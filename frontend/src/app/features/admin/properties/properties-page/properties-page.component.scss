@@ -1,0 +1,26 @@
+:host {
+  display: grid !important;
+  grid-template-areas: 'table right';
+  grid-template-rows: min-content 1fr;
+  grid-template-columns: 1fr 2fr;
+  grid-gap: 0 16px;
+}
+
+cdk-virtual-scroll-viewport {
+  grid-area: table;
+  height: min-content;
+}
+
+:host router-outlet {
+  display: none;
+
+  & ::ng-deep {
+    grid-area: right;
+    height: min-content;
+    width: 600px;
+  }
+}
+
+.active {
+  background-color: rgba(54, 1, 63, 0.1) !important;
+}

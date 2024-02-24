@@ -1,0 +1,20 @@
+form {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  gap: 8px;
+}
+
+section[role='property-form-actions'] {
+  display: grid;
+  grid-template-columns: 1fr auto auto auto;
+  align-items: center;
+  grid-gap: 8px;
+}
+
+section[role='utilities'] {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  align-items: center;
+  gap: 12px;
+}

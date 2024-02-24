@@ -1,0 +1,468 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "HotelManagement.WebApi",
+    "version": "1.0"
+  },
+  "paths": {
+    "/properties": {
+      "get": {
+        "tags": [
+          "Property"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PropertySummary"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Property"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreatePropertyCommand"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreatePropertyCommand"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreatePropertyCommand"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "uuid"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Property"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdatePropertyCommand"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdatePropertyCommand"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdatePropertyCommand"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "uuid"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/properties/{id}": {
+      "get": {
+        "tags": [
+          "Property"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PropertyDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Property"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/rooms": {
+      "get": {
+        "tags": [
+          "Room"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/RoomSummary"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "CreatePropertyCommand": {
+        "required": [
+          "description",
+          "email",
+          "hasBreakfast",
+          "hasFitnessCentre",
+          "hasFreeCancellation",
+          "hasFreeWiFi",
+          "hasParking",
+          "hasPetFriendlyPolicy",
+          "hasPool",
+          "hasRestaurant",
+          "hasRoomService",
+          "location",
+          "name",
+          "phoneNumber",
+          "type"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "type": {
+            "$ref": "#/components/schemas/PropertyType"
+          },
+          "description": {
+            "type": "string"
+          },
+          "location": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "phoneNumber": {
+            "type": "string"
+          },
+          "hasFreeWiFi": {
+            "type": "boolean"
+          },
+          "hasParking": {
+            "type": "boolean"
+          },
+          "hasPool": {
+            "type": "boolean"
+          },
+          "hasRestaurant": {
+            "type": "boolean"
+          },
+          "hasFitnessCentre": {
+            "type": "boolean"
+          },
+          "hasRoomService": {
+            "type": "boolean"
+          },
+          "hasPetFriendlyPolicy": {
+            "type": "boolean"
+          },
+          "hasBreakfast": {
+            "type": "boolean"
+          },
+          "hasFreeCancellation": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "PropertyDetails": {
+        "required": [
+          "createdOn",
+          "description",
+          "email",
+          "hasBreakfast",
+          "hasFitnessCentre",
+          "hasFreeCancellation",
+          "hasFreeWiFi",
+          "hasParking",
+          "hasPetFriendlyPolicy",
+          "hasPool",
+          "hasRestaurant",
+          "hasRoomService",
+          "id",
+          "location",
+          "name",
+          "phoneNumber",
+          "type",
+          "updatedOn"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string"
+          },
+          "type": {
+            "$ref": "#/components/schemas/PropertyType"
+          },
+          "description": {
+            "type": "string"
+          },
+          "location": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "phoneNumber": {
+            "type": "string"
+          },
+          "createdOn": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedOn": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "hasFreeWiFi": {
+            "type": "boolean"
+          },
+          "hasParking": {
+            "type": "boolean"
+          },
+          "hasPool": {
+            "type": "boolean"
+          },
+          "hasRestaurant": {
+            "type": "boolean"
+          },
+          "hasFitnessCentre": {
+            "type": "boolean"
+          },
+          "hasRoomService": {
+            "type": "boolean"
+          },
+          "hasPetFriendlyPolicy": {
+            "type": "boolean"
+          },
+          "hasBreakfast": {
+            "type": "boolean"
+          },
+          "hasFreeCancellation": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "PropertySummary": {
+        "required": [
+          "id",
+          "location",
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string"
+          },
+          "location": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "PropertyType": {
+        "enum": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
+      "RoomSummary": {
+        "required": [
+          "id",
+          "number"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "number": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "UpdatePropertyCommand": {
+        "required": [
+          "description",
+          "email",
+          "hasBreakfast",
+          "hasFitnessCentre",
+          "hasFreeCancellation",
+          "hasFreeWiFi",
+          "hasParking",
+          "hasPetFriendlyPolicy",
+          "hasPool",
+          "hasRestaurant",
+          "hasRoomService",
+          "id",
+          "name",
+          "phoneNumber"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "phoneNumber": {
+            "type": "string"
+          },
+          "hasFreeWiFi": {
+            "type": "boolean"
+          },
+          "hasParking": {
+            "type": "boolean"
+          },
+          "hasPool": {
+            "type": "boolean"
+          },
+          "hasRestaurant": {
+            "type": "boolean"
+          },
+          "hasFitnessCentre": {
+            "type": "boolean"
+          },
+          "hasRoomService": {
+            "type": "boolean"
+          },
+          "hasPetFriendlyPolicy": {
+            "type": "boolean"
+          },
+          "hasBreakfast": {
+            "type": "boolean"
+          },
+          "hasFreeCancellation": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  }
+}

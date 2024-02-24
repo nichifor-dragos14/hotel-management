@@ -1,0 +1,41 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34309.116
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HotelManagement.WebApi", "HotelManagement.WebApi\HotelManagement.WebApi.csproj", "{2F7EA80E-D75A-4B81-B016-AAC030FDA7C5}"
+	ProjectSection(ProjectDependencies) = postProject
+		{29281BAA-1D23-43B6-A7D5-DD49237A4655} = {29281BAA-1D23-43B6-A7D5-DD49237A4655}
+		{6FF0EF4C-9E0D-44F7-902D-E5C9B11D3E13} = {6FF0EF4C-9E0D-44F7-902D-E5C9B11D3E13}
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HotelManagement.Core", "HotelManagement.Core\HotelManagement.Core.csproj", "{6FF0EF4C-9E0D-44F7-902D-E5C9B11D3E13}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HotelManagement.Infrastructure", "HotelManagement.Infrastructure\HotelManagement.Infrastructure.csproj", "{29281BAA-1D23-43B6-A7D5-DD49237A4655}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2F7EA80E-D75A-4B81-B016-AAC030FDA7C5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2F7EA80E-D75A-4B81-B016-AAC030FDA7C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2F7EA80E-D75A-4B81-B016-AAC030FDA7C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2F7EA80E-D75A-4B81-B016-AAC030FDA7C5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6FF0EF4C-9E0D-44F7-902D-E5C9B11D3E13}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6FF0EF4C-9E0D-44F7-902D-E5C9B11D3E13}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6FF0EF4C-9E0D-44F7-902D-E5C9B11D3E13}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6FF0EF4C-9E0D-44F7-902D-E5C9B11D3E13}.Release|Any CPU.Build.0 = Release|Any CPU
+		{29281BAA-1D23-43B6-A7D5-DD49237A4655}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{29281BAA-1D23-43B6-A7D5-DD49237A4655}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{29281BAA-1D23-43B6-A7D5-DD49237A4655}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{29281BAA-1D23-43B6-A7D5-DD49237A4655}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FBE6DEAE-0255-4B87-B96D-DDEA8A7CBB31}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,42 @@
+mat-sidenav-container,
+mat-sidenav {
+  background: transparent;
+}
+
+mat-toolbar-row {
+  gap: 8px;
+}
+
+:host {
+  display: grid;
+  height: 100vh;
+  grid-template-rows: min-content 1fr;
+}
+
+router-outlet {
+  &
+
+  /*deleting this comment will collapse the universe*/
+  + ::ng-deep * {
+    display: block;
+    width: clamp(362px, 100%, 80vw);
+    justify-self: center;
+    padding: 0 16px;
+    box-sizing: border-box;
+    margin-top: 24px;
+  }
+}
+
+mat-nav-list {
+  padding-top: 0;
+  min-width: 200px;
+}
+
+.selected {
+  background-color: rgba(54, 1, 63, 0.12) !important;
+  --mdc-list-list-item-label-text-color: #36013f !important;
+  --mat-sidenav-container-text-color: #36013f !important;
+  --mat-sidenav-content-text-color: #36013f !important;
+  --mdc-list-list-item-focus-label-text-color: #36013f !important;
+  --mdc-list-list-item-hover-label-text-color: #36013f !important;
+}

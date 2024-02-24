@@ -1,0 +1,136 @@
+<section role="property-actions">
+  <a mat-icon-button routerLink="../" color="accent">
+    <mat-icon>close</mat-icon>
+  </a>
+
+  <a mat-button color="warn">Reports</a>
+
+  <a mat-button [routerLink]="['actions', 'delete']">Issue delete</a>
+</section>
+
+<h1 role="property-name">{{ property.name }}</h1>
+
+<img alt="Hotel picture" src="assets/hotel1.jpg" />
+
+<section>
+  <section role="property-facilities-icons">
+    <h2>Facilities</h2>
+
+    @if (property.hasFreeWiFi) {
+      <mat-icon>wifi</mat-icon>
+    }
+
+    @if (property.hasParking) {
+      <mat-icon>local_parking</mat-icon>
+    }
+
+    @if (property.hasPool) {
+      <mat-icon>pool</mat-icon>
+    }
+
+    @if (property.hasRestaurant) {
+      <mat-icon>restaurant</mat-icon>
+    }
+
+    @if (property.hasBreakfast) {
+      <mat-icon>free_breakfast</mat-icon>
+    }
+
+    @if (property.hasFitnessCentre) {
+      <mat-icon>fitness_center</mat-icon>
+    }
+
+    @if (property.hasRoomService) {
+      <mat-icon>room_service</mat-icon>
+    }
+
+    @if (property.hasPetFriendlyPolicy) {
+      <mat-icon>pets</mat-icon>
+    }
+
+    @if (property.hasFreeCancellation) {
+      <mat-icon>cancel</mat-icon>
+    }
+  </section>
+
+  <section role="property-facilities">
+    @if (property.hasFreeWiFi) {
+      <span>
+        <mat-icon>check_circle_outline</mat-icon>
+        <p>Free wifi</p>
+      </span>
+    }
+
+    @if (property.hasParking) {
+      <span>
+        <mat-icon>check_circle_outline</mat-icon>
+        <p>Parking</p>
+      </span>
+    }
+
+    @if (property.hasPool) {
+      <span>
+        <mat-icon>check_circle_outline</mat-icon>
+        <p>Pool</p>
+      </span>
+    }
+
+    @if (property.hasRestaurant) {
+      <span>
+        <mat-icon>check_circle_outline</mat-icon>
+        <p>Restaurant</p>
+      </span>
+    }
+
+    @if (property.hasBreakfast) {
+      <span>
+        <mat-icon>check_circle_outline</mat-icon>
+        <p>Breakfast</p>
+      </span>
+    }
+
+    @if (property.hasFitnessCentre) {
+      <span>
+        <mat-icon>check_circle_outline</mat-icon>
+        <p>Fitness center</p>
+      </span>
+    }
+
+    @if (property.hasRoomService) {
+      <span>
+        <mat-icon>check_circle_outline</mat-icon>
+        <p>Room service</p>
+      </span>
+    }
+
+    @if (property.hasPetFriendlyPolicy) {
+      <span>
+        <mat-icon>check_circle_outline</mat-icon>
+        <p>Pet friendly</p>
+      </span>
+    }
+
+    @if (property.hasFreeCancellation) {
+      <span>
+        <mat-icon>check_circle_outline</mat-icon>
+        <p>Free cancellation</p>
+      </span>
+    }
+  </section>
+</section>
+
+<section role="property-description">
+  <h2>Property description</h2>
+  <p id="description" [innerHTML]="property.description"></p>
+</section>
+
+<section>
+  <h2>Contact</h2>
+
+  <section role="property-contact">
+    <p>Phone: {{ property.phoneNumber }}</p>
+    <p>Email: {{ property.email }}</p>
+  </section>
+</section>
+
+<router-outlet hidden />

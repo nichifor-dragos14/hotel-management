@@ -1,0 +1,17 @@
+{
+  "name": "backend",
+  "version": "0.0.0",
+  "scripts": {
+    "install": "dotnet restore ./HotelManagement.sln && dotnet tool restore",
+    "create-migration": "echo 'Enter Migration Name:' && read message && dotnet ef migrations add \"$message\" -s=./HotelManagement.WebApi --project=./HotelManagement.Infrastructure",
+    "build": "dotnet publish ./HotelManagement.WebApi/HotelManagement.WebApi.csproj -o dist",
+    "clean": "dotnet clean ./HotelManagement.sln && rm -rf dist",
+    "start": "dotnet watch --project ./HotelManagement.WebApi/HotelManagement.WebApi.csproj",
+    "lint": "dotnet jb cleanupcode ./HotelManagement.sln",
+    "format": "dotnet format ./HotelManagement.sln"
+  },
+  "dependencies": {
+    "prettier": "^3.1.1"
+  },
+  "private": true
+}
