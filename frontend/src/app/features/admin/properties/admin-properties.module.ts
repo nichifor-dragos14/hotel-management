@@ -45,10 +45,6 @@ const PROPERTY_ROUTES: Routes = [
         runGuardsAndResolvers: 'always',
         children: [
           {
-            path: 'preview',
-            component: PropertyPageComponent,
-          },
-          {
             path: 'actions',
             component: DialogPageComponent,
             children: [
@@ -63,6 +59,16 @@ const PROPERTY_ROUTES: Routes = [
             ],
           },
         ],
+      },
+      {
+        path: ':id/preview',
+        component: PropertyPageComponent,
+        resolve: {
+          property: async ({ params }: ActivatedRouteSnapshot) =>
+            await inject(PropertyService).propertiesIdGetAsync({
+              id: params['id'],
+            }),
+        },
       },
     ],
   },

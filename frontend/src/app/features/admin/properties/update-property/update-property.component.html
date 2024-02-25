@@ -7,6 +7,15 @@
       <mat-icon>close</mat-icon>
     </a>
 
+    <button
+      mat-button
+      color="primary"
+      type="submit"
+      [disabled]="propertyForm.invalid"
+    >
+      Update
+    </button>
+
     <a mat-button color="warn">Reports</a>
 
     <a mat-button [routerLink]="['preview']">Preview</a>
