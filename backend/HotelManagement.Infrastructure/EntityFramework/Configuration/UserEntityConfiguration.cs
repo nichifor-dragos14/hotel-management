@@ -16,10 +16,5 @@ internal class UserEntityConfiguration : IEntityTypeConfiguration<User>
         builder.Property(q => q.CreatedOn).IsRequired();
         builder.Property(q => q.UpdatedOn).IsRequired();
         builder.Property(q => q.IsDeleted).IsRequired();
-
-        //builder.HasMany(c => c.Questions)
-        //    .WithOne(q => q.Category)
-        //    .IsRequired()
-        //    .OnDelete(DeleteBehavior.Cascade);
     }
 }

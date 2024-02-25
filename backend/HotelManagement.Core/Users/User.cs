@@ -1,4 +1,6 @@
-﻿namespace HotelManagement.Core.Users;
+﻿using HotelManagement.Core.Bookings;
+
+namespace HotelManagement.Core.Users;
 
 public class User
 {
@@ -28,6 +30,8 @@ public class User
 
     public bool IsDeleted { get; private set; }
 
+    public virtual List<Booking> Bookings { get; private init; }
+
     public static User Create(
         string firstName,
         string lastName
@@ -40,7 +44,7 @@ public class User
             DateTime.UtcNow
         )
         {
-            //Users = new List<User>()
+            Bookings = []
         };
     }
 
