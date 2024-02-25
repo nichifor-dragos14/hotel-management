@@ -30,13 +30,23 @@ import { MatListModule } from '@angular/material/list';
             routerLink="/admin/properties"
             routerLinkActive="selected"
           >
-            Properties
+            Properties admin
           </a>
         </mat-nav-list>
 
         <mat-nav-list>
-          <a mat-list-item routerLink="/stays" routerLinkActive="selected">
-            Stays
+          <a mat-list-item routerLink="/properties" routerLinkActive="selected">
+            Properties client
+          </a>
+        </mat-nav-list>
+
+        <mat-nav-list>
+          <a
+            mat-list-item
+            routerLink="/my-properties"
+            routerLinkActive="selected"
+          >
+            Properties partner
           </a>
         </mat-nav-list>
       </mat-sidenav>

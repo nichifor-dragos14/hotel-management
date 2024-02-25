@@ -32,6 +32,10 @@ mat-nav-list {
   min-width: 200px;
 }
 
+.mdc-list {
+  padding-bottom: 0 !important;
+}
+
 .selected {
   background-color: rgba(54, 1, 63, 0.12) !important;
   --mdc-list-list-item-label-text-color: #36013f !important;

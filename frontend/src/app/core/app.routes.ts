@@ -9,10 +9,17 @@ export const routes: Routes = [
       ),
   },
   {
-    path: 'stays',
+    path: 'my-properties',
     loadChildren: () =>
-      import('../features/client/stays/client-stays.module').then(
-        (m) => m.ClientStaysModule
+      import('../features/partner/properties/partner-properties.module').then(
+        (m) => m.PartnerPropertiesModule
+      ),
+  },
+  {
+    path: 'properties',
+    loadChildren: () =>
+      import('../features/client/properties/client-properties.module').then(
+        (m) => m.ClientPropertiesModule
       ),
   },
 ];

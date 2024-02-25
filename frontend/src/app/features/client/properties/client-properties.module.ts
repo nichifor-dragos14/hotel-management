@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { StaysPageComponent } from './stays-page/stays-page.component';
+import { PropertiesPageClientComponent } from './properties-page/properties-page.component';
 
 const STAYS_ROUTES: Routes = [
   {
     path: '',
-    component: StaysPageComponent,
+    component: PropertiesPageClientComponent,
   },
 ] satisfies Routes;
 
@@ -13,4 +13,4 @@ const STAYS_ROUTES: Routes = [
   imports: [RouterModule.forChild(STAYS_ROUTES)],
   exports: [RouterModule],
 })
-export class ClientStaysModule {}
+export class ClientPropertiesModule {}
