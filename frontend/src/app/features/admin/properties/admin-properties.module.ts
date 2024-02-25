@@ -5,6 +5,8 @@ import { ActivatedRouteSnapshot, RouterModule, Routes } from '@angular/router';
 import { PropertiesPageComponent } from './properties-page/properties-page.component';
 import { PropertyPageComponent } from './property-page/property-page.component';
 import { DialogPageComponent } from '$shared/dialog-page';
+import { NewPropertyPageComponent } from './new-property/new-property.component';
+import { UpdatePropertyPageComponent } from './update-property/update-property.component';
 
 const PROPERTY_ROUTES: Routes = [
   {
@@ -16,14 +18,22 @@ const PROPERTY_ROUTES: Routes = [
     },
     children: [
       {
+        path: 'new',
+        component: NewPropertyPageComponent,
+      },
+      {
         path: ':id',
-        component: PropertyPageComponent,
+        component: UpdatePropertyPageComponent,
         resolve: {
           property: ({ params }: ActivatedRouteSnapshot) =>
             inject(PropertyService).propertiesIdGetAsync({ id: params['id'] }),
         },
         runGuardsAndResolvers: 'always',
         children: [
+          {
+            path: 'preview',
+            component: PropertyPageComponent,
+          },
           {
             path: 'actions',
             component: DialogPageComponent,

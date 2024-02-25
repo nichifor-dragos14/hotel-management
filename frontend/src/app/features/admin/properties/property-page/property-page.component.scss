@@ -21,12 +21,6 @@ span {
   gap: 8px;
 }
 
-section[role='property-actions'] {
-  display: grid;
-  grid-template-columns: 1fr auto auto auto;
-  align-items: center;
-}
-
 section[role='property-facilities'] {
   padding: 0 16px;
 }

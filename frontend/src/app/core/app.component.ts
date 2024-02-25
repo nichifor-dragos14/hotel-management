@@ -43,16 +43,6 @@ import { MatListModule } from '@angular/material/list';
             Properties client
           </a>
         </mat-nav-list>
-
-        <mat-nav-list>
-          <a
-            mat-list-item
-            routerLink="partner/my-properties"
-            routerLinkActive="selected"
-          >
-            Properties partner
-          </a>
-        </mat-nav-list>
       </mat-sidenav>
       <mat-sidenav-content>
         <router-outlet />

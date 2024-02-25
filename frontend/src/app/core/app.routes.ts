@@ -7,11 +7,6 @@ export const routes: Routes = [
       import('../features/admin/admin.module').then((m) => m.AdminModule),
   },
   {
-    path: 'partner',
-    loadChildren: () =>
-      import('../features/partner/partner.module').then((m) => m.PartnerModule),
-  },
-  {
     path: 'client',
     loadChildren: () =>
       import('../features/client/client.module').then((m) => m.ClientModule),
