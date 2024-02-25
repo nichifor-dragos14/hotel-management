@@ -33,6 +33,12 @@ import { MatListModule } from '@angular/material/list';
             Properties
           </a>
         </mat-nav-list>
+
+        <mat-nav-list>
+          <a mat-list-item routerLink="/stays" routerLinkActive="selected">
+            Stays
+          </a>
+        </mat-nav-list>
       </mat-sidenav>
       <mat-sidenav-content>
         <router-outlet />

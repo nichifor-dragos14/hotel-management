@@ -8,4 +8,11 @@ export const routes: Routes = [
         (m) => m.AdminPropertyModule
       ),
   },
+  {
+    path: 'stays',
+    loadChildren: () =>
+      import('../features/client/stays/client-stays.module').then(
+        (m) => m.ClientStaysModule
+      ),
+  },
 ];
