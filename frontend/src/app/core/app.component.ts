@@ -35,7 +35,11 @@ import { MatListModule } from '@angular/material/list';
         </mat-nav-list>
 
         <mat-nav-list>
-          <a mat-list-item routerLink="/properties" routerLinkActive="selected">
+          <a
+            mat-list-item
+            routerLink="/client/properties"
+            routerLinkActive="selected"
+          >
             Properties client
           </a>
         </mat-nav-list>
@@ -43,7 +47,7 @@ import { MatListModule } from '@angular/material/list';
         <mat-nav-list>
           <a
             mat-list-item
-            routerLink="/my-properties"
+            routerLink="partner/my-properties"
             routerLinkActive="selected"
           >
             Properties partner

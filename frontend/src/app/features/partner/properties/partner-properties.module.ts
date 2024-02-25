@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { NewPropertyPagePartnerComponent } from './new-property/new-property.component';
 import { MyPropertiesPagePartnerComponent } from './my-properties/my-properties.component';
 
-const STAYS_ROUTES: Routes = [
+const PARTNER_ROUTES: Routes = [
   {
     path: '',
     component: MyPropertiesPagePartnerComponent,
@@ -15,7 +15,7 @@ const STAYS_ROUTES: Routes = [
 ] satisfies Routes;
 
 @NgModule({
-  imports: [RouterModule.forChild(STAYS_ROUTES)],
+  imports: [RouterModule.forChild(PARTNER_ROUTES)],
   exports: [RouterModule],
 })
-export class PartnerPropertiesModule {}
+export class PartnerPropertyModule {}

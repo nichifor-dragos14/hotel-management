@@ -5,7 +5,6 @@ import { ActivatedRouteSnapshot, RouterModule, Routes } from '@angular/router';
 import { PropertiesPageComponent } from './properties-page/properties-page.component';
 import { PropertyPageComponent } from './property-page/property-page.component';
 import { DialogPageComponent } from '$shared/dialog-page';
-import { PropertyRoomsPageComponent } from './property-rooms/property-rooms-page.component';
 
 const PROPERTY_ROUTES: Routes = [
   {
@@ -40,16 +39,6 @@ const PROPERTY_ROUTES: Routes = [
             ],
           },
         ],
-      },
-      {
-        path: ':id/rooms',
-        component: PropertyRoomsPageComponent,
-        resolve: {
-          rooms: ({ params }: ActivatedRouteSnapshot) =>
-            inject(PropertyService).propertiesIdRoomsGetAsync({
-              id: params?.['id'],
-            }),
-        },
       },
     ],
   },

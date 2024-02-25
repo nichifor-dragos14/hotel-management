@@ -2,24 +2,18 @@ import { Routes } from '@angular/router';
 
 export const routes: Routes = [
   {
-    path: 'admin/properties',
+    path: 'admin',
     loadChildren: () =>
-      import('../features/admin/properties/admin-properties.module').then(
-        (m) => m.AdminPropertyModule
-      ),
+      import('../features/admin/admin.module').then((m) => m.AdminModule),
   },
   {
-    path: 'my-properties',
+    path: 'partner',
     loadChildren: () =>
-      import('../features/partner/properties/partner-properties.module').then(
-        (m) => m.PartnerPropertiesModule
-      ),
+      import('../features/partner/partner.module').then((m) => m.PartnerModule),
   },
   {
-    path: 'properties',
+    path: 'client',
     loadChildren: () =>
-      import('../features/client/properties/client-properties.module').then(
-        (m) => m.ClientPropertiesModule
-      ),
+      import('../features/client/client.module').then((m) => m.ClientModule),
   },
 ];

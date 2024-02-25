@@ -13,4 +13,4 @@ const STAYS_ROUTES: Routes = [
   imports: [RouterModule.forChild(STAYS_ROUTES)],
   exports: [RouterModule],
 })
-export class ClientPropertiesModule {}
+export class ClientPropertyModule {}
