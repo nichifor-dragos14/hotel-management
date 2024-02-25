@@ -17,6 +17,14 @@ public class PropertyController : ControllerBase
         return TypedResults.Ok(await queryService.ExecuteAsync(new AllPropertiesQuery(), cancelationToken));
     }
 
+    [HttpGet("{id}/rooms")]
+    public async Task<Results<Ok<IEnumerable<PropertyRooms>>, NotFound>> GetAllRooms(Guid id,
+        [FromServices] IQueryHandler<AllPropertyRoomsQuery, IEnumerable<PropertyRooms>> queryService,
+        CancellationToken cancelationToken)
+    {
+        return TypedResults.Ok(await queryService.ExecuteAsync(new AllPropertyRoomsQuery(id), cancelationToken));
+    }
+
     [HttpGet("{id}")]
     public async Task<Results<Ok<PropertyDetails>, NotFound, BadRequest>> GetOne(Guid id,
         [FromServices] IQueryHandler<OnePropertyQuery, PropertyDetails> queryService,

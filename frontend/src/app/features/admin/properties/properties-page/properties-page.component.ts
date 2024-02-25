@@ -26,6 +26,6 @@ import { MatBadgeModule } from '@angular/material/badge';
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HotelsPageComponent {
+export class PropertiesPageComponent {
   @Input() properties: PropertySummary[] = [];
 }

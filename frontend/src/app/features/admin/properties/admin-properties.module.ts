@@ -2,14 +2,15 @@ import { NgModule, inject } from '@angular/core';
 import { PropertyService } from '$backend/services';
 import { DeletePropertyComponent } from './delete-property.component';
 import { ActivatedRouteSnapshot, RouterModule, Routes } from '@angular/router';
-import { HotelsPageComponent } from './properties-page/properties-page.component';
-import { HotelPageComponent } from './property-page/property-page.component';
+import { PropertiesPageComponent } from './properties-page/properties-page.component';
+import { PropertyPageComponent } from './property-page/property-page.component';
 import { DialogPageComponent } from '$shared/dialog-page';
+import { PropertyRoomsPageComponent } from './property-rooms/property-rooms-page.component';
 
 const PROPERTY_ROUTES: Routes = [
   {
     path: '',
-    component: HotelsPageComponent,
+    component: PropertiesPageComponent,
     resolve: {
       properties: async () =>
         await inject(PropertyService).propertiesGetAsync(),
@@ -17,7 +18,7 @@ const PROPERTY_ROUTES: Routes = [
     children: [
       {
         path: ':id',
-        component: HotelPageComponent,
+        component: PropertyPageComponent,
         resolve: {
           property: ({ params }: ActivatedRouteSnapshot) =>
             inject(PropertyService).propertiesIdGetAsync({ id: params['id'] }),
@@ -39,6 +40,16 @@ const PROPERTY_ROUTES: Routes = [
             ],
           },
         ],
+      },
+      {
+        path: ':id/rooms',
+        component: PropertyRoomsPageComponent,
+        resolve: {
+          rooms: ({ params }: ActivatedRouteSnapshot) =>
+            inject(PropertyService).propertiesIdRoomsGetAsync({
+              id: params?.['id'],
+            }),
+        },
       },
     ],
   },
