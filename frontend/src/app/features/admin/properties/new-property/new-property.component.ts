@@ -112,7 +112,7 @@ export class NewPropertyPageComponent {
         },
       });
 
-      this.toastService.open('Successfully deleted property', 'info');
+      this.toastService.open('Successfully added property', 'info');
     } catch (error) {
       if (error instanceof Error) {
         this.toastService.open(error.message, 'error');

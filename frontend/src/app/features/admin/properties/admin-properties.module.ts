@@ -7,6 +7,7 @@ import { PropertyPageComponent } from './property-page/property-page.component';
 import { DialogPageComponent } from '$shared/dialog-page';
 import { NewPropertyPageComponent } from './new-property/new-property.component';
 import { UpdatePropertyPageComponent } from './update-property/update-property.component';
+import { EditPropertyFormFactory } from './update-property.form-builder';
 
 const PROPERTY_ROUTES: Routes = [
   {
@@ -29,8 +30,17 @@ const PROPERTY_ROUTES: Routes = [
         path: ':id',
         component: UpdatePropertyPageComponent,
         resolve: {
-          property: ({ params }: ActivatedRouteSnapshot) =>
-            inject(PropertyService).propertiesIdGetAsync({ id: params['id'] }),
+          propertyForm: async ({ params }: ActivatedRouteSnapshot) => {
+            const editPropertyFormFactory = inject(EditPropertyFormFactory);
+
+            const property = await inject(PropertyService).propertiesIdGetAsync(
+              {
+                id: params['id'],
+              }
+            );
+
+            return editPropertyFormFactory.build(property);
+          },
         },
         runGuardsAndResolvers: 'always',
         children: [
