@@ -20,6 +20,10 @@ const PROPERTY_ROUTES: Routes = [
       {
         path: 'new',
         component: NewPropertyPageComponent,
+        resolve: {
+          propertyTypes: async () =>
+            await inject(PropertyService).propertiesTypesGetAsync(),
+        },
       },
       {
         path: ':id',

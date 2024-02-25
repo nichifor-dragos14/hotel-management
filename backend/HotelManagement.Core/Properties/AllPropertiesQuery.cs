@@ -10,7 +10,7 @@ public record PropertySummary(
 
 public record AllPropertiesQuery : IQuery<IEnumerable<PropertySummary>>;
 
-internal class AllHotelsQueryHandler(
+internal class AllPropertiesQueryHandler(
     IQueryFacade facade
 ) : IQueryHandler<AllPropertiesQuery, IEnumerable<PropertySummary>>
 {

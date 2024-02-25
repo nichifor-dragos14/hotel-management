@@ -1,1 +1,76 @@
-new page
+<form
+  [formGroup]="propertyForm"
+  (ngSubmit)="createProperty(propertyForm.value)"
+>
+  <section role="category-form-actions">
+    <a mat-icon-button routerLink="../" color="accent">
+      <mat-icon>close</mat-icon>
+    </a>
+
+    <button
+      mat-button
+      color="primary"
+      type="submit"
+      [disabled]="propertyForm.invalid"
+    >
+      Save
+    </button>
+  </section>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Name</mat-label>
+    <input matInput formControlName="name" />
+    <mat-error>The property name is required</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Location</mat-label>
+    <input matInput formControlName="location" />
+    <mat-error>The property location is required</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Property type</mat-label>
+    <mat-select matInput formControlName="type">
+      @for (type of propertyTypes; track type) {
+        <mat-option [value]="type.value">{{ type.type }}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Email</mat-label>
+    <input matInput formControlName="email" />
+    <mat-error>The property email is required</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Phone number</mat-label>
+    <input matInput formControlName="phoneNumber" />
+    <mat-error>The property phone number is required</mat-error>
+  </mat-form-field>
+
+  <section role="utilities">
+    <mat-checkbox formControlName="hasFreeWiFi">Wi-Fi</mat-checkbox>
+    <mat-checkbox formControlName="hasParking">Parking</mat-checkbox>
+    <mat-checkbox formControlName="hasRestaurant">Restaurant</mat-checkbox>
+    <mat-checkbox formControlName="hasPool">Pool</mat-checkbox>
+    <mat-checkbox formControlName="hasFitnessCentre">
+      Fitness center
+    </mat-checkbox>
+    <mat-checkbox formControlName="hasFreeCancellation">
+      Free cancellation
+    </mat-checkbox>
+    <mat-checkbox formControlName="hasPetFriendlyPolicy">
+      Pet friendly
+    </mat-checkbox>
+    <mat-checkbox formControlName="hasRoomService">Room service</mat-checkbox>
+    <mat-checkbox formControlName="hasBreakfast">Breakfast</mat-checkbox>
+  </section>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Description</mat-label>
+    <editor appTinyEditor formControlName="description" />
+    <mat-error>The property description is required</mat-error>
+  </mat-form-field>
+</form>

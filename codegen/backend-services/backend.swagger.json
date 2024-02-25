@@ -110,6 +110,31 @@
         }
       }
     },
+    "/properties/types": {
+      "get": {
+        "tags": [
+          "Property"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PropertyTypeSummary"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
     "/properties/{id}/rooms": {
       "get": {
         "tags": [
@@ -452,6 +477,22 @@
         ],
         "type": "integer",
         "format": "int32"
+      },
+      "PropertyTypeSummary": {
+        "required": [
+          "type",
+          "value"
+        ],
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string"
+          },
+          "value": {
+            "$ref": "#/components/schemas/PropertyType"
+          }
+        },
+        "additionalProperties": false
       },
       "RoomSummary": {
         "required": [

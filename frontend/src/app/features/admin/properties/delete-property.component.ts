@@ -17,9 +17,9 @@ import { AppToastService } from '$shared/toast';
   template: `
     <h1 mat-dialog-title>Delete property?</h1>
     <p mat-dialog-content>
-      Are you sure you want to issue a delete this property? The partner will be
+      Are you sure you want to delete this property? The partner will be
       <br />
-      announced of the deletion and all reservations will be canceled
+      announced of the deletion and all future reservations will be canceled
     </p>
     <mat-dialog-actions align="end">
       <button mat-button color="primary" (click)="ok()">Ok</button>
@@ -45,7 +45,7 @@ export class DeletePropertyComponent {
         this.toastService.open(error.message, 'error');
       }
     } finally {
-      this.router.navigateByUrl('/properties');
+      this.router.navigateByUrl('admin/properties');
     }
   }
 }
