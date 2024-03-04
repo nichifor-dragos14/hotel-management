@@ -1,4 +1,4 @@
-# InternshipSurveyR
+# HotelManagement
 
 ## Installation
 

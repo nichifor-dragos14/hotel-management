@@ -30,10 +30,5 @@ internal class PropertyEntityConfiguration : IEntityTypeConfiguration<Property>
         builder.Property(q => q.HasBreakfast).IsRequired();
         builder.Property(q => q.HasPetFriendlyPolicy).IsRequired();
         builder.Property(q => q.HasFreeCancellation).IsRequired();
-
-        //builder.HasMany(c => c.Questions)
-        //    .WithOne(q => q.Category)
-        //    .IsRequired()
-        //    .OnDelete(DeleteBehavior.Cascade);
     }
 }

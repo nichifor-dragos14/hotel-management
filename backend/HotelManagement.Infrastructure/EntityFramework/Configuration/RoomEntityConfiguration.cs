@@ -27,10 +27,5 @@ internal class RoomEntityConfiguration : IEntityTypeConfiguration<Room>
 
         builder.HasOne(c => c.Property)
             .WithMany(c => c.Rooms);
-
-        //builder.HasMany(c => c.Questions)
-        //    .WithOne(q => q.Category)
-        //    .IsRequired()
-        //    .OnDelete(DeleteBehavior.Cascade);
     }
 }

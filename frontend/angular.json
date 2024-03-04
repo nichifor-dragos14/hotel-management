@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "InternshipSurveyR": {
+    "HotelManagement": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -59,10 +59,10 @@
           },
           "configurations": {
             "production": {
-              "buildTarget": "InternshipSurveyR:build:production"
+              "buildTarget": "HotelManagement:build:production"
             },
             "development": {
-              "buildTarget": "InternshipSurveyR:build:development"
+              "buildTarget": "HotelManagement:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -70,7 +70,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "buildTarget": "InternshipSurveyR:build"
+            "buildTarget": "HotelManagement:build"
           }
         },
         "test": {

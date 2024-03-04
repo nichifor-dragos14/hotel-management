@@ -7,13 +7,9 @@
     "lint": "pnpm -s . lint",
     "format": "pnpm -s . format",
     "build": "pnpm -s . build",
-    "pre-commit": "lint-staged -r",
-    "backend:new-migration": "pnpm -s . backend create-migration",
-    "prepare": "husky install"
+    "backend:new-migration": "pnpm -s . backend create-migration"
   },
   "devDependencies": {
-    "husky": "^8.0.3",
-    "lint-staged": "^15.2.2",
     "nx": "17.1.3"
   }
 }

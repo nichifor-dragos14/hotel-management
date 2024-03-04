@@ -22,10 +22,5 @@ internal class BookingEntityConfiguration : IEntityTypeConfiguration<Booking>
 
         builder.HasOne(q => q.User)
             .WithMany(q => q.Bookings);
-
-        //builder.HasMany(c => c.Questions)
-        //    .WithOne(q => q.Category)
-        //    .IsRequired()
-        //    .OnDelete(DeleteBehavior.Cascade);
     }
 }
