@@ -21,7 +21,3 @@ pnpm start
 ```
 
 This will run the frontend and backend with watch flags, re-building each time the code changes. Additionally it will start the infrastructure and codegen with watch.
-
-## Debugging
-
-TBD
