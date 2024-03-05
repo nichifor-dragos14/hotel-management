@@ -51,21 +51,27 @@
   </mat-form-field>
 
   <section role="utilities">
-    <mat-checkbox formControlName="hasFreeWiFi">Wi-Fi</mat-checkbox>
-    <mat-checkbox formControlName="hasParking">Parking</mat-checkbox>
-    <mat-checkbox formControlName="hasRestaurant">Restaurant</mat-checkbox>
-    <mat-checkbox formControlName="hasPool">Pool</mat-checkbox>
-    <mat-checkbox formControlName="hasFitnessCentre">
+    <mat-slide-toggle formControlName="hasFreeWiFi">Wi-Fi</mat-slide-toggle>
+    <mat-slide-toggle formControlName="hasParking">Parking</mat-slide-toggle>
+    <mat-slide-toggle formControlName="hasRestaurant"
+      >Restaurant</mat-slide-toggle
+    >
+    <mat-slide-toggle formControlName="hasPool">Pool</mat-slide-toggle>
+    <mat-slide-toggle formControlName="hasFitnessCentre">
       Fitness center
-    </mat-checkbox>
-    <mat-checkbox formControlName="hasFreeCancellation">
+    </mat-slide-toggle>
+    <mat-slide-toggle formControlName="hasFreeCancellation">
       Free cancellation
-    </mat-checkbox>
-    <mat-checkbox formControlName="hasPetFriendlyPolicy">
+    </mat-slide-toggle>
+    <mat-slide-toggle formControlName="hasPetFriendlyPolicy">
       Pet friendly
-    </mat-checkbox>
-    <mat-checkbox formControlName="hasRoomService">Room service</mat-checkbox>
-    <mat-checkbox formControlName="hasBreakfast">Breakfast</mat-checkbox>
+    </mat-slide-toggle>
+    <mat-slide-toggle formControlName="hasRoomService"
+      >Room service</mat-slide-toggle
+    >
+    <mat-slide-toggle formControlName="hasBreakfast"
+      >Breakfast</mat-slide-toggle
+    >
   </section>
 
   <mat-form-field appearance="outline">

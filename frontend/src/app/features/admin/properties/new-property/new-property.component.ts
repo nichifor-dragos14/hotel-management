@@ -1,8 +1,3 @@
-/* eslint-disable eslint-comments/disable-enable-pair */
-/* eslint-disable max-lines-per-function */
-/* eslint-disable no-prototype-builtins */
-/* eslint-disable complexity */
-
 import {
   ChangeDetectionStrategy,
   Component,
@@ -14,13 +9,13 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { MatCheckboxModule } from '@angular/material/checkbox';
 import { Router, RouterModule } from '@angular/router';
 import { TinyEditorModule } from '$shared/tiny-editor';
 import { MatIconModule } from '@angular/material/icon';
 import { PropertyService, PropertyTypeSummary } from '$backend/services';
 import { AppToastService } from '$shared/toast';
 import { MatSelectModule } from '@angular/material/select';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 @Component({
   selector: 'app-new-property-page',
@@ -34,8 +29,8 @@ import { MatSelectModule } from '@angular/material/select';
     TinyEditorModule,
     MatIconModule,
     RouterModule,
-    MatCheckboxModule,
     MatSelectModule,
+    MatSlideToggleModule,
   ],
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,

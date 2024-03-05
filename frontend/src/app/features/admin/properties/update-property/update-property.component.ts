@@ -1,8 +1,3 @@
-/* eslint-disable eslint-comments/disable-enable-pair */
-/* eslint-disable max-lines-per-function */
-/* eslint-disable no-prototype-builtins */
-/* eslint-disable complexity */
-
 import { PropertyService, PropertyTypeSummary } from '$backend/services';
 import { AppToastService } from '$shared/toast';
 import {
@@ -18,9 +13,9 @@ import { Router, RouterModule } from '@angular/router';
 
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { MatCheckboxModule } from '@angular/material/checkbox';
 import { TinyEditorModule } from '$shared/tiny-editor';
 import { MatSelectModule } from '@angular/material/select';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 @Component({
   selector: 'app-update-property-page',
@@ -34,8 +29,8 @@ import { MatSelectModule } from '@angular/material/select';
     TinyEditorModule,
     MatIconModule,
     RouterModule,
-    MatCheckboxModule,
     MatSelectModule,
+    MatSlideToggleModule,
   ],
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
