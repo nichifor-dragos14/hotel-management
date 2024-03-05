@@ -1,23 +1,30 @@
 :host {
   display: grid !important;
-  grid-template-areas: 'table right';
+  grid-template-areas: 'header right' 'list right';
   grid-template-rows: min-content 1fr;
-  grid-template-columns: 1fr 2fr;
+  grid-template-columns: 2fr 3fr;
   grid-gap: 0 16px;
+  height: 100%;
+  position: relative;
 }
 
-cdk-virtual-scroll-viewport {
-  grid-area: table;
-  height: min-content;
+mat-nav-list {
+  grid-area: list;
+}
+
+app-page-header {
+  grid-area: header;
+  height: 'min-content';
 }
 
 :host router-outlet {
   display: none;
 
-  & ::ng-deep {
+  & ::ng-deep + * {
     grid-area: right;
     height: min-content;
-    width: 600px;
+    position: sticky;
+    top: 24px;
   }
 }
 

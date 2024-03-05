@@ -1,22 +1,33 @@
-<cdk-virtual-scroll-viewport scrollWindow itemSize="56">
-  <app-page-header title="Properties">
-    <button mat-button button color="primary" routerLink="new">Add</button>
-  </app-page-header>
+<app-page-header title="Properties">
+  <button mat-button button color="primary" routerLink="new">Add</button>
+</app-page-header>
 
-  <mat-nav-list>
-    <a
-      mat-list-item
-      *cdkVirtualFor="let property of properties"
-      [routerLink]="[property.id]"
-      routerLinkActive="active"
-    >
-      <span matListItemIcon>
-        <mat-icon [matBadge]="3" matBadgeSize="small"> person_pin </mat-icon>
-      </span>
+<mat-nav-list>
+  <cdk-virtual-scroll-viewport scrollWindow [itemSize]="56" [maxBufferPx]="500">
+    <ng-container *cdkVirtualFor="let property of propertiesDataSource">
+      @if (!property) {
+        <a mat-list-item disabled>
+          <span matListItemIcon>
+            <mat-spinner
+              mode="indeterminate"
+              [diameter]="24"
+              [strokeWidth]="3"
+            />
+          </span>
+        </a>
+      } @else {
+        <a mat-list-item [routerLink]="[property.id]" routerLinkActive="active">
+          <span matListItemIcon>
+            <mat-icon [matBadge]="3" matBadgeSize="small">
+              person_pin
+            </mat-icon>
+          </span>
 
-      <span matListItemTitle>{{ property.name }}</span>
-    </a>
-  </mat-nav-list>
-</cdk-virtual-scroll-viewport>
+          <span matListItemTitle>{{ property.name }}</span>
+        </a>
+      }
+    </ng-container>
+  </cdk-virtual-scroll-viewport>
+</mat-nav-list>
 
 <router-outlet hidden />

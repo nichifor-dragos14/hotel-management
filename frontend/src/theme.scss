@@ -38,3 +38,8 @@ $my-theme: mat.define-light-theme(
 cdk-virtual-scroll-viewport > .cdk-virtual-scroll-content-wrapper {
   width: 100%; // fixes a issue with content overflow
 }
+
+.mat-drawer-container,
+.mat-sidenav-content {
+  overflow: visible !important;
+}

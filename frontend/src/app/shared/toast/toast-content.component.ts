@@ -71,7 +71,6 @@ export class ToastContentComponent {
     map((_, tick) => 100 - (tick + 1)),
     tap((countDown) => {
       if (countDown <= 0) {
-        console.log('Finished!');
         this.snackBarRef.dismiss();
       }
     }),

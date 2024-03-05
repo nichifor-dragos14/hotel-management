@@ -10,11 +10,13 @@ namespace HotelManagement.WebApi.Controllers;
 public class PropertyController : ControllerBase
 {
     [HttpGet]
-    public async Task<Results<Ok<IEnumerable<PropertySummary>>, NotFound>> GetAll(
-        [FromServices] IQueryHandler<AllPropertiesQuery, IEnumerable<PropertySummary>> queryService,
+    public async Task<Results<Ok<IPaginatedResult<PropertySummary>>, NotFound>> GetAll(
+        [FromServices] IQueryHandler<AllPropertySummariesQuery, IPaginatedResult<PropertySummary>> queryService,
+        int from,
+        int to,
         CancellationToken cancelationToken)
     {
-        return TypedResults.Ok(await queryService.ExecuteAsync(new AllPropertiesQuery(), cancelationToken));
+        return TypedResults.Ok(await queryService.ExecuteAsync(new AllPropertySummariesQuery(from, to), cancelationToken));
     }
 
     [HttpGet("types")]

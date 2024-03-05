@@ -10,16 +10,31 @@
         "tags": [
           "Property"
         ],
+        "parameters": [
+          {
+            "name": "from",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "to",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/PropertySummary"
-                  }
+                  "$ref": "#/components/schemas/PropertySummaryIPaginatedResult"
                 }
               }
             }
@@ -449,9 +464,11 @@
       },
       "PropertySummary": {
         "required": [
+          "createdOn",
           "id",
           "location",
-          "name"
+          "name",
+          "rowNumber"
         ],
         "type": "object",
         "properties": {
@@ -464,6 +481,36 @@
           },
           "location": {
             "type": "string"
+          },
+          "createdOn": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "rowNumber": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "PropertySummaryIPaginatedResult": {
+        "required": [
+          "results",
+          "totalCount"
+        ],
+        "type": "object",
+        "properties": {
+          "results": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PropertySummary"
+            },
+            "readOnly": true
+          },
+          "totalCount": {
+            "type": "integer",
+            "format": "int32",
+            "readOnly": true
           }
         },
         "additionalProperties": false

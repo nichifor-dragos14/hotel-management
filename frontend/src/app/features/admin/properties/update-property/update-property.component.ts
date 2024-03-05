@@ -43,10 +43,6 @@ export class UpdatePropertyPageComponent {
 
   @Input() propertyTypes: PropertyTypeSummary[] = [];
 
-  constructor() {
-    console.log(this.propertyTypes);
-  }
-
   async updateProperty(newProperty: typeof this.propertyForm.value) {
     const {
       id,

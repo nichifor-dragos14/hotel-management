@@ -13,10 +13,6 @@ const PROPERTY_ROUTES: Routes = [
   {
     path: '',
     component: PropertiesPageComponent,
-    resolve: {
-      properties: async () =>
-        await inject(PropertyService).propertiesGetAsync(),
-    },
     children: [
       {
         path: 'new',
