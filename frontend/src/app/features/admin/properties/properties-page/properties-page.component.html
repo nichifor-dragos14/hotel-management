@@ -7,13 +7,15 @@
     <ng-container *cdkVirtualFor="let property of propertiesDataSource">
       @if (!property) {
         <a mat-list-item disabled>
-          <span matListItemIcon>
-            <mat-spinner
-              mode="indeterminate"
-              [diameter]="24"
-              [strokeWidth]="3"
-            />
-          </span>
+          <app-circle-placeholder
+            matListItemIcon
+            [radius]="35"
+          ></app-circle-placeholder>
+          <app-line-placeholder
+            matListItemTitle
+            [width]="250"
+            [height]="15"
+          ></app-line-placeholder>
         </a>
       } @else {
         <a mat-list-item [routerLink]="[property.id]" routerLinkActive="active">
