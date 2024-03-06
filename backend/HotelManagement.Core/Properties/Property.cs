@@ -1,4 +1,6 @@
-﻿using HotelManagement.Core.Rooms;
+﻿using HotelManagement.Core.Reports;
+using HotelManagement.Core.Reviews;
+using HotelManagement.Core.Rooms;
 
 namespace HotelManagement.Core.Properties;
 
@@ -84,6 +86,10 @@ public class Property
 
     public virtual List<Room> Rooms { get; private init; }
 
+    public virtual List<Review> Reviews { get; private init; }
+
+    public virtual List<Report> Reports { get; private init; }
+
     public static Property Create(
         string name,
         PropertyType type,
@@ -121,7 +127,9 @@ public class Property
             hasFreeCancellation
         )
         {
-            Rooms = []
+            Rooms = [],
+            Reviews = [],
+            Reports = []
         };
     }
 
@@ -149,6 +157,41 @@ public class Property
             hasKitchen,
             hasRefrigerator,
             hasSeaView,
+            DateTime.UtcNow,
+            DateTime.UtcNow
+        )
+        {
+            Property = this,
+            Bookings = []
+        };
+    }
+
+    public Report CreateReport(
+        string title,
+        string description
+    )
+    {
+        return new Report(
+            title,
+            description,
+            DateTime.UtcNow,
+            DateTime.UtcNow
+        )
+        {
+            Property = this
+        };
+    }
+
+    public Review CreateReview(
+       string title,
+       string description,
+       double rating
+   )
+    {
+        return new Review(
+            title,
+            description,
+            rating,
             DateTime.UtcNow,
             DateTime.UtcNow
         )

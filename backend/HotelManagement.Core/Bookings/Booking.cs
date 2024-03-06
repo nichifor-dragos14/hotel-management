@@ -31,9 +31,9 @@ public class Booking
 
     public bool IsDeleted { get; private set; }
 
-    public virtual User User { get; internal init; }
+    public virtual User User { get; private init; }
 
-    public virtual Room Room { get; internal init; }
+    public virtual Room Room { get; private init; }
 
     public static Booking Create(
         DateTime startOn,

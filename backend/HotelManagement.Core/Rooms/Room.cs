@@ -65,41 +65,7 @@ public class Room
 
     public virtual Property Property { get; internal init; }
 
-    public virtual List<Booking> Bookings { get; private init; }
-
-    public static Room Create(
-        int number,
-        RoomType type,
-        bool hasPrivateBathroom,
-        bool hasTowels,
-        bool hasHairdryer,
-        bool hasAirConditioning,
-        bool hasBalcony,
-        bool hasKitchen,
-        bool hasRefrigerator,
-        bool hasSeaView,
-        DateTime createdOn,
-        DateTime updatedOn
-    )
-    {
-        return new Room(
-            number,
-            type,
-            hasPrivateBathroom,
-            hasTowels,
-            hasHairdryer,
-            hasAirConditioning,
-            hasBalcony,
-            hasKitchen,
-            hasRefrigerator,
-            hasSeaView,
-            DateTime.UtcNow,
-            DateTime.UtcNow
-        )
-        {
-            Bookings = []
-        };
-    }
+    public virtual List<Booking> Bookings { get; internal init; }
 
     public void Update(
         bool hasPrivateBathroom,
