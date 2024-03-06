@@ -15,7 +15,6 @@ internal class RoomEntityConfiguration : IEntityTypeConfiguration<Room>
 
         builder.Property(q => q.CreatedOn).IsRequired();
         builder.Property(q => q.UpdatedOn).IsRequired();
-        builder.Property(q => q.IsDeleted).IsRequired();
 
         builder.Property(q => q.HasPrivateBathroom).IsRequired();
         builder.Property(q => q.HasTowels).IsRequired();

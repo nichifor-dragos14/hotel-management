@@ -16,7 +16,6 @@ public class Booking
         EndOn = endOn;
         CreatedOn = createdOn;
         UpdatedOn = updatedOn;
-        IsDeleted = false;
     }
 
     public Guid Id { get; }
@@ -28,8 +27,6 @@ public class Booking
     public DateTime CreatedOn { get; private set; }
 
     public DateTime UpdatedOn { get; private set; }
-
-    public bool IsDeleted { get; private set; }
 
     public virtual User User { get; private init; }
 
@@ -62,6 +59,5 @@ public class Booking
         StartOn = startOn;
         EndOn = endOn;
         UpdatedOn = DateTime.UtcNow;
-        IsDeleted = false;
     }
 }

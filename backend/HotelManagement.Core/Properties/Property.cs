@@ -43,7 +43,6 @@ public class Property
         HasPetFriendlyPolicy = hasPetFriendlyPolicy;
         HasBreakfast = hasBreakfast;
         HasFreeCancellation = hasFreeCancellation;
-        IsDeleted = false;
     }
 
     public Guid Id { get; }
@@ -81,8 +80,6 @@ public class Property
     public DateTime CreatedOn { get; private set; }
 
     public DateTime UpdatedOn { get; private set; }
-
-    public bool IsDeleted { get; private set; }
 
     public virtual List<Room> Rooms { get; private init; }
 

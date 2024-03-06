@@ -15,7 +15,6 @@ public class User
         LastName = lastName;
         CreatedOn = createdOn;
         UpdatedOn = updatedOn;
-        IsDeleted = false;
     }
 
     public Guid Id { get; }
@@ -27,8 +26,6 @@ public class User
     public DateTime CreatedOn { get; private set; }
 
     public DateTime UpdatedOn { get; private set; }
-
-    public bool IsDeleted { get; private set; }
 
     public virtual List<Booking> Bookings { get; private init; }
 
@@ -56,6 +53,5 @@ public class User
         FirstName = firstName;
         LastName = lastName;
         UpdatedOn = DateTime.UtcNow;
-        IsDeleted = false;
     }
 }

@@ -32,7 +32,6 @@ public class Room
         HasSeaView = hasSeaView;
         CreatedOn = createdOn;
         UpdatedOn = updatedOn;
-        IsDeleted = false;
     }
 
     public Guid Id { get; }
@@ -61,8 +60,6 @@ public class Room
 
     public DateTime UpdatedOn { get; private set; }
 
-    public bool IsDeleted { get; private set; }
-
     public virtual Property Property { get; internal init; }
 
     public virtual List<Booking> Bookings { get; internal init; }
@@ -85,6 +82,5 @@ public class Room
         HasKitchen = hasKitchen;
         HasRefrigerator = hasRefrigerator;
         UpdatedOn = DateTime.UtcNow;
-        IsDeleted = false;
     }
 }

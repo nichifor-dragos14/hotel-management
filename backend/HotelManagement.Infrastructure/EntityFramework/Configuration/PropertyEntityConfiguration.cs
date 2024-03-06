@@ -19,7 +19,6 @@ internal class PropertyEntityConfiguration : IEntityTypeConfiguration<Property>
 
         builder.Property(q => q.CreatedOn).IsRequired();
         builder.Property(q => q.UpdatedOn).IsRequired();
-        builder.Property(q => q.IsDeleted).IsRequired();
 
         builder.Property(q => q.HasFreeWiFi).IsRequired();
         builder.Property(q => q.HasParking).IsRequired();
