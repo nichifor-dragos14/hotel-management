@@ -1,0 +1,22 @@
+<section role="report-actions">
+  <a mat-icon-button routerLink="../" color="accent">
+    <mat-icon>close</mat-icon>
+  </a>
+
+  <a mat-button [routerLink]="['actions', 'close']" color="warn">Close</a>
+</section>
+
+<h1>{{ report.title }}</h1>
+
+<mat-chip-listbox>
+  <mat-chip-option selected="true" selectable="false" color="primary">
+    Created On: {{ report.createdOn | dateFormat }}
+  </mat-chip-option>
+  <mat-chip-option selected="true" selectable="false" color="secondary">
+    Updated On: {{ report.updatedOn | dateFormat }}
+  </mat-chip-option>
+</mat-chip-listbox>
+
+<p id="description">{{ report.description }}</p>
+
+<router-outlet hidden />

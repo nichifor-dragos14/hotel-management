@@ -1,0 +1,23 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 0 0 32px 0;
+}
+
+span {
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  gap: 8px;
+}
+
+section[role='report-actions'] {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+}
+
+#description {
+  padding: 0 32px;
+}

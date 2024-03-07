@@ -8,4 +8,9 @@ export const routes: Routes = [
         (m) => m.PropertiesModule
       ),
   },
+  {
+    path: 'reports',
+    loadChildren: () =>
+      import('../features/reports/reports.module').then((m) => m.ReportsModule),
+  },
 ];

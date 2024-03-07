@@ -172,7 +172,8 @@ public class Property
             title,
             description,
             DateTime.UtcNow,
-            DateTime.UtcNow
+            DateTime.UtcNow,
+            false
         )
         {
             Property = this
