@@ -5,6 +5,7 @@ import { ReportPageComponent } from './report-page/report-page.component';
 import { ReportService } from '$backend/services';
 import { DialogPageComponent } from '$shared/dialog-page';
 import { CloseReportComponent } from './close-report.component';
+import { OpenReportComponent } from './open-report.component';
 
 const REPORT_ROUTES: Routes = [
   {
@@ -28,6 +29,14 @@ const REPORT_ROUTES: Routes = [
               {
                 path: 'close',
                 component: CloseReportComponent,
+                resolve: {
+                  id: ({ parent }: ActivatedRouteSnapshot) =>
+                    parent?.parent?.params['id'],
+                },
+              },
+              {
+                path: 'open',
+                component: OpenReportComponent,
                 resolve: {
                   id: ({ parent }: ActivatedRouteSnapshot) =>
                     parent?.parent?.params['id'],

@@ -9,7 +9,8 @@ public class Report
         string description,
         DateTime createdOn,
         DateTime updatedOn,
-        bool isRead
+        bool isRead,
+        bool isClosed
     )
     {
         Title = title;
@@ -17,6 +18,7 @@ public class Report
         CreatedOn = createdOn;
         UpdatedOn = updatedOn;
         IsRead = isRead;
+        IsClosed = isClosed;
     }
 
     public Guid Id { get; }
@@ -27,9 +29,21 @@ public class Report
 
     public bool IsRead { get; private set; }
 
+    public bool IsClosed { get; private set; }
+
     public DateTime CreatedOn { get; private set; }
 
     public DateTime UpdatedOn { get; private set; }
 
     public virtual Property Property { get; internal init; }
+
+    public void Close()
+    {
+        IsClosed = true;
+    }
+
+    public void Open()
+    {
+        IsClosed = false;
+    }
 }

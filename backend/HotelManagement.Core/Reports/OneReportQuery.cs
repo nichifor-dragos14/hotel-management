@@ -7,6 +7,7 @@ public record ReportDetails(
     string Title,
     string Description,
     bool IsRead,
+    bool IsClosed,
     DateTime CreatedOn,
     DateTime UpdatedOn
 );
@@ -30,6 +31,7 @@ internal class OneReportQueryHandler(
                  report.Title,
                  report.Description,
                  report.IsRead,
+                 report.IsClosed,
                  report.CreatedOn,
                  report.UpdatedOn
              )

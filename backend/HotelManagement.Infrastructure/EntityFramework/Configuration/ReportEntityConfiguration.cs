@@ -13,6 +13,7 @@ internal class ReportEntityConfiguration : IEntityTypeConfiguration<Report>
         builder.Property(q => q.Title).IsRequired();
         builder.Property(q => q.Description).IsRequired();
         builder.Property(q => q.IsRead).IsRequired();
+        builder.Property(q => q.IsClosed).IsRequired();
 
         builder.Property(q => q.CreatedOn).IsRequired();
         builder.Property(q => q.UpdatedOn).IsRequired();

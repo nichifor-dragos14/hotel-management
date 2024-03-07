@@ -173,6 +173,7 @@ public class Property
             description,
             DateTime.UtcNow,
             DateTime.UtcNow,
+            false,
             false
         )
         {

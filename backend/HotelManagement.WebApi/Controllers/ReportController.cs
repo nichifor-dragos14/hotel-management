@@ -35,4 +35,32 @@ public class ReportController
             _ => TypedResults.NotFound()
         };
     }
+
+    [HttpPatch("close")]
+    public async Task<Results<Ok<Guid>, BadRequest>> Close(
+        [FromBody] CloseReportCommand closeReportCommand,
+        [FromServices] ICommandHandler<CloseReportCommand, Guid?> commandHandler,
+        CancellationToken cancellationToken
+    )
+    {
+        return await commandHandler.ExecuteAsync(closeReportCommand, cancellationToken) switch
+        {
+            { } id => TypedResults.Ok(id),
+            _ => TypedResults.BadRequest()
+        };
+    }
+
+    [HttpPatch("open")]
+    public async Task<Results<Ok<Guid>, BadRequest>> Open(
+        [FromBody] OpenReportCommand openReportCommand,
+        [FromServices] ICommandHandler<OpenReportCommand, Guid?> commandHandler,
+        CancellationToken cancellationToken
+    )
+    {
+        return await commandHandler.ExecuteAsync(openReportCommand, cancellationToken) switch
+        {
+            { } id => TypedResults.Ok(id),
+            _ => TypedResults.BadRequest()
+        };
+    }
 }

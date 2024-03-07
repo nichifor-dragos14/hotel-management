@@ -2,8 +2,11 @@
   <a mat-icon-button routerLink="../" color="accent">
     <mat-icon>close</mat-icon>
   </a>
-
-  <a mat-button [routerLink]="['actions', 'close']" color="warn">Close</a>
+  @if (report.isClosed) {
+    <a mat-button [routerLink]="['actions', 'open']" color="primary">Open</a>
+  } @else {
+    <a mat-button [routerLink]="['actions', 'close']" color="warn">Close</a>
+  }
 </section>
 
 <h1>{{ report.title }}</h1>
