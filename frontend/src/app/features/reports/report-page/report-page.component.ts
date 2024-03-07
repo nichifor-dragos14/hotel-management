@@ -1,5 +1,11 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { ReportDetails } from '$backend/services';
+import {
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  inject,
+} from '@angular/core';
+import { ReportDetails, ReportService } from '$backend/services';
 import { RouterModule } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
@@ -22,6 +28,17 @@ import { DateConverterModule } from '$shared/date-converter';
     DateConverterModule,
   ],
 })
-export class ReportPageComponent {
+export class ReportPageComponent implements AfterViewInit {
   @Input() report!: ReportDetails;
+  reportService = inject(ReportService);
+
+  async ngAfterViewInit() {
+    if (this.report.isRead) {
+      return;
+    }
+
+    await this.reportService.reportsReadPatchAsync({
+      body: { id: this.report.id },
+    });
+  }
 }

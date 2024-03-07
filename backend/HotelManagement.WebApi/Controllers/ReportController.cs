@@ -63,4 +63,18 @@ public class ReportController
             _ => TypedResults.BadRequest()
         };
     }
+
+    [HttpPatch("read")]
+    public async Task<Results<Ok<Guid>, BadRequest>> Read(
+        [FromBody] ReadReportCommand readReportCommand,
+        [FromServices] ICommandHandler<ReadReportCommand, Guid?> commandHandler,
+        CancellationToken cancellationToken
+    )
+    {
+        return await commandHandler.ExecuteAsync(readReportCommand, cancellationToken) switch
+        {
+            { } id => TypedResults.Ok(id),
+            _ => TypedResults.BadRequest()
+        };
+    }
 }

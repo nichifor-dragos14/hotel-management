@@ -46,4 +46,9 @@ public class Report
     {
         IsClosed = false;
     }
+
+    public void Read()
+    {
+        IsRead = true;
+    }
 }
