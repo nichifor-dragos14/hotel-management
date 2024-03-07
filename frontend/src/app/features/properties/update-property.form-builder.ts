@@ -32,8 +32,8 @@ export class EditPropertyFormFactory {
         property.hasBreakfast,
         { validators: [Validators.required] },
       ],
-      hasFitnessCentre: [
-        property.hasFitnessCentre,
+      hasFitnessCenter: [
+        property.hasFitnessCenter,
         { validators: [Validators.required] },
       ],
       hasFreeCancellation: [

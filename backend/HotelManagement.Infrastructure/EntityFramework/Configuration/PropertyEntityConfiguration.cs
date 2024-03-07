@@ -24,7 +24,7 @@ internal class PropertyEntityConfiguration : IEntityTypeConfiguration<Property>
         builder.Property(q => q.HasParking).IsRequired();
         builder.Property(q => q.HasPool).IsRequired();
         builder.Property(q => q.HasRestaurant).IsRequired();
-        builder.Property(q => q.HasFitnessCentre).IsRequired();
+        builder.Property(q => q.HasFitnessCenter).IsRequired();
         builder.Property(q => q.HasRoomService).IsRequired();
         builder.Property(q => q.HasBreakfast).IsRequired();
         builder.Property(q => q.HasPetFriendlyPolicy).IsRequired();

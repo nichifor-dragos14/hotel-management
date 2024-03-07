@@ -19,7 +19,7 @@ public class Property
         bool hasParking,
         bool hasPool,
         bool hasRestaurant,
-        bool hasFitnessCentre,
+        bool hasFitnessCenter,
         bool hasRoomService,
         bool hasPetFriendlyPolicy,
         bool hasBreakfast,
@@ -38,7 +38,7 @@ public class Property
         HasParking = hasParking;
         HasPool = hasPool;
         HasRestaurant = hasRestaurant;
-        HasFitnessCentre = hasFitnessCentre;
+        HasFitnessCenter = hasFitnessCenter;
         HasRoomService = hasRoomService;
         HasPetFriendlyPolicy = hasPetFriendlyPolicy;
         HasBreakfast = hasBreakfast;
@@ -67,7 +67,7 @@ public class Property
 
     public bool HasRestaurant { get; private set; }
 
-    public bool HasFitnessCentre { get; private set; }
+    public bool HasFitnessCenter { get; private set; }
 
     public bool HasRoomService { get; private set; }
 
@@ -98,7 +98,7 @@ public class Property
         bool hasParking,
         bool hasPool,
         bool hasRestaurant,
-        bool hasFitnessCentre,
+        bool hasFitnessCenter,
         bool hasRoomService,
         bool hasPetFriendlyPolicy,
         bool hasBreakfast,
@@ -117,7 +117,7 @@ public class Property
             hasFreeWiFi, hasParking,
             hasPool,
             hasRestaurant,
-            hasFitnessCentre,
+            hasFitnessCenter,
             hasRoomService,
             hasPetFriendlyPolicy,
             hasBreakfast,
@@ -206,7 +206,7 @@ public class Property
         bool hasParking,
         bool hasPool,
         bool hasRestaurant,
-        bool hasFitnessCentre,
+        bool hasFitnessCenter,
         bool hasRoomService,
         bool hasPetFriendlyPolicy,
         bool hasBreakfast,
@@ -221,7 +221,7 @@ public class Property
         HasParking = hasParking;
         HasPool = hasPool;
         HasRestaurant = hasRestaurant;
-        HasFitnessCentre = hasFitnessCentre;
+        HasFitnessCenter = hasFitnessCenter;
         HasRoomService = hasRoomService;
         HasPetFriendlyPolicy = hasPetFriendlyPolicy;
         HasBreakfast = hasBreakfast;

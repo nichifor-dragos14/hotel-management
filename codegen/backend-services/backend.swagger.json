@@ -279,7 +279,7 @@
           "description",
           "email",
           "hasBreakfast",
-          "hasFitnessCentre",
+          "hasFitnessCenter",
           "hasFreeCancellation",
           "hasFreeWiFi",
           "hasParking",
@@ -324,7 +324,7 @@
           "hasRestaurant": {
             "type": "boolean"
           },
-          "hasFitnessCentre": {
+          "hasFitnessCenter": {
             "type": "boolean"
           },
           "hasRoomService": {
@@ -348,7 +348,7 @@
           "description",
           "email",
           "hasBreakfast",
-          "hasFitnessCentre",
+          "hasFitnessCenter",
           "hasFreeCancellation",
           "hasFreeWiFi",
           "hasParking",
@@ -407,7 +407,7 @@
           "hasRestaurant": {
             "type": "boolean"
           },
-          "hasFitnessCentre": {
+          "hasFitnessCenter": {
             "type": "boolean"
           },
           "hasRoomService": {
@@ -574,7 +574,7 @@
           "description",
           "email",
           "hasBreakfast",
-          "hasFitnessCentre",
+          "hasFitnessCenter",
           "hasFreeCancellation",
           "hasFreeWiFi",
           "hasParking",
@@ -616,7 +616,7 @@
           "hasRestaurant": {
             "type": "boolean"
           },
-          "hasFitnessCentre": {
+          "hasFitnessCenter": {
             "type": "boolean"
           },
           "hasRoomService": {

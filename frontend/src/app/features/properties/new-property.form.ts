@@ -14,7 +14,7 @@ export const NEW_PROPERTY_FORM = new InjectionToken('NEW_PROPERTY_FORM', {
       phoneNumber: ['', { validators: [Validators.required] }],
       type: [PropertyType.$0, { validators: [Validators.required] }],
       hasBreakfast: [false, { validators: [Validators.required] }],
-      hasFitnessCentre: [false, { validators: [Validators.required] }],
+      hasFitnessCenter: [false, { validators: [Validators.required] }],
       hasFreeCancellation: [false, { validators: [Validators.required] }],
       hasFreeWiFi: [false, { validators: [Validators.required] }],
       hasParking: [false, { validators: [Validators.required] }],

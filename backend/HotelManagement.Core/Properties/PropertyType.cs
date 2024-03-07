@@ -3,7 +3,7 @@
 public enum PropertyType
 {
     Hotel,
-    Apartament,
-    Villa,
+    Hostel,
+    Resort,
     Campsite
 }

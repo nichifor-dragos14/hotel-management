@@ -53,7 +53,7 @@ export class UpdatePropertyPageComponent {
       phoneNumber,
       type,
       hasBreakfast,
-      hasFitnessCentre,
+      hasFitnessCenter,
       hasFreeCancellation,
       hasFreeWiFi,
       hasParking,
@@ -72,7 +72,7 @@ export class UpdatePropertyPageComponent {
       !phoneNumber ||
       type == undefined ||
       hasBreakfast == undefined ||
-      hasFitnessCentre == undefined ||
+      hasFitnessCenter == undefined ||
       hasFreeCancellation == undefined ||
       hasFreeWiFi == undefined ||
       hasParking == undefined ||
@@ -93,7 +93,7 @@ export class UpdatePropertyPageComponent {
           email,
           phoneNumber,
           hasBreakfast,
-          hasFitnessCentre,
+          hasFitnessCenter,
           hasFreeCancellation,
           hasFreeWiFi,
           hasParking,
