@@ -25,22 +25,8 @@ import { MatListModule } from '@angular/material/list';
     <mat-sidenav-container>
       <mat-sidenav mode="side" opened>
         <mat-nav-list>
-          <a
-            mat-list-item
-            routerLink="/admin/properties"
-            routerLinkActive="selected"
-          >
-            Properties admin
-          </a>
-        </mat-nav-list>
-
-        <mat-nav-list>
-          <a
-            mat-list-item
-            routerLink="/client/properties"
-            routerLinkActive="selected"
-          >
-            Properties client
+          <a mat-list-item routerLink="/properties" routerLinkActive="selected">
+            Properties
           </a>
         </mat-nav-list>
       </mat-sidenav>

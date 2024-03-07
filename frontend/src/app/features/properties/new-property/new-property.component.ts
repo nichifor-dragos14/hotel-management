@@ -110,6 +110,6 @@ export class NewPropertyPageComponent {
       }
     }
 
-    await this.router.navigateByUrl('admin/properties');
+    await this.router.navigateByUrl('properties');
   }
 }

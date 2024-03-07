@@ -45,7 +45,7 @@ export class DeletePropertyComponent {
         this.toastService.open(error.message, 'error');
       }
     } finally {
-      this.router.navigateByUrl('admin/properties');
+      this.router.navigateByUrl('properties');
     }
   }
 }

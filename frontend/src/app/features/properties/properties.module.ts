@@ -74,4 +74,4 @@ const PROPERTY_ROUTES: Routes = [
   imports: [RouterModule.forChild(PROPERTY_ROUTES)],
   exports: [RouterModule],
 })
-export class AdminPropertyModule {}
+export class PropertiesModule {}

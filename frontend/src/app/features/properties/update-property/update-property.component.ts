@@ -111,6 +111,6 @@ export class UpdatePropertyPageComponent {
       }
     }
 
-    await this.router.navigateByUrl('admin/properties');
+    await this.router.navigateByUrl('properties');
   }
 }
