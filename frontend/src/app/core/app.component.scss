@@ -9,7 +9,7 @@ mat-toolbar-row {
 
 :host {
   display: grid;
-  height: 100vh;
+  min-height: 100vh;
   grid-template-rows: min-content 1fr;
 }
 
@@ -29,7 +29,7 @@ router-outlet {
 
 mat-nav-list {
   padding-top: 0;
-  min-width: 200px;
+  width: 200px;
 }
 
 .mdc-list {
@@ -43,4 +43,18 @@ mat-nav-list {
   --mat-sidenav-content-text-color: #36013f !important;
   --mdc-list-list-item-focus-label-text-color: #36013f !important;
   --mdc-list-list-item-hover-label-text-color: #36013f !important;
+}
+
+mat-sidenav-container {
+  z-index: unset;
+}
+
+mat-sidenav-content {
+  z-index: unset;
+}
+
+mat-toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 }

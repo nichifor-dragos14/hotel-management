@@ -13,6 +13,7 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
           align-items: center;
           text-align: center;
           margin-bottom: 16px;
+          z-index: 1001;
       }
 
       h1 {
