@@ -9,17 +9,43 @@
   }
 </section>
 
-<h1>{{ report.title }}</h1>
+<section role="report-header">
+  <h1>{{ report.title }}</h1>
 
-<mat-chip-listbox>
-  <mat-chip-option selected="true" selectable="false" color="primary">
-    Created On: {{ report.createdOn | dateFormat }}
-  </mat-chip-option>
-  <mat-chip-option selected="true" selectable="false" color="secondary">
-    Updated On: {{ report.updatedOn | dateFormat }}
-  </mat-chip-option>
-</mat-chip-listbox>
+  <mat-chip-listbox>
+    <mat-chip-option selected="true" selectable="false" color="primary">
+      Created On: {{ report.createdOn | dateFormat }}
+    </mat-chip-option>
+    <mat-chip-option selected="true" selectable="false" color="secondary">
+      Updated On: {{ report.updatedOn | dateFormat }}
+    </mat-chip-option>
+  </mat-chip-listbox>
+</section>
 
 <p id="description">{{ report.description }}</p>
+
+@if (!reply) {
+  <a mat-raised-button (click)="reply = true">Reply</a>
+}
+
+@if (reply) {
+  <form [formGroup]="replyForm" (ngSubmit)="sendReply(replyForm.value)">
+    <mat-form-field appearance="outline">
+      <mat-label>Reply</mat-label>
+      <editor appTinyEditor formControlName="reply" />
+      <mat-error>You must reply before submitting</mat-error>
+    </mat-form-field>
+
+    <button
+      mat-raised-button
+      color="primary"
+      type="submit"
+      [disabled]="replyForm.invalid"
+      id="form-button"
+    >
+      Send
+    </button>
+  </form>
+}
 
 <router-outlet hidden />
