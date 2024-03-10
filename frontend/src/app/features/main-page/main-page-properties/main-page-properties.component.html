@@ -1,0 +1,133 @@
+<form
+  [formGroup]="searchPropertyForm"
+  (ngSubmit)="search(searchPropertyForm.value)"
+  role="searchForm"
+>
+  <app-page-header title="Where would you like to travel next? 😄">
+    <button
+      mat-button
+      button
+      color="primary"
+      type="submit"
+      [disabled]="searchPropertyForm.invalid"
+    >
+      Search
+    </button>
+  </app-page-header>
+
+  <mat-accordion multi class="mat-elevation-z8">
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title> Where are you going? </mat-panel-title>
+        <mat-panel-description>
+          <mat-icon>location_on</mat-icon>
+          Tell us where you are headed to
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+      <mat-form-field appearance="outline">
+        <input
+          matInput
+          formControlName="location"
+          placeholder="Where are you going?"
+        />
+        <mat-icon matPrefix class="my-icon">bed</mat-icon>
+      </mat-form-field>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title> Trip time </mat-panel-title>
+        <mat-panel-description>
+          <mat-icon>date_range</mat-icon>
+          Tell us when you wish to travel
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+      <mat-form-field>
+        <mat-label>Enter a date range</mat-label>
+        <mat-date-range-input [rangePicker]="picker">
+          <input matStartDate formControlName="startDate" />
+          <input matEndDate formControlName="endDate" />
+        </mat-date-range-input>
+
+        <mat-datepicker-toggle matIconSuffix [for]="picker">
+        </mat-datepicker-toggle>
+
+        <mat-date-range-picker #picker></mat-date-range-picker>
+      </mat-form-field>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title> Trip details </mat-panel-title>
+        <mat-panel-description>
+          <mat-icon>person_outline</mat-icon>
+          Tell us the number of persons and rooms
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Adults</mat-label>
+        <input matInput formControlName="numberAdults" type="number" min="1" />
+        <mat-icon matPrefix class="my-icon">person</mat-icon>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Children</mat-label>
+        <input
+          matInput
+          formControlName="numberChildren"
+          type="number"
+          min="0"
+        />
+        <mat-icon matPrefix class="my-icon">child_care</mat-icon>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Rooms</mat-label>
+        <input matInput formControlName="numberRooms" type="number" min="1" />
+        <mat-icon matPrefix class="my-icon">hotel</mat-icon>
+      </mat-form-field>
+    </mat-expansion-panel>
+  </mat-accordion>
+</form>
+
+<form role="filters">
+  <app-page-header title="Filters">
+    <button mat-button button color="primary" routerLink="new">Apply</button>
+  </app-page-header>
+
+  <mat-selection-list>
+    <h3>🏨 Property filters</h3>
+    <mat-list-option>Wi-Fi</mat-list-option>
+    <mat-list-option>Parking</mat-list-option>
+    <mat-list-option>Room service</mat-list-option>
+    <mat-list-option>Restaurant</mat-list-option>
+    <mat-list-option>Breakfast</mat-list-option>
+    <mat-list-option>Kitchen</mat-list-option>
+    <mat-list-option>Pool</mat-list-option>
+    <mat-list-option>Fitness center</mat-list-option>
+    <mat-list-option>Pet friendly</mat-list-option>
+    <mat-list-option>Free cancellation</mat-list-option>
+  </mat-selection-list>
+
+  <mat-selection-list>
+    <h3>🛏️ Room filters</h3>
+    <mat-list-option>Private bathroom</mat-list-option>
+    <mat-list-option>Air conditioning</mat-list-option>
+    <mat-list-option>Towels</mat-list-option>
+    <mat-list-option>Hairdryer</mat-list-option>
+    <mat-list-option>Balcony</mat-list-option>
+    <mat-list-option>Sea view</mat-list-option>
+    <mat-list-option>Refrigerator</mat-list-option>
+  </mat-selection-list>
+
+  <mat-selection-list>
+    <h3>⭐ Rating</h3>
+    <mat-list-option>Superb: +9</mat-list-option>
+    <mat-list-option>Very good: +8</mat-list-option>
+    <mat-list-option>Good: +7</mat-list-option>
+    <mat-list-option>Plesant: +6</mat-list-option>
+  </mat-selection-list>
+</form>

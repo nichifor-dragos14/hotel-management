@@ -13,4 +13,11 @@ export const routes: Routes = [
     loadChildren: () =>
       import('../features/reports/reports.module').then((m) => m.ReportsModule),
   },
+  {
+    path: 'main',
+    loadChildren: () =>
+      import('../features/main-page/main-page.module').then(
+        (m) => m.MainPageModule
+      ),
+  },
 ];

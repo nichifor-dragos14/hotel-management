@@ -31,6 +31,9 @@ import { MatListModule } from '@angular/material/list';
           <a mat-list-item routerLink="/reports" routerLinkActive="selected">
             Reports
           </a>
+          <a mat-list-item routerLink="/main" routerLinkActive="selected">
+            Main page properties
+          </a>
         </mat-nav-list>
       </mat-sidenav>
       <mat-sidenav-content>

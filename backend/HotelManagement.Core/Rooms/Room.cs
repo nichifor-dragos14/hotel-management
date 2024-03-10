@@ -13,7 +13,6 @@ public class Room
         bool hasHairdryer,
         bool hasAirConditioning,
         bool hasBalcony,
-        bool hasKitchen,
         bool hasRefrigerator,
         bool hasSeaView,
         DateTime createdOn,
@@ -27,7 +26,6 @@ public class Room
         HasHairdryer = hasHairdryer;
         HasAirConditioning = hasAirConditioning;
         HasBalcony = hasBalcony;
-        HasKitchen = hasKitchen;
         HasRefrigerator = hasRefrigerator;
         HasSeaView = hasSeaView;
         CreatedOn = createdOn;
@@ -50,8 +48,6 @@ public class Room
 
     public bool HasBalcony { get; private set; }
 
-    public bool HasKitchen { get; private set; }
-
     public bool HasRefrigerator { get; private set; }
 
     public bool HasSeaView { get; private set; }
@@ -70,7 +66,6 @@ public class Room
         bool hasHairdryer,
         bool hasAirConditioning,
         bool hasBalcony,
-        bool hasKitchen,
         bool hasRefrigerator
     )
     {
@@ -79,7 +74,6 @@ public class Room
         HasHairdryer = hasHairdryer;
         HasAirConditioning = hasAirConditioning;
         HasBalcony = hasBalcony;
-        HasKitchen = hasKitchen;
         HasRefrigerator = hasRefrigerator;
         UpdatedOn = DateTime.UtcNow;
     }

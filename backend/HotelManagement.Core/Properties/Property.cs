@@ -138,7 +138,6 @@ public class Property
         bool hasHairdryer,
         bool hasAirConditioning,
         bool hasBalcony,
-        bool hasKitchen,
         bool hasRefrigerator,
         bool hasSeaView
     )
@@ -151,7 +150,6 @@ public class Property
             hasHairdryer,
             hasAirConditioning,
             hasBalcony,
-            hasKitchen,
             hasRefrigerator,
             hasSeaView,
             DateTime.UtcNow,

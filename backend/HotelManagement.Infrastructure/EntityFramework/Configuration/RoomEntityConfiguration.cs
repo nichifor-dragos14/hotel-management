@@ -22,7 +22,6 @@ internal class RoomEntityConfiguration : IEntityTypeConfiguration<Room>
         builder.Property(q => q.HasBalcony).IsRequired();
         builder.Property(q => q.HasHairdryer).IsRequired();
         builder.Property(q => q.HasSeaView).IsRequired();
-        builder.Property(q => q.HasKitchen).IsRequired();
 
         builder.HasOne(c => c.Property)
             .WithMany(c => c.Rooms);
