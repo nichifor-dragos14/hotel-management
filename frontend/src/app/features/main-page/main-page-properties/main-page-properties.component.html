@@ -131,3 +131,7 @@
     <mat-list-option>Plesant: +6</mat-list-option>
   </mat-selection-list>
 </form>
+
+<div *ngFor="let index of arrayLength" style="margin-top: 100px">
+  <app-property-card [property]="generateProperty(index)"></app-property-card>
+</div>

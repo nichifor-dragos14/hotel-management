@@ -13,6 +13,8 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatListModule } from '@angular/material/list';
 import { AppPageHeaderComponent } from '$shared/page-header';
+import { PropertyCardComponent } from '$shared/cards';
+import { PropertyDetails } from '$backend/services';
 
 @Component({
   selector: 'app-main-page-properties',
@@ -35,6 +37,7 @@ import { AppPageHeaderComponent } from '$shared/page-header';
     MatNativeDateModule,
     MatListModule,
     AppPageHeaderComponent,
+    PropertyCardComponent,
   ],
 })
 export class MainPagePropertiesComponent {
@@ -42,5 +45,30 @@ export class MainPagePropertiesComponent {
 
   search(newSearch: typeof this.searchPropertyForm.value) {
     console.log(newSearch);
+  }
+
+  arrayLength = Array(1).fill(0); // Create an array with 10 elements
+
+  generateProperty(index: number): PropertyDetails {
+    return {
+      createdOn: new Date().toISOString(),
+      description: `Property ${index + 1} description`,
+      email: `property${index + 1}@example.com`,
+      hasBreakfast: index % 2 === 0,
+      hasFitnessCenter: index % 3 === 0,
+      hasFreeCancellation: index % 4 === 0,
+      hasFreeWiFi: index % 5 === 0,
+      hasParking: index % 6 === 0,
+      hasPetFriendlyPolicy: index % 7 === 0,
+      hasPool: index % 8 === 0,
+      hasRestaurant: index % 9 === 0,
+      hasRoomService: index % 10 === 0,
+      id: `property-${index + 1}`,
+      location: `Location ${index + 1}`,
+      name: `Property ${index + 1}`,
+      phoneNumber: `123-456-${index.toString().padStart(2, '0')}`,
+      type: 0, // Assuming 'Apartment' as default type
+      updatedOn: new Date().toISOString(),
+    };
   }
 }
