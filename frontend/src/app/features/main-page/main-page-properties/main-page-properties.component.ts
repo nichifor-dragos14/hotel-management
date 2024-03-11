@@ -3,7 +3,7 @@ import { Router, RouterModule } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
-import { SEARCH_PROPERTY_FORM } from '../new-search-property.form';
+import { SEARCH_PROPERTY_FORM } from '../search-property.form';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -13,10 +13,9 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatListModule } from '@angular/material/list';
 import { AppPageHeaderComponent } from '$shared/page-header';
-import { PropertyService, PropertySummaryFiltered } from '$backend/services';
-import { PaginatedDataSource } from '$core/pagination';
-import { of } from 'rxjs';
 import { ScrollingModule } from '@angular/cdk/scrolling';
+import { FILTER_PROPERTY_FORM } from '../filter-property.form';
+import { PropertyQueryParams } from '../property-query-params.interface';
 
 @Component({
   selector: 'app-main-page-properties',
@@ -44,14 +43,8 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
 })
 export class MainPagePropertiesComponent {
   readonly searchPropertyForm = inject(SEARCH_PROPERTY_FORM);
-  propertyService = inject(PropertyService);
+  readonly filterPropertyForm = inject(FILTER_PROPERTY_FORM);
   readonly router = inject(Router);
-
-  propertiesDataSource = new PaginatedDataSource<PropertySummaryFiltered>({
-    fetch: ({ from, to }) => {
-      return of({ results: [], totalCount: 0 });
-    },
-  });
 
   search(newSearch: typeof this.searchPropertyForm.value) {
     const {
@@ -74,7 +67,7 @@ export class MainPagePropertiesComponent {
       return;
     }
 
-    const queryParams = {
+    const queryParams: PropertyQueryParams = {
       location: location,
       startDate: startDate.toISOString(),
       endDate: endDate.toISOString(),
@@ -83,6 +76,94 @@ export class MainPagePropertiesComponent {
       numberOfRooms: numberOfRooms,
     };
 
+    const filterValue = this.filterPropertyForm.value;
+
+    if (filterValue.hasWiFi) {
+      queryParams['hasWiFi'] = true;
+    }
+
+    if (filterValue.hasParking) {
+      queryParams['hasParking'] = true;
+    }
+
+    if (filterValue.hasRoomService) {
+      queryParams['hasRoomService'] = true;
+    }
+
+    if (filterValue.hasRestaurant) {
+      queryParams['hasRestaurant'] = true;
+    }
+
+    if (filterValue.hasBreakfast) {
+      queryParams['hasBreakfast'] = true;
+    }
+
+    if (filterValue.hasKitchen) {
+      queryParams['hasKitchen'] = true;
+    }
+
+    if (filterValue.hasPool) {
+      queryParams['hasPool'] = true;
+    }
+
+    if (filterValue.hasFitnessCenter) {
+      queryParams['hasFitnessCenter'] = true;
+    }
+
+    if (filterValue.hasPetFriendlyPolicy) {
+      queryParams['hasPetFriendlyPolicy'] = true;
+    }
+
+    if (filterValue.hasFreeCancellation) {
+      queryParams['hasFreeCancellation'] = true;
+    }
+
+    if (filterValue.hasPrivateBathroom) {
+      queryParams['hasPrivateBathroom'] = true;
+    }
+
+    if (filterValue.hasAirConditioning) {
+      queryParams['hasAirConditioning'] = true;
+    }
+
+    if (filterValue.hasTowels) {
+      queryParams['hasTowels'] = true;
+    }
+
+    if (filterValue.hasHairdryer) {
+      queryParams['hasHairdryer'] = true;
+    }
+
+    if (filterValue.hasBalcony) {
+      queryParams['hasBalcony'] = true;
+    }
+
+    if (filterValue.hasSeaView) {
+      queryParams['hasSeaView'] = true;
+    }
+
+    if (filterValue.hasRefrigerator) {
+      queryParams['hasRefrigerator'] = true;
+    }
+
+    if (filterValue.isPlesant) {
+      queryParams['isPlesant'] = true;
+    } else if (filterValue.isGood) {
+      queryParams['isGood'] = true;
+    } else if (filterValue.isVeryGood) {
+      queryParams['isVeryGood'] = true;
+    } else if (filterValue.isSuperb) {
+      queryParams['isSuperb'] = true;
+    }
+
     this.router.navigate(['main/search-results'], { queryParams: queryParams });
+  }
+
+  toggleControl(controlName: string): void {
+    const control = this.filterPropertyForm.get(controlName);
+
+    if (control) {
+      control.setValue(!control.value);
+    }
   }
 }

@@ -1,6 +1,6 @@
 :host {
   display: grid !important;
-  grid-template-areas: 'searchForm filters' 'list filters';
+  grid-template-areas: 'searchForm filtersForm' 'list filtersForm';
   grid-template-rows: min-content 1fr;
   grid-template-columns: 5fr 1fr;
   grid-gap: 0 16px;
@@ -8,8 +8,8 @@
   position: relative;
 }
 
-form[role='filters'] {
-  grid-area: filters;
+form[role='filtersForm'] {
+  grid-area: filtersForm;
   padding: 0 8px;
   width: 100%;
 }
@@ -17,4 +17,17 @@ form[role='filters'] {
 form[role='searchForm'] {
   grid-area: searchForm;
   padding: 0 16px;
+}
+
+:host router-outlet {
+  display: none;
+
+  & ::ng-deep + * {
+    grid-area: list;
+  }
+}
+
+#search-header {
+  position: sticky;
+  top: 14.5px;
 }

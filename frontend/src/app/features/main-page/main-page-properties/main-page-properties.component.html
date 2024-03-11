@@ -101,40 +101,103 @@
   </mat-accordion>
 </form>
 
-<form role="filters">
-  <app-page-header title="Filters"> </app-page-header>
+<form [formGroup]="filterPropertyForm" role="filtersForm">
+  <app-page-header title="Filters"></app-page-header>
 
   <mat-selection-list>
     <h3>🏨 Property filters</h3>
-    <mat-list-option>Wi-Fi</mat-list-option>
-    <mat-list-option>Parking</mat-list-option>
-    <mat-list-option>Room service</mat-list-option>
-    <mat-list-option>Restaurant</mat-list-option>
-    <mat-list-option>Breakfast</mat-list-option>
-    <mat-list-option>Kitchen</mat-list-option>
-    <mat-list-option>Pool</mat-list-option>
-    <mat-list-option>Fitness center</mat-list-option>
-    <mat-list-option>Pet friendly</mat-list-option>
-    <mat-list-option>Free cancellation</mat-list-option>
+
+    <mat-list-option (selectedChange)="toggleControl('hasWiFi')">
+      Wi-Fi
+    </mat-list-option>
+
+    <mat-list-option (selectedChange)="toggleControl('hasParking')">
+      Parking
+    </mat-list-option>
+
+    <mat-list-option (selectedChange)="toggleControl('hasRoomService')">
+      Room service
+    </mat-list-option>
+
+    <mat-list-option (selectedChange)="toggleControl('hasRestaurant')">
+      Restaurant
+    </mat-list-option>
+
+    <mat-list-option (selectedChange)="toggleControl('hasBreakfast')">
+      Breakfast
+    </mat-list-option>
+
+    <mat-list-option (selectedChange)="toggleControl('hasKitchen')">
+      Kitchen
+    </mat-list-option>
+
+    <mat-list-option (selectedChange)="toggleControl('hasPool')">
+      Pool
+    </mat-list-option>
+
+    <mat-list-option (selectedChange)="toggleControl('hasFitnessCenter')">
+      Fitness center
+    </mat-list-option>
+
+    <mat-list-option (selectedChange)="toggleControl('hasPetFriendlyPolicy')">
+      Pet friendly
+    </mat-list-option>
+
+    <mat-list-option (selectedChange)="toggleControl('hasFreeCancellation')">
+      Free cancellation
+    </mat-list-option>
   </mat-selection-list>
 
   <mat-selection-list>
     <h3>🛏️ Room filters</h3>
-    <mat-list-option>Private bathroom</mat-list-option>
-    <mat-list-option>Air conditioning</mat-list-option>
-    <mat-list-option>Towels</mat-list-option>
-    <mat-list-option>Hairdryer</mat-list-option>
-    <mat-list-option>Balcony</mat-list-option>
-    <mat-list-option>Sea view</mat-list-option>
-    <mat-list-option>Refrigerator</mat-list-option>
+
+    <mat-list-option (selectedChange)="toggleControl('hasPrivateBathroom')">
+      Private bathroom
+    </mat-list-option>
+
+    <mat-list-option (selectedChange)="toggleControl('hasAirConditioning')">
+      Air conditioning
+    </mat-list-option>
+
+    <mat-list-option (selectedChange)="toggleControl('hasTowels')">
+      Towels
+    </mat-list-option>
+
+    <mat-list-option (selectedChange)="toggleControl('hasHairdryer')">
+      Hairdryer
+    </mat-list-option>
+
+    <mat-list-option (selectedChange)="toggleControl('hasBalcony')">
+      Balcony
+    </mat-list-option>
+
+    <mat-list-option (selectedChange)="toggleControl('hasSeaView')">
+      Sea view
+    </mat-list-option>
+
+    <mat-list-option (selectedChange)="toggleControl('hasRefrigerator')">
+      Refrigerator
+    </mat-list-option>
   </mat-selection-list>
 
   <mat-selection-list>
     <h3>⭐ Rating</h3>
-    <mat-list-option>Superb: +9</mat-list-option>
-    <mat-list-option>Very good: +8</mat-list-option>
-    <mat-list-option>Good: +7</mat-list-option>
-    <mat-list-option>Plesant: +6</mat-list-option>
+
+    <mat-list-option (selectedChange)="toggleControl('isSuperb')">
+      Superb: +9
+    </mat-list-option>
+
+    <mat-list-option (selectedChange)="toggleControl('isVeryGood')">
+      Very good: +8
+    </mat-list-option>
+
+    <mat-list-option (selectedChange)="toggleControl('isGood')">
+      Good: +7
+    </mat-list-option>
+
+    <mat-list-option (selectedChange)="toggleControl('isPlesant')">
+      Plesant: +6
+    </mat-list-option>
   </mat-selection-list>
 </form>
 
