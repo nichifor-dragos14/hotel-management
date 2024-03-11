@@ -6,6 +6,7 @@
   >
     <ng-container *cdkVirtualFor="let property of propertiesDataSource">
       @if (!property) {
+        <app-property-card-placeholder></app-property-card-placeholder>
       } @else {
         <app-property-card [property]="property"></app-property-card>
       }

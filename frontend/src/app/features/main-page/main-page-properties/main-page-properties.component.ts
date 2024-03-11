@@ -13,13 +13,10 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatListModule } from '@angular/material/list';
 import { AppPageHeaderComponent } from '$shared/page-header';
-import { PropertyCardComponent } from '$shared/cards';
 import { PropertyService, PropertySummaryFiltered } from '$backend/services';
 import { PaginatedDataSource } from '$core/pagination';
 import { of } from 'rxjs';
 import { ScrollingModule } from '@angular/cdk/scrolling';
-import { AppLinePlaceholderComponent } from '$shared/placeholders/line-placeholder';
-import { AppCirclePlaceholderComponent } from '$shared/placeholders/circle-placeholder';
 
 @Component({
   selector: 'app-main-page-properties',

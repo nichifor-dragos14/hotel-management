@@ -7,8 +7,7 @@ import { PropertyCardComponent } from '$shared/cards';
 import { PropertyService } from '$backend/services';
 import { PaginatedDataSource } from '$core/pagination';
 import { ScrollingModule } from '@angular/cdk/scrolling';
-import { AppLinePlaceholderComponent } from '$shared/placeholders/line-placeholder';
-import { AppCirclePlaceholderComponent } from '$shared/placeholders/circle-placeholder';
+import { PropertyCardPlaceholderComponent } from '$shared/placeholders/card-placeholder';
 
 @Component({
   selector: 'app-main-page-properties-list',
@@ -24,8 +23,7 @@ import { AppCirclePlaceholderComponent } from '$shared/placeholders/circle-place
     MatListModule,
     PropertyCardComponent,
     ScrollingModule,
-    AppLinePlaceholderComponent,
-    AppCirclePlaceholderComponent,
+    PropertyCardPlaceholderComponent,
   ],
 })
 export class MainPagePropertiesListComponent {
