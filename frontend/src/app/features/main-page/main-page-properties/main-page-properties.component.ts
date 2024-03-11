@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
@@ -42,15 +42,13 @@ import { AppCirclePlaceholderComponent } from '$shared/placeholders/circle-place
     MatNativeDateModule,
     MatListModule,
     AppPageHeaderComponent,
-    PropertyCardComponent,
     ScrollingModule,
-    AppLinePlaceholderComponent,
-    AppCirclePlaceholderComponent,
   ],
 })
 export class MainPagePropertiesComponent {
   readonly searchPropertyForm = inject(SEARCH_PROPERTY_FORM);
   propertyService = inject(PropertyService);
+  readonly router = inject(Router);
 
   propertiesDataSource = new PaginatedDataSource<PropertySummaryFiltered>({
     fetch: ({ from, to }) => {
@@ -79,23 +77,15 @@ export class MainPagePropertiesComponent {
       return;
     }
 
-    this.propertiesDataSource = new PaginatedDataSource({
-      fetch: ({ from, to }) => {
-        return this.propertyService.propertiesFilterLocationStartDateEndDateNumberOfAdultsNumberOfChildrenNumberOfRoomsGet(
-          {
-            from,
-            to,
-            location,
-            startDate: startDate.toISOString(),
-            endDate: endDate.toISOString(),
-            numberOfAdults,
-            numberOfChildren,
-            numberOfRooms,
-          }
-        );
-      },
-    });
+    const queryParams = {
+      location: location,
+      startDate: startDate.toISOString(),
+      endDate: endDate.toISOString(),
+      numberOfAdults: numberOfAdults,
+      numberOfChildren: numberOfChildren,
+      numberOfRooms: numberOfRooms,
+    };
 
-    console.log(this.propertiesDataSource);
+    this.router.navigate(['main/search-results'], { queryParams: queryParams });
   }
 }

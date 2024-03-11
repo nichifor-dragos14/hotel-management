@@ -1,0 +1,14 @@
+<mat-nav-list>
+  <cdk-virtual-scroll-viewport
+    scrollWindow
+    [itemSize]="248"
+    [maxBufferPx]="3000"
+  >
+    <ng-container *cdkVirtualFor="let property of propertiesDataSource">
+      @if (!property) {
+      } @else {
+        <app-property-card [property]="property"></app-property-card>
+      }
+    </ng-container>
+  </cdk-virtual-scroll-viewport>
+</mat-nav-list>
