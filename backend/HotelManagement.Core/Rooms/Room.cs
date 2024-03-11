@@ -38,6 +38,8 @@ public class Room
 
     public RoomType Type { get; private set; }
 
+    public int Price { get; private set; }
+
     public bool HasPrivateBathroom { get; private set; }
 
     public bool HasTowels { get; private set; }

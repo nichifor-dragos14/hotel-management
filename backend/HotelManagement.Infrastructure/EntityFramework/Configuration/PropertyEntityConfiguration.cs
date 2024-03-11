@@ -16,6 +16,8 @@ internal class PropertyEntityConfiguration : IEntityTypeConfiguration<Property>
         builder.Property(q => q.Location).IsRequired();
         builder.Property(q => q.Email).IsRequired();
         builder.Property(q => q.PhoneNumber).IsRequired();
+        builder.Property(q => q.Rating).IsRequired();
+        builder.Property(q => q.PrepaymentNeeded).IsRequired();
 
         builder.Property(q => q.CreatedOn).IsRequired();
         builder.Property(q => q.UpdatedOn).IsRequired();

@@ -1,5 +1,6 @@
 ﻿using HotelManagement.Core.Abstractions;
 using HotelManagement.Core.Properties;
+using HotelManagement.Core.Properties.Filters;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 
@@ -17,6 +18,24 @@ public class PropertyController : ControllerBase
         CancellationToken cancelationToken)
     {
         return TypedResults.Ok(await queryService.ExecuteAsync(new AllPropertySummariesQuery(from, to), cancelationToken));
+    }
+
+    [HttpGet("filter/{location}/{startDate}/{endDate}/{numberOfAdults}/{numberOfChildren}/{numberOfRooms}")]
+    public async Task<Results<Ok<IPaginatedResult<PropertySummaryFiltered>>, NotFound>> GetAllFiltered(
+       [FromServices] IQueryHandler<AllPropertySummariesFilteredQuery, IPaginatedResult<PropertySummaryFiltered>> queryService,
+       int from,
+       int to,
+       string location,
+       DateTime startDate,
+       DateTime endDate,
+       int numberOfAdults,
+       int numberOfChildren,
+       int numberOfRooms,
+       CancellationToken cancelationToken)
+    {
+        PropertyFiltersMandatory propertyFiltersMandatory = new(location, startDate, endDate, numberOfAdults, numberOfChildren, numberOfRooms);
+
+        return TypedResults.Ok(await queryService.ExecuteAsync(new AllPropertySummariesFilteredQuery(from, to, propertyFiltersMandatory), cancelationToken));
     }
 
     [HttpGet("types")]

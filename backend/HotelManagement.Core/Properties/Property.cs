@@ -59,6 +59,10 @@ public class Property
 
     public string PhoneNumber { get; private set; }
 
+    public int Rating { get; private set; }
+
+    public bool PrepaymentNeeded { get; private set; }
+
     public bool HasFreeWiFi { get; private set; }
 
     public bool HasParking { get; private set; }

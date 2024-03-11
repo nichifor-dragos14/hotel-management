@@ -12,8 +12,8 @@ export const SEARCH_PROPERTY_FORM = new InjectionToken('SEARCH_PROPERTY_FORM', {
         new Date(new Date().getTime() + 24 * 60 * 60 * 1000),
         { validators: [Validators.required] },
       ],
-      numberAdults: [2, { validators: [Validators.required] }],
-      numberChildren: [0, { validators: [Validators.required] }],
-      numberRooms: [1, { validators: [Validators.required] }],
+      numberOfAdults: [2, { validators: [Validators.required] }],
+      numberOfChildren: [0, { validators: [Validators.required] }],
+      numberOfRooms: [1, { validators: [Validators.required] }],
     }),
 });
