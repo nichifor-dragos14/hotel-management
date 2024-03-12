@@ -1,23 +1,20 @@
-<form
-  [formGroup]="searchPropertyForm"
-  (ngSubmit)="search(searchPropertyForm.value)"
-  role="searchForm"
+<app-page-header
+  title="Where would you like to travel next? 😄"
+  id="search-header"
 >
-  <app-page-header
-    title="Where would you like to travel next? 😄"
-    id="search-header"
+  <button
+    mat-button
+    button
+    color="primary"
+    type="submit"
+    (click)="submitForm()"
+    [disabled]="searchPropertyForm.invalid"
   >
-    <button
-      mat-button
-      button
-      color="primary"
-      type="submit"
-      [disabled]="searchPropertyForm.invalid"
-    >
-      Search
-    </button>
-  </app-page-header>
+    Search
+  </button>
+</app-page-header>
 
+<form [formGroup]="searchPropertyForm" role="searchForm">
   <mat-accordion multi class="mat-elevation-z8">
     <mat-expansion-panel [expanded]="true">
       <mat-expansion-panel-header>

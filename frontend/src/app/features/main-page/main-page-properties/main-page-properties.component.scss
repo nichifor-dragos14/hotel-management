@@ -1,6 +1,6 @@
 :host {
   display: grid !important;
-  grid-template-areas: 'searchForm filtersForm' 'list filtersForm';
+  grid-template-areas: 'header filtersForm' 'searchForm filtersForm' 'list filtersForm';
   grid-template-rows: min-content 1fr;
   grid-template-columns: 5fr 1fr;
   grid-gap: 0 16px;
@@ -28,6 +28,7 @@ form[role='searchForm'] {
 }
 
 #search-header {
+  grid-area: header;
   position: sticky;
   top: 14.5px;
 }

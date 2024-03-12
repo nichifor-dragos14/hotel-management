@@ -48,6 +48,12 @@ export class MainPagePropertiesComponent {
   readonly filterPropertyForm = inject(FILTER_PROPERTY_FORM);
   readonly router = inject(Router);
 
+  submitForm() {
+    if (this.searchPropertyForm.valid) {
+      this.search(this.searchPropertyForm.value);
+    }
+  }
+
   search(newSearch: typeof this.searchPropertyForm.value) {
     const {
       location,
