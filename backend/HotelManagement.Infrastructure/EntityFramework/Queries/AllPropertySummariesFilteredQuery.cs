@@ -14,11 +14,9 @@ internal class AllPropertySummariesFilteredQueryHandler(
         CancellationToken cancellationToken
         )
     {
-        var whereClause = query.PropertyFiltersOptional.HasFreeCancellation ? "p.\"HasFreeCancellation\" = True" : "True";
+        var whereClause = query.PropertyFiltersOptional.HasFreeCancellation ? "WHERE p.\"HasFreeCancellation\" = True" : "";
 
-        return await dbContext
-            .Database
-            .SqlQuery<NpgsqlPaginatedResult<PropertySummaryFiltered>>($"""
+        var queryBuild = $"""
                     WITH PropertySummaries AS (
                         SELECT
                             p."Id",
@@ -52,7 +50,7 @@ internal class AllPropertySummariesFilteredQueryHandler(
                             "Booking" AS b
                         ON
                             r."Id" = b."RoomId"
-                        WHERE p."HasFreeCancellation" = {query.PropertyFiltersOptional.HasFreeCancellation}
+                        {whereClause}
                         GROUP BY
                             p."Id",
                             p."Name",
@@ -74,7 +72,13 @@ internal class AllPropertySummariesFilteredQueryHandler(
                                 ELSE '[]'::jsonb
                             END AS "Results"
                         FROM PropertySummaries
-                """)
+                """;
+        
+        var queryFinal = FormattableStringFactory.Create(queryBuild);
+
+        return await dbContext
+            .Database
+            .SqlQuery<NpgsqlPaginatedResult<PropertySummaryFiltered>>(queryFinal)
             .FirstAsync(cancellationToken);
     }
 }
