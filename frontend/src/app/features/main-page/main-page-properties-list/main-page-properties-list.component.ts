@@ -45,7 +45,7 @@ export class MainPagePropertiesListComponent {
             this.activatedRoute.snapshot.queryParams['numberOfChildren'],
           numberOfRooms:
             this.activatedRoute.snapshot.queryParams['numberOfRooms'],
-          HasWiFi: this.activatedRoute.snapshot.queryParams['hasWiFi'],
+          HasFreeWiFi: this.activatedRoute.snapshot.queryParams['hasFreeWiFi'],
           HasParking: this.activatedRoute.snapshot.queryParams['hasParking'],
           HasRoomService:
             this.activatedRoute.snapshot.queryParams['hasRoomService'],

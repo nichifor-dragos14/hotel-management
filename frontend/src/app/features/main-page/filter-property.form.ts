@@ -6,7 +6,7 @@ export const FILTER_PROPERTY_FORM = new InjectionToken('SEARCH_PROPERTY_FORM', {
   providedIn: 'root',
   factory: () =>
     inject(AppFormBuilder).group({
-      hasWiFi: [false, { validators: [Validators.required] }],
+      hasFreeWiFi: [false, { validators: [Validators.required] }],
       hasParking: [false, { validators: [Validators.required] }],
       hasRoomService: [false, { validators: [Validators.required] }],
       hasRestaurant: [false, { validators: [Validators.required] }],

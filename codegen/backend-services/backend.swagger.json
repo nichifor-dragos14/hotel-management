@@ -201,7 +201,7 @@
             }
           },
           {
-            "name": "HasWiFi",
+            "name": "HasFreeWiFi",
             "in": "query",
             "schema": {
               "type": "boolean"

@@ -67,6 +67,8 @@ public class Property
 
     public bool HasParking { get; private set; }
 
+    public bool HasKitchen { get; private set; }
+
     public bool HasPool { get; private set; }
 
     public bool HasRestaurant { get; private set; }

@@ -2,7 +2,7 @@
 
 public class PropertyFiltersOptional
 {
-    public bool HasWiFi { get; set; }
+    public bool HasFreeWiFi { get; set; }
 
     public bool HasParking { get; set; }
 

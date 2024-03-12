@@ -80,8 +80,8 @@ export class MainPagePropertiesComponent {
 
     const filterValue = this.filterPropertyForm.value;
 
-    if (filterValue.hasWiFi) {
-      queryParams['hasWiFi'] = true;
+    if (filterValue.hasFreeWiFi) {
+      queryParams['hasFreeWiFi'] = true;
     }
 
     if (filterValue.hasParking) {
