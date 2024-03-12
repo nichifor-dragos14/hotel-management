@@ -45,6 +45,39 @@ export class MainPagePropertiesListComponent {
             this.activatedRoute.snapshot.queryParams['numberOfChildren'],
           numberOfRooms:
             this.activatedRoute.snapshot.queryParams['numberOfRooms'],
+          HasWiFi: this.activatedRoute.snapshot.queryParams['hasWiFi'],
+          HasParking: this.activatedRoute.snapshot.queryParams['hasParking'],
+          HasRoomService:
+            this.activatedRoute.snapshot.queryParams['hasRoomService'],
+          HasRestaurant:
+            this.activatedRoute.snapshot.queryParams['hasRestaurant'],
+          HasBreakfast:
+            this.activatedRoute.snapshot.queryParams['hasBreakfast'],
+          HasKitchen: this.activatedRoute.snapshot.queryParams['hasKitchen'],
+          HasPool: this.activatedRoute.snapshot.queryParams['hasPool'],
+          HasFitnessCenter:
+            this.activatedRoute.snapshot.queryParams['hasFitnessCenter'],
+          HasPetFriendlyPolicy:
+            this.activatedRoute.snapshot.queryParams['hasPetFriendlyPolicy'],
+          HasFreeCancellation:
+            this.activatedRoute.snapshot.queryParams['hasFreeCancellation'],
+
+          HasPrivateBathroom:
+            this.activatedRoute.snapshot.queryParams['hasPrivateBathroom'],
+          HasAirConditioning:
+            this.activatedRoute.snapshot.queryParams['hasAirConditioning'],
+          HasTowels: this.activatedRoute.snapshot.queryParams['hasTowels'],
+          HasHairdryer:
+            this.activatedRoute.snapshot.queryParams['hasHairdryer'],
+          HasBalcony: this.activatedRoute.snapshot.queryParams['hasBalcony'],
+          HasSeaView: this.activatedRoute.snapshot.queryParams['hasSeaView'],
+          HasRefrigerator:
+            this.activatedRoute.snapshot.queryParams['hasRefrigerator'],
+
+          RatingOver9: this.activatedRoute.snapshot.queryParams['isSuperb'],
+          RatingOver8: this.activatedRoute.snapshot.queryParams['isVeryGood'],
+          RatingOver7: this.activatedRoute.snapshot.queryParams['isGood'],
+          RatingOver6: this.activatedRoute.snapshot.queryParams['isPlesant'],
         }
       );
     },

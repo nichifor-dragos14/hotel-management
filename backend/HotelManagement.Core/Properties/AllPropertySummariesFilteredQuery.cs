@@ -27,5 +27,6 @@ public record PropertySummaryFiltered(
 public record AllPropertySummariesFilteredQuery(
     int From,
     int To,
-    PropertyFiltersMandatory SearchFiltersMandatory
+    PropertyFiltersMandatory PropertyFiltersMandatory,
+    PropertyFiltersOptional PropertyFiltersOptional
 ) : IQuery<IPaginatedResult<PropertySummaryFiltered>>;

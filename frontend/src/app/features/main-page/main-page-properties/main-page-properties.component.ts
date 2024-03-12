@@ -16,6 +16,7 @@ import { AppPageHeaderComponent } from '$shared/page-header';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { FILTER_PROPERTY_FORM } from '../filter-property.form';
 import { PropertyQueryParams } from '../property-query-params.interface';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 @Component({
   selector: 'app-main-page-properties',
@@ -39,6 +40,7 @@ import { PropertyQueryParams } from '../property-query-params.interface';
     MatListModule,
     AppPageHeaderComponent,
     ScrollingModule,
+    MatSlideToggleModule,
   ],
 })
 export class MainPagePropertiesComponent {
@@ -157,13 +159,5 @@ export class MainPagePropertiesComponent {
     }
 
     this.router.navigate(['main/search-results'], { queryParams: queryParams });
-  }
-
-  toggleControl(controlName: string): void {
-    const control = this.filterPropertyForm.get(controlName);
-
-    if (control) {
-      control.setValue(!control.value);
-    }
   }
 }

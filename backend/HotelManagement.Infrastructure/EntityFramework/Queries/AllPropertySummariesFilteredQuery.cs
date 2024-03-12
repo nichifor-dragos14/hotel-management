@@ -1,6 +1,7 @@
 ﻿using HotelManagement.Core.Abstractions;
 using HotelManagement.Core.Properties;
 using Microsoft.EntityFrameworkCore;
+using System.Runtime.CompilerServices;
 
 namespace HotelManagement.Infrastructure.EntityFramework.Queries;
 
@@ -13,6 +14,8 @@ internal class AllPropertySummariesFilteredQueryHandler(
         CancellationToken cancellationToken
         )
     {
+        var whereClause = query.PropertyFiltersOptional.HasFreeCancellation ? "p.\"HasFreeCancellation\" = True" : "True";
+
         return await dbContext
             .Database
             .SqlQuery<NpgsqlPaginatedResult<PropertySummaryFiltered>>($"""
@@ -28,11 +31,11 @@ internal class AllPropertySummariesFilteredQueryHandler(
                             COUNT(r."Id") AS "AvailableRooms",
                             AVG(re."Rating") AS "ReviewRating",
                             COUNT(re."Id") AS "TotalReviews",
-                            (r."Price" * {(query.SearchFiltersMandatory.EndDate - query.SearchFiltersMandatory.StartDate).Value.Days}) AS "TotalPrice",
-                            {(query.SearchFiltersMandatory.EndDate - query.SearchFiltersMandatory.StartDate).Value.Days} AS "NightCount",
-                            {query.SearchFiltersMandatory.NumberOfAdults} AS "AdultCount",
-                            {query.SearchFiltersMandatory.NumberOfChildren} AS "ChildrenCount",
-                            {query.SearchFiltersMandatory.NumberOfRooms} AS "RoomCount",
+                            (r."Price" * {(query.PropertyFiltersMandatory.EndDate - query.PropertyFiltersMandatory.StartDate).Value.Days}) AS "TotalPrice",
+                            {(query.PropertyFiltersMandatory.EndDate - query.PropertyFiltersMandatory.StartDate).Value.Days} AS "NightCount",
+                            {query.PropertyFiltersMandatory.NumberOfAdults} AS "AdultCount",
+                            {query.PropertyFiltersMandatory.NumberOfChildren} AS "ChildrenCount",
+                            {query.PropertyFiltersMandatory.NumberOfRooms} AS "RoomCount",
                             p."CreatedOn",
                             ROW_NUMBER() OVER (ORDER BY p."CreatedOn" DESC) AS "RowNumber"
                         FROM
@@ -49,6 +52,7 @@ internal class AllPropertySummariesFilteredQueryHandler(
                             "Booking" AS b
                         ON
                             r."Id" = b."RoomId"
+                        WHERE p."HasFreeCancellation" = {query.PropertyFiltersOptional.HasFreeCancellation}
                         GROUP BY
                             p."Id",
                             p."Name",

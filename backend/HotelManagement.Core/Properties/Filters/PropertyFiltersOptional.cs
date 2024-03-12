@@ -2,45 +2,45 @@
 
 public class PropertyFiltersOptional
 {
-    public bool HasWiFi { get; }
+    public bool HasWiFi { get; set; }
 
-    public bool HasParking { get; }
+    public bool HasParking { get; set; }
 
-    public bool HasRoomService { get; }
+    public bool HasRoomService { get; set; }
 
-    public bool HasRestaurant { get; }
+    public bool HasRestaurant { get; set; }
 
-    public bool HasBreakfast { get; }
+    public bool HasBreakfast { get; set; }
 
-    public bool HasKitchen { get; }
+    public bool HasKitchen { get; set; }
 
-    public bool HasPool { get; }
+    public bool HasPool { get; set; }
 
-    public bool HasFitnessCenter { get; }
+    public bool HasFitnessCenter { get; set; }
 
-    public bool HasPetFriendlyPolicy { get; }
+    public bool HasPetFriendlyPolicy { get; set; }
 
-    public bool HasFreeCancellation { get; }
+    public bool HasFreeCancellation { get; set; }
 
-    public bool HasPrivateBathroom { get; }
+    public bool HasPrivateBathroom { get; set; }
 
-    public bool HasAirConditioning { get; }
+    public bool HasAirConditioning { get; set; }
 
-    public bool HasTowels { get; }
+    public bool HasTowels { get; set; }
 
-    public bool HasHairdryer { get; }
+    public bool HasHairdryer { get; set; }
 
-    public bool HasBalcony { get; }
+    public bool HasBalcony { get; set; }
 
-    public bool HasSeaView { get; }
+    public bool HasSeaView { get; set; }
 
-    public bool HasRefrigerator { get; }
+    public bool HasRefrigerator { get; set; }
 
-    public bool RatingOver9 { get; }
+    public bool RatingOver9 { get; set; }
 
-    public bool RatingOver8 { get; }
+    public bool RatingOver8 { get; set; }
 
-    public bool RatingOver7 { get; }
+    public bool RatingOver7 { get; set; }
 
-    public bool RatingOver6 { get; }
+    public bool RatingOver6 { get; set; }
 }

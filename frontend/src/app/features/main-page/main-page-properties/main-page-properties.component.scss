@@ -31,3 +31,10 @@ form[role='searchForm'] {
   position: sticky;
   top: 14.5px;
 }
+
+section[role='filters'] {
+  padding-left: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}

@@ -31,11 +31,12 @@ public class PropertyController : ControllerBase
        int numberOfAdults,
        int numberOfChildren,
        int numberOfRooms,
+       [FromQuery] PropertyFiltersOptional propertyFiltersOptional,
        CancellationToken cancelationToken)
     {
         PropertyFiltersMandatory propertyFiltersMandatory = new(location, startDate, endDate, numberOfAdults, numberOfChildren, numberOfRooms);
 
-        return TypedResults.Ok(await queryService.ExecuteAsync(new AllPropertySummariesFilteredQuery(from, to, propertyFiltersMandatory), cancelationToken));
+        return TypedResults.Ok(await queryService.ExecuteAsync(new AllPropertySummariesFilteredQuery(from, to, propertyFiltersMandatory, propertyFiltersOptional), cancelationToken));
     }
 
     [HttpGet("types")]

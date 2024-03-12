@@ -107,97 +107,95 @@
   <mat-selection-list>
     <h3>🏨 Property filters</h3>
 
-    <mat-list-option (selectedChange)="toggleControl('hasWiFi')">
-      Wi-Fi
-    </mat-list-option>
+    <section role="filters">
+      <mat-slide-toggle formControlName="hasWiFi"> Wi-Fi </mat-slide-toggle>
 
-    <mat-list-option (selectedChange)="toggleControl('hasParking')">
-      Parking
-    </mat-list-option>
+      <mat-slide-toggle formControlName="hasParking">
+        Parking
+      </mat-slide-toggle>
 
-    <mat-list-option (selectedChange)="toggleControl('hasRoomService')">
-      Room service
-    </mat-list-option>
+      <mat-slide-toggle formControlName="hasRoomService">
+        Room service
+      </mat-slide-toggle>
 
-    <mat-list-option (selectedChange)="toggleControl('hasRestaurant')">
-      Restaurant
-    </mat-list-option>
+      <mat-slide-toggle formControlName="hasRestaurant">
+        Restaurant
+      </mat-slide-toggle>
 
-    <mat-list-option (selectedChange)="toggleControl('hasBreakfast')">
-      Breakfast
-    </mat-list-option>
+      <mat-slide-toggle formControlName="hasBreakfast">
+        Breakfast
+      </mat-slide-toggle>
 
-    <mat-list-option (selectedChange)="toggleControl('hasKitchen')">
-      Kitchen
-    </mat-list-option>
+      <mat-slide-toggle formControlName="hasKitchen">
+        Kitchen
+      </mat-slide-toggle>
 
-    <mat-list-option (selectedChange)="toggleControl('hasPool')">
-      Pool
-    </mat-list-option>
+      <mat-slide-toggle formControlName="hasPool"> Pool </mat-slide-toggle>
 
-    <mat-list-option (selectedChange)="toggleControl('hasFitnessCenter')">
-      Fitness center
-    </mat-list-option>
+      <mat-slide-toggle formControlName="hasFitnessCenter">
+        Fitness center
+      </mat-slide-toggle>
 
-    <mat-list-option (selectedChange)="toggleControl('hasPetFriendlyPolicy')">
-      Pet friendly
-    </mat-list-option>
+      <mat-slide-toggle formControlName="hasPetFriendlyPolicy">
+        Pet friendly
+      </mat-slide-toggle>
 
-    <mat-list-option (selectedChange)="toggleControl('hasFreeCancellation')">
-      Free cancellation
-    </mat-list-option>
+      <mat-slide-toggle formControlName="hasFreeCancellation">
+        Free cancellation
+      </mat-slide-toggle>
+    </section>
   </mat-selection-list>
 
   <mat-selection-list>
     <h3>🛏️ Room filters</h3>
 
-    <mat-list-option (selectedChange)="toggleControl('hasPrivateBathroom')">
-      Private bathroom
-    </mat-list-option>
+    <section role="filters">
+      <mat-slide-toggle formControlName="hasPrivateBathroom">
+        Private bathroom
+      </mat-slide-toggle>
 
-    <mat-list-option (selectedChange)="toggleControl('hasAirConditioning')">
-      Air conditioning
-    </mat-list-option>
+      <mat-slide-toggle formControlName="hasAirConditioning">
+        Air conditioning
+      </mat-slide-toggle>
 
-    <mat-list-option (selectedChange)="toggleControl('hasTowels')">
-      Towels
-    </mat-list-option>
+      <mat-slide-toggle formControlName="hasTowels"> Towels </mat-slide-toggle>
 
-    <mat-list-option (selectedChange)="toggleControl('hasHairdryer')">
-      Hairdryer
-    </mat-list-option>
+      <mat-slide-toggle formControlName="hasHairdryer">
+        Hairdryer
+      </mat-slide-toggle>
 
-    <mat-list-option (selectedChange)="toggleControl('hasBalcony')">
-      Balcony
-    </mat-list-option>
+      <mat-slide-toggle formControlName="hasBalcony">
+        Balcony
+      </mat-slide-toggle>
 
-    <mat-list-option (selectedChange)="toggleControl('hasSeaView')">
-      Sea view
-    </mat-list-option>
+      <mat-slide-toggle formControlName="hasSeaView">
+        Sea view
+      </mat-slide-toggle>
 
-    <mat-list-option (selectedChange)="toggleControl('hasRefrigerator')">
-      Refrigerator
-    </mat-list-option>
+      <mat-slide-toggle formControlName="hasRefrigerator">
+        Refrigerator
+      </mat-slide-toggle>
+    </section>
   </mat-selection-list>
 
   <mat-selection-list>
     <h3>⭐ Rating</h3>
 
-    <mat-list-option (selectedChange)="toggleControl('isSuperb')">
-      Superb: +9
-    </mat-list-option>
+    <section role="filters">
+      <mat-slide-toggle formControlName="isSuperb">
+        Superb: +9
+      </mat-slide-toggle>
 
-    <mat-list-option (selectedChange)="toggleControl('isVeryGood')">
-      Very good: +8
-    </mat-list-option>
+      <mat-slide-toggle formControlName="isVeryGood">
+        Very good: +8
+      </mat-slide-toggle>
 
-    <mat-list-option (selectedChange)="toggleControl('isGood')">
-      Good: +7
-    </mat-list-option>
+      <mat-slide-toggle formControlName="isGood"> Good: +7 </mat-slide-toggle>
 
-    <mat-list-option (selectedChange)="toggleControl('isPlesant')">
-      Plesant: +6
-    </mat-list-option>
+      <mat-slide-toggle formControlName="isPlesant">
+        Plesant: +6
+      </mat-slide-toggle>
+    </section>
   </mat-selection-list>
 </form>
 
