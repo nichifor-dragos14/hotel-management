@@ -3,12 +3,16 @@ import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-property-card',
   template: `
     <mat-card>
-      <div class="image-container">
+      <div
+        class="image-container"
+        [routerLink]="['/properties', property.id, 'preview']"
+      >
         <img
           matCardImage
           src="https://material.angular.io/assets/img/examples/shiba2.jpg"
@@ -17,7 +21,7 @@ import { CommonModule } from '@angular/common';
       </div>
 
       <section role="information">
-        <mat-card-header>
+        <mat-card-header [routerLink]="['/properties', property.id, 'preview']">
           <span matCardTitle>
             {{ property.name }}
             <ng-container *ngFor="let _ of [].constructor(property.rating)">
@@ -180,7 +184,7 @@ import { CommonModule } from '@angular/common';
     }
   `,
   standalone: true,
-  imports: [MatCardModule, MatIconModule, CommonModule],
+  imports: [MatCardModule, MatIconModule, CommonModule, RouterModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PropertyCardComponent {

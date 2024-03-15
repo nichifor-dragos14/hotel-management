@@ -12,45 +12,50 @@ import { EditPropertyFormFactory } from './update-property.form-builder';
 const PROPERTY_ROUTES: Routes = [
   {
     path: '',
-    component: PropertiesPageComponent,
     children: [
       {
-        path: 'new',
-        component: NewPropertyPageComponent,
-        resolve: {
-          propertyTypes: async () =>
-            await inject(PropertyService).propertiesTypesGetAsync(),
-        },
-      },
-      {
-        path: ':id',
-        component: UpdatePropertyPageComponent,
-        resolve: {
-          propertyForm: async ({ params }: ActivatedRouteSnapshot) => {
-            const editPropertyFormFactory = inject(EditPropertyFormFactory);
-
-            const property = await inject(PropertyService).propertiesIdGetAsync(
-              {
-                id: params['id'],
-              }
-            );
-
-            return editPropertyFormFactory.build(property);
-          },
-        },
-        runGuardsAndResolvers: 'always',
+        path: 'admin',
+        component: PropertiesPageComponent,
         children: [
           {
-            path: 'actions',
-            component: DialogPageComponent,
+            path: 'new',
+            component: NewPropertyPageComponent,
+            resolve: {
+              propertyTypes: async () =>
+                await inject(PropertyService).propertiesTypesGetAsync(),
+            },
+          },
+          {
+            path: ':id',
+            component: UpdatePropertyPageComponent,
+            resolve: {
+              propertyForm: async ({ params }: ActivatedRouteSnapshot) => {
+                const editPropertyFormFactory = inject(EditPropertyFormFactory);
+
+                const property = await inject(
+                  PropertyService
+                ).propertiesIdGetAsync({
+                  id: params['id'],
+                });
+
+                return editPropertyFormFactory.build(property);
+              },
+            },
+            runGuardsAndResolvers: 'always',
             children: [
               {
-                path: 'delete',
-                component: DeletePropertyComponent,
-                resolve: {
-                  id: ({ parent }: ActivatedRouteSnapshot) =>
-                    parent?.parent?.params['id'],
-                },
+                path: 'actions',
+                component: DialogPageComponent,
+                children: [
+                  {
+                    path: 'delete',
+                    component: DeletePropertyComponent,
+                    resolve: {
+                      id: ({ parent }: ActivatedRouteSnapshot) =>
+                        parent?.parent?.params['id'],
+                    },
+                  },
+                ],
               },
             ],
           },
