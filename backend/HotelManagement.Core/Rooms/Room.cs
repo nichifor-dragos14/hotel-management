@@ -40,6 +40,10 @@ public class Room
 
     public int Price { get; private set; }
 
+    public int AdultCapacity { get; private set; }
+
+    public int ChildrenCapacity { get; private set; }
+
     public bool HasPrivateBathroom { get; private set; }
 
     public bool HasTowels { get; private set; }

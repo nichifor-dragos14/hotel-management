@@ -1,4 +1,6 @@
 ﻿using HotelManagement.Core.Abstractions;
+using HotelManagement.Core.Reviews;
+using HotelManagement.Core.Rooms;
 
 namespace HotelManagement.Core.Properties;
 
@@ -20,7 +22,11 @@ public record PropertyDetails(
     bool HasRoomService,
     bool HasPetFriendlyPolicy,
     bool HasBreakfast,
-    bool HasFreeCancellation
+    bool HasFreeCancellation,
+    bool PrepaymentNeeded,
+    int Rating,
+    List<Room> Rooms,
+    List<Review> Reviews
 );
 
 public record OnePropertyQuery(Guid? Id) : IQuery<PropertyDetails>;
@@ -55,7 +61,11 @@ internal class OneHotelQueryHandler(
                  property.HasRoomService,
                  property.HasPetFriendlyPolicy,
                  property.HasBreakfast,
-                 property.HasFreeCancellation
+                 property.HasFreeCancellation,
+                 property.PrepaymentNeeded,
+                 property.Rating,
+                 property.Rooms,
+                 property.Reviews
              )
             ).FirstOrDefault();
     }

@@ -1,132 +1,210 @@
-<section role="property-actions">
-  <a mat-icon-button routerLink="../" color="accent">
-    <mat-icon>chevron_left</mat-icon>
-  </a>
-</section>
+<app-page-header
+  id="property-name"
+  [title]="property.name + ' ' + generateStarRating(property.rating)"
+>
+  <button mat-button button color="primary">Reserve now</button>
+</app-page-header>
 
-<h1 role="property-name">{{ property.name }}</h1>
-
-<img alt="Hotel picture" src="assets/hotel1.jpg" />
-
-<section>
-  <section role="property-facilities-icons">
-    <h2>Facilities</h2>
-
-    @if (property.hasFreeWiFi) {
-      <mat-icon>wifi</mat-icon>
+<section role="gallery-facilities-map">
+  <mat-grid-list cols="4" gutterSize="12px">
+    @for (image of gridImages; track image) {
+      <mat-grid-tile [colspan]="image.cols" [rowspan]="image.rows">
+        <img alt="Hotel picture" [src]="image.image" />
+      </mat-grid-tile>
     }
+  </mat-grid-list>
 
-    @if (property.hasParking) {
-      <mat-icon>local_parking</mat-icon>
-    }
-
-    @if (property.hasPool) {
-      <mat-icon>pool</mat-icon>
-    }
-
-    @if (property.hasRestaurant) {
-      <mat-icon>restaurant</mat-icon>
-    }
-
-    @if (property.hasBreakfast) {
-      <mat-icon>free_breakfast</mat-icon>
-    }
-
-    @if (property.hasFitnessCenter) {
-      <mat-icon>fitness_center</mat-icon>
-    }
-
-    @if (property.hasRoomService) {
-      <mat-icon>room_service</mat-icon>
-    }
-
-    @if (property.hasPetFriendlyPolicy) {
-      <mat-icon>pets</mat-icon>
-    }
-
-    @if (property.hasFreeCancellation) {
-      <mat-icon>cancel</mat-icon>
-    }
-  </section>
-
-  <section role="property-facilities">
-    @if (property.hasFreeWiFi) {
+  <section role="facilities-map">
+    <section role="facilities">
       <span>
-        <mat-icon>check_circle_outline</mat-icon>
-        <p>Free wifi</p>
+        <mat-icon color="primary">location_pin</mat-icon>
+        <p>
+          {{ property.location }} - <a href="" target="_blank">View on map</a>
+        </p>
       </span>
-    }
 
-    @if (property.hasParking) {
-      <span>
-        <mat-icon>check_circle_outline</mat-icon>
-        <p>Parking</p>
-      </span>
-    }
+      <h2>Property facilities</h2>
 
-    @if (property.hasPool) {
-      <span>
-        <mat-icon>check_circle_outline</mat-icon>
-        <p>Pool</p>
-      </span>
-    }
+      @if (property.hasFreeWiFi) {
+        <span>
+          <mat-icon color="primary">wifi</mat-icon>
+          <p>Free wifi</p>
+        </span>
+      }
 
-    @if (property.hasRestaurant) {
-      <span>
-        <mat-icon>check_circle_outline</mat-icon>
-        <p>Restaurant</p>
-      </span>
-    }
+      @if (property.hasParking) {
+        <span>
+          <mat-icon color="primary">local_parking</mat-icon>
+          <p>Parking</p>
+        </span>
+      }
 
-    @if (property.hasBreakfast) {
-      <span>
-        <mat-icon>check_circle_outline</mat-icon>
-        <p>Breakfast</p>
-      </span>
-    }
+      @if (property.hasPool) {
+        <span>
+          <mat-icon color="primary">pool</mat-icon>
+          <p>Pool</p>
+        </span>
+      }
 
-    @if (property.hasFitnessCenter) {
-      <span>
-        <mat-icon>check_circle_outline</mat-icon>
-        <p>Fitness center</p>
-      </span>
-    }
+      @if (property.hasRestaurant) {
+        <span>
+          <mat-icon color="primary">restaurant</mat-icon>
+          <p>Restaurant</p>
+        </span>
+      }
 
-    @if (property.hasRoomService) {
-      <span>
-        <mat-icon>check_circle_outline</mat-icon>
-        <p>Room service</p>
-      </span>
-    }
+      @if (property.hasBreakfast) {
+        <span>
+          <mat-icon color="primary">free_breakfast</mat-icon>
+          <p>Breakfast</p>
+        </span>
+      }
 
-    @if (property.hasPetFriendlyPolicy) {
-      <span>
-        <mat-icon>check_circle_outline</mat-icon>
-        <p>Pet friendly</p>
-      </span>
-    }
+      @if (property.hasFitnessCenter) {
+        <span>
+          <mat-icon color="primary">fitness_center</mat-icon>
+          <p>Fitness center</p>
+        </span>
+      }
 
-    @if (property.hasFreeCancellation) {
-      <span>
-        <mat-icon>check_circle_outline</mat-icon>
-        <p>Free cancellation</p>
-      </span>
-    }
+      @if (property.hasRoomService) {
+        <span>
+          <mat-icon color="primary">room_service</mat-icon>
+          <p>Room service</p>
+        </span>
+      }
+
+      @if (property.hasPetFriendlyPolicy) {
+        <span>
+          <mat-icon color="primary">pets</mat-icon>
+          <p>Pet friendly</p>
+        </span>
+      }
+
+      @if (property.hasFreeCancellation) {
+        <span>
+          <mat-icon color="primary">cancel</mat-icon>
+          <p>Free cancellation</p>
+        </span>
+      }
+    </section>
+
+    <section role="map">
+      <h2>View on map</h2>
+      <img alt="Google maps location" src="assets/google-maps.jpg" />
+    </section>
   </section>
 </section>
 
-<section role="property-description">
-  <h2>Property description</h2>
-  <p id="description" [innerHTML]="property.description"></p>
+<div [innerHTML]="property.description"></div>
+
+<section role="rooms">
+  <h2>Availability</h2>
+
+  <table mat-table [dataSource]="property.rooms">
+    <ng-container matColumnDef="roomType">
+      <th mat-header-cell *matHeaderCellDef>Room type</th>
+      <td mat-cell *matCellDef="let room">
+        <h3>{{ roomTypeMapper(room.type) }} room</h3>
+
+        <section role="room-facilities">
+          @if (room.hasAirConditioning) {
+            <span>
+              <mat-icon>check</mat-icon>
+              Air conditioning
+            </span>
+          }
+
+          @if (room.hasBalcony) {
+            <span>
+              <mat-icon>check</mat-icon>
+              Balcony
+            </span>
+          }
+
+          @if (room.hasHairdryer) {
+            <span>
+              <mat-icon>check</mat-icon>
+              Hairdryer
+            </span>
+          }
+
+          @if (room.hasPrivateBathroom) {
+            <span>
+              <mat-icon>check</mat-icon>
+              Private bathroom
+            </span>
+          }
+
+          @if (room.hasRefrigerator) {
+            <span>
+              <mat-icon>check</mat-icon>
+              Refrigerator
+            </span>
+          }
+
+          @if (room.hasSeaView) {
+            <span>
+              <mat-icon>check</mat-icon>
+              Sea view
+            </span>
+          }
+
+          @if (room.hasTowels) {
+            <span>
+              <mat-icon>check</mat-icon>
+              Towels
+            </span>
+          }
+        </section>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="numberOfGuests">
+      <th mat-header-cell *matHeaderCellDef>Number of guests</th>
+      <td mat-cell *matCellDef="let room">
+        <section role="room-guests">
+          <span>
+            <section>
+              <ng-container
+                *ngFor="let _ of [].constructor(room.adultCapacity)"
+              >
+                <mat-icon>person</mat-icon>
+              </ng-container>
+            </section>
+            adults
+          </span>
+
+          <span>
+            <section>
+              <ng-container
+                *ngFor="let _ of [].constructor(room.childrenCapacity)"
+              >
+                <mat-icon>person</mat-icon>
+              </ng-container>
+            </section>
+            children
+          </span>
+        </section>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="price">
+      <th mat-header-cell *matHeaderCellDef>Price</th>
+      <td mat-cell *matCellDef="let room">{{ room.price }} lei</td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
 </section>
 
-<section>
-  <h2>Contact</h2>
+<section role="reviews">
+  <h2>Guest reviews</h2>
 
-  <section role="property-contact">
-    <p>Phone: {{ property.phoneNumber }}</p>
-    <p>Email: {{ property.email }}</p>
+  <section role="user-reviews">
+    <ng-container *ngFor="let review of property.reviews">
+      <app-review-card [review]="review"></app-review-card>
+    </ng-container>
   </section>
 </section>
-
-<router-outlet hidden />

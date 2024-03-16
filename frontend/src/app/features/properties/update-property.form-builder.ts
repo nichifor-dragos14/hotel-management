@@ -58,6 +58,13 @@ export class EditPropertyFormFactory {
         property.hasRoomService,
         { validators: [Validators.required] },
       ],
+      prepaymentNeeded: [
+        property.prepaymentNeeded,
+        { validators: [Validators.required] },
+      ],
+      rating: [property.rating, { validators: [Validators.required] }],
+      reviews: [[], { validators: [Validators.required] }],
+      rooms: [[], { validators: [Validators.required] }],
     });
   }
 }

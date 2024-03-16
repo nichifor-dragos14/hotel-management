@@ -716,6 +716,52 @@
   },
   "components": {
     "schemas": {
+      "Booking": {
+        "required": [
+          "createdOn",
+          "endOn",
+          "id",
+          "room",
+          "startOn",
+          "updatedOn",
+          "user"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "readOnly": true
+          },
+          "startOn": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true
+          },
+          "endOn": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true
+          },
+          "createdOn": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true
+          },
+          "updatedOn": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true
+          },
+          "user": {
+            "$ref": "#/components/schemas/User"
+          },
+          "room": {
+            "$ref": "#/components/schemas/Room"
+          }
+        },
+        "additionalProperties": false
+      },
       "CloseReportCommand": {
         "required": [
           "id"
@@ -810,6 +856,146 @@
         },
         "additionalProperties": false
       },
+      "Property": {
+        "required": [
+          "createdOn",
+          "description",
+          "email",
+          "hasBreakfast",
+          "hasFitnessCenter",
+          "hasFreeCancellation",
+          "hasFreeWiFi",
+          "hasKitchen",
+          "hasParking",
+          "hasPetFriendlyPolicy",
+          "hasPool",
+          "hasRestaurant",
+          "hasRoomService",
+          "id",
+          "location",
+          "name",
+          "phoneNumber",
+          "prepaymentNeeded",
+          "rating",
+          "reports",
+          "reviews",
+          "rooms",
+          "type",
+          "updatedOn"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "readOnly": true
+          },
+          "name": {
+            "type": "string",
+            "readOnly": true
+          },
+          "type": {
+            "$ref": "#/components/schemas/PropertyType"
+          },
+          "description": {
+            "type": "string",
+            "readOnly": true
+          },
+          "location": {
+            "type": "string",
+            "readOnly": true
+          },
+          "email": {
+            "type": "string",
+            "readOnly": true
+          },
+          "phoneNumber": {
+            "type": "string",
+            "readOnly": true
+          },
+          "rating": {
+            "type": "integer",
+            "format": "int32",
+            "readOnly": true
+          },
+          "prepaymentNeeded": {
+            "type": "boolean",
+            "readOnly": true
+          },
+          "hasFreeWiFi": {
+            "type": "boolean",
+            "readOnly": true
+          },
+          "hasParking": {
+            "type": "boolean",
+            "readOnly": true
+          },
+          "hasKitchen": {
+            "type": "boolean",
+            "readOnly": true
+          },
+          "hasPool": {
+            "type": "boolean",
+            "readOnly": true
+          },
+          "hasRestaurant": {
+            "type": "boolean",
+            "readOnly": true
+          },
+          "hasFitnessCenter": {
+            "type": "boolean",
+            "readOnly": true
+          },
+          "hasRoomService": {
+            "type": "boolean",
+            "readOnly": true
+          },
+          "hasPetFriendlyPolicy": {
+            "type": "boolean",
+            "readOnly": true
+          },
+          "hasBreakfast": {
+            "type": "boolean",
+            "readOnly": true
+          },
+          "hasFreeCancellation": {
+            "type": "boolean",
+            "readOnly": true
+          },
+          "createdOn": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true
+          },
+          "updatedOn": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true
+          },
+          "rooms": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Room"
+            },
+            "readOnly": true
+          },
+          "reviews": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Review"
+            },
+            "readOnly": true
+          },
+          "reports": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Report"
+            },
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
       "PropertyDetails": {
         "required": [
           "createdOn",
@@ -828,6 +1014,10 @@
           "location",
           "name",
           "phoneNumber",
+          "prepaymentNeeded",
+          "rating",
+          "reviews",
+          "rooms",
           "type",
           "updatedOn"
         ],
@@ -889,6 +1079,25 @@
           },
           "hasFreeCancellation": {
             "type": "boolean"
+          },
+          "prepaymentNeeded": {
+            "type": "boolean"
+          },
+          "rating": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "rooms": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Room"
+            }
+          },
+          "reviews": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Review"
+            }
           }
         },
         "additionalProperties": false
@@ -1132,6 +1341,56 @@
         },
         "additionalProperties": false
       },
+      "Report": {
+        "required": [
+          "createdOn",
+          "description",
+          "id",
+          "isClosed",
+          "isRead",
+          "property",
+          "title",
+          "updatedOn"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "readOnly": true
+          },
+          "title": {
+            "type": "string",
+            "readOnly": true
+          },
+          "description": {
+            "type": "string",
+            "readOnly": true
+          },
+          "isRead": {
+            "type": "boolean",
+            "readOnly": true
+          },
+          "isClosed": {
+            "type": "boolean",
+            "readOnly": true
+          },
+          "createdOn": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true
+          },
+          "updatedOn": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true
+          },
+          "property": {
+            "$ref": "#/components/schemas/Property"
+          }
+        },
+        "additionalProperties": false
+      },
       "ReportDetails": {
         "required": [
           "createdOn",
@@ -1228,6 +1487,153 @@
         },
         "additionalProperties": false
       },
+      "Review": {
+        "required": [
+          "createdOn",
+          "description",
+          "id",
+          "property",
+          "rating",
+          "title",
+          "updatedOn"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "readOnly": true
+          },
+          "title": {
+            "type": "string",
+            "readOnly": true
+          },
+          "description": {
+            "type": "string",
+            "readOnly": true
+          },
+          "rating": {
+            "type": "number",
+            "format": "double",
+            "readOnly": true
+          },
+          "createdOn": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true
+          },
+          "updatedOn": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true
+          },
+          "property": {
+            "$ref": "#/components/schemas/Property"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Room": {
+        "required": [
+          "adultCapacity",
+          "bookings",
+          "childrenCapacity",
+          "createdOn",
+          "hasAirConditioning",
+          "hasBalcony",
+          "hasHairdryer",
+          "hasPrivateBathroom",
+          "hasRefrigerator",
+          "hasSeaView",
+          "hasTowels",
+          "id",
+          "number",
+          "price",
+          "property",
+          "type",
+          "updatedOn"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "readOnly": true
+          },
+          "number": {
+            "type": "integer",
+            "format": "int32",
+            "readOnly": true
+          },
+          "type": {
+            "$ref": "#/components/schemas/RoomType"
+          },
+          "price": {
+            "type": "integer",
+            "format": "int32",
+            "readOnly": true
+          },
+          "adultCapacity": {
+            "type": "integer",
+            "format": "int32",
+            "readOnly": true
+          },
+          "childrenCapacity": {
+            "type": "integer",
+            "format": "int32",
+            "readOnly": true
+          },
+          "hasPrivateBathroom": {
+            "type": "boolean",
+            "readOnly": true
+          },
+          "hasTowels": {
+            "type": "boolean",
+            "readOnly": true
+          },
+          "hasHairdryer": {
+            "type": "boolean",
+            "readOnly": true
+          },
+          "hasAirConditioning": {
+            "type": "boolean",
+            "readOnly": true
+          },
+          "hasBalcony": {
+            "type": "boolean",
+            "readOnly": true
+          },
+          "hasRefrigerator": {
+            "type": "boolean",
+            "readOnly": true
+          },
+          "hasSeaView": {
+            "type": "boolean",
+            "readOnly": true
+          },
+          "createdOn": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true
+          },
+          "updatedOn": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true
+          },
+          "property": {
+            "$ref": "#/components/schemas/Property"
+          },
+          "bookings": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Booking"
+            },
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
       "RoomSummary": {
         "required": [
           "id",
@@ -1317,6 +1723,50 @@
           },
           "hasFreeCancellation": {
             "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "User": {
+        "required": [
+          "bookings",
+          "createdOn",
+          "firstName",
+          "id",
+          "lastName",
+          "updatedOn"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "readOnly": true
+          },
+          "firstName": {
+            "type": "string",
+            "readOnly": true
+          },
+          "lastName": {
+            "type": "string",
+            "readOnly": true
+          },
+          "createdOn": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true
+          },
+          "updatedOn": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true
+          },
+          "bookings": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Booking"
+            },
+            "readOnly": true
           }
         },
         "additionalProperties": false

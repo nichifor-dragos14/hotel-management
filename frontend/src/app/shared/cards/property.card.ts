@@ -166,7 +166,7 @@ import { RouterModule } from '@angular/router';
     }
 
     .property-rating-square {
-        background-color: purple;
+        background-color: #5e35b1;
         color: white;
         display: inline;
         padding: 8px;

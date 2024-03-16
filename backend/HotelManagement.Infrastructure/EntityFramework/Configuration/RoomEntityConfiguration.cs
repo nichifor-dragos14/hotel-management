@@ -13,6 +13,8 @@ internal class RoomEntityConfiguration : IEntityTypeConfiguration<Room>
         builder.Property(q => q.Number).IsRequired();
         builder.Property(q => q.Type).IsRequired();
         builder.Property(q => q.Price).IsRequired();
+        builder.Property(q => q.AdultCapacity).IsRequired();
+        builder.Property(q => q.ChildrenCapacity).IsRequired();
 
         builder.Property(q => q.CreatedOn).IsRequired();
         builder.Property(q => q.UpdatedOn).IsRequired();
