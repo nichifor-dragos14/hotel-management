@@ -27,7 +27,23 @@ section[role='gallery-facilities-map'] {
   grid-template-columns: 5fr 3fr;
   grid-template-areas: 'gallery facilities-map';
   gap: 64px;
-  padding: 16px 32px;
+  padding: 16px 0;
+}
+
+#general-rating-heading {
+  margin: 0;
+}
+
+.property-rating-square {
+  grid-area: rating;
+  background-color: #5e35b1;
+  color: white;
+  display: inline;
+  padding: 8px;
+  height: min-content;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
 }
 
 mat-grid-list {
@@ -44,7 +60,24 @@ section[role='facilities-map'] {
 section[role='facilities'] {
   display: flex;
   flex-direction: column;
+  gap: 12px;
+}
+
+section[role='facilities'] span {
+  align-items: center;
+}
+
+section[role='location-general-rating'] {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+section[role='general-rating'] {
+  display: flex;
+  flex-direction: row;
   gap: 8px;
+  align-items: center;
 }
 
 section[role='map'] {
@@ -113,4 +146,21 @@ section[role='reviews'] section[role='user-reviews'] {
   display: flex;
   flex-direction: row;
   gap: 16px;
+}
+
+section[role='contact'] {
+  display: flex;
+  flex-direction: column;
+}
+
+section[role='contact'] section[role='contact-information'] {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+section[role='contact'] section[role='contact-information'] span {
+  display: flex;
+  flex-direction: row;
+  gap: 4px;
 }

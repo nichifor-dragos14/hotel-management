@@ -6,7 +6,7 @@
 </app-page-header>
 
 <section role="gallery-facilities-map">
-  <mat-grid-list cols="4" gutterSize="12px">
+  <mat-grid-list cols="4" gutterSize="12px" [rowHeight]="200">
     @for (image of gridImages; track image) {
       <mat-grid-tile [colspan]="image.cols" [rowspan]="image.rows">
         <img alt="Hotel picture" [src]="image.image" />
@@ -16,75 +16,81 @@
 
   <section role="facilities-map">
     <section role="facilities">
-      <span>
-        <mat-icon color="primary">location_pin</mat-icon>
-        <p>
-          {{ property.location }} - <a href="" target="_blank">View on map</a>
-        </p>
-      </span>
+      <section role="location-general-rating">
+        <span>
+          <mat-icon color="primary">location_pin</mat-icon>
+          <span>
+            {{ property.location }} - <a href="" target="_blank">View on map</a>
+          </span>
+        </span>
 
+        <section role="general-rating">
+          <h2 id="general-rating-heading">Superb</h2>
+          <div class="property-rating-square">9.3</div>
+        </section>
+      </section>
       <h2>Property facilities</h2>
 
       @if (property.hasFreeWiFi) {
         <span>
           <mat-icon color="primary">wifi</mat-icon>
-          <p>Free wifi</p>
+          <span>Free wifi</span>
         </span>
       }
 
       @if (property.hasParking) {
         <span>
           <mat-icon color="primary">local_parking</mat-icon>
-          <p>Parking</p>
+          <span>Parking</span>
         </span>
       }
 
       @if (property.hasPool) {
         <span>
           <mat-icon color="primary">pool</mat-icon>
-          <p>Pool</p>
+          <span>Pool</span>
         </span>
       }
 
       @if (property.hasRestaurant) {
         <span>
           <mat-icon color="primary">restaurant</mat-icon>
-          <p>Restaurant</p>
+          <span>Restaurant</span>
         </span>
       }
 
       @if (property.hasBreakfast) {
         <span>
           <mat-icon color="primary">free_breakfast</mat-icon>
-          <p>Breakfast</p>
+          <span>Breakfast</span>
         </span>
       }
 
       @if (property.hasFitnessCenter) {
         <span>
           <mat-icon color="primary">fitness_center</mat-icon>
-          <p>Fitness center</p>
+          <span>Fitness center</span>
         </span>
       }
 
       @if (property.hasRoomService) {
         <span>
           <mat-icon color="primary">room_service</mat-icon>
-          <p>Room service</p>
+          <span>Room service</span>
         </span>
       }
 
       @if (property.hasPetFriendlyPolicy) {
         <span>
           <mat-icon color="primary">pets</mat-icon>
-          <p>Pet friendly</p>
+          <span>Pet friendly</span>
         </span>
       }
 
       @if (property.hasFreeCancellation) {
         <span>
           <mat-icon color="primary">cancel</mat-icon>
-          <p>Free cancellation</p>
+          <span>Free cancellation</span>
         </span>
       }
     </section>
@@ -206,5 +212,21 @@
     <ng-container *ngFor="let review of property.reviews">
       <app-review-card [review]="review"></app-review-card>
     </ng-container>
+  </section>
+</section>
+
+<section role="contact">
+  <h2>Contact</h2>
+
+  <section role="contact-information">
+    <span>
+      <mat-icon>email</mat-icon>
+      {{ property.email }}
+    </span>
+
+    <span>
+      <mat-icon>phone</mat-icon>
+      {{ property.phoneNumber }}
+    </span>
   </section>
 </section>
