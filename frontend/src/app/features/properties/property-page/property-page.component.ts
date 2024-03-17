@@ -79,4 +79,8 @@ export class PropertyPageComponent implements AfterViewInit {
 
     return '';
   }
+
+  transformToOneDecimal(rating: number) {
+    return rating.toPrecision(2);
+  }
 }

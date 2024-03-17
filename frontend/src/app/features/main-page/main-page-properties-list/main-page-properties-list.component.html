@@ -8,7 +8,11 @@
       @if (!property) {
         <app-property-card-placeholder></app-property-card-placeholder>
       } @else {
-        <app-property-card [property]="property"></app-property-card>
+        <app-property-card
+          [property]="property"
+          [routerLink]="['/properties', property.id, 'preview']"
+          [queryParams]="activatedRoute.snapshot.queryParams"
+        ></app-property-card>
       }
     </ng-container>
   </cdk-virtual-scroll-viewport>

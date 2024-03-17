@@ -26,7 +26,9 @@
 
         <section role="general-rating">
           <h2 id="general-rating-heading">Superb</h2>
-          <div class="property-rating-square">9.3</div>
+          <div class="property-rating-square">
+            {{ transformToOneDecimal(property.reviewRating) }}
+          </div>
         </section>
       </section>
       <h2>Property facilities</h2>

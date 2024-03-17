@@ -1,9 +1,15 @@
-import { PropertySummaryFiltered, Review } from '$backend/services';
-import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
+import { ReviewPropertyDetails } from '$backend/services';
+import {
+  Component,
+  ChangeDetectionStrategy,
+  Input,
+  inject,
+} from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { DateConverterModule } from '$shared/date-converter';
 
 @Component({
   selector: 'app-review-card',
@@ -26,9 +32,13 @@ import { RouterModule } from '@angular/router';
         </mat-card-content>
       </section>
 
-      <div class="property-rating-square">
-        {{ review.rating }}
-      </div>
+      <section role="rating-date">
+        <div class="property-rating-square">
+          {{ review.rating }}
+        </div>
+
+        <span>{{ review.createdOn | dateFormat }}</span>
+      </section>
     </mat-card>
   `,
   styles: `
@@ -64,6 +74,12 @@ import { RouterModule } from '@angular/router';
         flex-direction: column;
     }
 
+    section[role='rating-date'] {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
     .property-rating-square {
         grid-area: rating;
         background-color: #5e35b1;
@@ -77,9 +93,15 @@ import { RouterModule } from '@angular/router';
     }
   `,
   standalone: true,
-  imports: [MatCardModule, MatIconModule, CommonModule, RouterModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [
+    MatCardModule,
+    MatIconModule,
+    CommonModule,
+    RouterModule,
+    DateConverterModule,
+  ],
 })
 export class ReviewCardComponent {
-  @Input() review!: Review;
+  @Input() review!: ReviewPropertyDetails;
 }

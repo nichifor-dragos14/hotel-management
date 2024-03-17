@@ -9,10 +9,7 @@ import { RouterModule } from '@angular/router';
   selector: 'app-property-card',
   template: `
     <mat-card>
-      <div
-        class="image-container"
-        [routerLink]="['/properties', property.id, 'preview']"
-      >
+      <div class="image-container">
         <img
           matCardImage
           src="https://material.angular.io/assets/img/examples/shiba2.jpg"
@@ -21,7 +18,7 @@ import { RouterModule } from '@angular/router';
       </div>
 
       <section role="information">
-        <mat-card-header [routerLink]="['/properties', property.id, 'preview']">
+        <mat-card-header>
           <span matCardTitle>
             {{ property.name }}
             <ng-container *ngFor="let _ of [].constructor(property.rating)">

@@ -1,5 +1,4 @@
 ﻿using HotelManagement.Core.Abstractions;
-using HotelManagement.Core.Reviews;
 using HotelManagement.Core.Rooms;
 
 namespace HotelManagement.Core.Properties;
@@ -12,6 +11,8 @@ public record PropertyDetails(
     string Location,
     string Email,
     string PhoneNumber,
+    int Rating,
+    double ReviewRating,
     DateTime CreatedOn,
     DateTime UpdatedOn,
     bool HasFreeWiFi,
@@ -24,9 +25,35 @@ public record PropertyDetails(
     bool HasBreakfast,
     bool HasFreeCancellation,
     bool PrepaymentNeeded,
-    int Rating,
-    List<Room> Rooms,
-    List<Review> Reviews
+    IEnumerable<RoomPropertyDetails> Rooms,
+    IEnumerable<ReviewPropertyDetails> Reviews
+);
+
+public record ReviewPropertyDetails(
+     Guid Id,
+     string Title,
+     string Description,
+     double Rating,
+     DateTime CreatedOn,
+     DateTime UpdatedOn
+);
+
+public record RoomPropertyDetails(
+    Guid Id,
+    int Number,
+    RoomType Type,
+    int Price,
+    int AdultCapacity,
+    int ChildrenCapacity ,
+    bool HasPrivateBathroom,
+    bool HasTowels,
+    bool HasHairdryer,
+    bool HasAirConditioning,
+    bool HasBalcony,
+    bool HasRefrigerator,
+    bool HasSeaView,
+    DateTime CreatedOn,
+    DateTime UpdatedOn
 );
 
 public record OnePropertyQuery(Guid? Id) : IQuery<PropertyDetails>;
@@ -51,6 +78,8 @@ internal class OneHotelQueryHandler(
                  property.Location,
                  property.Email,
                  property.PhoneNumber,
+                 property.Rating,
+                 property.Reviews.Select(r => r.Rating).Average(),
                  property.CreatedOn,
                  property.UpdatedOn,
                  property.HasFreeWiFi,
@@ -63,9 +92,33 @@ internal class OneHotelQueryHandler(
                  property.HasBreakfast,
                  property.HasFreeCancellation,
                  property.PrepaymentNeeded,
-                 property.Rating,
-                 property.Rooms,
-                 property.Reviews
+                 property.Rooms.Select(r => new RoomPropertyDetails(
+                     r.Id,
+                     r.Number,
+                     r.Type, 
+                     r.Price,
+                     r.AdultCapacity,
+                     r.ChildrenCapacity,
+                     r.HasPrivateBathroom,
+                     r.HasTowels, 
+                     r.HasHairdryer,
+                     r.HasAirConditioning,
+                     r.HasBalcony, 
+                     r.HasRefrigerator,
+                     r.HasSeaView, 
+                     r.CreatedOn,
+                     r.UpdatedOn
+                     )
+                 ),
+                 property.Reviews.Select(r => new ReviewPropertyDetails(
+                     r.Id,
+                     r.Title,
+                     r.Description,
+                     r.Rating,
+                     r.CreatedOn,
+                     r.UpdatedOn
+                     )
+                 )
              )
             ).FirstOrDefault();
     }

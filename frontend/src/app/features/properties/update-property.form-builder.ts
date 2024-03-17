@@ -2,7 +2,7 @@
 /* eslint-disable max-lines-per-function */
 /* eslint-disable no-prototype-builtins */
 
-import { PropertyDetails } from '$backend/services';
+import { PropertyDetails, UpdatePropertyCommand } from '$backend/services';
 import { AppFormBuilder } from '$core/forms';
 import { Injectable, inject } from '@angular/core';
 import { FormGroup, Validators } from '@angular/forms';
@@ -11,23 +11,19 @@ import { FormGroup, Validators } from '@angular/forms';
 export class EditPropertyFormFactory {
   readonly formBuilder = inject(AppFormBuilder);
 
-  build(property: PropertyDetails): FormGroup {
-    return this.formBuilder.group<PropertyDetails>({
+  build(property: UpdatePropertyCommand): FormGroup {
+    return this.formBuilder.group<UpdatePropertyCommand>({
       id: [property.id, { validators: [Validators.required] }],
       name: [property.name, { validators: [Validators.required] }],
       description: [
         property.description,
         { validators: [Validators.required] },
       ],
-      location: [property.location, { validators: [Validators.required] }],
-      type: [property.type, { validators: [Validators.required] }],
       email: [property.email, { validators: [Validators.required] }],
       phoneNumber: [
         property.phoneNumber,
         { validators: [Validators.required] },
       ],
-      createdOn: [property.createdOn, { validators: [Validators.required] }],
-      updatedOn: [property.updatedOn, { validators: [Validators.required] }],
       hasBreakfast: [
         property.hasBreakfast,
         { validators: [Validators.required] },
@@ -58,13 +54,6 @@ export class EditPropertyFormFactory {
         property.hasRoomService,
         { validators: [Validators.required] },
       ],
-      prepaymentNeeded: [
-        property.prepaymentNeeded,
-        { validators: [Validators.required] },
-      ],
-      rating: [property.rating, { validators: [Validators.required] }],
-      reviews: [[], { validators: [Validators.required] }],
-      rooms: [[], { validators: [Validators.required] }],
     });
   }
 }
