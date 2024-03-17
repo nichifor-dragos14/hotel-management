@@ -1,33 +1,101 @@
 import { InjectionToken, inject } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { AppFormBuilder } from '$core/forms';
+import { ActivatedRoute } from '@angular/router';
 
 export const FILTER_PROPERTY_FORM = new InjectionToken('SEARCH_PROPERTY_FORM', {
   providedIn: 'root',
-  factory: () =>
-    inject(AppFormBuilder).group({
-      hasFreeWiFi: [false, { validators: [Validators.required] }],
-      hasParking: [false, { validators: [Validators.required] }],
-      hasRoomService: [false, { validators: [Validators.required] }],
-      hasRestaurant: [false, { validators: [Validators.required] }],
-      hasBreakfast: [false, { validators: [Validators.required] }],
-      hasKitchen: [false, { validators: [Validators.required] }],
-      hasPool: [false, { validators: [Validators.required] }],
-      hasFitnessCenter: [false, { validators: [Validators.required] }],
-      hasPetFriendlyPolicy: [false, { validators: [Validators.required] }],
-      hasFreeCancellation: [false, { validators: [Validators.required] }],
+  factory: () => {
+    const route = inject(ActivatedRoute);
+    const queryParams = route ? route.snapshot.queryParams : {};
 
-      hasPrivateBathroom: [false, { validators: [Validators.required] }],
-      hasAirConditioning: [false, { validators: [Validators.required] }],
-      hasTowels: [false, { validators: [Validators.required] }],
-      hasHairdryer: [false, { validators: [Validators.required] }],
-      hasBalcony: [false, { validators: [Validators.required] }],
-      hasSeaView: [false, { validators: [Validators.required] }],
-      hasRefrigerator: [false, { validators: [Validators.required] }],
+    return inject(AppFormBuilder).group({
+      hasFreeWiFi: [
+        queryParams['hasFreeWiFi'] ? true : false,
+        { validators: [Validators.required] },
+      ],
+      hasParking: [
+        queryParams['hasParking'] ? true : false,
+        { validators: [Validators.required] },
+      ],
+      hasRoomService: [
+        queryParams['hasRoomService'] ? true : false,
+        { validators: [Validators.required] },
+      ],
+      hasRestaurant: [
+        queryParams['hasRestaurant'] ? true : false,
+        { validators: [Validators.required] },
+      ],
+      hasBreakfast: [
+        queryParams['hasBreakfast'] ? true : false,
+        { validators: [Validators.required] },
+      ],
+      hasKitchen: [
+        queryParams['hasKitchen'] ? true : false,
+        { validators: [Validators.required] },
+      ],
+      hasPool: [
+        queryParams['hasPool'] ? true : false,
+        { validators: [Validators.required] },
+      ],
+      hasFitnessCenter: [
+        queryParams['hasFitnessCenter'] ? true : false,
+        { validators: [Validators.required] },
+      ],
+      hasPetFriendlyPolicy: [
+        queryParams['hasPetFriendlyPolicy'] ? true : false,
+        { validators: [Validators.required] },
+      ],
+      hasFreeCancellation: [
+        queryParams['hasFreeCancellation'] ? true : false,
+        { validators: [Validators.required] },
+      ],
 
-      isSuperb: [false, { validators: [Validators.required] }],
-      isVeryGood: [false, { validators: [Validators.required] }],
-      isGood: [false, { validators: [Validators.required] }],
-      isPlesant: [false, { validators: [Validators.required] }],
-    }),
+      hasPrivateBathroom: [
+        queryParams['hasPrivateBathroom'] ? true : false,
+        { validators: [Validators.required] },
+      ],
+      hasAirConditioning: [
+        queryParams['hasAirConditioning'] ? true : false,
+        { validators: [Validators.required] },
+      ],
+      hasTowels: [
+        queryParams['hasTowels'] ? true : false,
+        { validators: [Validators.required] },
+      ],
+      hasHairdryer: [
+        queryParams['hasHairdryer'] ? true : false,
+        { validators: [Validators.required] },
+      ],
+      hasBalcony: [
+        queryParams['hasBalcony'] ? true : false,
+        { validators: [Validators.required] },
+      ],
+      hasSeaView: [
+        queryParams['hasSeaView'] ? true : false,
+        { validators: [Validators.required] },
+      ],
+      hasRefrigerator: [
+        queryParams['hasRefrigerator'] ? true : false,
+        { validators: [Validators.required] },
+      ],
+
+      isSuperb: [
+        queryParams['isSuperb'] ? true : false,
+        { validators: [Validators.required] },
+      ],
+      isVeryGood: [
+        queryParams['isVeryGood'] ? true : false,
+        { validators: [Validators.required] },
+      ],
+      isGood: [
+        queryParams['isGood'] ? true : false,
+        { validators: [Validators.required] },
+      ],
+      isPlesant: [
+        queryParams['isPlesant'] ? true : false,
+        { validators: [Validators.required] },
+      ],
+    });
+  },
 });
