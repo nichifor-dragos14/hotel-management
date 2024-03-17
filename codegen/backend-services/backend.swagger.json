@@ -1263,7 +1263,8 @@
           "id",
           "rating",
           "title",
-          "updatedOn"
+          "updatedOn",
+          "user"
         ],
         "type": "object",
         "properties": {
@@ -1288,6 +1289,34 @@
           "updatedOn": {
             "type": "string",
             "format": "date-time"
+          },
+          "user": {
+            "$ref": "#/components/schemas/ReviewUserPropertyDetails"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ReviewUserPropertyDetails": {
+        "required": [
+          "firstName",
+          "id",
+          "lastName",
+          "nationality"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "firstName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "nationality": {
+            "type": "string"
           }
         },
         "additionalProperties": false

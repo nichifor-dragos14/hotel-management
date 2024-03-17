@@ -1,4 +1,5 @@
 ﻿using HotelManagement.Core.Properties;
+using HotelManagement.Core.Users;
 
 namespace HotelManagement.Core.Reviews;
 
@@ -32,6 +33,8 @@ public class Review
     public DateTime UpdatedOn { get; private set; }
 
     public virtual Property Property { get; internal init; }
+
+    public virtual User User { get; private set; }
 
     public void Update(
         string title,

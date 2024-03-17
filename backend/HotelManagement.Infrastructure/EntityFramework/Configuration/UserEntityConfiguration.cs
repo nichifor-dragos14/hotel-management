@@ -12,6 +12,7 @@ internal class UserEntityConfiguration : IEntityTypeConfiguration<User>
 
         builder.Property(q => q.FirstName).IsRequired();
         builder.Property(q => q.LastName).IsRequired();
+        builder.Property(q => q.Nationality).IsRequired();
 
         builder.Property(q => q.CreatedOn).IsRequired();
         builder.Property(q => q.UpdatedOn).IsRequired();

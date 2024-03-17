@@ -1,10 +1,5 @@
 import { ReviewPropertyDetails } from '$backend/services';
-import {
-  Component,
-  ChangeDetectionStrategy,
-  Input,
-  inject,
-} from '@angular/core';
+import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
@@ -21,8 +16,10 @@ import { DateConverterModule } from '$shared/date-converter';
             <img matCardAvatar src="assets/hotel1.jpg" />
 
             <section role="information">
-              <span matCardTitle> John Arnold </span>
-              <span matCardSubtitle>🎏 Italy</span>
+              <span matCardTitle>
+                {{ review.user.lastName }} {{ review.user.firstName }}
+              </span>
+              <span matCardSubtitle>🎏 {{ review.user.nationality }}</span>
             </section>
           </section>
         </mat-card-header>
@@ -104,4 +101,8 @@ import { DateConverterModule } from '$shared/date-converter';
 })
 export class ReviewCardComponent {
   @Input() review!: ReviewPropertyDetails;
+
+  constructor() {
+    console.log(this.review);
+  }
 }

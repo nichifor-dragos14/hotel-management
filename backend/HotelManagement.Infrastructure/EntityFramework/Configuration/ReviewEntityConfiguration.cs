@@ -19,5 +19,8 @@ internal class ReviewEntityConfiguration : IEntityTypeConfiguration<Review>
 
         builder.HasOne(q => q.Property)
            .WithMany(q => q.Reviews);
+
+        builder.HasOne(q => q.User)
+           .WithMany(q => q.Reviews);
     }
 }

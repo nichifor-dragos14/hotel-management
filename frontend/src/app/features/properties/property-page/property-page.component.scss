@@ -140,12 +140,23 @@ section[role='rooms'] table section[role='room-guests'] span {
 section[role='reviews'] {
   display: flex;
   flex-direction: column;
+  gap: 16px;
 }
 
 section[role='reviews'] section[role='user-reviews'] {
   display: flex;
   flex-direction: row;
   gap: 16px;
+}
+
+section[role='reviews'] section[role='user-reviews'] {
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+}
+
+section[role='reviews'] section[role='user-reviews'] app-review-card {
+  flex: 1 1;
 }
 
 section[role='contact'] {

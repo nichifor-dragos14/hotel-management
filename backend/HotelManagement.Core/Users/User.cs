@@ -1,4 +1,5 @@
 ﻿using HotelManagement.Core.Bookings;
+using HotelManagement.Core.Reviews;
 
 namespace HotelManagement.Core.Users;
 
@@ -23,11 +24,15 @@ public class User
 
     public string LastName { get; private set; }
 
+    public string Nationality { get; private set; }
+
     public DateTime CreatedOn { get; private set; }
 
     public DateTime UpdatedOn { get; private set; }
 
     public virtual List<Booking> Bookings { get; private init; }
+
+    public virtual List<Review> Reviews { get; private init; }
 
     public static User Create(
         string firstName,

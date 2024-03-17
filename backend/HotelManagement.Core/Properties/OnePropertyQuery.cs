@@ -35,8 +35,17 @@ public record ReviewPropertyDetails(
      string Description,
      double Rating,
      DateTime CreatedOn,
-     DateTime UpdatedOn
+     DateTime UpdatedOn,
+     ReviewUserPropertyDetails User
 );
+
+public record ReviewUserPropertyDetails(
+    Guid Id,
+    string FirstName,
+    string LastName,
+    string Nationality
+);
+
 
 public record RoomPropertyDetails(
     Guid Id,
@@ -95,17 +104,17 @@ internal class OneHotelQueryHandler(
                  property.Rooms.Select(r => new RoomPropertyDetails(
                      r.Id,
                      r.Number,
-                     r.Type, 
+                     r.Type,
                      r.Price,
                      r.AdultCapacity,
                      r.ChildrenCapacity,
                      r.HasPrivateBathroom,
-                     r.HasTowels, 
+                     r.HasTowels,
                      r.HasHairdryer,
                      r.HasAirConditioning,
-                     r.HasBalcony, 
+                     r.HasBalcony,
                      r.HasRefrigerator,
-                     r.HasSeaView, 
+                     r.HasSeaView,
                      r.CreatedOn,
                      r.UpdatedOn
                      )
@@ -116,10 +125,16 @@ internal class OneHotelQueryHandler(
                      r.Description,
                      r.Rating,
                      r.CreatedOn,
-                     r.UpdatedOn
+                     r.UpdatedOn,
+                     new ReviewUserPropertyDetails(
+                         r.User.Id,
+                         r.User.FirstName,
+                         r.User.LastName,
+                         r.User.Nationality
+                         )
                      )
                  )
-             )
+              )
             ).FirstOrDefault();
     }
 }
