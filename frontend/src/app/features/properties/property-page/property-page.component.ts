@@ -61,19 +61,19 @@ export class PropertyPageComponent implements AfterViewInit {
   }
 
   roomTypeMapper(value: RoomType): string {
-    if ((value = RoomType.$0)) {
+    if (value == RoomType.$0) {
       return 'Single';
     }
 
-    if ((value = RoomType.$1)) {
+    if (value == RoomType.$1) {
       return 'Double';
     }
 
-    if ((value = RoomType.$2)) {
+    if (value == RoomType.$2) {
       return 'Suite';
     }
 
-    if ((value = RoomType.$3)) {
+    if (value == RoomType.$3) {
       return 'Deluxe';
     }
 

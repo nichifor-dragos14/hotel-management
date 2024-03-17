@@ -31,8 +31,11 @@ import { RouterModule } from '@angular/router';
             <a href="#" target="_blank">Show on map </a>
           </span>
 
-          <span matCardSubtitle>
-            {{ transformTypeOfRoomToString(property.typeOfRoom) }} room
+          <span
+            matCardSubtitleI
+            *ngFor="let room of property.typeOfRooms.slice(0, 2)"
+          >
+            {{ transformTypeOfRoomToString(room) }} room
           </span>
         </mat-card-header>
 
@@ -97,13 +100,13 @@ import { RouterModule } from '@angular/router';
             } @else {
               adults
             }
-            @if (property.childCount == 1) {
-              {{ property.childCount }} , 1 child
-            } @else if (property.childCount > 1) {
-              {{ property.childCount }} , {{ property.childCount }} children
+            @if (property.childrenCount == 1) {
+              , {{ property.childrenCount }} child
+            } @else if (property.childrenCount > 1) {
+              , {{ property.childrenCount }} children
             }
           </span>
-          <span matCardTitle>{{ property.totalPrice }} lei</span>
+          <span matCardTitle>Starting at {{ property.totalPrice }} lei</span>
           <span matCardSubtitle>Includes taxes and charges</span>
         </mat-card-content>
       </section>
@@ -134,6 +137,11 @@ import { RouterModule } from '@angular/router';
         display: flex;
         flex-direction: column;
         justify-content: space-between;
+    }
+
+    section[role='information'] mat-card-header {
+        display: flex;
+        flex-direction: column;
     }
 
     section[role='information'] mat-card-content span {

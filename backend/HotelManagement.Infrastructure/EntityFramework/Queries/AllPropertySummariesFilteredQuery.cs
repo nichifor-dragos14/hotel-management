@@ -14,169 +14,81 @@ internal class AllPropertySummariesFilteredQueryHandler(
         CancellationToken cancellationToken
         )
     {
-        var whereClause = "";
-        var havingClause = "";
+        var whereClause = $"WHERE p.\"Location\" ILIKE '%{query.PropertyFiltersMandatory.Location}%'" +
+            $" AND r.\"AdultCapacity\" >= {query.PropertyFiltersMandatory.NumberOfAdults}" +
+            $" AND r.\"ChildrenCapacity\" >= {query.PropertyFiltersMandatory.NumberOfChildren}";
 
         if (query.PropertyFiltersOptional.HasFreeWiFi)
         {
-            whereClause += "WHERE p.\"HasFreeWiFi\" = True";
+            whereClause += " AND p.\"HasFreeWiFi\" = True";
         }
 
         if (query.PropertyFiltersOptional.HasParking)
         {
-            if (whereClause == "")
-            {
-                whereClause += "WHERE p.\"HasParking\" = True";
-            }
-            else
-            {
-                whereClause += " AND p.\"HasParking\" = True";
-            }
+            whereClause += " AND p.\"HasParking\" = True";
         }
 
         if (query.PropertyFiltersOptional.HasRestaurant)
         {
-            if (whereClause == "")
-            {
-                whereClause += "WHERE p.\"HasRestaurant\" = True";
-            }
-            else
-            {
-                whereClause += " AND p.\"HasRestaurant\" = True";
-            }
+            whereClause += " AND p.\"HasRestaurant\" = True";
         }
 
         if (query.PropertyFiltersOptional.HasBreakfast)
         {
-            if (whereClause == "")
-            {
-                whereClause += "WHERE p.\"HasBreakfast\" = True";
-            }
-            else
-            {
-                whereClause += " AND p.\"HasBreakfast\" = True";
-            }
+            whereClause += " AND p.\"HasBreakfast\" = True";
         }
 
         if (query.PropertyFiltersOptional.HasKitchen)
         {
-            if (whereClause == "")
-            {
-                whereClause += "WHERE p.\"HasKitchen\" = True";
-            }
-            else
-            {
-                whereClause += " AND p.\"HasKitchen\" = True";
-            }
+            whereClause += " AND p.\"HasKitchen\" = True";
         }
 
         if (query.PropertyFiltersOptional.HasPool)
         {
-            if (whereClause == "")
-            {
-                whereClause += "WHERE p.\"HasPool\" = True";
-            }
-            else
-            {
-                whereClause += " AND p.\"HasPool\" = True";
-            }
+            whereClause += " AND p.\"HasPool\" = True";
         }
 
         if (query.PropertyFiltersOptional.HasFitnessCenter)
         {
-            if (whereClause == "")
-            {
-                whereClause += "WHERE p.\"HasFitnessCenter\" = True";
-            }
-            else
-            {
-                whereClause += " AND p.\"HasFitnessCenter\" = True";
-            }
+            whereClause += " AND p.\"HasFitnessCenter\" = True";
         }
 
         if (query.PropertyFiltersOptional.HasPetFriendlyPolicy)
         {
-            if (whereClause == "")
-            {
-                whereClause += "WHERE p.\"HasPetFriendlyPolicy\" = True";
-            }
-            else
-            {
-                whereClause += " AND p.\"HasPetFriendlyPolicy\" = True";
-            }
+            whereClause += " AND p.\"HasPetFriendlyPolicy\" = True";
         }
 
         if (query.PropertyFiltersOptional.HasFreeCancellation)
         {
-            if (whereClause == "")
-            {
-                whereClause += "WHERE p.\"HasFreeCancellation\" = True";
-            }
-            else
-            {
-                whereClause += " AND p.\"HasFreeCancellation\" = True";
-            }
+            whereClause += " AND p.\"HasFreeCancellation\" = True";
         }
 
         if (query.PropertyFiltersOptional.HasPrivateBathroom)
         {
-            if (whereClause == "")
-            {
-                whereClause += "WHERE r.\"HasPrivateBathroom\" = True";
-            }
-            else
-            {
-                whereClause += " AND r.\"HasPrivateBathroom\" = True";
-            }
+            whereClause += " AND r.\"HasPrivateBathroom\" = True";
         }
 
         if (query.PropertyFiltersOptional.HasHairdryer)
         {
-            if (whereClause == "")
-            {
-                whereClause += "WHERE r.\"HasHairdryer\" = True";
-            }
-            else
-            {
-                whereClause += " AND r.\"HasHairdryer\" = True";
-            }
+            whereClause += " AND r.\"HasHairdryer\" = True";
         }
 
         if (query.PropertyFiltersOptional.HasBalcony)
         {
-            if (whereClause == "")
-            {
-                whereClause += "WHERE r.\"HasBalcony\" = True";
-            }
-            else
-            {
-                whereClause += " AND r.\"HasBalcony\" = True";
-            }
+            whereClause += " AND r.\"HasBalcony\" = True";
         }
 
         if (query.PropertyFiltersOptional.HasSeaView)
         {
-            if (whereClause == "")
-            {
-                whereClause += "WHERE r.\"HasSeaView\" = True";
-            }
-            else
-            {
-                whereClause += " AND r.\"HasSeaView\" = True";
-            }
+            whereClause += " AND r.\"HasSeaView\" = True";
         }
 
         if (query.PropertyFiltersOptional.HasRefrigerator)
         {
-            if (whereClause == "")
-            {
-                whereClause += "WHERE r.\"HasRefrigerator\" = True";
-            }
-            else
-            {
-                whereClause += " AND r.\"HasRefrigerator\" = True";
-            }
+            whereClause += " AND r.\"HasRefrigerator\" = True";
         }
+
+        var havingClause = "";
 
         if (query.PropertyFiltersOptional.RatingOver6)
         {
@@ -185,7 +97,7 @@ internal class AllPropertySummariesFilteredQueryHandler(
         else if (query.PropertyFiltersOptional.RatingOver7)
         {
             havingClause += "HAVING AVG(re.\"Rating\") > 7";
-     
+
         }
         else if (query.PropertyFiltersOptional.RatingOver8)
         {
@@ -205,11 +117,11 @@ internal class AllPropertySummariesFilteredQueryHandler(
                             p."Rating",
                             p."HasFreeCancellation",
                             p."PrepaymentNeeded",
-                            r."Type" AS "TypeOfRoom",
+                            json_agg(DISTINCT r."Type") AS "TypeOfRooms",
                             COUNT(r."Id") AS "AvailableRooms",
                             AVG(re."Rating") AS "ReviewRating",
                             COUNT(re."Id") AS "TotalReviews",
-                            (r."Price" * {(query.PropertyFiltersMandatory.EndDate - query.PropertyFiltersMandatory.StartDate).Value.Days}) AS "TotalPrice",
+                            (MIN(r."Price") * {(query.PropertyFiltersMandatory.EndDate - query.PropertyFiltersMandatory.StartDate).Value.Days}) AS "TotalPrice",
                             {(query.PropertyFiltersMandatory.EndDate - query.PropertyFiltersMandatory.StartDate).Value.Days} AS "NightCount",
                             {query.PropertyFiltersMandatory.NumberOfAdults} AS "AdultCount",
                             {query.PropertyFiltersMandatory.NumberOfChildren} AS "ChildrenCount",
@@ -226,10 +138,6 @@ internal class AllPropertySummariesFilteredQueryHandler(
                             "Review" AS re
                         ON
                             p."Id" = re."PropertyId"
-                        LEFT JOIN
-                            "Booking" AS b
-                        ON
-                            r."Id" = b."RoomId"
                         {whereClause}
                         GROUP BY
                             p."Id",
@@ -237,8 +145,6 @@ internal class AllPropertySummariesFilteredQueryHandler(
                             p."Location",
                             p."Rating",
                             p."HasFreeCancellation",
-                            r."Type",
-                            r."Price",
                             p."CreatedOn"
                         {havingClause}
                         ORDER BY
@@ -246,7 +152,24 @@ internal class AllPropertySummariesFilteredQueryHandler(
                         OFFSET {query.From} ROWS FETCH NEXT {query.To - query.From} ROWS ONLY
                     )
                     SELECT
-                        (SELECT COUNT(*) FROM PropertySummaries) as "TotalCount",
+                        CASE
+                            WHEN (
+                                SELECT COUNT(DISTINCT p."Id") 
+                                FROM "Property" AS p 
+                                JOIN "Room" AS r ON r."PropertyId" = p."Id"
+                                LEFT JOIN "Review" AS re ON re."PropertyId" = p."Id"
+                                {whereClause}
+                                {havingClause}
+                            ) IS NULL THEN 0
+                            ELSE (
+                                SELECT COUNT(DISTINCT p."Id") 
+                                FROM "Property" AS p 
+                                JOIN "Room" AS r ON r."PropertyId" = p."Id"
+                                LEFT JOIN "Review" AS re ON re."PropertyId" = p."Id"
+                                {whereClause}
+                                {havingClause}
+                            )
+                        END AS "TotalCount",
                             CASE
                                 WHEN (SELECT COUNT(*) FROM PropertySummaries) > 0
                                     THEN jsonb_agg(PropertySummaries)

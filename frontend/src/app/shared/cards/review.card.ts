@@ -17,9 +17,20 @@ import { DateConverterModule } from '$shared/date-converter';
 
             <section role="information">
               <span matCardTitle>
-                {{ review.user.lastName }} {{ review.user.firstName }}
+                @if (review.user) {
+                  {{ review.user.lastName }} {{ review.user.firstName }}
+                } @else {
+                  Unknown
+                }
               </span>
-              <span matCardSubtitle>🎏 {{ review.user.nationality }}</span>
+              <span matCardSubtitle>
+                🎏
+                @if (review.user) {
+                  {{ review.user.nationality }}
+                } @else {
+                  Not specified
+                }
+              </span>
             </section>
           </section>
         </mat-card-header>
@@ -101,8 +112,4 @@ import { DateConverterModule } from '$shared/date-converter';
 })
 export class ReviewCardComponent {
   @Input() review!: ReviewPropertyDetails;
-
-  constructor() {
-    console.log(this.review);
-  }
 }

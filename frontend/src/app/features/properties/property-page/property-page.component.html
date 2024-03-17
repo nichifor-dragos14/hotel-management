@@ -207,21 +207,23 @@
   </table>
 </section>
 
-<section role="reviews">
-  <section>
-    <h2>Guest reviews</h2>
+@if (property.reviews.length !== 0) {
+  <section role="reviews">
+    <section>
+      <h2>Guest reviews</h2>
 
-    <section role="user-reviews">
-      <ng-container *ngFor="let review of property.reviews.slice(0, 4)">
-        <app-review-card [review]="review"></app-review-card>
-      </ng-container>
+      <section role="user-reviews">
+        <ng-container *ngFor="let review of property.reviews.slice(0, 4)">
+          <app-review-card [review]="review"></app-review-card>
+        </ng-container>
+      </section>
     </section>
-  </section>
 
-  @if (property.reviews.length > 4) {
-    <button mat-button color="primary">Read more</button>
-  }
-</section>
+    @if (property.reviews.length > 4) {
+      <button mat-button color="primary">Read more</button>
+    }
+  </section>
+}
 
 <section role="contact">
   <h2>Contact</h2>

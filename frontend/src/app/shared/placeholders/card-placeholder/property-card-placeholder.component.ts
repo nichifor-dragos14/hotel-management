@@ -56,7 +56,7 @@ import { AppLinePlaceholderComponent } from '../line-placeholder';
           <app-line-placeholder [width]="100" [height]="10">
           </app-line-placeholder>
 
-          <app-line-placeholder [width]="40" [height]="10">
+          <app-line-placeholder [width]="140" [height]="10">
           </app-line-placeholder>
 
           <app-line-placeholder [width]="160" [height]="10">

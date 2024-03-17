@@ -36,7 +36,7 @@ public record ReviewPropertyDetails(
      double Rating,
      DateTime CreatedOn,
      DateTime UpdatedOn,
-     ReviewUserPropertyDetails User
+     ReviewUserPropertyDetails? User
 );
 
 public record ReviewUserPropertyDetails(
@@ -88,7 +88,7 @@ internal class OneHotelQueryHandler(
                  property.Email,
                  property.PhoneNumber,
                  property.Rating,
-                 property.Reviews.Select(r => r.Rating).Average(),
+                 property.Reviews.Any() ? property.Reviews.Select(r => r.Rating).Average() : 0,
                  property.CreatedOn,
                  property.UpdatedOn,
                  property.HasFreeWiFi,
@@ -131,7 +131,7 @@ internal class OneHotelQueryHandler(
                          r.User.FirstName,
                          r.User.LastName,
                          r.User.Nationality
-                         )
+                         ) ?? null
                      )
                  )
               )

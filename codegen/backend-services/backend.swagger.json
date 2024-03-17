@@ -993,7 +993,7 @@
         "required": [
           "adultCount",
           "availableRooms",
-          "childCount",
+          "childrenCount",
           "createdOn",
           "hasFreeCancellation",
           "id",
@@ -1002,12 +1002,10 @@
           "nightCount",
           "prepaymentNeeded",
           "rating",
-          "reviewRating",
           "roomCount",
           "rowNumber",
           "totalPrice",
-          "totalReviews",
-          "typeOfRoom"
+          "typeOfRooms"
         ],
         "type": "object",
         "properties": {
@@ -1031,8 +1029,11 @@
           "prepaymentNeeded": {
             "type": "boolean"
           },
-          "typeOfRoom": {
-            "$ref": "#/components/schemas/RoomType"
+          "typeOfRooms": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RoomType"
+            }
           },
           "availableRooms": {
             "type": "integer",
@@ -1040,11 +1041,13 @@
           },
           "reviewRating": {
             "type": "number",
-            "format": "double"
+            "format": "double",
+            "nullable": true
           },
           "totalReviews": {
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "nullable": true
           },
           "totalPrice": {
             "type": "integer",
@@ -1058,7 +1061,7 @@
             "type": "integer",
             "format": "int32"
           },
-          "childCount": {
+          "childrenCount": {
             "type": "integer",
             "format": "int32"
           },
@@ -1263,8 +1266,7 @@
           "id",
           "rating",
           "title",
-          "updatedOn",
-          "user"
+          "updatedOn"
         ],
         "type": "object",
         "properties": {
