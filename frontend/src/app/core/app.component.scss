@@ -53,6 +53,11 @@ mat-sidenav-content {
   z-index: unset;
 }
 
+mat-sidenav {
+  position: fixed;
+  top: 64px;
+}
+
 mat-toolbar {
   position: sticky;
   top: 0;
