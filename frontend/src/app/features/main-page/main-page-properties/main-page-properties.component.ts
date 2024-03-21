@@ -13,7 +13,6 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatListModule } from '@angular/material/list';
 import { AppPageHeaderComponent } from '$shared/page-header';
-import { ScrollingModule } from '@angular/cdk/scrolling';
 import { FILTER_PROPERTY_FORM } from '../filter-property.form';
 import { PropertyQueryParams } from '../property-query-params.interface';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
@@ -41,7 +40,6 @@ import { Subject, takeUntil } from 'rxjs';
     MatNativeDateModule,
     MatListModule,
     AppPageHeaderComponent,
-    ScrollingModule,
     MatSlideToggleModule,
   ],
 })
@@ -51,7 +49,7 @@ export class MainPagePropertiesComponent {
   readonly router = inject(Router);
 
   readonly notificationService = inject(NotificationService);
-  subscription = this.notificationService.onReloadNotification
+  readonly subscription = this.notificationService.onReloadNotification
     .pipe(takeUntil(new Subject<void>()))
     .subscribe(() => {
       window.location.reload();

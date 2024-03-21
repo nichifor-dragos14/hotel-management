@@ -3,28 +3,9 @@
   grid-template-areas: 'header filtersForm' 'searchForm filtersForm' 'list filtersForm';
   grid-template-rows: min-content min-content 1fr;
   grid-template-columns: 5fr 1fr;
-  grid-gap: 0 16px;
+  grid-gap: 8px 16px;
   height: 100%;
   position: relative;
-}
-
-form[role='filtersForm'] {
-  grid-area: filtersForm;
-  padding: 0 8px;
-  width: 100%;
-}
-
-form[role='searchForm'] {
-  grid-area: searchForm;
-  padding: 0 16px;
-}
-
-:host router-outlet {
-  display: none;
-
-  & ::ng-deep + * {
-    grid-area: list;
-  }
 }
 
 #search-header {
@@ -33,9 +14,28 @@ form[role='searchForm'] {
   top: 14.5px;
 }
 
+form[role='searchForm'] {
+  grid-area: searchForm;
+  padding: 0 16px;
+}
+
+form[role='filtersForm'] {
+  grid-area: filtersForm;
+  padding: 0 8px;
+  width: 100%;
+}
+
 section[role='filters'] {
   padding-left: 16px;
   display: flex;
   flex-direction: column;
   gap: 24px;
+}
+
+:host router-outlet {
+  display: none;
+
+  & ::ng-deep + * {
+    grid-area: list;
+  }
 }
