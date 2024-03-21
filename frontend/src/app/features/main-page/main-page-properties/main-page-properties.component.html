@@ -105,39 +105,52 @@
     <h3>🏨 Property filters</h3>
 
     <section role="filters">
-      <mat-slide-toggle formControlName="hasFreeWiFi"> Wi-Fi </mat-slide-toggle>
+      <mat-slide-toggle formControlName="hasFreeWiFi" (click)="submitForm()">
+        Wi-Fi
+      </mat-slide-toggle>
 
-      <mat-slide-toggle formControlName="hasParking">
+      <mat-slide-toggle formControlName="hasParking" (click)="submitForm()">
         Parking
       </mat-slide-toggle>
 
-      <mat-slide-toggle formControlName="hasRoomService">
+      <mat-slide-toggle formControlName="hasRoomService" (click)="submitForm()">
         Room service
       </mat-slide-toggle>
 
-      <mat-slide-toggle formControlName="hasRestaurant">
+      <mat-slide-toggle formControlName="hasRestaurant" (click)="submitForm()">
         Restaurant
       </mat-slide-toggle>
 
-      <mat-slide-toggle formControlName="hasBreakfast">
+      <mat-slide-toggle formControlName="hasBreakfast" (click)="submitForm()">
         Breakfast
       </mat-slide-toggle>
 
-      <mat-slide-toggle formControlName="hasKitchen">
+      <mat-slide-toggle formControlName="hasKitchen" (click)="submitForm()">
         Kitchen
       </mat-slide-toggle>
 
-      <mat-slide-toggle formControlName="hasPool"> Pool </mat-slide-toggle>
+      <mat-slide-toggle formControlName="hasPool" (click)="submitForm()">
+        Pool
+      </mat-slide-toggle>
 
-      <mat-slide-toggle formControlName="hasFitnessCenter">
+      <mat-slide-toggle
+        formControlName="hasFitnessCenter"
+        (click)="submitForm()"
+      >
         Fitness center
       </mat-slide-toggle>
 
-      <mat-slide-toggle formControlName="hasPetFriendlyPolicy">
+      <mat-slide-toggle
+        formControlName="hasPetFriendlyPolicy"
+        (click)="submitForm()"
+      >
         Pet friendly
       </mat-slide-toggle>
 
-      <mat-slide-toggle formControlName="hasFreeCancellation">
+      <mat-slide-toggle
+        formControlName="hasFreeCancellation"
+        (click)="submitForm()"
+      >
         Free cancellation
       </mat-slide-toggle>
     </section>
@@ -147,29 +160,40 @@
     <h3>🛏️ Room filters</h3>
 
     <section role="filters">
-      <mat-slide-toggle formControlName="hasPrivateBathroom">
+      <mat-slide-toggle
+        formControlName="hasPrivateBathroom"
+        (click)="submitForm()"
+      >
         Private bathroom
       </mat-slide-toggle>
 
-      <mat-slide-toggle formControlName="hasAirConditioning">
+      <mat-slide-toggle
+        formControlName="hasAirConditioning"
+        (click)="submitForm()"
+      >
         Air conditioning
       </mat-slide-toggle>
 
-      <mat-slide-toggle formControlName="hasTowels"> Towels </mat-slide-toggle>
+      <mat-slide-toggle formControlName="hasTowels" (click)="submitForm()">
+        Towels
+      </mat-slide-toggle>
 
-      <mat-slide-toggle formControlName="hasHairdryer">
+      <mat-slide-toggle formControlName="hasHairdryer" (click)="submitForm()">
         Hairdryer
       </mat-slide-toggle>
 
-      <mat-slide-toggle formControlName="hasBalcony">
+      <mat-slide-toggle formControlName="hasBalcony" (click)="submitForm()">
         Balcony
       </mat-slide-toggle>
 
-      <mat-slide-toggle formControlName="hasSeaView">
+      <mat-slide-toggle formControlName="hasSeaView" (click)="submitForm()">
         Sea view
       </mat-slide-toggle>
 
-      <mat-slide-toggle formControlName="hasRefrigerator">
+      <mat-slide-toggle
+        formControlName="hasRefrigerator"
+        (click)="submitForm()"
+      >
         Refrigerator
       </mat-slide-toggle>
     </section>
@@ -179,17 +203,19 @@
     <h3>⭐ Rating</h3>
 
     <section role="filters">
-      <mat-slide-toggle formControlName="isSuperb">
+      <mat-slide-toggle formControlName="isSuperb" (click)="submitForm()">
         Superb: +9
       </mat-slide-toggle>
 
-      <mat-slide-toggle formControlName="isVeryGood">
+      <mat-slide-toggle formControlName="isVeryGood" (click)="submitForm()">
         Very good: +8
       </mat-slide-toggle>
 
-      <mat-slide-toggle formControlName="isGood"> Good: +7 </mat-slide-toggle>
+      <mat-slide-toggle formControlName="isGood" (click)="submitForm()">
+        Good: +7
+      </mat-slide-toggle>
 
-      <mat-slide-toggle formControlName="isPlesant">
+      <mat-slide-toggle formControlName="isPlesant" (click)="submitForm()">
         Plesant: +6
       </mat-slide-toggle>
     </section>

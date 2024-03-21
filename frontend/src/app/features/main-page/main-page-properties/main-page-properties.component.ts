@@ -17,6 +17,8 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
 import { FILTER_PROPERTY_FORM } from '../filter-property.form';
 import { PropertyQueryParams } from '../property-query-params.interface';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { NotificationService } from '$shared/update-notifiers/update-notification.service';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-main-page-properties',
@@ -47,6 +49,17 @@ export class MainPagePropertiesComponent {
   readonly searchPropertyForm = inject(SEARCH_PROPERTY_FORM);
   readonly filterPropertyForm = inject(FILTER_PROPERTY_FORM);
   readonly router = inject(Router);
+
+  readonly notificationService = inject(NotificationService);
+  subscription = this.notificationService.onReloadNotification
+    .pipe(takeUntil(new Subject<void>()))
+    .subscribe(() => {
+      window.location.reload();
+    });
+
+  constructor() {
+    this.submitForm();
+  }
 
   submitForm() {
     if (this.searchPropertyForm.valid) {

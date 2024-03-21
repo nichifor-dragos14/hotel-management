@@ -4,11 +4,12 @@ import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { MatRippleModule } from '@angular/material/core';
 
 @Component({
   selector: 'app-property-card',
   template: `
-    <mat-card>
+    <mat-card matRipple>
       <div class="image-container">
         <img
           matCardImage
@@ -118,6 +119,7 @@ import { RouterModule } from '@angular/router';
         display: grid;
         grid-template-columns: min-content 1fr 1fr;
         gap: 16px;
+        border-radius: 8px;
     }
 
     .image-container {
@@ -189,7 +191,13 @@ import { RouterModule } from '@angular/router';
     }
   `,
   standalone: true,
-  imports: [MatCardModule, MatIconModule, CommonModule, RouterModule],
+  imports: [
+    MatCardModule,
+    MatIconModule,
+    CommonModule,
+    RouterModule,
+    MatRippleModule,
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PropertyCardComponent {
