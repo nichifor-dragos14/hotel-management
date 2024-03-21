@@ -6,7 +6,7 @@
 </app-page-header>
 
 <section role="gallery-facilities-map">
-  <mat-grid-list cols="4" gutterSize="12px" [rowHeight]="200">
+  <mat-grid-list [cols]="gridCols" gutterSize="12px" [rowHeight]="200">
     @for (image of gridImages; track image) {
       <mat-grid-tile [colspan]="image.cols" [rowspan]="image.rows">
         <img alt="Hotel picture" [src]="image.image" />

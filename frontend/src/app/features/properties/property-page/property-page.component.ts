@@ -3,6 +3,7 @@ import {
   ChangeDetectionStrategy,
   Component,
   Input,
+  OnInit,
 } from '@angular/core';
 import { PropertyDetails, RoomType } from '$backend/services';
 import { RouterModule } from '@angular/router';
@@ -37,23 +38,88 @@ export interface GridImage {
     ReviewCardComponent,
   ],
 })
-export class PropertyPageComponent implements AfterViewInit {
-  ngAfterViewInit(): void {
-    console.log(this.property);
-  }
+export class PropertyPageComponent implements OnInit, AfterViewInit {
   @Input() property!: PropertyDetails;
 
   displayedColumns = ['roomType', 'numberOfGuests', 'price'];
 
-  gridImages: GridImage[] = [
-    { image: 'assets/hotel1.jpg', cols: 2, rows: 1 },
-    { image: 'assets/hotel2.jpg', cols: 2, rows: 2 },
-    { image: 'assets/hotel3.jpg', cols: 2, rows: 1 },
-    { image: 'assets/hotel1.jpg', cols: 1, rows: 1 },
-    { image: 'assets/hotel2.jpg', cols: 1, rows: 1 },
-    { image: 'assets/hotel3.jpg', cols: 1, rows: 1 },
-    { image: 'assets/hotel2.jpg', cols: 1, rows: 1 },
-  ];
+  gridImages: GridImage[] = [];
+  imageSize = 7;
+  gridCols = 0;
+
+  ngOnInit(): void {
+    if (this.imageSize === 1) {
+      this.gridCols = 1;
+      this.gridImages = [{ image: 'assets/hotel1.jpg', cols: 1, rows: 3 }];
+    }
+
+    if (this.imageSize === 2) {
+      this.gridCols = 2;
+      this.gridImages = [
+        { image: 'assets/hotel1.jpg', cols: 1, rows: 3 },
+        { image: 'assets/hotel2.jpg', cols: 1, rows: 3 },
+      ];
+    }
+
+    if (this.imageSize === 3) {
+      this.gridCols = 2;
+      this.gridImages = [
+        { image: 'assets/hotel1.jpg', cols: 1, rows: 1 },
+        { image: 'assets/hotel2.jpg', cols: 1, rows: 3 },
+        { image: 'assets/hotel3.jpg', cols: 1, rows: 2 },
+      ];
+    }
+
+    if (this.imageSize === 4) {
+      this.gridCols = 2;
+      this.gridImages = [
+        { image: 'assets/hotel1.jpg', cols: 1, rows: 1 },
+        { image: 'assets/hotel1.jpg', cols: 1, rows: 2 },
+        { image: 'assets/hotel1.jpg', cols: 1, rows: 2 },
+        { image: 'assets/hotel1.jpg', cols: 1, rows: 1 },
+      ];
+    }
+
+    if (this.imageSize === 5) {
+      this.gridCols = 3;
+      this.gridImages = [
+        { image: 'assets/hotel1.jpg', cols: 1, rows: 1 },
+        { image: 'assets/hotel1.jpg', cols: 2, rows: 2 },
+        { image: 'assets/hotel1.jpg', cols: 1, rows: 1 },
+        { image: 'assets/hotel1.jpg', cols: 2, rows: 1 },
+        { image: 'assets/hotel1.jpg', cols: 1, rows: 1 },
+      ];
+    }
+
+    if (this.imageSize === 6) {
+      this.gridCols = 4;
+      this.gridImages = [
+        { image: 'assets/hotel1.jpg', cols: 1, rows: 1 },
+        { image: 'assets/hotel2.jpg', cols: 3, rows: 2 },
+        { image: 'assets/hotel3.jpg', cols: 1, rows: 1 },
+        { image: 'assets/hotel1.jpg', cols: 2, rows: 1 },
+        { image: 'assets/hotel2.jpg', cols: 1, rows: 1 },
+        { image: 'assets/hotel3.jpg', cols: 1, rows: 1 },
+      ];
+    }
+
+    if (this.imageSize >= 7) {
+      this.gridCols = 4;
+      this.gridImages = [
+        { image: 'assets/hotel1.jpg', cols: 2, rows: 1 },
+        { image: 'assets/hotel2.jpg', cols: 2, rows: 2 },
+        { image: 'assets/hotel3.jpg', cols: 2, rows: 1 },
+        { image: 'assets/hotel1.jpg', cols: 1, rows: 1 },
+        { image: 'assets/hotel2.jpg', cols: 1, rows: 1 },
+        { image: 'assets/hotel3.jpg', cols: 1, rows: 1 },
+        { image: 'assets/hotel1.jpg', cols: 1, rows: 1 },
+      ];
+    }
+  }
+
+  ngAfterViewInit(): void {
+    console.log(this.property);
+  }
 
   generateStarRating(rating: number): string {
     const stars = '⭐'.repeat(rating);
