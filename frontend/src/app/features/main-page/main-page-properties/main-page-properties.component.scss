@@ -1,7 +1,7 @@
 :host {
   display: grid !important;
   grid-template-areas: 'header filtersForm' 'searchForm filtersForm' 'list filtersForm';
-  grid-template-rows: min-content 1fr;
+  grid-template-rows: min-content min-content 1fr;
   grid-template-columns: 5fr 1fr;
   grid-gap: 0 16px;
   height: 100%;
