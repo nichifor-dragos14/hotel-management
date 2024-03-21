@@ -172,7 +172,7 @@
       <th mat-header-cell *matHeaderCellDef>Number of guests</th>
       <td mat-cell *matCellDef="let room">
         <section role="room-guests">
-          <span>
+          <span *ngIf="room.adultCapacity > 0">
             <section>
               <ng-container
                 *ngFor="let _ of [].constructor(room.adultCapacity)"
@@ -183,7 +183,7 @@
             adults
           </span>
 
-          <span>
+          <span *ngIf="room.childrenCapacity > 0">
             <section>
               <ng-container
                 *ngFor="let _ of [].constructor(room.childrenCapacity)"

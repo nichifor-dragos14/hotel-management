@@ -42,7 +42,7 @@ import { DateConverterModule } from '$shared/date-converter';
 
       <section role="rating-date">
         <div class="property-rating-square">
-          {{ review.rating }}
+          {{ transformToTwoDecimals(review.rating) }}
         </div>
 
         <span>{{ review.createdOn | dateFormat }}</span>
@@ -112,4 +112,8 @@ import { DateConverterModule } from '$shared/date-converter';
 })
 export class ReviewCardComponent {
   @Input() review!: ReviewPropertyDetails;
+
+  transformToTwoDecimals(rating: number) {
+    return rating.toPrecision(2);
+  }
 }
