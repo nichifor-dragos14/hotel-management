@@ -66,6 +66,7 @@ import { AppCirclePlaceholderComponent } from '../circle-placeholder';
         grid-template-columns: 1fr auto;
         gap: 8px;
         padding: 8px;
+        height: 142px;
     }
 
     section[role='review'] {
