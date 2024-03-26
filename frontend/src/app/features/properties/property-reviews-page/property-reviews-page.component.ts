@@ -15,6 +15,7 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
 import { MatListModule } from '@angular/material/list';
 import { ReviewCardComponent } from '$shared/cards';
 import { PaginatedDataSource } from '$core/pagination';
+import { ReviewCardPlaceholderComponent } from '$shared/placeholders/card-placeholder/review-card-placeholder.component';
 
 @Component({
   selector: 'app-property-reviews-page',
@@ -30,6 +31,7 @@ import { PaginatedDataSource } from '$core/pagination';
     ScrollingModule,
     MatListModule,
     ReviewCardComponent,
+    ReviewCardPlaceholderComponent
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

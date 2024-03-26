@@ -1,4 +1,4 @@
-<app-page-header title="All reviews">
+<app-page-header title="All user reviews">
   <button
     mat-button
     button
@@ -11,19 +11,17 @@
 </app-page-header>
 
 <mat-dialog-content>
-  <mat-nav-list>
-    <cdk-virtual-scroll-viewport
-      scrollWindow
-      [itemSize]="142"
-      [maxBufferPx]="1000"
-    >
-      <ng-container *cdkVirtualFor="let review of reviewsDataSource">
-        @if (!review) {
-          <a mat-list-item disabled> ... </a>
-        } @else {
-          <app-review-card [review]="review"></app-review-card>
-        }
-      </ng-container>
-    </cdk-virtual-scroll-viewport>
-  </mat-nav-list>
+  <cdk-virtual-scroll-viewport
+    scrollWindow
+    [itemSize]="142"
+    [maxBufferPx]="1000"
+  >
+    <ng-container *cdkVirtualFor="let review of reviewsDataSource">
+      @if (!review) {
+        <app-review-card-placeholder></app-review-card-placeholder>
+      } @else {
+        <app-review-card [review]="review"></app-review-card>
+      }
+    </ng-container>
+  </cdk-virtual-scroll-viewport>
 </mat-dialog-content>

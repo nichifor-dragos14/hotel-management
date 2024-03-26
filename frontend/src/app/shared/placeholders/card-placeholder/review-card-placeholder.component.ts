@@ -1,53 +1,65 @@
-import { ReviewPropertyDetails } from '$backend/services';
 import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
-import { DateConverterModule } from '$shared/date-converter';
+import { AppLinePlaceholderComponent } from '../line-placeholder';
+import { AppCirclePlaceholderComponent } from '../circle-placeholder';
 
 @Component({
-  selector: 'app-review-card',
+  selector: 'app-review-card-placeholder',
   template: `
     <mat-card>
       <section role="review">
         <mat-card-header>
           <section role="user-and-picture">
-            <img matCardAvatar src="assets/hotel1.jpg" />
+            <app-circle-placeholder [radius]="40"></app-circle-placeholder>
 
             <section role="user">
-              <span matCardTitle>
-                @if (review.user) {
-                  {{ review.user.firstName }} {{ review.user.lastName }}
-                } @else {
-                  Unknown
-                }
+              <span matCardTitle class="name">
+                <app-line-placeholder [width]="90" [height]="20">
+                </app-line-placeholder>
+
+                <app-line-placeholder [width]="80" [height]="20">
+                </app-line-placeholder>
               </span>
 
               <span matCardSubtitle>
-                🎏
-                @if (review.user) {
-                  {{ review.user.nationality }}
-                } @else {
-                  Not specified
-                }
+                <app-line-placeholder [width]="100" [height]="15">
+                </app-line-placeholder>
               </span>
             </section>
           </section>
         </mat-card-header>
 
         <mat-card-content>
-          <span>"{{ review.description }}"</span>
+          <span>
+            <app-line-placeholder [width]="500" [height]="18">
+            </app-line-placeholder>
+          </span>
         </mat-card-content>
       </section>
 
-      <div class="property-rating-square">
-        {{ transformToTwoDecimals(review.rating) }}
-      </div>
+      <div class="property-rating-square linear-background">9.0</div>
 
-      <span class="date">{{ review.createdOn | dateFormat }}</span>
+      <span class="date">
+        <app-line-placeholder [width]="100" [height]="15">
+        </app-line-placeholder>
+      </span>
     </mat-card>
   `,
   styles: `
+    .linear-background {
+        animation-duration: 1s;
+        animation-fill-mode: forwards;
+        animation-iteration-count: infinite;
+        animation-name: placeHolderShimmer;
+        animation-timing-function: linear;
+        background: #f6f7f8;
+        background: linear-gradient(to right, #eeeeee 8%, #dddddd 18%, #eeeeee 33%);
+        background-size: 1000px 104px;
+        position: relative;
+        overflow: hidden;
+    } 
+
     mat-card {
         display: grid;
         grid-template-areas: 'review rating' 'review date';
@@ -78,6 +90,13 @@ import { DateConverterModule } from '$shared/date-converter';
     section[role='user'] {
         display: flex;
         flex-direction: column;
+        gap: 8px;
+    }
+
+    section[role='user'] .name {
+        display: flex;
+        flex-direction: row;
+        gap: 8px;
     }
 
     .property-rating-square {
@@ -103,12 +122,11 @@ import { DateConverterModule } from '$shared/date-converter';
   `,
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [MatCardModule, CommonModule, RouterModule, DateConverterModule],
+  imports: [
+    MatCardModule,
+    CommonModule,
+    AppLinePlaceholderComponent,
+    AppCirclePlaceholderComponent,
+  ],
 })
-export class ReviewCardComponent {
-  @Input() review!: ReviewPropertyDetails;
-
-  transformToTwoDecimals(rating: number) {
-    return rating.toPrecision(2);
-  }
-}
+export class ReviewCardPlaceholderComponent {}
