@@ -209,18 +209,38 @@
 
 @if (property.reviews.length !== 0) {
   <section role="reviews">
-    <section>
-      <h2>Guest reviews</h2>
+    <section role="header-reviews">
+      <section role="title-subtitle-reviews">
+        <h2>See our guest reviews</h2>
 
-      <section role="user-reviews">
+        <span>
+          {{ property.reviews.length }}
+          @if (property.reviews.length === 1) {
+            review
+          } @else {
+            reviews
+          }
+        </span>
+      </section>
+
+      <section role="content-reviews">
         <ng-container *ngFor="let review of property.reviews.slice(0, 4)">
           <app-review-card [review]="review"></app-review-card>
         </ng-container>
       </section>
     </section>
 
-    @if (property.reviews.length > 4) {
-      <button mat-button color="primary">Read more</button>
+    @if (property.reviews.length > 0) {
+      <section>
+        <button
+          mat-button
+          color="primary"
+          [routerLink]="['view', 'reviews']"
+          [queryParams]="activatedRoute.snapshot.queryParams"
+        >
+          Read all reviews
+        </button>
+      </section>
     }
   </section>
 }
@@ -240,3 +260,5 @@
     </span>
   </section>
 </section>
+
+<router-outlet hidden />

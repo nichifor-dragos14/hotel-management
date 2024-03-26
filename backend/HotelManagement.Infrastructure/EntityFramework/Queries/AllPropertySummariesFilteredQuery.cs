@@ -145,7 +145,8 @@ internal class AllPropertySummariesFilteredQueryHandler(
                             p."Location",
                             p."Rating",
                             p."HasFreeCancellation",
-                            p."CreatedOn"
+                            p."CreatedOn",
+                            r."Id"
                         {havingClause}
                         ORDER BY
                             p."CreatedOn" DESC

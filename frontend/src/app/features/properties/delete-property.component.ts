@@ -12,7 +12,7 @@ import { CommonModule } from '@angular/common';
 import { AppToastService } from '$shared/toast';
 
 @Component({
-  selector: 'app-delete-hotel',
+  selector: 'app-delete-property',
   standalone: true,
   template: `
     <h1 mat-dialog-title>Delete property?</h1>

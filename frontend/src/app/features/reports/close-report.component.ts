@@ -12,7 +12,7 @@ import { CommonModule } from '@angular/common';
 import { AppToastService } from '$shared/toast';
 
 @Component({
-  selector: 'app-delete-hotel',
+  selector: 'app-close-report',
   standalone: true,
   template: `
     <h1 mat-dialog-title>Close report?</h1>
@@ -34,7 +34,9 @@ export class CloseReportComponent {
 
   async ok() {
     try {
-      await this.reportService.reportsClosePatchAsync({ body: { id: this.id } });
+      await this.reportService.reportsClosePatchAsync({
+        body: { id: this.id },
+      });
       this.toastService.open('Successfully closed report', 'info');
     } catch (error) {
       if (error instanceof Error) {

@@ -143,19 +143,38 @@ section[role='reviews'] {
   gap: 16px;
 }
 
-section[role='reviews'] section[role='user-reviews'] {
+section[role='reviews'] h2 {
+  margin: 0;
+}
+
+section[role='header-reviews'] {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+section[role='title-subtitle-reviews'] {
+  display: flex;
+  flex-direction: column;
+}
+
+section[role='title-subtitle-reviews'] span {
+  color: grey;
+}
+
+section[role='reviews'] section[role='content-reviews'] {
   display: flex;
   flex-direction: row;
   gap: 16px;
 }
 
-section[role='reviews'] section[role='user-reviews'] {
+section[role='reviews'] section[role='content-reviews'] {
   display: flex;
   flex-direction: row;
   gap: 16px;
 }
 
-section[role='reviews'] section[role='user-reviews'] app-review-card {
+section[role='reviews'] section[role='content-reviews'] app-review-card {
   flex: 1 1;
 }
 

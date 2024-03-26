@@ -1,0 +1,29 @@
+<app-page-header title="All reviews">
+  <button
+    mat-button
+    button
+    color="primary"
+    [routerLink]="['../../']"
+    [queryParams]="activatedRoute.snapshot.queryParams"
+  >
+    Close
+  </button>
+</app-page-header>
+
+<mat-dialog-content>
+  <mat-nav-list>
+    <cdk-virtual-scroll-viewport
+      scrollWindow
+      [itemSize]="142"
+      [maxBufferPx]="1000"
+    >
+      <ng-container *cdkVirtualFor="let review of reviewsDataSource">
+        @if (!review) {
+          <a mat-list-item disabled> ... </a>
+        } @else {
+          <app-review-card [review]="review"></app-review-card>
+        }
+      </ng-container>
+    </cdk-virtual-scroll-viewport>
+  </mat-nav-list>
+</mat-dialog-content>

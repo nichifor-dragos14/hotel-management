@@ -8,6 +8,7 @@ import { DialogPageComponent } from '$shared/dialog-page';
 import { NewPropertyPageComponent } from './new-property/new-property.component';
 import { UpdatePropertyPageComponent } from './update-property/update-property.component';
 import { EditPropertyFormFactory } from './update-property.form-builder';
+import { PropertyReviewsPageComponent } from './property-reviews-page/property-reviews-page.component';
 
 const PROPERTY_ROUTES: Routes = [
   {
@@ -70,6 +71,19 @@ const PROPERTY_ROUTES: Routes = [
               id: params['id'],
             }),
         },
+        children: [
+          {
+            path: 'view',
+            component: DialogPageComponent,
+            runGuardsAndResolvers: 'always',
+            children: [
+              {
+                path: 'reviews',
+                component: PropertyReviewsPageComponent,
+              },
+            ],
+          },
+        ],
       },
     ],
   },

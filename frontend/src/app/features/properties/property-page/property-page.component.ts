@@ -4,9 +4,10 @@ import {
   Component,
   Input,
   OnInit,
+  inject,
 } from '@angular/core';
 import { PropertyDetails, RoomType } from '$backend/services';
-import { RouterModule } from '@angular/router';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
@@ -40,6 +41,7 @@ export interface GridImage {
 })
 export class PropertyPageComponent implements OnInit, AfterViewInit {
   @Input() property!: PropertyDetails;
+  activatedRoute = inject(ActivatedRoute);
 
   displayedColumns = ['roomType', 'numberOfGuests', 'price'];
 
