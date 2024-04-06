@@ -107,104 +107,119 @@
 <div [innerHTML]="property.description"></div>
 
 <section role="rooms">
-  <h2>Availability</h2>
+  <section role="title-rooms">
+    <h2>Availability</h2>
 
-  <table mat-table [dataSource]="property.rooms">
-    <ng-container matColumnDef="roomType">
-      <th mat-header-cell *matHeaderCellDef>Room type</th>
-      <td mat-cell *matCellDef="let room">
-        <h3>{{ roomTypeMapper(room.type) }} room</h3>
+    <table mat-table [dataSource]="property.rooms.slice(0, 2)">
+      <ng-container matColumnDef="roomType">
+        <th mat-header-cell *matHeaderCellDef>Room type</th>
+        <td mat-cell *matCellDef="let room">
+          <h3>{{ roomTypeMapper(room.type) }} room</h3>
 
-        <section role="room-facilities">
-          @if (room.hasAirConditioning) {
-            <span>
-              <mat-icon>ac_unit</mat-icon>
-              Air conditioning
+          <section role="room-facilities">
+            @if (room.hasAirConditioning) {
+              <span>
+                <mat-icon>ac_unit</mat-icon>
+                Air conditioning
+              </span>
+            }
+
+            @if (room.hasBalcony) {
+              <span>
+                <mat-icon>deck</mat-icon>
+                Balcony
+              </span>
+            }
+
+            @if (room.hasHairdryer) {
+              <span>
+                <mat-icon>waves</mat-icon>
+                Hairdryer
+              </span>
+            }
+
+            @if (room.hasPrivateBathroom) {
+              <span>
+                <mat-icon>shower</mat-icon>
+                Private bathroom
+              </span>
+            }
+
+            @if (room.hasRefrigerator) {
+              <span>
+                <mat-icon>kitchen</mat-icon>
+                Refrigerator
+              </span>
+            }
+
+            @if (room.hasSeaView) {
+              <span>
+                <mat-icon>beach_access</mat-icon>
+                Sea view
+              </span>
+            }
+
+            @if (room.hasTowels) {
+              <span>
+                <mat-icon>local_laundry_service</mat-icon>
+                Towels
+              </span>
+            }
+          </section>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="numberOfGuests">
+        <th mat-header-cell *matHeaderCellDef>Number of guests</th>
+        <td mat-cell *matCellDef="let room">
+          <section role="room-guests">
+            <span *ngIf="room.adultCapacity > 0">
+              <section>
+                <ng-container
+                  *ngFor="let _ of [].constructor(room.adultCapacity)"
+                >
+                  <mat-icon>person</mat-icon>
+                </ng-container>
+              </section>
+              adults
             </span>
-          }
 
-          @if (room.hasBalcony) {
-            <span>
-              <mat-icon>deck</mat-icon>
-              Balcony
+            <span *ngIf="room.childrenCapacity > 0">
+              <section>
+                <ng-container
+                  *ngFor="let _ of [].constructor(room.childrenCapacity)"
+                >
+                  <mat-icon>person</mat-icon>
+                </ng-container>
+              </section>
+              children
             </span>
-          }
+          </section>
+        </td>
+      </ng-container>
 
-          @if (room.hasHairdryer) {
-            <span>
-              <mat-icon>waves</mat-icon>
-              Hairdryer
-            </span>
-          }
+      <ng-container matColumnDef="price">
+        <th mat-header-cell *matHeaderCellDef>Price</th>
+        <td mat-cell *matCellDef="let room">{{ room.price }} lei</td>
+      </ng-container>
 
-          @if (room.hasPrivateBathroom) {
-            <span>
-              <mat-icon>shower</mat-icon>
-              Private bathroom
-            </span>
-          }
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+  </section>
 
-          @if (room.hasRefrigerator) {
-            <span>
-              <mat-icon>kitchen</mat-icon>
-              Refrigerator
-            </span>
-          }
-
-          @if (room.hasSeaView) {
-            <span>
-              <mat-icon>beach_access</mat-icon>
-              Sea view
-            </span>
-          }
-
-          @if (room.hasTowels) {
-            <span>
-              <mat-icon>local_laundry_service</mat-icon>
-              Towels
-            </span>
-          }
-        </section>
-      </td>
-    </ng-container>
-
-    <ng-container matColumnDef="numberOfGuests">
-      <th mat-header-cell *matHeaderCellDef>Number of guests</th>
-      <td mat-cell *matCellDef="let room">
-        <section role="room-guests">
-          <span *ngIf="room.adultCapacity > 0">
-            <section>
-              <ng-container
-                *ngFor="let _ of [].constructor(room.adultCapacity)"
-              >
-                <mat-icon>person</mat-icon>
-              </ng-container>
-            </section>
-            adults
-          </span>
-
-          <span *ngIf="room.childrenCapacity > 0">
-            <section>
-              <ng-container
-                *ngFor="let _ of [].constructor(room.childrenCapacity)"
-              >
-                <mat-icon>person</mat-icon>
-              </ng-container>
-            </section>
-            children
-          </span>
-        </section>
-      </td>
-    </ng-container>
-
-    <ng-container matColumnDef="price">
-      <th mat-header-cell *matHeaderCellDef>Price</th>
-      <td mat-cell *matCellDef="let room">{{ room.price }} lei</td>
-    </ng-container>
-
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-  </table>
+  @if (property.rooms.length > 0) {
+    <section>
+      <button
+        mat-button
+        color="primary"
+        [routerLink]="['view', 'rooms']"
+        [queryParams]="activatedRoute.snapshot.queryParams"
+      >
+        See all rooms
+      </button>
+    </section>
+  }
 </section>
 
 @if (property.reviews.length !== 0) {

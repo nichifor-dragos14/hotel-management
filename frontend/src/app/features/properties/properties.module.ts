@@ -9,6 +9,7 @@ import { NewPropertyPageComponent } from './new-property/new-property.component'
 import { UpdatePropertyPageComponent } from './update-property/update-property.component';
 import { EditPropertyFormFactory } from './update-property.form-builder';
 import { PropertyReviewsPageComponent } from './property-reviews-page/property-reviews-page.component';
+import { PropertyRoomsPageComponent } from './property-rooms-page/property-rooms-page.component';
 
 const PROPERTY_ROUTES: Routes = [
   {
@@ -80,6 +81,10 @@ const PROPERTY_ROUTES: Routes = [
               {
                 path: 'reviews',
                 component: PropertyReviewsPageComponent,
+              },
+              {
+                path: 'rooms',
+                component: PropertyRoomsPageComponent,
               },
             ],
           },

@@ -54,6 +54,7 @@ import { DateConverterModule } from '$shared/date-converter';
         grid-template-columns: 1fr auto;
         gap: 8px;
         padding: 8px;
+        border-radius: 0 !important;
     }
 
     section[role='review'] {

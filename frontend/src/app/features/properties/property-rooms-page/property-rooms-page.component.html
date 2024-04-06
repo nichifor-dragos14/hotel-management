@@ -1,0 +1,27 @@
+<app-page-header title="All available rooms">
+  <button
+    mat-button
+    button
+    color="primary"
+    [routerLink]="['../../']"
+    [queryParams]="activatedRoute.snapshot.queryParams"
+  >
+    Close
+  </button>
+</app-page-header>
+
+<mat-dialog-content>
+  <cdk-virtual-scroll-viewport
+    scrollWindow
+    [itemSize]="142"
+    [maxBufferPx]="1000"
+  >
+    <ng-container *cdkVirtualFor="let room of roomsDataSource">
+      @if (!room) {
+        <p>loading...</p>
+      } @else {
+        <app-room-card [room]="room"></app-room-card>
+      }
+    </ng-container>
+  </cdk-virtual-scroll-viewport>
+</mat-dialog-content>

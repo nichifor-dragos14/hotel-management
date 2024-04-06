@@ -453,6 +453,22 @@
               "type": "string",
               "format": "uuid"
             }
+          },
+          {
+            "name": "from",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "to",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
           }
         ],
         "responses": {
@@ -461,10 +477,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/PropertyRooms"
-                  }
+                  "$ref": "#/components/schemas/PropertyRoomIPaginatedResult"
                 }
               }
             }
@@ -1033,22 +1046,28 @@
         },
         "additionalProperties": false
       },
-      "PropertyRooms": {
+      "PropertyRoom": {
         "required": [
+          "adultCapacity",
+          "childrenCapacity",
           "createdOn",
+          "hasAirConditioning",
+          "hasBalcony",
+          "hasHairdryer",
+          "hasPrivateBathroom",
+          "hasRefrigerator",
+          "hasSeaView",
+          "hasTowels",
+          "id",
           "number",
-          "propertyId",
-          "roomId",
+          "price",
+          "rowNumber",
           "type",
           "updatedOn"
         ],
         "type": "object",
         "properties": {
-          "propertyId": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "roomId": {
+          "id": {
             "type": "string",
             "format": "uuid"
           },
@@ -1059,6 +1078,39 @@
           "type": {
             "$ref": "#/components/schemas/RoomType"
           },
+          "price": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "adultCapacity": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "childrenCapacity": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "hasPrivateBathroom": {
+            "type": "boolean"
+          },
+          "hasTowels": {
+            "type": "boolean"
+          },
+          "hasHairdryer": {
+            "type": "boolean"
+          },
+          "hasAirConditioning": {
+            "type": "boolean"
+          },
+          "hasBalcony": {
+            "type": "boolean"
+          },
+          "hasRefrigerator": {
+            "type": "boolean"
+          },
+          "hasSeaView": {
+            "type": "boolean"
+          },
           "createdOn": {
             "type": "string",
             "format": "date-time"
@@ -1066,6 +1118,32 @@
           "updatedOn": {
             "type": "string",
             "format": "date-time"
+          },
+          "rowNumber": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "PropertyRoomIPaginatedResult": {
+        "required": [
+          "results",
+          "totalCount"
+        ],
+        "type": "object",
+        "properties": {
+          "results": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PropertyRoom"
+            },
+            "readOnly": true
+          },
+          "totalCount": {
+            "type": "integer",
+            "format": "int32",
+            "readOnly": true
           }
         },
         "additionalProperties": false

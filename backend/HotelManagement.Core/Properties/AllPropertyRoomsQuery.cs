@@ -3,36 +3,23 @@ using HotelManagement.Core.Rooms;
 
 namespace HotelManagement.Core.Properties;
 
-public record PropertyRooms(
-    Guid PropertyId,
-    Guid RoomId,
+public record PropertyRoom(
+    Guid Id,
     int Number,
     RoomType Type,
+    int Price,
+    int AdultCapacity,
+    int ChildrenCapacity,
+    bool HasPrivateBathroom,
+    bool HasTowels,
+    bool HasHairdryer,
+    bool HasAirConditioning,
+    bool HasBalcony,
+    bool HasRefrigerator,
+    bool HasSeaView,
     DateTime CreatedOn,
-    DateTime UpdatedOn
+    DateTime UpdatedOn,
+    int RowNumber
 );
 
-public record AllPropertyRoomsQuery(Guid? Id) : IQuery<IEnumerable<PropertyRooms>>;
-
-internal class AllPropertyRoomsQueryHandler(
-    IQueryFacade facade
-) : IQueryHandler<AllPropertyRoomsQuery, IEnumerable<PropertyRooms>>
-{
-    public async Task<IEnumerable<PropertyRooms>> ExecuteAsync(
-        AllPropertyRoomsQuery query,
-        CancellationToken cancellationToken)
-    {
-        return
-            from property in facade.Of<Property>()
-            where property.Id == query.Id
-            join room in facade.Of<Room>() on property.Id equals room.Property.Id
-            select new PropertyRooms(
-                property.Id,
-                room.Id,
-                room.Number,
-                room.Type,
-                room.CreatedOn,
-                room.UpdatedOn
-            );
-    }
-}
+public record AllPropertyRoomsQuery(int From, int To, Guid Id) : IQuery<IPaginatedResult<PropertyRoom>>;

@@ -100,6 +100,21 @@ section[role='facilities'] span {
 section[role='rooms'] {
   display: flex;
   flex-direction: column;
+  gap: 16px;
+}
+
+section[role='rooms'] h2 {
+  margin: 0;
+}
+
+section[role='rooms'] button {
+  justify-self: end;
+}
+
+section[role='title-rooms'] {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
 section[role='rooms'] table th {
