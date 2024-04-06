@@ -13,12 +13,12 @@
 <mat-dialog-content>
   <cdk-virtual-scroll-viewport
     scrollWindow
-    [itemSize]="142"
+    [itemSize]="164"
     [maxBufferPx]="1000"
   >
     <ng-container *cdkVirtualFor="let room of roomsDataSource">
       @if (!room) {
-        <p>loading...</p>
+        <app-room-card-placeholder></app-room-card-placeholder>
       } @else {
         <app-room-card [room]="room"></app-room-card>
       }

@@ -10,7 +10,7 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
 import { MatListModule } from '@angular/material/list';
 import { RoomCardComponent } from '$shared/cards';
 import { PaginatedDataSource } from '$core/pagination';
-import { ReviewCardPlaceholderComponent } from '$shared/placeholders/card-placeholder/review-card-placeholder.component';
+import { RoomCardPlaceholderComponent } from '$shared/placeholders/card-placeholder';
 
 @Component({
   selector: 'app-property-rooms-page',
@@ -26,7 +26,7 @@ import { ReviewCardPlaceholderComponent } from '$shared/placeholders/card-placeh
     ScrollingModule,
     MatListModule,
     RoomCardComponent,
-    ReviewCardPlaceholderComponent,
+    RoomCardPlaceholderComponent,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
