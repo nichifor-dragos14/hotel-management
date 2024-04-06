@@ -1,1 +1,1 @@
-export * from './circle-placeholder.component';
+export * from './circle.placeholder';

@@ -1,1 +1,1 @@
-export * from './line-placeholder.component';
+export * from './line.placeholder';
