@@ -10,6 +10,9 @@ internal class UserEntityConfiguration : IEntityTypeConfiguration<User>
     {
         builder.HasKey(q => q.Id);
 
+        builder.Property(q => q.Email).IsRequired();
+        builder.Property(q => q.Password).IsRequired();
+
         builder.Property(q => q.FirstName).IsRequired();
         builder.Property(q => q.LastName).IsRequired();
         builder.Property(q => q.Nationality).IsRequired();

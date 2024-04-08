@@ -1,9 +1,12 @@
-﻿using System.Collections.Concurrent;
-using System.Reflection;
+﻿using System.Reflection;
+using System.Text;
 using HealthChecks.UI.Client;
 using HotelManagement.WebApi;
 using HotelManagement.WebApi.Development;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+using Microsoft.IdentityModel.Tokens;
+using NSwag.Generation.Processors.Security;
 using Serilog;
 using Serilog.Sinks.Elasticsearch;
 using Vernou.Swashbuckle.HttpResultsAdapter;
@@ -28,44 +31,77 @@ builder.Host.UseSerilog((context, configuration) =>
         .ReadFrom.Configuration(context.Configuration);
 });
 
-ConcurrentDictionary<Guid, int> _counters = new();
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+})
+    .AddJwtBearer(options =>
+    {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateLifetime = true,
+            ValidateIssuerSigningKey = true,
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            ValidIssuer = builder.Configuration["JWT:Issuer"],
+            ValidAudience = builder.Configuration["JWT:Audience"],
+            IssuerSigningKey =  new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JWT:SecretKey"]))
+        };
+});
 
-var services = builder.Services;
-var env = builder.Environment;
 
-services.AddSingleton(_counters);
-services.AddCore();
-services.AddControllers();
-
-services.AddHealthChecks()
-    .AddElasticsearch(builder.Configuration["ElasticConfiguration:Uri"], "HotelManagement:Elasticsearch");
-services.AddInfrastructure(builder.Configuration);
-
-services.AddEndpointsApiExplorer();
-services.AddSwaggerGen(settings =>
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen(settings =>
 {
     settings.OperationFilter<HttpResultsOperationFilter>();
     settings.SchemaFilter<NonNullishAsRequiredSchemaFilter>();
     settings.SupportNonNullableReferenceTypes();
 });
-services.AddOpenApiDocument();
 
-//services.AddHealthChecks();
 
-if (env.IsDevelopment())
-    // Only on dev mode we generate the swagger
-    services.AddHostedService<SwaggerExportService>();
+builder.Services.AddHealthChecks()
+    .AddElasticsearch(builder.Configuration["ElasticConfiguration:Uri"], "HotelManagement:Elasticsearch");
+builder.Services.AddCore();
+builder.Services.AddControllers();
+builder.Services.AddInfrastructure(builder.Configuration);
+builder.Services.AddOpenApiDocument(settings =>
+{
+    settings.AddSecurity(JwtBearerDefaults.AuthenticationScheme, new NSwag.OpenApiSecurityScheme()
+    {
+        Name = "Authorization",
+        Type = NSwag.OpenApiSecuritySchemeType.ApiKey,
+        Scheme = JwtBearerDefaults.AuthenticationScheme,
+        BearerFormat = "JWT",
+        In = NSwag.OpenApiSecurityApiKeyLocation.Header,
+        Description = "Please enter the token using the format: \"Bearer [space] YOUR_TOKEN\""
+    });
+    settings.OperationProcessors.Add(new OperationSecurityScopeProcessor(JwtBearerDefaults.AuthenticationScheme));
+});
+
+
+
+if (builder.Environment.IsDevelopment())
+{
+    builder.Services.AddHostedService<SwaggerExportService>();
+}
 
 var app = builder.Build();
 
+app.UseHttpsRedirection();
+app.UseRouting();
+app.UseAuthentication();
+app.UseAuthorization();
 app.UseOpenApi();
 app.UseSwaggerUi();
-app.UseHttpsRedirection();
-app.UseAuthorization();
 app.UseHealthChecks("/healthy");
-app.UseRouting();
+app.MapHealthChecks(
+    "/health-details",
+    new HealthCheckOptions
+    {
+        ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse 
+    }
+);
 app.MapControllers();
-app.MapHealthChecks("/health-details",
-    new HealthCheckOptions { ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse });
 
 app.Run();
