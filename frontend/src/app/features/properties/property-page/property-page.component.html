@@ -2,7 +2,9 @@
   id="property-name"
   [title]="property.name + ' ' + generateStarRating(property.rating)"
 >
-  <button mat-button button color="primary">Reserve now</button>
+  <button mat-button button color="primary" [routerLink]="['view', 'rooms']">
+    Reserve now
+  </button>
 </app-page-header>
 
 <section role="gallery-facilities-map">

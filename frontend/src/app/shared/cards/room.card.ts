@@ -24,9 +24,14 @@ import { MatButtonModule } from '@angular/material/button';
               adults
             </span>
 
-            <span matCardSubtitle>
+            <span
+              matCardSubtitle
+              [style.visibility]="
+                room.childrenCapacity === 0 ? 'hidden' : 'visible'
+              "
+            >
               <ng-container
-                *ngFor="let _ of [].constructor(room.adultCapacity)"
+                *ngFor="let _ of [].constructor(room.childrenCapacity)"
               >
                 <mat-icon>person</mat-icon>
               </ng-container>
@@ -100,6 +105,7 @@ import { MatButtonModule } from '@angular/material/button';
         grid-template-areas: 'content book';
         padding: 8px;
         border-radius: 0 !important;
+        height: 164px;
     }
 
     section[role="content"] {
