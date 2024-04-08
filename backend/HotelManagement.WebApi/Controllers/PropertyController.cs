@@ -9,7 +9,6 @@ namespace HotelManagement.WebApi.Controllers;
 
 [Route("properties")]
 [ApiController]
-[Authorize]
 public class PropertyController : ControllerBase
 {
     [HttpGet]
