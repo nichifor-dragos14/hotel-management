@@ -1,6 +1,7 @@
 ﻿using HotelManagement.Core.Abstractions;
 using HotelManagement.Core.Properties;
 using HotelManagement.Core.Properties.Filters;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,6 +9,7 @@ namespace HotelManagement.WebApi.Controllers;
 
 [Route("properties")]
 [ApiController]
+[Authorize]
 public class PropertyController : ControllerBase
 {
     [HttpGet]
