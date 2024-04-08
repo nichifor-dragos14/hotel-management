@@ -5,8 +5,9 @@ import {
   HttpHandler,
   HttpEvent,
 } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
+import { LoginService } from './login.service';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
@@ -14,6 +15,8 @@ export class AuthInterceptor implements HttpInterceptor {
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
+    inject(LoginService).validateTokenAndUpdateState();
+
     const jwtToken = sessionStorage.getItem('JWT');
     let request = req;
 

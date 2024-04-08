@@ -2,8 +2,8 @@
   display: grid !important;
   grid-template-areas: 'image login-form';
   grid-template-columns: 2fr 1fr;
-  height: 90vh;
-  width: 90vh;
+  height: 100%;
+  width: 100%;
   gap: 32px;
   overflow: hidden;
 }

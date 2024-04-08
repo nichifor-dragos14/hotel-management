@@ -1,9 +1,17 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  OnInit,
+  inject,
+} from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
+import { LoginService } from '$features/auth/login.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -18,10 +26,14 @@ import { MatListModule } from '@angular/material/list';
   template: `
     <mat-toolbar class="mat-elevation-z4">
       <mat-toolbar-row>
-        <a mat-button routerLink="/">Hotel Management</a>
+        <a mat-button>Hotel Management</a>
+        <section role="buttons">
+          @if (isLoggedIn) {
+            <a mat-button (click)="loginService.logout()"> Logout </a>
+          }
+        </section>
       </mat-toolbar-row>
     </mat-toolbar>
-
     <mat-sidenav-container>
       <mat-sidenav mode="side" opened>
         <mat-nav-list>
@@ -48,4 +60,26 @@ import { MatListModule } from '@angular/material/list';
   changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrl: './app.component.scss',
 })
-export class AppComponent {}
+export class AppComponent implements OnInit {
+  cdr = inject(ChangeDetectorRef);
+  loginService = inject(LoginService);
+
+  isLoggedIn: boolean = false;
+  private subscription: Subscription = new Subscription();
+
+  ngOnInit(): void {
+    this.subscribeToLoginStatus();
+  }
+
+  private subscribeToLoginStatus(): void {
+    this.subscription.add(
+      this.loginService.isLoggedIn$.subscribe((status) => {
+        this.isLoggedIn = status;
+      })
+    );
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
+}

@@ -1,26 +1,37 @@
 import { HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class LoginService {
-  logout() {
-    sessionStorage.removeItem('JWT');
+  private isLoggedIn = new BehaviorSubject<boolean>(this.isTokenValid());
+
+  get isLoggedIn$(): Observable<boolean> {
+    return this.isLoggedIn.asObservable();
   }
 
-  checkLogin(): Observable<boolean> {
+  logout() {
+    sessionStorage.removeItem('JWT');
+    this.isLoggedIn.next(false);
+  }
+
+  notifyLoginSuccess() {
+    this.isLoggedIn.next(true);
+  }
+
+  private isTokenValid(): boolean {
     const jwtToken = sessionStorage.getItem('JWT');
 
     if (!jwtToken) {
-      return of(false);
+      return false;
     }
 
     const tokenData = JSON.parse(atob(jwtToken.split('.')[1]));
 
     if (!tokenData || !tokenData.exp) {
-      return of(false);
+      return false;
     }
 
     const expirationTime = tokenData.exp * 1000;
@@ -28,10 +39,15 @@ export class LoginService {
     const currentTime = new Date().getTime();
 
     if (currentTime > expirationTime) {
-      return of(false);
+      return false;
     }
 
-    return of(true);
+    return true;
+  }
+
+  validateTokenAndUpdateState(): void {
+    const isValid = this.isTokenValid();
+    this.isLoggedIn.next(isValid);
   }
 
   async AddJWTToSessionStorage(JWT: string): Promise<void> {
@@ -39,6 +55,7 @@ export class LoginService {
       if (JWT.length != 0) {
         try {
           sessionStorage.setItem('JWT', JWT);
+          this.notifyLoginSuccess();
           resolve();
         } catch (error) {
           reject(error);
