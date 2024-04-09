@@ -1,0 +1,14 @@
+<mat-card>
+    <mat-card-header>
+      <div mat-card-avatar class="profile-avatar" [style.background-image]="'url(' + user.avatar + ')'"></div>
+      <mat-card-title>{{ user.name }}</mat-card-title>
+      <mat-card-subtitle>{{ user.email }}</mat-card-subtitle>
+    </mat-card-header>
+    <img mat-card-image [src]="user.avatar" alt="Photo of {{ user.name }}">
+    <mat-card-content>
+      <p>
+        {{ user.bio }}
+      </p>
+    </mat-card-content>
+  </mat-card>
+  
