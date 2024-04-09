@@ -8,6 +8,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { LOGIN_FORM } from '../login.form';
 import { AuthService } from '$backend/services';
 import { LoginService } from '../login.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-login-page',
@@ -29,6 +30,7 @@ export class LoginPageComponent {
   authService = inject(AuthService);
   loginService = inject(LoginService);
   router = inject(Router);
+  private location = inject(Location);
 
   async login(value: typeof this.loginForm.value) {
     const { email, password } = value as Required<typeof value>;
@@ -46,7 +48,7 @@ export class LoginPageComponent {
         this.loginService.AddJWTToSessionStorage(response.body);
         this.loginForm.reset();
 
-        await this.router.navigate(['/']);
+        this.location.back();
       }
     } catch (error) {
       throw new Error('Bad request');
