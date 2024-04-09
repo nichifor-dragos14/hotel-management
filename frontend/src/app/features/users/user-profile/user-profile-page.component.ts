@@ -1,5 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
+import { MatListModule } from '@angular/material/list';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-user-profile-page',
@@ -7,13 +9,6 @@ import { MatCardModule } from '@angular/material/card';
   styleUrls: ['./user-profile-page.component.scss'],
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [MatCardModule],
+  imports: [MatButtonModule, MatListModule, RouterModule],
 })
-export class UserProfilePageComponent {
-  user = {
-    name: 'John Doe',
-    email: 'john.doe@example.com',
-    bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-    avatar: 'https://material.angular.io/assets/img/examples/shiba1.jpg', // Placeholder avatar image
-  };
-}
+export class UserProfilePageComponent {}

@@ -1,4 +1,24 @@
-.profile-avatar {
-    background-size: cover;
+:host {
+  display: grid !important;
+  grid-template-areas: 'router option-list';
+  grid-template-columns: 2fr 1fr;
+  grid-column-gap: 48px;
+  padding-right: 128px !important;
+  padding-left: 128px !important;
+}
+
+:host router-outlet {
+  display: none;
+
+  & ::ng-deep + * {
+    grid-area: router;
   }
-  
+}
+
+section[role='option-list'] {
+  grid-area: option-list;
+}
+
+.active {
+  background-color: rgba(54, 1, 63, 0.1) !important;
+}

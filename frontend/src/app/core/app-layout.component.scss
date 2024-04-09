@@ -70,3 +70,11 @@ section[role='buttons'] {
   flex-direction: row;
   gap: 8px;
 }
+
+#profile-picture {
+  height: 32px;
+  width: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  cursor: pointer;
+}

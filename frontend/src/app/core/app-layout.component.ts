@@ -29,6 +29,13 @@ import { Subscription } from 'rxjs';
         <a mat-button>Hotel Management</a>
         <section role="buttons">
           @if (isLoggedIn) {
+            <img
+              id="profile-picture"
+              alt="profile picture"
+              src="assets/hotel1.jpg"
+              [routerLink]="['users/my-profile/details']"
+            />
+
             <a mat-button (click)="loginService.logout()"> Logout </a>
           } @else {
             <a mat-button [routerLink]="['/auth/login']"> Login </a>
@@ -60,7 +67,7 @@ import { Subscription } from 'rxjs';
     </mat-sidenav-container>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  styleUrl: './app.component.scss',
+  styleUrl: './app-layout.component.scss',
 })
 export class AppLayoutComponent implements OnInit {
   cdr = inject(ChangeDetectorRef);
