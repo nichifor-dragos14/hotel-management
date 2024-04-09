@@ -39,3 +39,13 @@ section[role='filters'] {
     grid-area: list;
   }
 }
+
+mat-panel-description {
+  display: flex;
+  flex-direction: row;
+  gap: 4px;
+}
+
+mat-icon {
+  overflow: unset;
+}
