@@ -21,10 +21,7 @@ import { MatRippleModule } from '@angular/material/core';
       <section role="information">
         <mat-card-header>
           <span matCardTitle>
-            {{ property.name }}
-            <ng-container *ngFor="let _ of [].constructor(property.rating)">
-              ⭐
-            </ng-container>
+            {{ generateStarRating(property.rating) }}
           </span>
 
           <span matCardSubtitle>
@@ -119,7 +116,10 @@ import { MatRippleModule } from '@angular/material/core';
         display: grid;
         grid-template-columns: min-content 1fr 1fr;
         gap: 16px;
-        border-radius: 8px;
+    }
+
+    mat-icon {
+      overflow: unset;
     }
 
     .image-container {
@@ -202,6 +202,12 @@ import { MatRippleModule } from '@angular/material/core';
 })
 export class PropertyCardComponent {
   @Input() property!: PropertySummaryFiltered;
+
+  generateStarRating(rating: number): string {
+    const stars = '⭐'.repeat(rating);
+
+    return this.property.name + ' ' + stars;
+  }
 
   transformTypeOfRoomToString(type: number) {
     if (type == 0) return 'Single';
