@@ -4,11 +4,11 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { RouterModule } from '@angular/router';
 
 @Component({
-  selector: 'app-user-profile-preferences-page',
-  templateUrl: './user-profile-preferences-page.component.html',
-  styleUrls: ['./user-profile-preferences-page.component.scss'],
+  selector: 'app-user-profile-security-page',
+  templateUrl: './user-profile-security-page.component.html',
+  styleUrls: ['./user-profile-security-page.component.scss'],
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [MatButtonModule, RouterModule, MatSlideToggleModule],
 })
-export class UserProfilePreferencesPageComponent {}
+export class UserProfileSecurityPageComponent {}
