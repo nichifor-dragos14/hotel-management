@@ -36,7 +36,7 @@ import { DateConverterModule } from '$shared/date-converter';
         </mat-card-header>
 
         <mat-card-content>
-          <span>"{{ review.description }}"</span>
+          <span>"{{ transformReviewDescription(review.description) }}"</span>
         </mat-card-content>
       </section>
 
@@ -55,6 +55,7 @@ import { DateConverterModule } from '$shared/date-converter';
         gap: 8px;
         padding: 8px;
         border-radius: 0 !important;
+        height: 142px;
     }
 
     section[role='review'] {
@@ -111,5 +112,13 @@ export class ReviewCardComponent {
 
   transformToTwoDecimals(rating: number) {
     return rating.toPrecision(2);
+  }
+
+  transformReviewDescription(description: string) {
+    if (description.length > 30) {
+      return description.substring(0, 30) + '...';
+    } else {
+      return description;
+    }
   }
 }

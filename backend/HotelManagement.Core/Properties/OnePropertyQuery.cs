@@ -89,7 +89,10 @@ internal class OneHotelQueryHandler(
                                })
                                .FirstOrDefault();
 
-        if (propertyDetails == null) return null;
+        if (propertyDetails == null)
+        {
+            return null;
+        }
 
         var roomsDetails = propertyDetails.Rooms.Select(r => new RoomPropertyDetails(
             r.Id,
@@ -135,7 +138,7 @@ internal class OneHotelQueryHandler(
             property.Email,
             property.PhoneNumber,
             property.Rating,
-            property.Reviews.Count != 0 ? property.Reviews.Average(r => r.Rating) : 0,
+            property.Reviews?.Any() == true ? property.Reviews.Average(r => r.Rating) : 0,
             property.CreatedOn,
             property.UpdatedOn,
             property.HasFreeWiFi,
