@@ -92,20 +92,20 @@ internal class AllPropertySummariesFilteredQueryHandler(
 
         if (query.PropertyFiltersOptional.RatingOver6)
         {
-            havingClause += "HAVING AVG(re.\"Rating\") > 6";
+            havingClause += "HAVING AVG(re.\"Rating\") >= 6";
         }
         else if (query.PropertyFiltersOptional.RatingOver7)
         {
-            havingClause += "HAVING AVG(re.\"Rating\") > 7";
+            havingClause += "HAVING AVG(re.\"Rating\") >= 7";
 
         }
         else if (query.PropertyFiltersOptional.RatingOver8)
         {
-            havingClause += "HAVING AVG(re.\"Rating\") > 8";
+            havingClause += "HAVING AVG(re.\"Rating\") >= 8";
         }
         else if (query.PropertyFiltersOptional.RatingOver9)
         {
-            havingClause += "HAVING AVG(re.\"Rating\") > 9";
+            havingClause += "HAVING AVG(re.\"Rating\") >= 9";
         }
 
         var queryBuild = $"""
