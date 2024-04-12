@@ -120,7 +120,7 @@ internal class AllPropertySummariesFilteredQueryHandler(
                             json_agg(DISTINCT r."Type") AS "TypeOfRooms",
                             COUNT(r."Id") AS "AvailableRooms",
                             AVG(re."Rating") AS "ReviewRating",
-                            COUNT(re."Id") AS "TotalReviews",
+                            COUNT(DISTINCT re."Id") AS "TotalReviews",
                             (MIN(r."Price") * {(query.PropertyFiltersMandatory.EndDate - query.PropertyFiltersMandatory.StartDate).Value.Days}) AS "TotalPrice",
                             {(query.PropertyFiltersMandatory.EndDate - query.PropertyFiltersMandatory.StartDate).Value.Days} AS "NightCount",
                             {query.PropertyFiltersMandatory.NumberOfAdults} AS "AdultCount",
@@ -145,8 +145,7 @@ internal class AllPropertySummariesFilteredQueryHandler(
                             p."Location",
                             p."Rating",
                             p."HasFreeCancellation",
-                            p."CreatedOn",
-                            r."Id"
+                            p."CreatedOn"
                         {havingClause}
                         ORDER BY
                             p."CreatedOn" DESC
