@@ -43,27 +43,27 @@ export class DateFormatPipe implements PipeTransform {
       return 'Jun.';
     }
 
-    if (month === 1) {
+    if (month === 7) {
       return 'Jul.';
     }
 
-    if (month === 1) {
+    if (month === 8) {
       return 'Aug.';
     }
 
-    if (month === 1) {
+    if (month === 9) {
       return 'Sep.';
     }
 
-    if (month === 1) {
+    if (month === 10) {
       return 'Oct.';
     }
 
-    if (month === 1) {
+    if (month === 11) {
       return 'Nov.';
     }
 
-    if (month === 1) {
+    if (month === 12) {
       return 'Dec.';
     }
 

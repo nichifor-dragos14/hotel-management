@@ -1,6 +1,8 @@
 import { HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, of } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { jwtDecode } from 'jwt-decode';
+import { UserClaims } from './user-claims.model';
 
 @Injectable({
   providedIn: 'root',
@@ -13,7 +15,7 @@ export class LoginService {
   }
 
   logout() {
-    sessionStorage.removeItem('JWT');
+    localStorage.removeItem('JWT');
     this.isLoggedIn.next(false);
   }
 
@@ -22,7 +24,7 @@ export class LoginService {
   }
 
   private isTokenValid(): boolean {
-    const jwtToken = sessionStorage.getItem('JWT');
+    const jwtToken = localStorage.getItem('JWT');
 
     if (!jwtToken) {
       return false;
@@ -54,7 +56,7 @@ export class LoginService {
     return new Promise<void>((resolve, reject) => {
       if (JWT.length != 0) {
         try {
-          sessionStorage.setItem('JWT', JWT);
+          localStorage.setItem('JWT', JWT);
           this.notifyLoginSuccess();
           resolve();
         } catch (error) {
@@ -66,14 +68,28 @@ export class LoginService {
     });
   }
 
-  getHeaders(): HttpHeaders {
-    let headers = new HttpHeaders();
-    const jwtToken = sessionStorage.getItem('JWT');
+  decodeToken() {
+    const jwtToken = localStorage.getItem('JWT');
 
-    if (jwtToken) {
-      headers = headers.set('Authorization', `Bearer ${jwtToken}`);
+    if (!jwtToken || !this.isTokenValid()) {
+      return null;
     }
 
-    return headers;
+    const decodedToken: any = jwtDecode(jwtToken);
+    let claims: UserClaims = {};
+
+    for (let prop in decodedToken) {
+      if (
+        decodedToken.hasOwnProperty(prop) &&
+        !['exp', 'iss', 'aud'].includes(prop)
+      ) {
+        const segments = prop.split('/');
+        const lastSegment = segments[segments.length - 1];
+
+        claims[lastSegment] = decodedToken[prop];
+      }
+    }
+
+    return claims;
   }
 }

@@ -1,11 +1,24 @@
 :host {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 24px;
 }
 
-section[role='options'] {
+form {
+  display: grid;
+  grid-template-areas: 'form button';
+  grid-template-columns: 1fr auto;
+  grid-column-gap: 64px;
+}
+
+section[role='personal-preferences'] {
+  grid-area: form;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 32px;
+}
+
+section[role='personal-preferences'] section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
 }

@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { UserDetails } from '$backend/services';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { RouterModule } from '@angular/router';
@@ -11,4 +12,6 @@ import { RouterModule } from '@angular/router';
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [MatButtonModule, RouterModule, MatSlideToggleModule],
 })
-export class UserProfileSecurityPageComponent {}
+export class UserProfileSecurityPageComponent {
+  @Input() user!: UserDetails;
+}

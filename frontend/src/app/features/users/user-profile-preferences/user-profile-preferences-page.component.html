@@ -5,7 +5,29 @@
   </span>
 </section>
 
-<section role="options">
-  <mat-slide-toggle>Retain search history</mat-slide-toggle>
-  <mat-slide-toggle>Send offers on email</mat-slide-toggle>
-</section>
+<form [formGroup]="userForm">
+  <section role="edit">
+    <button
+      mat-button
+      color="primary"
+      class="edit"
+      type="button"
+      (click)="saveChanges(userForm.value)"
+      [disabled]="userForm.invalid"
+    >
+      Save changes
+    </button>
+  </section>
+
+  <section role="personal-preferences">
+    <section>
+      <span>Retain search history</span>
+      <mat-slide-toggle formControlName="retainSearchHistory">
+      </mat-slide-toggle>
+    </section>
+    <section>
+      <span>Send offers on email</span>
+      <mat-slide-toggle formControlName="sendOffersOnEmail"></mat-slide-toggle>
+    </section>
+  </section>
+</form>

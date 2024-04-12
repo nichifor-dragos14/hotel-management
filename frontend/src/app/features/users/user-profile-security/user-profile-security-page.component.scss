@@ -5,7 +5,8 @@
 }
 
 section[role='options'] {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 16px 32px;
+  align-items: center;
 }

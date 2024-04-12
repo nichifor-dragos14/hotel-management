@@ -6,40 +6,122 @@
   <img id="profile-picture" alt="profile picture" src="assets/hotel1.jpg" />
 </section>
 
-<section role="personal-information">
-  <span class="property">First name</span>
-  <span class="value">Dragos</span>
-  <button mat-button color="primary" class="edit">Edit</button>
+<form [formGroup]="userForm">
+  <section role="edit">
+    <button
+      mat-button
+      color="primary"
+      class="edit"
+      type="button"
+      (click)="toggleEditing()"
+      [disabled]="editing && userForm.invalid"
+    >
+      {{ editing ? 'Save changes' : 'Edit details' }}
+    </button>
 
-  <span>Last name</span>
-  <span>Nichifor</span>
-  <button mat-button color="primary">Edit</button>
+    @if (editing) {
+      <button
+        mat-button
+        color="warn"
+        class="edit"
+        type="button"
+        (click)="cancelEditing()"
+      >
+        Cancel
+      </button>
+    }
+  </section>
 
-  <span>Email</span>
-  <span>dragosnichifor14.gmail.com</span>
-  <button mat-button color="primary">Edit</button>
+  @if (!editing) {
+    <section role="personal-information">
+      <section>
+        <span>First name</span>
+        <span> {{ userForm.get('firstName')?.value }} </span>
+      </section>
 
-  <span>Phone number</span>
-  <span>0748513025</span>
-  <button mat-button color="primary">Edit</button>
+      <section>
+        <span>Last name</span>
+        <span>
+          {{ userForm.get('lastName')?.value }}
+        </span>
+      </section>
 
-  <span>Nationality</span>
-  <span>Romania</span>
-  <button mat-button color="primary">Edit</button>
+      <section>
+        <span>Phone number</span>
+        <span>{{ userForm.get('phoneNumber')?.value }}</span>
+      </section>
 
-  <span>Gender</span>
-  <span>Man</span>
-  <button mat-button color="primary">Edit</button>
+      <section>
+        <span>Nationality</span>
+        <span>{{ userForm.get('nationality')?.value }}</span>
+      </section>
 
-  <span>Address</span>
-  <span>1 Decembrie 1918 nr. 27</span>
-  <button mat-button color="primary">Edit</button>
+      <section>
+        <span>Gender</span>
+        <span>{{ userGenderMapper(userForm.get('gender')?.value) }}</span>
+      </section>
 
-  <span>Date of birth</span>
-  <span>14/10/2002</span>
-  <button mat-button color="primary">Edit</button>
-</section>
+      <section>
+        <span>Address</span>
+        <span>{{ userForm.get('address')?.value }}</span>
+      </section>
 
+      <section>
+        <span>Date of birth</span>
+        <span>{{ userForm.get('dateOfBirth')?.value | dateFormat }}</span>
+      </section>
+    </section>
+  } @else {
+    <section role="form">
+      <mat-form-field appearance="outline">
+        <mat-label>First name</mat-label>
+        <input matInput formControlName="firstName" />
+        <mat-error>The first name is required</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Last name</mat-label>
+        <input matInput formControlName="lastName" />
+        <mat-error>The last name is required</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Phone number</mat-label>
+        <input matInput formControlName="phoneNumber" />
+        <mat-error>The phone number is required</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Nationality</mat-label>
+        <input matInput formControlName="nationality" />
+        <mat-error>The nationality is required</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Address</mat-label>
+        <input matInput formControlName="address" />
+        <mat-error>The address is required</mat-error>
+      </mat-form-field>
+
+      <mat-radio-group aria-label="Select your gender" formControlName="gender">
+        <mat-radio-button value="{{ 0 }}">Man</mat-radio-button>
+        <mat-radio-button value="{{ 1 }}">Woman</mat-radio-button>
+        <mat-radio-button value="{{ 2 }}">Other</mat-radio-button>
+      </mat-radio-group>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Date of birth</mat-label>
+        <input
+          matInput
+          [matDatepicker]="picker"
+          formControlName="dateOfBirth"
+        />
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+    </section>
+  }
+</form>
 <hr />
 
 <section>

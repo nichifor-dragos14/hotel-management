@@ -815,6 +815,125 @@
           }
         }
       }
+    },
+    "/users/{email}": {
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "parameters": [
+          {
+            "name": "email",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/users/details": {
+      "patch": {
+        "tags": [
+          "User"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateUserDetailsCommand"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateUserDetailsCommand"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateUserDetailsCommand"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "uuid"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/users/preferences": {
+      "patch": {
+        "tags": [
+          "User"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateUserPreferencesCommand"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateUserPreferencesCommand"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateUserPreferencesCommand"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "uuid"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
     }
   },
   "components": {
@@ -899,6 +1018,15 @@
           }
         },
         "additionalProperties": false
+      },
+      "Gender": {
+        "enum": [
+          0,
+          1,
+          2
+        ],
+        "type": "integer",
+        "format": "int32"
       },
       "LoginModel": {
         "required": [
@@ -1733,6 +1861,123 @@
             "type": "boolean"
           },
           "hasFreeCancellation": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "UpdateUserDetailsCommand": {
+        "required": [
+          "address",
+          "dateOfBirth",
+          "firstName",
+          "gender",
+          "id",
+          "lastName",
+          "nationality",
+          "phoneNumber"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "firstName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "phoneNumber": {
+            "type": "string"
+          },
+          "nationality": {
+            "type": "string"
+          },
+          "gender": {
+            "$ref": "#/components/schemas/Gender"
+          },
+          "address": {
+            "type": "string"
+          },
+          "dateOfBirth": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false
+      },
+      "UpdateUserPreferencesCommand": {
+        "required": [
+          "id",
+          "retainSearchHistory",
+          "sendOffersOnEmail"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "retainSearchHistory": {
+            "type": "boolean"
+          },
+          "sendOffersOnEmail": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "UserDetails": {
+        "required": [
+          "address",
+          "dateOfBirth",
+          "email",
+          "firstName",
+          "gender",
+          "id",
+          "lastName",
+          "nationality",
+          "phoneNumber",
+          "retainSearchHistory",
+          "sendOffersOnEmail"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "firstName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "phoneNumber": {
+            "type": "string"
+          },
+          "nationality": {
+            "type": "string"
+          },
+          "gender": {
+            "$ref": "#/components/schemas/Gender"
+          },
+          "address": {
+            "type": "string"
+          },
+          "dateOfBirth": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "retainSearchHistory": {
+            "type": "boolean"
+          },
+          "sendOffersOnEmail": {
             "type": "boolean"
           }
         },

@@ -80,6 +80,9 @@ importers:
       '@tinymce/tinymce-angular':
         specifier: 7.0.0
         version: 7.0.0(@angular/common@17.0.6)(@angular/core@17.0.6)(@angular/forms@17.0.6)
+      jwt-decode:
+        specifier: ^4.0.0
+        version: 4.0.0
       normalize.css:
         specifier: ^8.0.1
         version: 8.0.1
@@ -7074,6 +7077,11 @@ packages:
     resolution: {integrity: sha512-POQXvpdL69+CluYsillJ7SUhKvytYjW9vG/GKpnf+xP8UWgYEM/RaMzHHofbALDiKbbP1W8UEYmgGl39WkPZsg==}
     engines: {'0': node >= 0.2.0}
 
+  /jwt-decode@4.0.0:
+    resolution: {integrity: sha512-+KJGIyHgkGuIq3IEBNftfhW/LfWhXUIY6OmyVWjliu5KH1y0fw7VQ8YndE2O4qZdMSd9SqbnC8GOcZEy0Om7sA==}
+    engines: {node: '>=18'}
+    dev: false
+
   /karma-chrome-launcher@3.2.0:
     resolution: {integrity: sha512-rE9RkUPI7I9mAxByQWkGJFXfFD6lE4gC5nPuZdobf/QdTEJI6EU4yIay/cfU/xV4ZxlM5JiTv7zWYgA64NpS5Q==}
     dependencies:
@@ -7225,8 +7233,6 @@ packages:
       webpack: '*'
     peerDependenciesMeta:
       webpack:
-        optional: true
-      webpack-sources:
         optional: true
     dependencies:
       webpack: 5.89.0(esbuild@0.19.5)

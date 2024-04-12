@@ -1,7 +1,7 @@
 :host {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 8px;
 }
 
 #profile-picture {
@@ -18,13 +18,38 @@ section[role='header'] {
   gap: 16px;
 }
 
-section[role='personal-information'] {
+form {
   display: grid;
-  grid-template-columns: 1fr 2fr auto;
-  gap: 16px 32px;
-  align-items: center;
+  grid-template-areas: 'form button';
+  grid-template-columns: 1fr auto;
+  grid-column-gap: 64px;
 }
 
-.edit {
-  justify-self: start;
+section[role='personal-information'] {
+  grid-area: form;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+section[role='personal-information'] section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+section[role='form'] {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+mat-radio-group {
+  margin-bottom: 22px;
+}
+
+section[role='edit'] {
+  grid-area: button;
+  display: flex;
+  flex-direction: row;
+  gap: 4px;
 }
