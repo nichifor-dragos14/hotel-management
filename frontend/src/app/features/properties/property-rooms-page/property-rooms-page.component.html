@@ -1,14 +1,26 @@
-<app-page-header title="All available rooms">
-  <button
-    mat-button
-    button
-    color="primary"
-    [routerLink]="['../../']"
-    [queryParams]="activatedRoute.snapshot.queryParams"
-  >
-    Close
-  </button>
-</app-page-header>
+<section role="header">
+  <app-page-header title="All available rooms">
+    <button
+      mat-button
+      button
+      color="primary"
+      [disabled]="selectedRoomIds.length == 0"
+    >
+      Reserve
+    </button>
+    <button
+      mat-button
+      button
+      color="warn"
+      [routerLink]="['../../']"
+      [queryParams]="activatedRoute.snapshot.queryParams"
+    >
+      Close
+    </button>
+  </app-page-header>
+
+  <p>Selected rooms: {{ selectedRoomIds.length }}</p>
+</section>
 
 <mat-dialog-content>
   <cdk-virtual-scroll-viewport
@@ -20,7 +32,8 @@
       @if (!room) {
         <app-room-card-placeholder></app-room-card-placeholder>
       } @else {
-        <app-room-card [room]="room"></app-room-card>
+        <app-room-card [room]="room" (messageEvent)="receiveMessage($event)">
+        </app-room-card>
       }
     </ng-container>
   </cdk-virtual-scroll-viewport>

@@ -4,7 +4,9 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
   selector: 'app-page-header',
   template: `
     <h1>{{ title }}</h1>
-    <ng-content select="[button]"></ng-content>
+    <section role="buttons">
+      <ng-content select="[button]"></ng-content>
+    </section>
   `,
   styles: `
       :host {
@@ -18,6 +20,13 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
       h1 {
           margin: 0;
+      }
+
+      section[role='buttons'] {
+        display: flex;
+        flex-direction: row;
+        gap: 8px;
+        justify-content: center;
       }
     `,
   changeDetection: ChangeDetectionStrategy.OnPush,

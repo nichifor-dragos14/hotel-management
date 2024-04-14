@@ -2,7 +2,13 @@
   id="property-name"
   [title]="property.name + ' ' + generateStarRating(property.rating)"
 >
-  <button mat-button button color="primary" [routerLink]="['view', 'rooms']">
+  <button
+    mat-button
+    button
+    color="primary"
+    [routerLink]="['view', 'rooms']"
+    [queryParams]="activatedRoute.snapshot.queryParams"
+  >
     Reserve now
   </button>
 </app-page-header>

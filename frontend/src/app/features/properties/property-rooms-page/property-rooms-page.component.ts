@@ -37,6 +37,8 @@ export class PropertyRoomsPageComponent {
   readonly router = inject(Router);
   readonly activatedRoute = inject(ActivatedRoute);
 
+  selectedRoomIds: string[] = [];
+
   roomsDataSource = new PaginatedDataSource({
     fetch: ({ from, to }) =>
       this.propertyService.propertiesIdRoomsGet({
@@ -45,4 +47,16 @@ export class PropertyRoomsPageComponent {
         id: this.activatedRoute.snapshot.parent?.parent?.params['id'],
       }),
   });
+
+  receiveMessage($event: any) {
+    if (this.selectedRoomIds.includes($event)) {
+      this.selectedRoomIds = this.selectedRoomIds.filter(
+        (item) => item != $event
+      );
+
+      return;
+    }
+
+    this.selectedRoomIds.push($event);
+  }
 }

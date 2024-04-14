@@ -4,5 +4,9 @@
   height: 64vh;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 8px;
+}
+
+section[role='header'] p {
+  color: grey;
 }

@@ -1,5 +1,11 @@
 import { RoomPropertyDetails, RoomType } from '$backend/services';
-import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
+import {
+  Component,
+  ChangeDetectionStrategy,
+  Input,
+  Output,
+  EventEmitter,
+} from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
@@ -12,7 +18,9 @@ import { MatButtonModule } from '@angular/material/button';
     <mat-card>
       <section role="content">
         <mat-card-header>
-          <span matCardTitle>{{ roomTypeMapper(room.type) }} room</span>
+          <span matCardTitle
+            >{{ roomTypeMapper(room.type) }} room no. {{ room.number }}</span
+          >
 
           <section role="capacity">
             <span matCardSubtitle>
@@ -95,7 +103,21 @@ import { MatButtonModule } from '@angular/material/button';
       <section role="book">
         <span matCardTitle>{{ room.price }} lei</span>
 
-        <button mat-button color="primary">reserve</button>
+        @if (!isSelected) {
+          <button mat-button color="primary" (click)="toggleSelected()">
+            Select
+          </button>
+        } @else {
+          <button
+            mat-button
+            [color]="buttonText == 'Selected' ? 'secondary' : 'warn'"
+            (click)="toggleSelected()"
+            (mouseenter)="onHover()"
+            (mouseleave)="onLeave()"
+          >
+            {{ buttonText }}
+          </button>
+        }
       </section>
     </mat-card>
   `,
@@ -149,7 +171,15 @@ import { MatButtonModule } from '@angular/material/button';
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        align-items: center;
+        align-items: end;
+    }
+
+    mat-card-header {
+      color: black;
+    }
+
+    section[role='book'] span {
+      color: black;
     }
   `,
   standalone: true,
@@ -164,9 +194,23 @@ import { MatButtonModule } from '@angular/material/button';
 })
 export class RoomCardComponent {
   @Input() room!: RoomPropertyDetails;
+  @Output() messageEvent = new EventEmitter<string>();
 
-  ngAfterViewInit() {
-    console.log(this.room);
+  isSelected: boolean = false;
+  buttonText: string = 'Selected';
+
+  onHover() {
+    this.buttonText = 'Remove';
+  }
+
+  onLeave() {
+    this.buttonText = 'Selected';
+  }
+
+  toggleSelected() {
+    this.isSelected = !this.isSelected;
+
+    this.messageEvent.emit(this.room.id);
   }
 
   roomTypeMapper(value: RoomType): string {
