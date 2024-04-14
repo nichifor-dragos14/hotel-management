@@ -59,6 +59,13 @@ import { Subscription } from 'rxjs';
           <a mat-list-item routerLink="/main" routerLinkActive="selected">
             Main page properties
           </a>
+          <a
+            mat-list-item
+            routerLink="/bookings/my-reservations"
+            routerLinkActive="selected"
+          >
+            My bookings
+          </a>
         </mat-nav-list>
       </mat-sidenav>
       <mat-sidenav-content>

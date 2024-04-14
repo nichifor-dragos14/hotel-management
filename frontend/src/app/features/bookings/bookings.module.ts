@@ -4,6 +4,8 @@ import { NewBookingPageComponent } from './new-booking/new-booking.component';
 import { PropertyService, RoomService, UserService } from '$backend/services';
 import { LoginService } from '$features/auth/login.service';
 import { CreateBookingUserFormFactory } from './new-booking-form';
+import { BookingsPageComponent } from './bookings-page/bookings-page.component';
+import { BookingPageComponent } from './booking-page/booking-page.component';
 
 const BOOKING_ROUTES: Routes = [
   {
@@ -61,6 +63,32 @@ const BOOKING_ROUTES: Routes = [
         return user.id;
       },
     },
+  },
+  {
+    path: 'my-reservations',
+    component: BookingsPageComponent,
+    resolve: {
+      userId: async () => {
+        let claims = inject(LoginService).decodeToken();
+
+        if (claims == null) {
+          return;
+        }
+
+        let user = await inject(UserService).usersEmailGetAsync({
+          email: claims['emailaddress'],
+        });
+
+        return user.id;
+      },
+    },
+    children: [
+      {
+        path: ':id',
+        component: BookingPageComponent,
+        resolve: {},
+      },
+    ],
   },
 ] satisfies Routes;
 

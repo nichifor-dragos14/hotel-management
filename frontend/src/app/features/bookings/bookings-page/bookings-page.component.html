@@ -1,0 +1,89 @@
+<app-page-header title="My bookings">
+  <button mat-button button color="primary" routerLink="/main">
+    Book your next trip now
+  </button>
+</app-page-header>
+
+<mat-tab-group dynamicHeight="true">
+  <mat-tab label="Past bookings">
+    <mat-nav-list>
+      <cdk-virtual-scroll-viewport
+        scrollWindow
+        [itemSize]="64"
+        [maxBufferPx]="500"
+      >
+        <ng-container *cdkVirtualFor="let booking of pastBookingsDataSource">
+          @if (!booking) {
+            <a mat-list-item disabled>
+              <app-line-placeholder
+                matListItemTitle
+                [width]="250"
+                [height]="15"
+              >
+              </app-line-placeholder>
+              <app-line-placeholder matListItemLine [width]="250" [height]="15">
+              </app-line-placeholder>
+              <app-line-placeholder matListItemMeta [width]="120" [height]="15">
+              </app-line-placeholder>
+            </a>
+          } @else {
+            <a
+              mat-list-item
+              [routerLink]="[booking.id]"
+              routerLinkActive="active"
+            >
+              <span matListItemTitle>{{ booking.propertyName }}</span>
+              <span matListItemLine>{{ booking.location }}</span>
+              <span matListItemMeta>
+                {{ booking.startDate | dateFormat }} -
+                {{ booking.endDate | dateFormat }}
+              </span>
+            </a>
+          }
+        </ng-container>
+      </cdk-virtual-scroll-viewport>
+    </mat-nav-list>
+  </mat-tab>
+
+  <mat-tab label="Upcoming bookings"
+    ><mat-nav-list>
+      <cdk-virtual-scroll-viewport
+        scrollWindow
+        [itemSize]="64"
+        [maxBufferPx]="500"
+      >
+        <ng-container
+          *cdkVirtualFor="let booking of upcomingBookingsDataSource"
+        >
+          @if (!booking) {
+            <a mat-list-item disabled>
+              <app-circle-placeholder matListItemIcon [radius]="35">
+              </app-circle-placeholder>
+              <app-line-placeholder
+                matListItemTitle
+                [width]="250"
+                [height]="15"
+              >
+              </app-line-placeholder>
+            </a>
+          } @else {
+            <a
+              mat-list-item
+              [routerLink]="[booking.id]"
+              routerLinkActive="active"
+            >
+              <span matListItemTitle>{{ booking.propertyName }}</span>
+              <span matListItemLine>{{ booking.location }}</span>
+              <span matListItemMeta>
+                {{ booking.startDate | dateFormat }} -
+                {{ booking.endDate | dateFormat }}
+              </span>
+            </a>
+          }
+        </ng-container>
+      </cdk-virtual-scroll-viewport>
+    </mat-nav-list>
+  </mat-tab>
+</mat-tab-group>
+
+<router-outlet hidden />
