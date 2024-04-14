@@ -9,7 +9,6 @@ import { PaginatedDataSource } from '$core/pagination';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { PropertyCardPlaceholderComponent } from '$shared/placeholders/card-placeholder';
 import { Subscription } from 'rxjs';
-import { NotificationService } from '$shared/update-notifiers/update-notification.service';
 
 @Component({
   selector: 'app-main-page-properties-list',
@@ -33,21 +32,6 @@ export class MainPagePropertiesListComponent {
   activatedRoute = inject(ActivatedRoute);
 
   queryParamsSubscription!: Subscription;
-  notificationService = inject(NotificationService);
-  shouldReload = false;
-
-  ngOnInit(): void {
-    this.queryParamsSubscription = this.activatedRoute.queryParams.subscribe(
-      () => {
-        if (this.shouldReload) {
-          this.notificationService.triggerReload();
-          this.shouldReload = false;
-        } else {
-          this.shouldReload = true;
-        }
-      }
-    );
-  }
 
   propertiesDataSource = new PaginatedDataSource({
     fetch: ({ from, to }) => {

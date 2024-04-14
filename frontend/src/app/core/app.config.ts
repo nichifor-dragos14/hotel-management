@@ -1,5 +1,9 @@
 import { ApplicationConfig, importProvidersFrom } from '@angular/core';
-import { provideRouter, withComponentInputBinding } from '@angular/router';
+import {
+  RouteReuseStrategy,
+  provideRouter,
+  withComponentInputBinding,
+} from '@angular/router';
 import { BackendApiModule } from '$backend/services';
 import {
   BrowserAnimationsModule,
@@ -16,6 +20,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatIconModule } from '@angular/material/icon';
 import { EditorModule } from '@tinymce/tinymce-angular';
 import { httpInterceptorProviders } from '$features/auth/auth.interceptor';
+import { CustomReuseStrategy } from './router.configuration';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -31,5 +36,6 @@ export const appConfig: ApplicationConfig = {
     ),
     provideAnimations(),
     httpInterceptorProviders,
+    { provide: RouteReuseStrategy, useClass: CustomReuseStrategy },
   ],
 };
