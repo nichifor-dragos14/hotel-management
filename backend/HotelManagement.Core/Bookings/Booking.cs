@@ -6,23 +6,55 @@ namespace HotelManagement.Core.Bookings;
 public class Booking
 {
     private Booking(
-        DateTime startOn,
-        DateTime endOn,
+        DateTime startDate,
+        DateTime endDate,
+        int totalPrice,
+        string firstNameOnBooking,
+        string lastNameOnBooking,
+        string emailOnBooking,
+        string phoneNumberOnBooking,
+        string countryOnBooking,
+        string specialMentions,
+        string expectedArrival,
         DateTime createdOn,
         DateTime updatedOn
     )
     {
-        StartOn = startOn;
-        EndOn = endOn;
+        StartDate = startDate;
+        EndDate = endDate;
+        TotalPrice = totalPrice;
+        FirstNameOnBooking = firstNameOnBooking;
+        LastNameOnBooking = lastNameOnBooking;
+        EmailOnBooking = emailOnBooking;
+        PhoneNumberOnBooking = phoneNumberOnBooking;
+        CountryOnBooking = countryOnBooking;
+        SpecialMentions = specialMentions;
+        ExpectedArrival = expectedArrival;
         CreatedOn = createdOn;
         UpdatedOn = updatedOn;
     }
 
     public Guid Id { get; }
 
-    public DateTime StartOn { get; private set; }
+    public DateTime StartDate { get; private set; }
 
-    public DateTime EndOn { get; private set; }
+    public DateTime EndDate { get; private set; }
+
+    public int TotalPrice { get; private set; }
+
+    public string FirstNameOnBooking { get; private set; }
+
+    public string LastNameOnBooking { get; private set; }
+
+    public string EmailOnBooking { get; private set; }
+
+    public string PhoneNumberOnBooking { get; private set; }
+
+    public string CountryOnBooking { get; private set; }
+
+    public string SpecialMentions { get; private set; }
+
+    public string ExpectedArrival { get; private set; }
 
     public DateTime CreatedOn { get; private set; }
 
@@ -33,15 +65,31 @@ public class Booking
     public virtual Room Room { get; private init; }
 
     public static Booking Create(
-        DateTime startOn,
-        DateTime endOn,
+        DateTime startDate,
+        DateTime endDate,
+        int totalPrice,
+        string firstNameOnBooking,
+        string lastNameOnBooking,
+        string emailOnBooking,
+        string phoneNumberOnBooking,
+        string countryOnBooking,
+        string specialMentions,
+        string expectedArrival,
         User user,
         Room room
     )
     {
         return new Booking(
-            startOn,
-            endOn,
+            startDate,
+            endDate,
+            totalPrice,
+            firstNameOnBooking,
+            lastNameOnBooking,
+            emailOnBooking,
+            phoneNumberOnBooking,
+            countryOnBooking,
+            specialMentions,
+            expectedArrival,
             DateTime.UtcNow,
             DateTime.UtcNow
         )
@@ -56,8 +104,6 @@ public class Booking
         DateTime endOn
     )
     {
-        StartOn = startOn;
-        EndOn = endOn;
         UpdatedOn = DateTime.UtcNow;
     }
 }

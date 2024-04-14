@@ -1,0 +1,229 @@
+<app-page-header title="My booking">
+  <button
+    mat-button
+    button
+    color="primary"
+    [disabled]="userForm.invalid"
+    (click)="createBooking(userForm.value)"
+  >
+    Create
+  </button>
+</app-page-header>
+
+<section role="details">
+  <mat-card>
+    <section role="property-details">
+      <span class="font-light">{{ propertyTypeMapper(property.type) }}</span>
+      <h2>{{ property.name }}</h2>
+    </section>
+
+    <span class="location-details">
+      <mat-icon>location_pin</mat-icon>
+      <span>{{ property.location }}</span>
+    </span>
+
+    <section role="review">
+      <span class="property-rating-square">{{ property.reviewRating }}</span>
+      <section role="review-grade">
+        <span class="font-light">
+          {{ reviewRatingMapper(property.reviewRating) }}
+        </span>
+        <span class="font-light">·</span>
+        <span class="font-light">{{ property.reviews.length }} reviews</span>
+      </section>
+    </section>
+  </mat-card>
+
+  <mat-card>
+    <h2>Your booking details</h2>
+
+    <section role="check-in-out">
+      <section>
+        <span>Check in</span>
+        <h2>{{ startDate.toString() | dateFormat }}</h2>
+      </section>
+
+      <section>
+        <span>Check out</span>
+        <h2>{{ endDate.toString() | dateFormat }}</h2>
+      </section>
+    </section>
+
+    <section role="stay">
+      <span> Total length of stay:</span>
+      <span class="font-light">
+        {{ computeDateDifference(startDate, endDate) }}
+        @if (computeDateDifference(startDate, endDate) == 1) {
+          night
+        } @else {
+          nights
+        }
+      </span>
+    </section>
+
+    <mat-divider></mat-divider>
+
+    <section role="selection">
+      <h2>You selected</h2>
+
+      <section role="rooms">
+        <span *ngFor="let room of propertyRooms" class="font-light">
+          {{ roomTypeMapper(room.type) }} Room no. {{ room.number }} for
+          {{ room.adultCapacity }} adults
+          @if (room.childrenCapacity != 0) {
+            , {{ room.childrenCapacity }} children
+          }
+        </span>
+      </section>
+    </section>
+  </mat-card>
+
+  <mat-card>
+    <h2>Your price</h2>
+
+    <section role="price">
+      <h1>Total</h1>
+      <section>
+        <h1>{{ computeTotalPrice() }} lei</h1>
+        <span class="font-light">Includes taxes and charges</span>
+      </section>
+    </section>
+
+    <span> * Price includes VAT.</span>
+  </mat-card>
+
+  <mat-card>
+    <h2>How much does it cost to cancel?</h2>
+
+    <section role="cancellation">
+      <span class="green-font">
+        Free cancellation before {{ startDate.toString() | dateFormat }}.
+      </span>
+      <span>From {{ startDate.toString() | dateFormat }}, 1020 lei.</span>
+    </section>
+  </mat-card>
+
+  <mat-card>
+    <h2>Your booking counts!</h2>
+
+    <span>
+      Every booking you complete counts towards your progress in Genius.
+    </span>
+  </mat-card>
+</section>
+
+<section role="booking">
+  <mat-card>
+    <section role="user">
+      <img id="profile-picture" alt="profile picture" src="assets/hotel1.jpg" />
+      <section>
+        <h2>You are signed in</h2>
+        <span>{{ loggedUserEmail }}</span>
+      </section>
+    </section>
+  </mat-card>
+
+  <mat-card>
+    <h2>Who are you booking for?</h2>
+
+    <mat-radio-group
+      [(ngModel)]="bookingForSomeoneElse"
+      (ngModelChange)="setControls()"
+    >
+      <mat-radio-button [value]="false">Me</mat-radio-button>
+      <mat-radio-button [value]="true">Somebody else</mat-radio-button>
+    </mat-radio-group>
+
+    <mat-divider></mat-divider>
+
+    <h2>Booking details</h2>
+
+    <form [formGroup]="userForm">
+      <section role="left-side-form-grid">
+        <mat-form-field appearance="outline">
+          <mat-label>First name</mat-label>
+          <input
+            matInput
+            formControlName="firstName"
+            [disabled]="bookingForSomeoneElse"
+          />
+          <mat-error>The first name is required</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Email</mat-label>
+          <input matInput formControlName="email" />
+          <mat-error>The email is required</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Phone number</mat-label>
+          <input matInput formControlName="phoneNumber" />
+          <mat-error>The phone number is required</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Country</mat-label>
+          <input matInput formControlName="country" />
+          <mat-error>The nationality is required</mat-error>
+        </mat-form-field>
+      </section>
+
+      <section role="right-side-form-grid">
+        <mat-form-field appearance="outline">
+          <mat-label>Last name</mat-label>
+          <input matInput formControlName="lastName" />
+          <mat-error>The last name is required</mat-error>
+        </mat-form-field>
+      </section>
+    </form>
+
+    <span>* Confirmation is made using the email address.</span>
+    <span>* Property can contact you using the phone number.</span>
+  </mat-card>
+
+  <mat-card>
+    <section role="special-requests">
+      <section>
+        <h2>Special requests</h2>
+        <span class="font-light">
+          Special requests cannot be guaranteed but the property will do its
+          best to meet your needs. You can always make a special request after
+          your booking is complete!
+        </span>
+      </section>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Description</mat-label>
+        <editor appTinyEditor [(ngModel)]="specialMentions" />
+        <mat-error>The property description is required</mat-error>
+      </mat-form-field>
+    </section>
+  </mat-card>
+
+  <mat-card>
+    <h2>Your arrival time</h2>
+    <span class="font-light">Add your estimated arrival time (optional)</span>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Select an option</mat-label>
+      <mat-select [(value)]="expectedArrival">
+        <mat-option value="I don't know">I don't know</mat-option>
+        <mat-option value="10:00 - 11:00">10:00 - 11:00</mat-option>
+        <mat-option value="11:00 - 12:00">11:00 - 12:00</mat-option>
+        <mat-option value="12:00 - 13:00">12:00 - 13:00</mat-option>
+        <mat-option value="13:00 - 14:00">13:00 - 14:00</mat-option>
+        <mat-option value="14:00 - 15:00">14:00 - 15:00</mat-option>
+        <mat-option value="15:00 - 16:00">15:00 - 16:00</mat-option>
+        <mat-option value="16:00 - 17:00">16:00 - 17:00</mat-option>
+        <mat-option value="17:00 - 18:00">17:00 - 18:00</mat-option>
+        <mat-option value="18:00 - 19:00">18:00 - 19:00</mat-option>
+        <mat-option value="19:00 - 20:00">19:00 - 20:00</mat-option>
+        <mat-option value="20:00 - 21:00">20:00 - 21:00</mat-option>
+        <mat-option value="21:00 - 22:00">21:00 - 22:00</mat-option>
+        <mat-option value="22:00 - 23:00">22:00 - 23:00</mat-option>
+        <mat-option value="23:00 - 00:00">23:00 - 00:00</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </mat-card>
+</section>

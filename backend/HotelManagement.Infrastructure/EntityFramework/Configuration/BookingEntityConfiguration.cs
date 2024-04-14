@@ -10,9 +10,18 @@ internal class BookingEntityConfiguration : IEntityTypeConfiguration<Booking>
     {
         builder.HasKey(q => q.Id);
 
-        builder.Property(q => q.StartOn).IsRequired();
-        builder.Property(q => q.EndOn).IsRequired();
+        builder.Property(q => q.StartDate).IsRequired();
+        builder.Property(q => q.EndDate).IsRequired();
 
+        builder.Property(q => q.TotalPrice).IsRequired();
+        builder.Property(q => q.FirstNameOnBooking).IsRequired();
+        builder.Property(q => q.LastNameOnBooking).IsRequired();
+        builder.Property(q => q.EmailOnBooking).IsRequired();
+        builder.Property(q => q.PhoneNumberOnBooking).IsRequired();
+        builder.Property(q => q.CountryOnBooking).IsRequired();
+        builder.Property(q => q.SpecialMentions).IsRequired();
+        builder.Property(q => q.ExpectedArrival).IsRequired();
+     
         builder.Property(q => q.CreatedOn).IsRequired();
         builder.Property(q => q.UpdatedOn).IsRequired();
 

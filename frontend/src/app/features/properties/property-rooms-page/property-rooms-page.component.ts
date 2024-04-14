@@ -59,4 +59,17 @@ export class PropertyRoomsPageComponent {
 
     this.selectedRoomIds.push($event);
   }
+
+  sendParams() {
+    return {
+      startDate: this.activatedRoute.snapshot.queryParams['startDate'],
+      endDate: this.activatedRoute.snapshot.queryParams['endDate'],
+      numberOfAdults:
+        this.activatedRoute.snapshot.queryParams['numberOfAdults'],
+      numberOfChildren:
+        this.activatedRoute.snapshot.queryParams['numberOfChildren'],
+      propertyId: this.activatedRoute.snapshot.parent?.parent?.params['id'],
+      selectedRoomIds: this.selectedRoomIds.join(','),
+    };
+  }
 }

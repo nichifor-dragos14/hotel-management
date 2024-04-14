@@ -5,6 +5,8 @@
       button
       color="primary"
       [disabled]="selectedRoomIds.length == 0"
+      [routerLink]="['/bookings/new']"
+      [queryParams]="sendParams()"
     >
       Reserve
     </button>

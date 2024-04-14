@@ -46,6 +46,48 @@
         }
       }
     },
+    "/bookings": {
+      "post": {
+        "tags": [
+          "Booking"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateBookingCommand"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateBookingCommand"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateBookingCommand"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "uuid"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
     "/properties": {
       "get": {
         "tags": [
@@ -816,6 +858,44 @@
         }
       }
     },
+    "/rooms/ids": {
+      "get": {
+        "tags": [
+          "Room"
+        ],
+        "parameters": [
+          {
+            "name": "ids",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "format": "uuid"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/RoomPropertyDetails"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
     "/users/{email}": {
       "get": {
         "tags": [
@@ -947,6 +1027,51 @@
           "id": {
             "type": "string",
             "format": "uuid"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateBookingCommand": {
+        "required": [
+          "endDate",
+          "expectedArrival",
+          "loggedUserId",
+          "roomId",
+          "specialMentions",
+          "startDate",
+          "totalPrice",
+          "userDetails"
+        ],
+        "type": "object",
+        "properties": {
+          "userDetails": {
+            "$ref": "#/components/schemas/UserDetailsForBooking"
+          },
+          "loggedUserId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "roomId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "startDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "endDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "totalPrice": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "specialMentions": {
+            "type": "string"
+          },
+          "expectedArrival": {
+            "type": "string"
           }
         },
         "additionalProperties": false
@@ -1979,6 +2104,34 @@
           },
           "sendOffersOnEmail": {
             "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "UserDetailsForBooking": {
+        "required": [
+          "country",
+          "email",
+          "firstName",
+          "lastName",
+          "phoneNumber"
+        ],
+        "type": "object",
+        "properties": {
+          "firstName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "phoneNumber": {
+            "type": "string"
+          },
+          "country": {
+            "type": "string"
           }
         },
         "additionalProperties": false

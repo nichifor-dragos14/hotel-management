@@ -1,0 +1,204 @@
+:host {
+  display: grid !important;
+  grid-template-areas: 'header header' 'booking details';
+  grid-template-columns: 1fr auto;
+  grid-column-gap: 32px;
+  grid-row-gap: 8px;
+  padding: 0 64px !important;
+}
+
+app-page-header {
+  grid-area: header;
+  height: 'min-content';
+  position: sticky;
+  top: 14.5px;
+}
+
+section[role='details'] {
+  grid-area: details;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+section[role='details'] mat-card {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 16px;
+  max-width: 20vw;
+}
+
+section[role='property-details'] {
+  display: flex;
+  flex-direction: column;
+}
+
+.location-details {
+  display: flex;
+  flex-direction: row;
+  gap: 4px;
+  align-items: center;
+}
+
+.property-rating-square {
+  background-color: #5e35b1;
+  color: white;
+  display: inline;
+  padding: 8px;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+
+section[role='review'] {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  align-items: center;
+}
+
+section[role='review'] section[role='review-grade'] {
+  display: flex;
+  flex-direction: row;
+  gap: 4px;
+  align-items: center;
+}
+
+section[role='check-in-out'] {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-column-gap: 32px;
+}
+
+section[role='check-in-out'] section {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+section[role='stay'] {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+section[role='rooms'] {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+section[role='selection'] {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+section[role='price'] {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-column-gap: 32px;
+  padding: 16px 0;
+}
+
+section[role='price'] section {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+section[role='cancellation'] {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+h1 {
+  margin: 0;
+}
+
+h2 {
+  margin: 0;
+}
+
+.font-light {
+  font-weight: lighter;
+  font-size: 0.8rem;
+}
+
+.green-font {
+  color: green;
+}
+
+section[role='booking'] {
+  grid-area: booking;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+section[role='booking'] mat-card {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 16px;
+}
+
+#profile-picture {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid gold;
+}
+
+section[role='user'] {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-column-gap: 32px;
+  align-items: center;
+}
+
+section[role='user'] section {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+section[role='no-user'] {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas: 'left right';
+  grid-column-gap: 32px;
+}
+
+section[role='right-side-form-grid'] {
+  grid-area: right;
+  display: flex;
+  flex-direction: column;
+}
+
+section[role='left-side-form-grid'] {
+  grid-area: left;
+  display: flex;
+  flex-direction: column;
+}
+
+section[role='special-requests'] {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+section[role='special-requests'] section {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
