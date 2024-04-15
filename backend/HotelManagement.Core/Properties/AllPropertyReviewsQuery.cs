@@ -1,5 +1,4 @@
 ﻿using HotelManagement.Core.Abstractions;
-using HotelManagement.Core.Reviews;
 
 namespace HotelManagement.Core.Properties;
 

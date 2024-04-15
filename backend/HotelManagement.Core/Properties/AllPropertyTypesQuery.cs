@@ -24,6 +24,6 @@ internal class AllPropertyTypesQueryHandler(
             summaries.Add(new PropertyTypeSummary(type.ToString(), type));
         }
 
-        return (IEnumerable<PropertyTypeSummary>)summaries;
+        return summaries;
     }
 }

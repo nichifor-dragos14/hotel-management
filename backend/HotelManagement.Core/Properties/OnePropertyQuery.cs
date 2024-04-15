@@ -46,7 +46,6 @@ public record ReviewUserPropertyDetails(
     string Nationality
 );
 
-
 public record RoomPropertyDetails(
     Guid Id,
     int Number,
@@ -67,7 +66,7 @@ public record RoomPropertyDetails(
 
 public record OnePropertyQuery(Guid? Id) : IQuery<PropertyDetails>;
 
-internal class OneHotelQueryHandler(
+internal class OnePropertyQueryHandler(
     IQueryFacade facade
 ) : IQueryHandler<OnePropertyQuery, PropertyDetails>
 {

@@ -40,7 +40,6 @@ internal class OneUserQueryHandler(
                     user.DateOfBirth,
                     user.RetainSearchHistory,
                     user.SendOffersOnEmail
-                    )
-                ).FirstOrDefault();
+                    )).FirstOrDefault();
     }
 }

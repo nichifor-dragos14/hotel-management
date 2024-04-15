@@ -27,6 +27,7 @@ internal class CreatePropertyCommandHandler(
     public async Task<Guid?> ExecuteAsync(CreatePropertyCommand command, CancellationToken cancellationToken)
     {
         var properties = unitOfWork.GetRepository<Property>();
+
         var newProperty = Property.Create(
             command.Name,
             command.Type,
@@ -46,6 +47,7 @@ internal class CreatePropertyCommandHandler(
         );
 
         properties.Add(newProperty);
+
         await unitOfWork.SaveChangesAsync(cancellationToken);
 
         return newProperty.Id;

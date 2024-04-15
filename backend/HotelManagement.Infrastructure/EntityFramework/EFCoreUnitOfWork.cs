@@ -1,5 +1,4 @@
-﻿using System.Threading;
-using HotelManagement.Core.Abstractions;
+﻿using HotelManagement.Core.Abstractions;
 
 namespace HotelManagement.Infrastructure.EntityFramework;
 

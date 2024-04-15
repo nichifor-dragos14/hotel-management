@@ -12,6 +12,7 @@ using Serilog.Sinks.Elasticsearch;
 using Vernou.Swashbuckle.HttpResultsAdapter;
 
 var builder = WebApplication.CreateBuilder(args);
+
 builder.Configuration.AddJsonFile("appsettings.Mocks.json", true, true);
 
 builder.Host.UseSerilog((context, configuration) =>
