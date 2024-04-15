@@ -1,11 +1,17 @@
 import { NgModule, inject } from '@angular/core';
 import { ActivatedRouteSnapshot, RouterModule, Routes } from '@angular/router';
 import { NewBookingPageComponent } from './new-booking/new-booking.component';
-import { PropertyService, RoomService, UserService } from '$backend/services';
+import {
+  BookingService,
+  PropertyService,
+  RoomService,
+  UserService,
+} from '$backend/services';
 import { LoginService } from '$features/auth/login.service';
 import { CreateBookingUserFormFactory } from './new-booking-form';
 import { BookingsPageComponent } from './bookings-page/bookings-page.component';
-import { BookingPageComponent } from './booking-page/booking-page.component';
+import { UpdateBookingPageComponent } from './update-booking/update-booking.component';
+import { UpdateBookingFormFactory } from './update-booking.form';
 
 const BOOKING_ROUTES: Routes = [
   {
@@ -85,8 +91,26 @@ const BOOKING_ROUTES: Routes = [
     children: [
       {
         path: ':id',
-        component: BookingPageComponent,
-        resolve: {},
+        component: UpdateBookingPageComponent,
+        resolve: {
+          bookingDetails: async ({ params }: ActivatedRouteSnapshot) =>
+            await inject(BookingService).bookingsIdGetAsync({
+              id: params['id'],
+            }),
+          bookingForm: async ({ params }: ActivatedRouteSnapshot) => {
+            const editBookingForm = inject(UpdateBookingFormFactory);
+
+            let booking = await inject(BookingService).bookingsIdGetAsync({
+              id: params['id'],
+            });
+
+            return editBookingForm.build({
+              expectedArrival: booking.expectedArrival,
+              id: booking.id,
+              specialMentions: booking.specialMentions,
+            });
+          },
+        },
       },
     ],
   },

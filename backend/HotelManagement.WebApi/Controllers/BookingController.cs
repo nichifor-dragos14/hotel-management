@@ -31,13 +31,43 @@ public class BookingController : ControllerBase
         return TypedResults.Ok(await queryService.ExecuteAsync(new AllUpcomingBookingSummariesQuery(userId, from, to), cancelationToken));
     }
 
+    [HttpGet("{id}")]
+    public async Task<Results<Ok<BookingDetails>, NotFound, BadRequest>> GetOne(
+        Guid id,
+        [FromServices] IQueryHandler<OneBookingQuery, BookingDetails> queryService,
+        CancellationToken cancellationToken)
+    {
+        if (id == Guid.Empty)
+            return TypedResults.BadRequest();
+
+
+        return await queryService.ExecuteAsync(new OneBookingQuery(id), cancellationToken) switch
+        {
+            { } hotel => TypedResults.Ok(hotel),
+            _ => TypedResults.NotFound()
+        };
+    }
 
     [HttpPost]
     public async Task<Results<Ok<Guid>, BadRequest>> Create(
        [FromBody] CreateBookingCommand command,
        [FromServices] ICommandHandler<CreateBookingCommand, Guid?> commandHandler,
        CancellationToken cancellationToken
-   )
+    )
+    {
+        return await commandHandler.ExecuteAsync(command, cancellationToken) switch
+        {
+            { } id => TypedResults.Ok(id),
+            _ => TypedResults.BadRequest()
+        };
+    }
+
+    [HttpPatch]
+    public async Task<Results<Ok<Guid>, BadRequest>> Update(
+        [FromBody] UpdateBookingCommand command,
+        [FromServices] ICommandHandler<UpdateBookingCommand, Guid?> commandHandler,
+        CancellationToken cancellationToken
+    )
     {
         return await commandHandler.ExecuteAsync(command, cancellationToken) switch
         {

@@ -1,0 +1,266 @@
+<section role="booking-actions">
+  <a mat-icon-button routerLink="../" color="accent">
+    <mat-icon>close</mat-icon>
+  </a>
+
+  <button
+    mat-button
+    color="primary"
+    type="submit"
+    [disabled]="bookingForm.invalid"
+  >
+    Update
+  </button>
+
+  <a mat-button color="warn" [routerLink]="['actions', 'delete']">Cancel</a>
+</section>
+
+<section role="page-content">
+  <app-page-header
+    title="Your stay at {{ bookingDetails.propertyDetails.name }} {{
+      generateStarRating(bookingDetails.propertyDetails.rating)
+    }}"
+  >
+    <section button role="creation-date">
+      <span>Created on</span>
+      <mat-chip>
+        {{ bookingDetails.createdOn | dateFormat }}
+      </mat-chip>
+    </section>
+  </app-page-header>
+
+  <section role="details">
+    <section role="user-details">
+      <section role="expected-guest">
+        <h2>Expected guest</h2>
+        <section>
+          <span>
+            {{ bookingDetails.firstNameOnBooking }}
+            {{ bookingDetails.lastNameOnBooking }}
+          </span>
+          <span>
+            Country:
+            {{ bookingDetails.countryOnBooking }}
+          </span>
+        </section>
+      </section>
+
+      <section role="guest-information">
+        <h2>Guest information</h2>
+        <section>
+          <span> Email: {{ bookingDetails.emailOnBooking }} </span>
+          <span> Phone number: {{ bookingDetails.phoneNumberOnBooking }}</span>
+        </section>
+      </section>
+
+      <section role="guest-information">
+        <h2>Booked room</h2>
+        <section>
+          <span>
+            {{ roomTypeMapper(bookingDetails.roomDetails.type) }} Room
+          </span>
+
+          <section role="booked-room">
+            <span>
+              <ng-container
+                *ngFor="let _ of [].constructor(bookingDetails.roomDetails)"
+              >
+                <mat-icon>person</mat-icon>
+              </ng-container>
+              adults
+            </span>
+            <span
+              [style.visibility]="
+                bookingDetails.roomDetails.childrenCapacity === 0
+                  ? 'hidden'
+                  : 'visible'
+              "
+            >
+              <ng-container
+                *ngFor="
+                  let _ of [].constructor(
+                    bookingDetails.roomDetails.childrenCapacity
+                  )
+                "
+              >
+                <mat-icon>person</mat-icon>
+              </ng-container>
+              children
+            </span>
+          </section>
+        </section>
+      </section>
+    </section>
+
+    <section role="booking-details">
+      <section role="booking-layout">
+        <h2>Location</h2>
+        <span>
+          {{ bookingDetails.propertyDetails.location }} -
+          <a href="#" target="_blank">See on map</a>
+        </span>
+      </section>
+
+      <section role="booking-layout">
+        <h2>Facilities</h2>
+
+        <section role="facilities">
+          @if (bookingDetails.propertyDetails.hasFreeWiFi) {
+            <span>
+              <mat-icon color="primary">wifi</mat-icon>
+              <span>Free wifi</span>
+            </span>
+          }
+
+          @if (bookingDetails.propertyDetails.hasParking) {
+            <span>
+              <mat-icon color="primary">local_parking</mat-icon>
+              <span>Parking</span>
+            </span>
+          }
+
+          @if (bookingDetails.propertyDetails.hasPool) {
+            <span>
+              <mat-icon color="primary">pool</mat-icon>
+              <span>Pool</span>
+            </span>
+          }
+
+          @if (bookingDetails.propertyDetails.hasRestaurant) {
+            <span>
+              <mat-icon color="primary">restaurant</mat-icon>
+              <span>Restaurant</span>
+            </span>
+          }
+
+          @if (bookingDetails.propertyDetails.hasBreakfast) {
+            <span>
+              <mat-icon color="primary">free_breakfast</mat-icon>
+              <span>Breakfast</span>
+            </span>
+          }
+
+          @if (bookingDetails.propertyDetails.hasFitnessCenter) {
+            <span>
+              <mat-icon color="primary">fitness_center</mat-icon>
+              <span>Fitness center</span>
+            </span>
+          }
+
+          @if (bookingDetails.propertyDetails.hasRoomService) {
+            <span>
+              <mat-icon color="primary">room_service</mat-icon>
+              <span>Room service</span>
+            </span>
+          }
+
+          @if (bookingDetails.propertyDetails.hasPetFriendlyPolicy) {
+            <span>
+              <mat-icon color="primary">pets</mat-icon>
+              <span>Pet friendly</span>
+            </span>
+          }
+
+          @if (bookingDetails.propertyDetails.hasFreeCancellation) {
+            <span>
+              <mat-icon color="primary">cancel</mat-icon>
+              <span>Free cancellation</span>
+            </span>
+          }
+
+          @if (bookingDetails.roomDetails.hasAirConditioning) {
+            <span matCardSubtitle>
+              <mat-icon color="primary">ac_unit</mat-icon>
+              Air conditioning
+            </span>
+          }
+
+          @if (bookingDetails.roomDetails.hasBalcony) {
+            <span matCardSubtitle>
+              <mat-icon color="primary">deck</mat-icon>
+              Balcony
+            </span>
+          }
+
+          @if (bookingDetails.roomDetails.hasHairdryer) {
+            <span matCardSubtitle>
+              <mat-icon color="primary">waves</mat-icon>
+              Hairdryer
+            </span>
+          }
+
+          @if (bookingDetails.roomDetails.hasPrivateBathroom) {
+            <span matCardSubtitle>
+              <mat-icon color="primary">shower</mat-icon>
+              Private bathroom
+            </span>
+          }
+
+          @if (bookingDetails.roomDetails.hasRefrigerator) {
+            <span matCardSubtitle>
+              <mat-icon color="primary">kitchen</mat-icon>
+              Refrigerator
+            </span>
+          }
+
+          @if (bookingDetails.roomDetails.hasSeaView) {
+            <span matCardSubtitle>
+              <mat-icon color="primary">beach_access</mat-icon>
+              Sea view
+            </span>
+          }
+
+          @if (bookingDetails.roomDetails.hasTowels) {
+            <span matCardSubtitle>
+              <mat-icon color="primary">local_laundry_service</mat-icon>
+              Towels
+            </span>
+          }
+        </section>
+      </section>
+
+      <section role="booking-layout">
+        <h2>Property's contact information</h2>
+        <section role="property-contact-information">
+          <span>Email: {{ bookingDetails.propertyDetails.email }}</span>
+          <span>
+            Phone number:
+            {{ bookingDetails.propertyDetails.phoneNumber }}
+          </span>
+        </section>
+      </section>
+    </section>
+  </section>
+</section>
+
+<form [formGroup]="bookingForm" (ngSubmit)="updateBooking(bookingForm.value)">
+  <h2>Edit your booking details</h2>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Select an option</mat-label>
+    <mat-select formControlName="expectedArrival">
+      <mat-option value="I don't know">I don't know</mat-option>
+      <mat-option value="10:00 - 11:00">10:00 - 11:00</mat-option>
+      <mat-option value="11:00 - 12:00">11:00 - 12:00</mat-option>
+      <mat-option value="12:00 - 13:00">12:00 - 13:00</mat-option>
+      <mat-option value="13:00 - 14:00">13:00 - 14:00</mat-option>
+      <mat-option value="14:00 - 15:00">14:00 - 15:00</mat-option>
+      <mat-option value="15:00 - 16:00">15:00 - 16:00</mat-option>
+      <mat-option value="16:00 - 17:00">16:00 - 17:00</mat-option>
+      <mat-option value="17:00 - 18:00">17:00 - 18:00</mat-option>
+      <mat-option value="18:00 - 19:00">18:00 - 19:00</mat-option>
+      <mat-option value="19:00 - 20:00">19:00 - 20:00</mat-option>
+      <mat-option value="20:00 - 21:00">20:00 - 21:00</mat-option>
+      <mat-option value="21:00 - 22:00">21:00 - 22:00</mat-option>
+      <mat-option value="22:00 - 23:00">22:00 - 23:00</mat-option>
+      <mat-option value="23:00 - 00:00">23:00 - 00:00</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Special mentions</mat-label>
+    <editor appTinyEditor formControlName="specialMentions" />
+  </mat-form-field>
+</form>
+
+<router-outlet hidden />

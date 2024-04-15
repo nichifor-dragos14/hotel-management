@@ -100,10 +100,12 @@ public class Booking
     }
 
     public void Update(
-        DateTime startOn,
-        DateTime endOn
+        string specialMentions,
+        string expectedArrival
     )
     {
+        SpecialMentions = specialMentions;
+        ExpectedArrival = expectedArrival;
         UpdatedOn = DateTime.UtcNow;
     }
 }

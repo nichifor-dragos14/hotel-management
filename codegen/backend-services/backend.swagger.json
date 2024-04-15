@@ -142,6 +142,42 @@
         }
       }
     },
+    "/bookings/{id}": {
+      "get": {
+        "tags": [
+          "Booking"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BookingDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
     "/bookings": {
       "post": {
         "tags": [
@@ -162,6 +198,46 @@
             "application/*+json": {
               "schema": {
                 "$ref": "#/components/schemas/CreateBookingCommand"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "uuid"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Booking"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateBookingCommand"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateBookingCommand"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateBookingCommand"
               }
             }
           }
@@ -1114,6 +1190,248 @@
   },
   "components": {
     "schemas": {
+      "BookingDetails": {
+        "required": [
+          "countryOnBooking",
+          "createdOn",
+          "emailOnBooking",
+          "endDate",
+          "expectedArrival",
+          "firstNameOnBooking",
+          "id",
+          "lastNameOnBooking",
+          "phoneNumberOnBooking",
+          "propertyDetails",
+          "roomDetails",
+          "specialMentions",
+          "startDate",
+          "totalPrice",
+          "updatedOn"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "startDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "endDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "totalPrice": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "firstNameOnBooking": {
+            "type": "string"
+          },
+          "lastNameOnBooking": {
+            "type": "string"
+          },
+          "emailOnBooking": {
+            "type": "string"
+          },
+          "phoneNumberOnBooking": {
+            "type": "string"
+          },
+          "countryOnBooking": {
+            "type": "string"
+          },
+          "specialMentions": {
+            "type": "string"
+          },
+          "expectedArrival": {
+            "type": "string"
+          },
+          "createdOn": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedOn": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "propertyDetails": {
+            "$ref": "#/components/schemas/BookingPropertyDetails"
+          },
+          "roomDetails": {
+            "$ref": "#/components/schemas/BookingRoomDetails"
+          }
+        },
+        "additionalProperties": false
+      },
+      "BookingPropertyDetails": {
+        "required": [
+          "createdOn",
+          "email",
+          "hasBreakfast",
+          "hasFitnessCenter",
+          "hasFreeCancellation",
+          "hasFreeWiFi",
+          "hasParking",
+          "hasPetFriendlyPolicy",
+          "hasPool",
+          "hasRestaurant",
+          "hasRoomService",
+          "id",
+          "location",
+          "name",
+          "phoneNumber",
+          "prepaymentNeeded",
+          "rating",
+          "type",
+          "updatedOn"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string"
+          },
+          "type": {
+            "$ref": "#/components/schemas/PropertyType"
+          },
+          "location": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "phoneNumber": {
+            "type": "string"
+          },
+          "rating": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "createdOn": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedOn": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "hasFreeWiFi": {
+            "type": "boolean"
+          },
+          "hasParking": {
+            "type": "boolean"
+          },
+          "hasPool": {
+            "type": "boolean"
+          },
+          "hasRestaurant": {
+            "type": "boolean"
+          },
+          "hasFitnessCenter": {
+            "type": "boolean"
+          },
+          "hasRoomService": {
+            "type": "boolean"
+          },
+          "hasPetFriendlyPolicy": {
+            "type": "boolean"
+          },
+          "hasBreakfast": {
+            "type": "boolean"
+          },
+          "hasFreeCancellation": {
+            "type": "boolean"
+          },
+          "prepaymentNeeded": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "BookingRoomDetails": {
+        "required": [
+          "adultCapacity",
+          "childrenCapacity",
+          "createdOn",
+          "hasAirConditioning",
+          "hasBalcony",
+          "hasHairdryer",
+          "hasPrivateBathroom",
+          "hasRefrigerator",
+          "hasSeaView",
+          "hasTowels",
+          "id",
+          "number",
+          "price",
+          "propertyId",
+          "type",
+          "updatedOn"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "number": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "type": {
+            "$ref": "#/components/schemas/RoomType"
+          },
+          "price": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "adultCapacity": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "childrenCapacity": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "hasPrivateBathroom": {
+            "type": "boolean"
+          },
+          "hasTowels": {
+            "type": "boolean"
+          },
+          "hasHairdryer": {
+            "type": "boolean"
+          },
+          "hasAirConditioning": {
+            "type": "boolean"
+          },
+          "hasBalcony": {
+            "type": "boolean"
+          },
+          "hasRefrigerator": {
+            "type": "boolean"
+          },
+          "hasSeaView": {
+            "type": "boolean"
+          },
+          "propertyId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "createdOn": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedOn": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false
+      },
       "BookingSummary": {
         "required": [
           "endDate",
@@ -2077,6 +2395,27 @@
         ],
         "type": "integer",
         "format": "int32"
+      },
+      "UpdateBookingCommand": {
+        "required": [
+          "expectedArrival",
+          "id",
+          "specialMentions"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "specialMentions": {
+            "type": "string"
+          },
+          "expectedArrival": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
       },
       "UpdatePropertyCommand": {
         "required": [

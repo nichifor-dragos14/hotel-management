@@ -25,8 +25,6 @@ export class CustomReuseStrategy implements RouteReuseStrategy {
     const neverReuseUrls = ['search-results'];
     const futureUrl = future.routeConfig ? future.routeConfig.path : '';
 
-    console.log(neverReuseUrls, futureUrl);
-
     if (futureUrl == null) {
       return false;
     }

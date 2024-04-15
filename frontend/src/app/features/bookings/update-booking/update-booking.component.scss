@@ -1,0 +1,128 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  padding: 0 32px;
+  gap: 24px;
+}
+
+section[role='booking-actions'] {
+  display: grid;
+  grid-template-columns: 1fr auto auto auto auto;
+  align-items: center;
+}
+
+section[role='utilities'] {
+  display: grid;
+  grid-template-columns: repeat(5, auto);
+  grid-template-rows: auto auto;
+}
+
+section[role='creation-date'] {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  align-items: center;
+}
+
+h2 {
+  margin: 0;
+}
+
+.font-light {
+  font-weight: lighter;
+  font-size: 0.8rem;
+}
+
+section[role='page-content'] {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+section[role='details'] {
+  display: grid;
+  grid-template-areas: 'booking-details user-details';
+  grid-template-columns: 1fr auto;
+  grid-column-gap: 16px;
+}
+
+section[role='user-details'] {
+  grid-area: user-details;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+section[role='expected-guest'] {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+section[role='expected-guest'] section {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+section[role='guest-information'] {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+section[role='guest-information'] section {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+section[role='booking-details'] {
+  grid-area: booking-details;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+section[role='booking-details'] section[role='booking-layout'] {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+section[role='facilities'] {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-row-gap: 8px;
+}
+
+section[role='facilities'] span {
+  display: flex;
+  flex-direction: row;
+  gap: 4px;
+  align-items: center;
+}
+
+section[role='property-contact-information'] {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+section[role='booked-room'] {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+section[role='booked-room'] span {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
