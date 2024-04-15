@@ -75,4 +75,19 @@ public class BookingController : ControllerBase
             _ => TypedResults.BadRequest()
         };
     }
+
+    [HttpDelete("{id}")]
+    public async Task<Results<Ok, NotFound>> Delete(
+        Guid id,
+        [FromServices] ICommandHandler<DeleteBookingCommand, bool> commandHandler,
+        CancellationToken cancellationToken)
+    {
+        bool result = await commandHandler.ExecuteAsync(new DeleteBookingCommand(id), cancellationToken);
+
+        return result switch
+        {
+            true => TypedResults.Ok(),
+            false => TypedResults.NotFound()
+        };
+    }
 }

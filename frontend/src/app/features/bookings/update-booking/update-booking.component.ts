@@ -53,10 +53,6 @@ export class UpdateBookingPageComponent {
   @Input() bookingDetails!: BookingDetails;
   @Input() bookingForm!: FormGroup;
 
-  ngAfterViewInit() {
-    console.log(this.bookingDetails, this.bookingForm);
-  }
-
   generateStarRating(rating: number): string {
     const stars = '⭐'.repeat(rating);
     return stars;
@@ -83,32 +79,26 @@ export class UpdateBookingPageComponent {
   }
 
   async updateBooking(newBooking: typeof this.bookingForm.value) {
-    //   try {
-    //     await this.propertyService.propertiesPatchAsync({
-    //       body: {
-    //         id,
-    //         name,
-    //         description,
-    //         email,
-    //         phoneNumber,
-    //         hasBreakfast,
-    //         hasFitnessCenter,
-    //         hasFreeCancellation,
-    //         hasFreeWiFi,
-    //         hasParking,
-    //         hasPetFriendlyPolicy,
-    //         hasPool,
-    //         hasRestaurant,
-    //         hasRoomService,
-    //       },
-    //     });
-    //     this.toastService.open('Successfully updated property', 'info');
-    //   } catch (error) {
-    //     if (error instanceof Error) {
-    //       this.toastService.open(error.message, 'error');
-    //     }
-    //   } finally {
-    //     await this.router.navigateByUrl('/properties/reinit');
-    //   }
+    console.log(this.bookingForm);
+    if (this.bookingForm.invalid) {
+      return;
+    }
+
+    try {
+      await this.bookingService.bookingsPatchAsync({
+        body: {
+          id: newBooking.id,
+          expectedArrival: newBooking.expectedArrival,
+          specialMentions: newBooking.specialMentions,
+        },
+      });
+      this.toastService.open('Successfully updated booking details', 'info');
+    } catch (error) {
+      if (error instanceof Error) {
+        this.toastService.open(error.message, 'error');
+      }
+    } finally {
+      await this.router.navigateByUrl('/bookings/my-reservations');
+    }
   }
 }

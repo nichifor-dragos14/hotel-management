@@ -7,12 +7,13 @@
     mat-button
     color="primary"
     type="submit"
+    (click)="updateBooking(bookingForm.value)"
     [disabled]="bookingForm.invalid"
   >
     Update
   </button>
 
-  <a mat-button color="warn" [routerLink]="['actions', 'delete']">Cancel</a>
+  <a mat-button color="warn" [routerLink]="['actions', 'delete']">Delete</a>
 </section>
 
 <section role="page-content">
@@ -89,6 +90,10 @@
             </span>
           </section>
         </section>
+      </section>
+
+      <section role="guest-information">
+        <h2>Total price: {{ bookingDetails.totalPrice }} lei</h2>
       </section>
     </section>
 
@@ -233,7 +238,7 @@
   </section>
 </section>
 
-<form [formGroup]="bookingForm" (ngSubmit)="updateBooking(bookingForm.value)">
+<form [formGroup]="bookingForm">
   <h2>Edit your booking details</h2>
 
   <mat-form-field appearance="outline">
