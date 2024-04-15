@@ -43,7 +43,7 @@ export class CloseReportComponent {
         this.toastService.open(error.message, 'error');
       }
     } finally {
-      this.router.navigateByUrl('reports');
+      await this.router.navigateByUrl('/reports/reinit');
     }
   }
 }

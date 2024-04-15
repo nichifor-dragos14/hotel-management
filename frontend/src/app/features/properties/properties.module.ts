@@ -10,11 +10,16 @@ import { UpdatePropertyPageComponent } from './update-property/update-property.c
 import { EditPropertyFormFactory } from './update-property.form-builder';
 import { PropertyReviewsPageComponent } from './property-reviews-page/property-reviews-page.component';
 import { PropertyRoomsPageComponent } from './property-rooms-page/property-rooms-page.component';
+import { PropertiesDummyComponent } from './properties.dummy.component';
 
 const PROPERTY_ROUTES: Routes = [
   {
     path: '',
     children: [
+      {
+        path: 'reinit',
+        component: PropertiesDummyComponent,
+      },
       {
         path: 'admin',
         component: PropertiesPageComponent,

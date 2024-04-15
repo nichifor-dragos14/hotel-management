@@ -109,8 +109,8 @@ export class UpdatePropertyPageComponent {
       if (error instanceof Error) {
         this.toastService.open(error.message, 'error');
       }
+    } finally {
+      await this.router.navigateByUrl('/properties/reinit');
     }
-
-    await this.router.navigateByUrl('properties/admin');
   }
 }

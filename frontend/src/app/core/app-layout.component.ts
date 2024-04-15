@@ -53,7 +53,11 @@ import { Subscription } from 'rxjs';
           >
             Properties
           </a>
-          <a mat-list-item routerLink="/reports" routerLinkActive="selected">
+          <a
+            mat-list-item
+            routerLink="/reports/admin"
+            routerLinkActive="selected"
+          >
             Reports
           </a>
           <a mat-list-item routerLink="/main" routerLinkActive="selected">
