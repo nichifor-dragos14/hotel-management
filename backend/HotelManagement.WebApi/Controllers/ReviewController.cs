@@ -9,7 +9,6 @@ namespace HotelManagement.WebApi.Controllers;
 [ApiController]
 public class ReviewController : ControllerBase
 {
-
     [HttpPost]
     public async Task<Results<Ok<Guid>, BadRequest>> Create(
        [FromBody] CreateReviewCommand command,

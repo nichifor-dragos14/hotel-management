@@ -36,6 +36,20 @@ public class ReportController
         };
     }
 
+    [HttpPost]
+    public async Task<Results<Ok<Guid>, BadRequest>> Create(
+      [FromBody] CreateReportCommand command,
+      [FromServices] ICommandHandler<CreateReportCommand, Guid?> commandHandler,
+      CancellationToken cancellationToken
+   )
+    {
+        return await commandHandler.ExecuteAsync(command, cancellationToken) switch
+        {
+            { } id => TypedResults.Ok(id),
+            _ => TypedResults.BadRequest()
+        };
+    }
+
     [HttpPatch("close")]
     public async Task<Results<Ok<Guid>, BadRequest>> Close(
         [FromBody] CloseReportCommand closeReportCommand,

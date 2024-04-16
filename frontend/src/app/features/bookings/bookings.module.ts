@@ -17,6 +17,8 @@ import { DialogPageComponent } from '$shared/dialog-page';
 import { DeleteBookingComponent } from './delete-booking.component';
 import { LeaveReviewComponent } from './leave-review.component';
 import { LeaveReviewFormFactory } from './leave-review.form';
+import { LeaveReportFormFactory } from './leave-report.form';
+import { LeaveReportComponent } from './leave-report.component';
 
 const BOOKING_ROUTES: Routes = [
   {
@@ -117,6 +119,48 @@ const BOOKING_ROUTES: Routes = [
                           description: '',
                           propertyId: property.id,
                           rating: 1,
+                          title: '',
+                          userId: user.id,
+                        });
+                      },
+                    },
+                  },
+                  {
+                    path: 'report/:id',
+                    component: LeaveReportComponent,
+                    resolve: {
+                      property: async ({ params }: ActivatedRouteSnapshot) =>
+                        await inject(PropertyService).propertiesIdGetAsync({
+                          id: params['id'],
+                        }),
+                      reportForm: async ({
+                        params,
+                      }: ActivatedRouteSnapshot) => {
+                        const leaveReportFormFactory = inject(
+                          LeaveReportFormFactory
+                        );
+                        const loginService = inject(LoginService);
+                        const userService = inject(UserService);
+                        const propertyService = inject(PropertyService);
+
+                        let claims = loginService.decodeToken();
+
+                        if (claims == null) {
+                          return;
+                        }
+
+                        let user = await userService.usersEmailGetAsync({
+                          email: claims['emailaddress'],
+                        });
+
+                        var property =
+                          await propertyService.propertiesIdGetAsync({
+                            id: params['id'],
+                          });
+
+                        return leaveReportFormFactory.build({
+                          description: '',
+                          propertyId: property.id,
                           title: '',
                           userId: user.id,
                         });

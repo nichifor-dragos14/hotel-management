@@ -1,4 +1,5 @@
 ﻿using HotelManagement.Core.Properties;
+using HotelManagement.Core.Users;
 
 namespace HotelManagement.Core.Reports;
 
@@ -7,10 +8,10 @@ public class Report
     internal Report(
         string title,
         string description,
-        DateTime createdOn,
-        DateTime updatedOn,
         bool isRead,
-        bool isClosed
+        bool isClosed,
+        DateTime createdOn,
+        DateTime updatedOn
     )
     {
         Title = title;
@@ -36,6 +37,29 @@ public class Report
     public DateTime UpdatedOn { get; private set; }
 
     public virtual Property Property { get; internal init; }
+
+    public virtual User User { get; internal init; }
+
+    public static Report Create(
+    Property property,
+    User user,
+    string title,
+    string description
+)
+    {
+        return new Report(
+            title,
+            description,
+            false,
+            false,
+            DateTime.UtcNow,
+            DateTime.UtcNow
+        )
+        {
+            Property = property,
+            User = user,
+        };
+    }
 
     public void Close()
     {

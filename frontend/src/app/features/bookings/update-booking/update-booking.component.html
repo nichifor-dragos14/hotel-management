@@ -25,7 +25,13 @@
     </a>
   }
 
-  <a mat-button color="warn" [routerLink]="['actions', 'report']">Report</a>
+  <a
+    mat-button
+    color="warn"
+    [routerLink]="['actions', 'report', bookingDetails.propertyDetails.id]"
+  >
+    Report
+  </a>
 
   <a mat-button color="warn" [routerLink]="['actions', 'delete']"> Delete</a>
 </section>

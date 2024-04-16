@@ -167,24 +167,6 @@ public class Property
         };
     }
 
-    public Report CreateReport(
-        string title,
-        string description
-    )
-    {
-        return new Report(
-            title,
-            description,
-            DateTime.UtcNow,
-            DateTime.UtcNow,
-            false,
-            false
-        )
-        {
-            Property = this
-        };
-    }
-
     public void Update(
         string name,
         string description,

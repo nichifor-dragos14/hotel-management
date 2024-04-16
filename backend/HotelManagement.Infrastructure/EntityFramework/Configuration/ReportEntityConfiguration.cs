@@ -20,5 +20,8 @@ internal class ReportEntityConfiguration : IEntityTypeConfiguration<Report>
 
         builder.HasOne(q => q.Property)
            .WithMany(q => q.Reports);
+
+        builder.HasOne(q => q.User)
+          .WithMany(q => q.Reports);
     }
 }
