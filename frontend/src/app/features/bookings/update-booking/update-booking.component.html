@@ -3,20 +3,23 @@
     <mat-icon>close</mat-icon>
   </a>
 
-  <button
-    mat-button
-    color="primary"
-    type="submit"
-    (click)="updateBooking(bookingForm.value)"
-    [disabled]="bookingForm.invalid"
-  >
-    Update
-  </button>
+  @if (!isInPast()) {
+    <button
+      mat-button
+      color="primary"
+      type="submit"
+      (click)="updateBooking(bookingForm.value)"
+      [disabled]="bookingForm.invalid"
+    >
+      Update
+    </button>
+  }
 
   @if (isInPast()) {
     <a
       mat-button
       [routerLink]="['actions', 'review', bookingDetails.propertyDetails.id]"
+      color="primary"
     >
       Leave review
     </a>
@@ -35,7 +38,7 @@
   >
     <section button role="creation-date">
       <span>Created on</span>
-      <mat-chip>
+      <mat-chip color="primary">
         {{ bookingDetails.createdOn | dateFormat }}
       </mat-chip>
     </section>
@@ -251,34 +254,36 @@
   </section>
 </section>
 
-<form [formGroup]="bookingForm">
-  <h2>Edit your booking details</h2>
+@if (!isInPast()) {
+  <form [formGroup]="bookingForm">
+    <h2>Edit your booking details</h2>
 
-  <mat-form-field appearance="outline">
-    <mat-label>Select an option</mat-label>
-    <mat-select formControlName="expectedArrival">
-      <mat-option value="I don't know">I don't know</mat-option>
-      <mat-option value="10:00 - 11:00">10:00 - 11:00</mat-option>
-      <mat-option value="11:00 - 12:00">11:00 - 12:00</mat-option>
-      <mat-option value="12:00 - 13:00">12:00 - 13:00</mat-option>
-      <mat-option value="13:00 - 14:00">13:00 - 14:00</mat-option>
-      <mat-option value="14:00 - 15:00">14:00 - 15:00</mat-option>
-      <mat-option value="15:00 - 16:00">15:00 - 16:00</mat-option>
-      <mat-option value="16:00 - 17:00">16:00 - 17:00</mat-option>
-      <mat-option value="17:00 - 18:00">17:00 - 18:00</mat-option>
-      <mat-option value="18:00 - 19:00">18:00 - 19:00</mat-option>
-      <mat-option value="19:00 - 20:00">19:00 - 20:00</mat-option>
-      <mat-option value="20:00 - 21:00">20:00 - 21:00</mat-option>
-      <mat-option value="21:00 - 22:00">21:00 - 22:00</mat-option>
-      <mat-option value="22:00 - 23:00">22:00 - 23:00</mat-option>
-      <mat-option value="23:00 - 00:00">23:00 - 00:00</mat-option>
-    </mat-select>
-  </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Select an option</mat-label>
+      <mat-select formControlName="expectedArrival">
+        <mat-option value="I don't know">I don't know</mat-option>
+        <mat-option value="10:00 - 11:00">10:00 - 11:00</mat-option>
+        <mat-option value="11:00 - 12:00">11:00 - 12:00</mat-option>
+        <mat-option value="12:00 - 13:00">12:00 - 13:00</mat-option>
+        <mat-option value="13:00 - 14:00">13:00 - 14:00</mat-option>
+        <mat-option value="14:00 - 15:00">14:00 - 15:00</mat-option>
+        <mat-option value="15:00 - 16:00">15:00 - 16:00</mat-option>
+        <mat-option value="16:00 - 17:00">16:00 - 17:00</mat-option>
+        <mat-option value="17:00 - 18:00">17:00 - 18:00</mat-option>
+        <mat-option value="18:00 - 19:00">18:00 - 19:00</mat-option>
+        <mat-option value="19:00 - 20:00">19:00 - 20:00</mat-option>
+        <mat-option value="20:00 - 21:00">20:00 - 21:00</mat-option>
+        <mat-option value="21:00 - 22:00">21:00 - 22:00</mat-option>
+        <mat-option value="22:00 - 23:00">22:00 - 23:00</mat-option>
+        <mat-option value="23:00 - 00:00">23:00 - 00:00</mat-option>
+      </mat-select>
+    </mat-form-field>
 
-  <mat-form-field appearance="outline">
-    <mat-label>Special mentions</mat-label>
-    <editor appTinyEditor formControlName="specialMentions" />
-  </mat-form-field>
-</form>
+    <mat-form-field appearance="outline">
+      <mat-label>Special mentions</mat-label>
+      <editor appTinyEditor formControlName="specialMentions" />
+    </mat-form-field>
+  </form>
+}
 
 <router-outlet hidden />
