@@ -22,4 +22,4 @@ public record PropertyRoom(
     int RowNumber
 );
 
-public record AllPropertyRoomsQuery(int From, int To, Guid Id) : IQuery<IPaginatedResult<PropertyRoom>>;
+public record AllPropertyRoomsQuery(int From, int To, Guid Id, DateTime StartDate, DateTime EndDate) : IQuery<IPaginatedResult<PropertyRoom>>;

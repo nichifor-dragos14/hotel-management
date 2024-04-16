@@ -16,7 +16,10 @@ internal class AllPropertySummariesFilteredQueryHandler(
     {
         var whereClause = $"WHERE p.\"Location\" ILIKE '%{query.PropertyFiltersMandatory.Location}%'" +
             $" AND r.\"AdultCapacity\" >= {query.PropertyFiltersMandatory.NumberOfAdults}" +
-            $" AND r.\"ChildrenCapacity\" >= {query.PropertyFiltersMandatory.NumberOfChildren}";
+            $" AND r.\"ChildrenCapacity\" >= {query.PropertyFiltersMandatory.NumberOfChildren}" +
+            $" AND NOT EXISTS (SELECT 1 FROM \"Booking\"" +
+            $"                 WHERE \"Booking\".\"RoomId\" = r.\"Id\"" +
+            $"                 AND NOT (\"Booking\".\"StartDate\" >= '{query.PropertyFiltersMandatory.EndDate}' OR \"Booking\".\"EndDate\" <= '{query.PropertyFiltersMandatory.StartDate}'))";
 
         if (query.PropertyFiltersOptional.HasFreeWiFi)
         {
@@ -118,7 +121,7 @@ internal class AllPropertySummariesFilteredQueryHandler(
                             p."HasFreeCancellation",
                             p."PrepaymentNeeded",
                             json_agg(DISTINCT r."Type") AS "TypeOfRooms",
-                            COUNT(r."Id") AS "AvailableRooms",
+                            COUNT(DISTINCT r."Id") AS "AvailableRooms",
                             AVG(re."Rating") AS "ReviewRating",
                             COUNT(DISTINCT re."Id") AS "TotalReviews",
                             (MIN(r."Price") * {(query.PropertyFiltersMandatory.EndDate - query.PropertyFiltersMandatory.StartDate).Value.Days}) AS "TotalPrice",

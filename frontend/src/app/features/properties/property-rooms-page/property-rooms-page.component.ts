@@ -45,6 +45,8 @@ export class PropertyRoomsPageComponent {
         from: from,
         to: to,
         id: this.activatedRoute.snapshot.parent?.parent?.params['id'],
+        startDate: this.activatedRoute.snapshot.queryParams['startDate'],
+        endDate: this.activatedRoute.snapshot.queryParams['endDate'],
       }),
   });
 

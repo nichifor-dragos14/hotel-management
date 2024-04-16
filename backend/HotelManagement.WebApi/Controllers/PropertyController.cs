@@ -1,7 +1,6 @@
 ﻿using HotelManagement.Core.Abstractions;
 using HotelManagement.Core.Properties;
 using HotelManagement.Core.Properties.Filters;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 
@@ -65,9 +64,11 @@ public class PropertyController : ControllerBase
         Guid id,
         int from,
         int to,
+        DateTime startDate,
+        DateTime endDate,
         CancellationToken cancelationToken)
     {
-        return TypedResults.Ok(await queryService.ExecuteAsync(new AllPropertyRoomsQuery(from, to, id), cancelationToken));
+        return TypedResults.Ok(await queryService.ExecuteAsync(new AllPropertyRoomsQuery(from, to, id, startDate, endDate), cancelationToken));
     }
 
     [HttpGet("{id}")]
