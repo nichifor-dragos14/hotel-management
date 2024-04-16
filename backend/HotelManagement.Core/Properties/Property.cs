@@ -185,24 +185,6 @@ public class Property
         };
     }
 
-    public Review CreateReview(
-       string title,
-       string description,
-       double rating
-   )
-    {
-        return new Review(
-            title,
-            description,
-            rating,
-            DateTime.UtcNow,
-            DateTime.UtcNow
-        )
-        {
-            Property = this
-        };
-    }
-
     public void Update(
         string name,
         string description,

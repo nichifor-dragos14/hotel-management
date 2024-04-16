@@ -15,6 +15,8 @@ import { UpdateBookingFormFactory } from './update-booking.form';
 import { BookingsDummyComponent } from './bookings.dummy.component';
 import { DialogPageComponent } from '$shared/dialog-page';
 import { DeleteBookingComponent } from './delete-booking.component';
+import { LeaveReviewComponent } from './leave-review.component';
+import { LeaveReviewFormFactory } from './leave-review.form';
 
 const BOOKING_ROUTES: Routes = [
   {
@@ -76,6 +78,49 @@ const BOOKING_ROUTES: Routes = [
                     resolve: {
                       id: ({ parent }: ActivatedRouteSnapshot) =>
                         parent?.parent?.params['id'],
+                    },
+                  },
+                  {
+                    path: 'review/:id',
+                    component: LeaveReviewComponent,
+                    resolve: {
+                      property: async ({ params }: ActivatedRouteSnapshot) =>
+                        await inject(PropertyService).propertiesIdGetAsync({
+                          id: params['id'],
+                        }),
+                      reviewForm: async ({
+                        params,
+                      }: ActivatedRouteSnapshot) => {
+                        const leaveReviewFormFactory = inject(
+                          LeaveReviewFormFactory
+                        );
+                        const loginService = inject(LoginService);
+                        const userService = inject(UserService);
+                        const propertyService = inject(PropertyService);
+
+                        let claims = loginService.decodeToken();
+
+                        if (claims == null) {
+                          return;
+                        }
+
+                        let user = await userService.usersEmailGetAsync({
+                          email: claims['emailaddress'],
+                        });
+
+                        var property =
+                          await propertyService.propertiesIdGetAsync({
+                            id: params['id'],
+                          });
+
+                        return leaveReviewFormFactory.build({
+                          description: '',
+                          propertyId: property.id,
+                          rating: 1,
+                          title: '',
+                          userId: user.id,
+                        });
+                      },
                     },
                   },
                 ],

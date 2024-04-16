@@ -78,8 +78,11 @@ export class UpdateBookingPageComponent {
     return '';
   }
 
+  isInPast() {
+    return this.bookingDetails.endDate <= new Date().toISOString();
+  }
+
   async updateBooking(newBooking: typeof this.bookingForm.value) {
-    console.log(this.bookingForm);
     if (this.bookingForm.invalid) {
       return;
     }

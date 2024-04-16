@@ -13,7 +13,18 @@
     Update
   </button>
 
-  <a mat-button color="warn" [routerLink]="['actions', 'delete']">Delete</a>
+  @if (isInPast()) {
+    <a
+      mat-button
+      [routerLink]="['actions', 'review', bookingDetails.propertyDetails.id]"
+    >
+      Leave review
+    </a>
+  }
+
+  <a mat-button color="warn" [routerLink]="['actions', 'report']">Report</a>
+
+  <a mat-button color="warn" [routerLink]="['actions', 'delete']"> Delete</a>
 </section>
 
 <section role="page-content">
@@ -91,6 +102,8 @@
           </section>
         </section>
       </section>
+
+      <mat-divider></mat-divider>
 
       <section role="guest-information">
         <h2>Total price: {{ bookingDetails.totalPrice }} lei</h2>

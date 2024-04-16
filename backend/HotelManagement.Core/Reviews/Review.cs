@@ -47,4 +47,25 @@ public class Review
         Rating= rating;
         UpdatedOn = DateTime.UtcNow;
     }
+
+    public static Review Create(
+        Property property,
+        User user,
+        string title,
+        double rating,
+        string description
+    )
+    {
+        return new Review(
+            title,
+            description,
+            rating,
+            DateTime.UtcNow,
+            DateTime.UtcNow
+        )
+        {
+            Property = property,
+            User = user,
+        };
+    }
 }
