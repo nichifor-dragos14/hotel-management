@@ -72,9 +72,11 @@ const PROPERTY_ROUTES: Routes = [
         path: ':id/preview',
         component: PropertyPageComponent,
         resolve: {
-          property: async ({ params }: ActivatedRouteSnapshot) =>
+          property: async ({ params, queryParams }: ActivatedRouteSnapshot) =>
             await inject(PropertyService).propertiesIdGetAsync({
               id: params['id'],
+              startDate: queryParams['startDate'],
+              endDate: queryParams['endDate'],
             }),
         },
         children: [

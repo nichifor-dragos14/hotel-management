@@ -72,7 +72,10 @@ public class PropertyController : ControllerBase
     }
 
     [HttpGet("{id}")]
-    public async Task<Results<Ok<PropertyDetails>, NotFound, BadRequest>> GetOne(Guid id,
+    public async Task<Results<Ok<PropertyDetails>, NotFound, BadRequest>> GetOne(
+        Guid id,
+        DateTime startDate,
+        DateTime endDate,
         [FromServices] IQueryHandler<OnePropertyQuery, PropertyDetails> queryService,
         CancellationToken cancellationToken)
     {
@@ -80,7 +83,7 @@ public class PropertyController : ControllerBase
             return TypedResults.BadRequest();
 
 
-        return await queryService.ExecuteAsync(new OnePropertyQuery(id), cancellationToken) switch
+        return await queryService.ExecuteAsync(new OnePropertyQuery(id, startDate, endDate), cancellationToken) switch
         {
             { } hotel => TypedResults.Ok(hotel),
             _ => TypedResults.NotFound()

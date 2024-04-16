@@ -39,7 +39,7 @@ export interface GridImage {
     ReviewCardComponent,
   ],
 })
-export class PropertyPageComponent implements OnInit, AfterViewInit {
+export class PropertyPageComponent implements OnInit {
   @Input() property!: PropertyDetails;
   activatedRoute = inject(ActivatedRoute);
 
@@ -117,10 +117,6 @@ export class PropertyPageComponent implements OnInit, AfterViewInit {
         { image: 'assets/hotel1.jpg', cols: 1, rows: 1 },
       ];
     }
-  }
-
-  ngAfterViewInit(): void {
-    console.log(this.property);
   }
 
   generateStarRating(rating: number): string {
