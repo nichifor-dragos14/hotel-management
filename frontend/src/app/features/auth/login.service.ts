@@ -1,4 +1,3 @@
-import { HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { jwtDecode } from 'jwt-decode';
@@ -68,7 +67,7 @@ export class LoginService {
     });
   }
 
-  decodeToken() {
+  private decodeToken() {
     const jwtToken = localStorage.getItem('JWT');
 
     if (!jwtToken || !this.isTokenValid()) {
@@ -91,5 +90,25 @@ export class LoginService {
     }
 
     return claims;
+  }
+
+  getLoggedUserEmail() {
+    let claims = this.decodeToken();
+
+    if (claims == null) {
+      return;
+    }
+
+    return claims['emailaddress'];
+  }
+
+  getLoggedUserId() {
+    let claims = this.decodeToken();
+
+    if (claims == null) {
+      return;
+    }
+
+    return claims['nameidentifier'];
   }
 }

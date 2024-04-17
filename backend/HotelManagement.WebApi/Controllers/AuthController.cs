@@ -41,6 +41,7 @@ public class AuthController(IConfiguration _configuration) : ControllerBase
 
         var claims = new List<Claim>
         {
+            new(ClaimTypes.NameIdentifier, user.Id.ToString()),
             new(ClaimTypes.Email, user.Email),
         };
 
@@ -49,7 +50,7 @@ public class AuthController(IConfiguration _configuration) : ControllerBase
             signingCredentials: signIncredentials,
             issuer: issuer,
             audience: audience,
-            expires: DateTime.UtcNow.AddDays(1)
+            expires: DateTime.UtcNow.AddDays(7)
         );
 
         var tokenString = new JwtSecurityTokenHandler().WriteToken(tokenOptions);

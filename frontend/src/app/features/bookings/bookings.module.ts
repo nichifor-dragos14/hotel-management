@@ -33,17 +33,9 @@ const BOOKING_ROUTES: Routes = [
         component: BookingsPageComponent,
         resolve: {
           userId: async () => {
-            let claims = inject(LoginService).decodeToken();
+            const loginService = inject(LoginService);
 
-            if (claims == null) {
-              return;
-            }
-
-            let user = await inject(UserService).usersEmailGetAsync({
-              email: claims['emailaddress'],
-            });
-
-            return user.id;
+            return loginService.getLoggedUserId();
           },
         },
         children: [
@@ -97,18 +89,9 @@ const BOOKING_ROUTES: Routes = [
                           LeaveReviewFormFactory
                         );
                         const loginService = inject(LoginService);
-                        const userService = inject(UserService);
                         const propertyService = inject(PropertyService);
 
-                        let claims = loginService.decodeToken();
-
-                        if (claims == null) {
-                          return;
-                        }
-
-                        let user = await userService.usersEmailGetAsync({
-                          email: claims['emailaddress'],
-                        });
+                        let userId = loginService.getLoggedUserId();
 
                         var property =
                           await propertyService.propertiesIdGetAsync({
@@ -120,7 +103,7 @@ const BOOKING_ROUTES: Routes = [
                           propertyId: property.id,
                           rating: 1,
                           title: '',
-                          userId: user.id,
+                          userId: userId,
                         });
                       },
                     },
@@ -140,18 +123,9 @@ const BOOKING_ROUTES: Routes = [
                           LeaveReportFormFactory
                         );
                         const loginService = inject(LoginService);
-                        const userService = inject(UserService);
                         const propertyService = inject(PropertyService);
 
-                        let claims = loginService.decodeToken();
-
-                        if (claims == null) {
-                          return;
-                        }
-
-                        let user = await userService.usersEmailGetAsync({
-                          email: claims['emailaddress'],
-                        });
+                        let userId = loginService.getLoggedUserId();
 
                         var property =
                           await propertyService.propertiesIdGetAsync({
@@ -162,7 +136,7 @@ const BOOKING_ROUTES: Routes = [
                           description: '',
                           propertyId: property.id,
                           title: '',
-                          userId: user.id,
+                          userId: userId,
                         });
                       },
                     },
@@ -194,18 +168,14 @@ const BOOKING_ROUTES: Routes = [
           numberOfChildren: async ({ queryParams }: ActivatedRouteSnapshot) =>
             queryParams['numberOfChildren'],
           userForm: async () => {
-            let claims = inject(LoginService).decodeToken();
-
-            if (claims == null) {
-              return;
-            }
+            let userEmail = inject(LoginService).getLoggedUserEmail();
 
             const editUserDetailsFormFactory = inject(
               CreateBookingUserFormFactory
             );
 
             let user = await inject(UserService).usersEmailGetAsync({
-              email: claims['emailaddress'],
+              email: userEmail,
             });
 
             return editUserDetailsFormFactory.build({
@@ -217,17 +187,9 @@ const BOOKING_ROUTES: Routes = [
             });
           },
           userId: async () => {
-            let claims = inject(LoginService).decodeToken();
+            const loginService = inject(LoginService);
 
-            if (claims == null) {
-              return;
-            }
-
-            let user = await inject(UserService).usersEmailGetAsync({
-              email: claims['emailaddress'],
-            });
-
-            return user.id;
+            return loginService.getLoggedUserId();
           },
         },
       },

@@ -20,7 +20,7 @@ const USER_ROUTES: Routes = [
         component: UserProfileDetailsPageComponent,
         resolve: {
           userForm: async () => {
-            let claims = inject(LoginService).decodeToken();
+            let claims = inject(LoginService).getLoggedUserEmail();
 
             if (claims == null) {
               return;
@@ -43,7 +43,7 @@ const USER_ROUTES: Routes = [
         component: UserProfilePreferencesPageComponent,
         resolve: {
           userForm: async () => {
-            let claims = inject(LoginService).decodeToken();
+            let claims = inject(LoginService).getLoggedUserEmail();
 
             if (claims == null) {
               return;
@@ -66,7 +66,7 @@ const USER_ROUTES: Routes = [
         component: UserProfileSecurityPageComponent,
         resolve: {
           user: async () => {
-            let claims = inject(LoginService).decodeToken();
+            let claims = inject(LoginService).getLoggedUserEmail();
 
             if (claims == null) {
               return;
