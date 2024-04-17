@@ -19,6 +19,7 @@ IQueryFacade facade
                                {
                                    Property = p,
                                    Rooms = p.Rooms.OrderBy(r => r.CreatedOn).Take(3),
+                                   ReviewCount = p.Reviews.Count(),
                                    Reviews = p.Reviews.OrderBy(r => r.CreatedOn).Take(5).Select(r => new
                                    {
                                        Review = r,
@@ -91,6 +92,7 @@ IQueryFacade facade
             property.HasBreakfast,
             property.HasFreeCancellation,
             property.PrepaymentNeeded,
+            propertyDetails.ReviewCount,
             roomsDetails,
             reviewsDetails
         );

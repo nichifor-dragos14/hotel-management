@@ -1,72 +1,68 @@
+import { ReviewPropertyDetails } from '$backend/services';
 import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { CommonModule } from '@angular/common';
-import { AppLinePlaceholderComponent } from '../line-placeholder';
-import { AppCirclePlaceholderComponent } from '../circle-placeholder';
+import { RouterModule } from '@angular/router';
+import { DateConverterModule } from '$shared/date-converter';
 
 @Component({
-  selector: 'app-review-card-placeholder',
+  selector: 'app-review-property-card',
   template: `
     <mat-card>
       <section role="review">
         <mat-card-header>
           <section role="user-and-picture">
-            <app-circle-placeholder [radius]="40"></app-circle-placeholder>
+            <img matCardAvatar src="assets/hotel1.jpg" />
 
             <section role="user">
-              <span matCardTitle class="name">
-                <app-line-placeholder [width]="90" [height]="20">
-                </app-line-placeholder>
-
-                <app-line-placeholder [width]="80" [height]="20">
-                </app-line-placeholder>
+              <span matCardTitle>
+                @if (review.user) {
+                  {{ review.user.firstName }} {{ review.user.lastName }}
+                } @else {
+                  Unknown
+                }
               </span>
 
               <span matCardSubtitle>
-                <app-line-placeholder [width]="100" [height]="15">
-                </app-line-placeholder>
+                🎏
+                @if (review.user) {
+                  {{ review.user.nationality }}
+                } @else {
+                  Not specified
+                }
               </span>
             </section>
           </section>
         </mat-card-header>
 
         <mat-card-content>
-          <span>
-            <app-line-placeholder [width]="500" [height]="18">
-            </app-line-placeholder>
-          </span>
+          <span matCardSubtitle>{{ review.title }}</span>
+          <p [innerHTML]="transformText(review.description)"></p>
         </mat-card-content>
       </section>
 
-      <div class="property-rating-square linear-background">9.0</div>
+      <div class="property-rating-square">
+        {{ transformToTwoDecimals(review.rating) }}
+      </div>
 
-      <span class="date">
-        <app-line-placeholder [width]="100" [height]="15">
-        </app-line-placeholder>
-      </span>
+      <span class="date">{{ review.createdOn | dateFormat }}</span>
     </mat-card>
   `,
   styles: `
-    .linear-background {
-        animation-duration: 1s;
-        animation-fill-mode: forwards;
-        animation-iteration-count: infinite;
-        animation-name: placeHolderShimmer;
-        animation-timing-function: linear;
-        background: #f6f7f8;
-        background: linear-gradient(to right, #eeeeee 8%, #dddddd 18%, #eeeeee 33%);
-        background-size: 1000px 104px;
-        position: relative;
-        overflow: hidden;
-    } 
-
     mat-card {
         display: grid;
         grid-template-areas: 'review rating' 'review date';
         grid-template-columns: 1fr auto;
         gap: 8px;
         padding: 8px;
-        height: 142px;
+        border-radius: 0 !important;
+        height: 175px
+    }
+
+    mat-card-content {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
     }
 
     section[role='review'] {
@@ -74,6 +70,7 @@ import { AppCirclePlaceholderComponent } from '../circle-placeholder';
         display: flex;
         flex-direction: column;
         gap: 16px;
+        overflow: hidden
     }
 
     section[role='user-and-picture'] {
@@ -84,6 +81,10 @@ import { AppCirclePlaceholderComponent } from '../circle-placeholder';
         gap: 8px;
     }
 
+    p {
+        max-width: 170px;
+    }
+
     section[role='user-and-picture'] img {
         margin-bottom: 0 !important;
     }
@@ -91,13 +92,6 @@ import { AppCirclePlaceholderComponent } from '../circle-placeholder';
     section[role='user'] {
         display: flex;
         flex-direction: column;
-        gap: 8px;
-    }
-
-    section[role='user'] .name {
-        display: flex;
-        flex-direction: row;
-        gap: 8px;
     }
 
     .property-rating-square {
@@ -123,11 +117,20 @@ import { AppCirclePlaceholderComponent } from '../circle-placeholder';
   `,
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [
-    MatCardModule,
-    CommonModule,
-    AppLinePlaceholderComponent,
-    AppCirclePlaceholderComponent,
-  ],
+  imports: [MatCardModule, CommonModule, RouterModule, DateConverterModule],
 })
-export class ReviewCardPlaceholderComponent {}
+export class ReviewPropertyCardComponent {
+  @Input() review!: ReviewPropertyDetails;
+
+  transformText(text: string) {
+    if (text.length > 50) {
+      return text.slice(0, 50) + '...';
+    }
+
+    return text;
+  }
+
+  transformToTwoDecimals(rating: number) {
+    return rating.toPrecision(2);
+  }
+}

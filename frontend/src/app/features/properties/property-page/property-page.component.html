@@ -237,8 +237,8 @@
         <h2>See our guest reviews</h2>
 
         <span>
-          {{ property.reviews.length }}
-          @if (property.reviews.length === 1) {
+          {{ property.reviewCount }}
+          @if (property.reviewCount === 1) {
             review
           } @else {
             reviews
@@ -248,7 +248,8 @@
 
       <section role="content-reviews">
         <ng-container *ngFor="let review of property.reviews.slice(0, 4)">
-          <app-review-card [review]="review"></app-review-card>
+          <app-review-property-card [review]="review">
+          </app-review-property-card>
         </ng-container>
       </section>
     </section>

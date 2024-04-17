@@ -1989,6 +1989,7 @@
           "phoneNumber",
           "prepaymentNeeded",
           "rating",
+          "reviewCount",
           "reviewRating",
           "reviews",
           "rooms",
@@ -2064,6 +2065,10 @@
           },
           "prepaymentNeeded": {
             "type": "boolean"
+          },
+          "reviewCount": {
+            "type": "integer",
+            "format": "int32"
           },
           "rooms": {
             "type": "array",

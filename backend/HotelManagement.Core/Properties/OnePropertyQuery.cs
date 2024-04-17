@@ -25,6 +25,7 @@ public record PropertyDetails(
     bool HasBreakfast,
     bool HasFreeCancellation,
     bool PrepaymentNeeded,
+    int ReviewCount,
     IEnumerable<RoomPropertyDetails> Rooms,
     IEnumerable<ReviewPropertyDetails> Reviews
 );

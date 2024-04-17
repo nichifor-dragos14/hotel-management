@@ -14,7 +14,7 @@ import { CommonModule } from '@angular/common';
 import { AppPageHeaderComponent } from '$shared/page-header';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatTableModule } from '@angular/material/table';
-import { ReviewCardComponent } from '$shared/cards';
+import { ReviewPropertyCardComponent } from '$shared/cards';
 
 export interface GridImage {
   image: string;
@@ -36,7 +36,7 @@ export interface GridImage {
     AppPageHeaderComponent,
     MatGridListModule,
     MatTableModule,
-    ReviewCardComponent,
+    ReviewPropertyCardComponent,
   ],
 })
 export class PropertyPageComponent implements OnInit {
