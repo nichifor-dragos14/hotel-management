@@ -8,7 +8,7 @@ public record CreateReviewCommand(
     Guid PropertyId, 
     Guid UserId,
     string Title,
-    int Rating,
+    double Rating,
     string Description
 ) : ICommand<Guid?>;
 

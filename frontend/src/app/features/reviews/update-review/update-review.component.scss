@@ -16,3 +16,8 @@ form {
   display: flex;
   flex-direction: column;
 }
+
+section[role='rating'] {
+  display: flex;
+  flex-direction: column;
+}

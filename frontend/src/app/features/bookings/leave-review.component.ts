@@ -15,12 +15,13 @@ import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { TinyEditorModule } from '$shared/tiny-editor';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSliderModule } from '@angular/material/slider';
 
 @Component({
   selector: 'app-leave-review',
   standalone: true,
   template: `
-    <app-page-header title="Your review for {{ property.name }}">
+    <app-page-header title="Your review for {{ property.name }}  💯">
       <button
         mat-button
         color="primary"
@@ -38,7 +39,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     <form [formGroup]="reviewForm">
       <p>
         The property would like to know what went well and what not. Your review
-        helps us improve customer experience!
+        helps us improve customer experience! 😄
       </p>
 
       <mat-form-field appearance="outline">
@@ -47,17 +48,12 @@ import { MatFormFieldModule } from '@angular/material/form-field';
         <mat-error>The review title is required</mat-error>
       </mat-form-field>
 
-      <mat-form-field appearance="outline">
-        <mat-label>Rating</mat-label>
-        <input
-          matInput
-          formControlName="rating"
-          type="number"
-          min="1"
-          max="10"
-        />
-        <mat-error>The review rating is required</mat-error>
-      </mat-form-field>
+      <section role="rating">
+        <mat-label>Rating 🚀</mat-label>
+        <mat-slider min="1" max="10" step="0.1" discrete>
+          <input matSliderThumb formControlName="rating" />
+        </mat-slider>
+      </section>
 
       <mat-form-field appearance="outline">
         <mat-label>Description</mat-label>
@@ -82,6 +78,11 @@ import { MatFormFieldModule } from '@angular/material/form-field';
         gap: 8px;
         padding: 0 64px;
     }
+
+    section[role='rating'] {
+      display: flex;
+      flex-direction: column;
+    }
 `,
   imports: [
     MatDialogModule,
@@ -93,6 +94,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     TinyEditorModule,
     MatInputModule,
     MatFormFieldModule,
+    MatSliderModule,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

@@ -37,7 +37,7 @@ export class CancelBookingComponent {
       await this.bookingService.bookingsIdDeleteAsync({
         id: this.id,
       });
-      this.toastService.open('Successfully cancelled booking', 'info');
+      this.toastService.open('You successfully cancelled your booking', 'info');
     } catch (error) {
       if (error instanceof Error) {
         this.toastService.open(error.message, 'error');

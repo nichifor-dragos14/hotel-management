@@ -14,6 +14,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { TinyEditorModule } from '$shared/tiny-editor';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { AppToastService } from '$shared/toast';
+import { MatSliderModule } from '@angular/material/slider';
 
 @Component({
   selector: 'app-update-review',
@@ -30,6 +31,7 @@ import { AppToastService } from '$shared/toast';
     MatFormFieldModule,
     TinyEditorModule,
     ReactiveFormsModule,
+    MatSliderModule,
   ],
 })
 export class UpdateReviewPageComponent {

@@ -101,7 +101,7 @@ const BOOKING_ROUTES: Routes = [
                         return leaveReviewFormFactory.build({
                           description: '',
                           propertyId: property.id,
-                          rating: 1,
+                          rating: 5,
                           title: '',
                           userId: userId,
                         });

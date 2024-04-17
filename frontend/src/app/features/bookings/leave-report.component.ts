@@ -20,7 +20,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
   selector: 'app-leave-report',
   standalone: true,
   template: `
-    <app-page-header title="Your report for {{ property.name }}">
+    <app-page-header title="Your report for {{ property.name }} ❗">
       <button
         mat-button
         color="primary"
@@ -38,7 +38,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     <form [formGroup]="reportForm">
       <p>
         We are sorry to hear that you are not happy with your reservation.
-        Please, let us know what went wrong!
+        Please, let us know what went wrong! 🤕
       </p>
 
       <mat-form-field appearance="outline">
@@ -100,7 +100,7 @@ export class LeaveReportComponent {
 
     try {
       await this.reportService.reportsPostAsync({ body: newReport });
-      this.toastService.open('Successfully sent report', 'info');
+      this.toastService.open('Your report was successfully sent', 'info');
     } catch (error) {
       if (error instanceof Error) {
         this.toastService.open(error.message, 'error');
