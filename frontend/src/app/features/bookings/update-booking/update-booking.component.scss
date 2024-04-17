@@ -5,9 +5,15 @@
   gap: 16px;
 }
 
+#map-img {
+  height: 200px;
+  width: 350px;
+}
+
 section[role='booking-actions'] {
   display: grid;
   grid-template-columns: 1fr auto auto auto auto;
+  grid-column-gap: 8px;
   align-items: center;
 }
 
@@ -50,7 +56,7 @@ section[role='user-details'] {
   grid-area: user-details;
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 36px;
 }
 
 section[role='expected-guest'] {
@@ -94,6 +100,7 @@ section[role='facilities'] {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-row-gap: 8px;
+  grid-column-gap: 4px;
 }
 
 section[role='facilities'] span {
@@ -124,5 +131,5 @@ section[role='booked-room'] span {
 form {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 8px;
 }

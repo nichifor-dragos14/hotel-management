@@ -1,7 +1,5 @@
-<app-page-header title="My bookings">
-  <button mat-button button color="primary" routerLink="/main">
-    Book your next trip now
-  </button>
+<app-page-header title="My bookings 🍸">
+  <button mat-button button color="primary" routerLink="/main">Book now</button>
 </app-page-header>
 
 <mat-tab-group dynamicHeight="true">
@@ -32,12 +30,14 @@
               [routerLink]="[booking.id]"
               routerLinkActive="active"
             >
-              <span matListItemTitle>{{ booking.propertyName }}</span>
-              <span matListItemLine>{{ booking.location }}</span>
-              <span matListItemMeta>
-                {{ booking.startDate | dateFormat }} -
+              <span matListItemTitle>
+                Your stay at {{ booking.propertyName }}
+              </span>
+              <span matListItemLine>
+                From {{ booking.startDate | dateFormat }} to
                 {{ booking.endDate | dateFormat }}
               </span>
+              <span matListItemMeta>{{ booking.location }}</span>
             </a>
           }
         </ng-container>
@@ -72,10 +72,12 @@
               [routerLink]="[booking.id]"
               routerLinkActive="active"
             >
-              <span matListItemTitle>{{ booking.propertyName }}</span>
-              <span matListItemLine>{{ booking.location }}</span>
-              <span matListItemMeta>
-                {{ booking.startDate | dateFormat }} -
+              <span matListItemTitle>
+                Your upcoming stay at {{ booking.propertyName }}
+              </span>
+              <span matListItemMeta>{{ booking.location }}</span>
+              <span matListItemLine>
+                From {{ booking.startDate | dateFormat }} to
                 {{ booking.endDate | dateFormat }}
               </span>
             </a>

@@ -19,7 +19,7 @@
     <a
       mat-button
       [routerLink]="['actions', 'review', bookingDetails.propertyDetails.id]"
-      color="primary"
+      color="secondary"
     >
       Leave review
     </a>
@@ -40,12 +40,12 @@
 
 <section role="page-content">
   <app-page-header
-    title="Your stay at {{ bookingDetails.propertyDetails.name }} {{
-      generateStarRating(bookingDetails.propertyDetails.rating)
-    }}"
+    title="Your {{ isInPast() ? '' : 'upcoming' }} stay at {{
+      bookingDetails.propertyDetails.name
+    }} {{ generateStarRating(bookingDetails.propertyDetails.rating) }}"
   >
     <section button role="creation-date">
-      <span>Created on</span>
+      <h2>🕥</h2>
       <mat-chip color="primary">
         {{ bookingDetails.createdOn | dateFormat }}
       </mat-chip>
@@ -62,7 +62,6 @@
             {{ bookingDetails.lastNameOnBooking }}
           </span>
           <span>
-            Country:
             {{ bookingDetails.countryOnBooking }}
           </span>
         </section>
@@ -80,7 +79,8 @@
         <h2>Booked room</h2>
         <section>
           <span>
-            {{ roomTypeMapper(bookingDetails.roomDetails.type) }} Room
+            {{ roomTypeMapper(bookingDetails.roomDetails.type) }} Room no.
+            {{ bookingDetails.roomDetails.number }}
           </span>
 
           <section role="booked-room">
@@ -114,9 +114,8 @@
         </section>
       </section>
 
-      <mat-divider></mat-divider>
-
       <section role="guest-information">
+        <mat-divider></mat-divider>
         <h2>Total price: {{ bookingDetails.totalPrice }} lei</h2>
       </section>
     </section>
@@ -125,9 +124,15 @@
       <section role="booking-layout">
         <h2>Location</h2>
         <span>
-          {{ bookingDetails.propertyDetails.location }} -
+          🌍 {{ bookingDetails.propertyDetails.location }} -
           <a href="#" target="_blank">See on map</a>
         </span>
+
+        <img
+          id="map-img"
+          alt="Google maps location"
+          src="assets/google-maps.jpg"
+        />
       </section>
 
       <section role="booking-layout">
@@ -264,7 +269,7 @@
 
 @if (!isInPast()) {
   <form [formGroup]="bookingForm">
-    <h2>Edit your booking details</h2>
+    <h2>Edit your booking details ✏️</h2>
 
     <mat-form-field appearance="outline">
       <mat-label>Select an option</mat-label>
