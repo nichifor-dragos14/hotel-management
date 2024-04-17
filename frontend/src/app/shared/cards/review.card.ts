@@ -36,7 +36,8 @@ import { DateConverterModule } from '$shared/date-converter';
         </mat-card-header>
 
         <mat-card-content>
-          <span>"{{ review.description }}"</span>
+          <span matCardSubtitle>{{ review.title }}</span>
+          <p [innerHTML]="review.description"></p>
         </mat-card-content>
       </section>
 
@@ -55,8 +56,17 @@ import { DateConverterModule } from '$shared/date-converter';
         gap: 8px;
         padding: 8px;
         border-radius: 0 !important;
-        height: 142px;
-        overflow-y: scroll;
+        height: 155px;
+    }
+
+    mat-card-content {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    p {
+      overflow-wrap: break-word;
     }
 
     section[role='review'] {
@@ -64,6 +74,7 @@ import { DateConverterModule } from '$shared/date-converter';
         display: flex;
         flex-direction: column;
         gap: 16px;
+        overflow: hidden
     }
 
     section[role='user-and-picture'] {
