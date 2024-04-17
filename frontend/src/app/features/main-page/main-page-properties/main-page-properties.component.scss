@@ -23,6 +23,9 @@ form[role='filtersForm'] {
   grid-area: filtersForm;
   padding: 0 8px;
   width: 100%;
+  flex-direction: column;
+  display: flex;
+  gap: 8px;
 }
 
 section[role='filters'] {

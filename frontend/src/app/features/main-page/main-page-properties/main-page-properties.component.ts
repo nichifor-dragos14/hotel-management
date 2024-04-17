@@ -16,6 +16,7 @@ import { AppPageHeaderComponent } from '$shared/page-header';
 import { FILTER_PROPERTY_FORM } from '../filter-property.form';
 import { PropertyQueryParams } from '../property-query-params.interface';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatDividerModule } from '@angular/material/divider';
 
 @Component({
   selector: 'app-main-page-properties',
@@ -39,6 +40,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     MatListModule,
     AppPageHeaderComponent,
     MatSlideToggleModule,
+    MatDividerModule,
   ],
 })
 export class MainPagePropertiesComponent {
