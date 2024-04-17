@@ -14,10 +14,11 @@ public class ReviewController : ControllerBase
        [FromServices] IQueryHandler<AllReviewSummariesQuery, IPaginatedResult<ReviewSummary>> queryService,
        int from,
        int to,
+       Guid userId,
        CancellationToken cancelationToken
     )
     {
-        return TypedResults.Ok(await queryService.ExecuteAsync(new AllReviewSummariesQuery(from, to), cancelationToken));
+        return TypedResults.Ok(await queryService.ExecuteAsync(new AllReviewSummariesQuery(from, to, userId), cancelationToken));
     }
 
     [HttpPost]

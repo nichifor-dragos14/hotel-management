@@ -1,4 +1,9 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  inject,
+} from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { AppPageHeaderComponent } from '$shared/page-header';
@@ -38,7 +43,10 @@ import { DateConverterModule } from '$shared/date-converter';
 export class ReviewsPageComponent {
   reviewService = inject(ReviewService);
 
+  @Input() userId!: string;
+
   reviewsDataSource = new PaginatedDataSource({
-    fetch: ({ from, to }) => this.reviewService.reviewsGet({ from, to }),
+    fetch: ({ from, to }) =>
+      this.reviewService.reviewsGet({ from, to, userId: this.userId }),
   });
 }

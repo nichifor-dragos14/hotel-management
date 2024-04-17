@@ -28,12 +28,14 @@
   <a
     mat-button
     color="warn"
-    [routerLink]="['actions', 'report', bookingDetails.propertyDetails.id]"
+    [routerLink]="['actions', 'cancel', bookingDetails.propertyDetails.id]"
   >
     Report
   </a>
 
-  <a mat-button color="warn" [routerLink]="['actions', 'delete']"> Delete</a>
+  @if (!isInPast()) {
+    <a mat-button color="warn" [routerLink]="['actions', 'delete']"> Delete</a>
+  }
 </section>
 
 <section role="page-content">

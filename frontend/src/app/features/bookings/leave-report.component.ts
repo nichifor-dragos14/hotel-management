@@ -1,8 +1,4 @@
-import {
-  PropertyDetails,
-  ReportService,
-  ReviewService,
-} from '$backend/services';
+import { PropertyDetails, ReportService } from '$backend/services';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -97,21 +93,12 @@ export class LeaveReportComponent {
   @Input() property!: PropertyDetails;
   @Input() reportForm!: FormGroup;
 
-  ngOnInit() {
-    console.log('init');
-  }
-
-  ngAfterViewInit() {
-    console.log(this.reportForm);
-  }
-
   async createReport(newReport: typeof this.reportForm.value) {
     if (this.reportForm.invalid) {
       return;
     }
 
     try {
-      console.log(newReport);
       await this.reportService.reportsPostAsync({ body: newReport });
       this.toastService.open('Successfully sent report', 'info');
     } catch (error) {

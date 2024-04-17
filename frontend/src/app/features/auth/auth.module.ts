@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginPageComponent } from './login/login-page.component';
 import { RegisterPageComponent } from './register/register-page.component';
 
-const MAIN_PAGE_ROUTES: Routes = [
+const AUTHENTICATION_ROUTES: Routes = [
   {
     path: 'login',
     component: LoginPageComponent,
@@ -15,7 +15,7 @@ const MAIN_PAGE_ROUTES: Routes = [
 ] satisfies Routes;
 
 @NgModule({
-  imports: [RouterModule.forChild(MAIN_PAGE_ROUTES)],
+  imports: [RouterModule.forChild(AUTHENTICATION_ROUTES)],
   exports: [RouterModule],
 })
 export class AuthModule {}

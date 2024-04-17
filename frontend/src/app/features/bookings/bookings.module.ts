@@ -14,7 +14,7 @@ import { UpdateBookingPageComponent } from './update-booking/update-booking.comp
 import { UpdateBookingFormFactory } from './update-booking.form';
 import { BookingsDummyComponent } from './bookings.dummy.component';
 import { DialogPageComponent } from '$shared/dialog-page';
-import { DeleteBookingComponent } from './delete-booking.component';
+import { CancelBookingComponent } from './cancel-booking.component';
 import { LeaveReviewComponent } from './leave-review.component';
 import { LeaveReviewFormFactory } from './leave-review.form';
 import { LeaveReportFormFactory } from './leave-report.form';
@@ -67,8 +67,8 @@ const BOOKING_ROUTES: Routes = [
                 component: DialogPageComponent,
                 children: [
                   {
-                    path: 'delete',
-                    component: DeleteBookingComponent,
+                    path: 'cancel',
+                    component: CancelBookingComponent,
                     resolve: {
                       id: ({ parent }: ActivatedRouteSnapshot) =>
                         parent?.parent?.params['id'],

@@ -12,4 +12,4 @@ public record ReviewSummary(
     int RowNumber
 );
 
-public record AllReviewSummariesQuery(int From, int To) : IQuery<IPaginatedResult<ReviewSummary>>;
+public record AllReviewSummariesQuery(int From, int To, Guid userId) : IQuery<IPaginatedResult<ReviewSummary>>;

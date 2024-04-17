@@ -1,8 +1,4 @@
-import {
-  BookingService,
-  PropertyDetails,
-  ReviewService,
-} from '$backend/services';
+import { PropertyDetails, ReviewService } from '$backend/services';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -15,7 +11,7 @@ import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { AppToastService } from '$shared/toast';
 import { AppPageHeaderComponent } from '$shared/page-header';
-import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { TinyEditorModule } from '$shared/tiny-editor';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -115,7 +111,6 @@ export class LeaveReviewComponent {
     }
 
     try {
-      console.log(newReview);
       await this.reviewService.reviewsPostAsync({ body: newReview });
       this.toastService.open('Successfully posted review', 'info');
     } catch (error) {

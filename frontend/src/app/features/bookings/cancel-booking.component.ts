@@ -12,11 +12,11 @@ import { CommonModule } from '@angular/common';
 import { AppToastService } from '$shared/toast';
 
 @Component({
-  selector: 'app-close-booking',
+  selector: 'app-cancel-booking',
   standalone: true,
   template: `
-    <h1 mat-dialog-title>Delete booking?</h1>
-    <p mat-dialog-content>Are you sure you want to delete this booking?</p>
+    <h1 mat-dialog-title>Cancel booking?</h1>
+    <p mat-dialog-content>Are you sure you want to cancel this booking?</p>
     <mat-dialog-actions align="end">
       <button mat-button color="primary" (click)="ok()">Ok</button>
       <button mat-button color="warn" routerLink="../../">Close</button>
@@ -25,9 +25,9 @@ import { AppToastService } from '$shared/toast';
   imports: [MatDialogModule, MatButtonModule, CommonModule, RouterModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DeleteBookingComponent {
-  readonly bookingService = inject(BookingService);
+export class CancelBookingComponent {
   readonly router = inject(Router);
+  readonly bookingService = inject(BookingService);
   readonly toastService = inject(AppToastService);
 
   @Input() id: string = '';
@@ -37,7 +37,7 @@ export class DeleteBookingComponent {
       await this.bookingService.bookingsIdDeleteAsync({
         id: this.id,
       });
-      this.toastService.open('Successfully deleted booking', 'info');
+      this.toastService.open('Successfully cancelled booking', 'info');
     } catch (error) {
       if (error instanceof Error) {
         this.toastService.open(error.message, 'error');

@@ -43,6 +43,7 @@ import { Subscription } from 'rxjs';
         </section>
       </mat-toolbar-row>
     </mat-toolbar>
+
     <mat-sidenav-container>
       <mat-sidenav mode="side" opened>
         <mat-nav-list>
@@ -79,6 +80,7 @@ import { Subscription } from 'rxjs';
           </a>
         </mat-nav-list>
       </mat-sidenav>
+
       <mat-sidenav-content>
         <router-outlet />
       </mat-sidenav-content>
