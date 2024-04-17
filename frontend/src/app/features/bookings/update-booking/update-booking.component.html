@@ -28,13 +28,13 @@
   <a
     mat-button
     color="warn"
-    [routerLink]="['actions', 'cancel', bookingDetails.propertyDetails.id]"
+    [routerLink]="['actions', 'report', bookingDetails.propertyDetails.id]"
   >
     Report
   </a>
 
   @if (!isInPast()) {
-    <a mat-button color="warn" [routerLink]="['actions', 'delete']"> Delete</a>
+    <a mat-button color="warn" [routerLink]="['actions', 'cancel']">Cancel</a>
   }
 </section>
 
