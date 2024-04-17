@@ -9,6 +9,17 @@ namespace HotelManagement.WebApi.Controllers;
 [ApiController]
 public class ReviewController : ControllerBase
 {
+    [HttpGet]
+    public async Task<Results<Ok<IPaginatedResult<ReviewSummary>>, NotFound>> GetAll(
+       [FromServices] IQueryHandler<AllReviewSummariesQuery, IPaginatedResult<ReviewSummary>> queryService,
+       int from,
+       int to,
+       CancellationToken cancelationToken
+    )
+    {
+        return TypedResults.Ok(await queryService.ExecuteAsync(new AllReviewSummariesQuery(from, to), cancelationToken));
+    }
+
     [HttpPost]
     public async Task<Results<Ok<Guid>, BadRequest>> Create(
        [FromBody] CreateReviewCommand command,

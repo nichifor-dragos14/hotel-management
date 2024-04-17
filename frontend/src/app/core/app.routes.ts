@@ -49,6 +49,13 @@ export const routes: Routes = [
             (m) => m.BookingsModule
           ),
       },
+      {
+        path: 'reviews',
+        loadChildren: () =>
+          import('../features/reviews/reviews.module').then(
+            (m) => m.ReviewsModule
+          ),
+      },
     ],
   },
 ];

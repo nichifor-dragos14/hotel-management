@@ -70,6 +70,13 @@ import { Subscription } from 'rxjs';
           >
             My bookings
           </a>
+          <a
+            mat-list-item
+            routerLink="/reviews/my-reviews"
+            routerLinkActive="selected"
+          >
+            My reviews
+          </a>
         </mat-nav-list>
       </mat-sidenav>
       <mat-sidenav-content>
