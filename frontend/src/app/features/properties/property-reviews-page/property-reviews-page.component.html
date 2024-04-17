@@ -11,11 +11,7 @@
 </app-page-header>
 
 <mat-dialog-content>
-  <cdk-virtual-scroll-viewport
-    scrollWindow
-    [itemSize]="155"
-    [maxBufferPx]="1000"
-  >
+  <cdk-virtual-scroll-viewport [itemSize]="155" [maxBufferPx]="1000">
     <ng-container *cdkVirtualFor="let review of reviewsDataSource">
       @if (!review) {
         <app-review-card-placeholder></app-review-card-placeholder>

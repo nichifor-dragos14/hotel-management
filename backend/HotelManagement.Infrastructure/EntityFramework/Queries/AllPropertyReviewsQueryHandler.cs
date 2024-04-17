@@ -25,16 +25,27 @@ internal class AllPropertyReviewsQueryHandler(
                             r."Rating",
                             r."CreatedOn",
                             r."UpdatedOn",
+                            u."FirstName" as "UserFirstName",
+                            u."LastName" as "UserLastName",
+                            u."Nationality" as "UserNationality",
                             ROW_NUMBER() OVER (ORDER BY r."CreatedOn" DESC) AS "RowNumber"
                         FROM
                             "Review" AS r
+                        JOIN 
+                            "User" AS u
+                        ON
+                            u."Id" = r."UserId"  
                         WHERE r."PropertyId" = {query.Id}
                         ORDER BY
                             r."CreatedOn" DESC
                         OFFSET {query.From} ROWS FETCH NEXT {query.To - query.From} ROWS ONLY
                     )
                     SELECT
-                        (SELECT COUNT(*) FROM "Review" WHERE "Review"."PropertyId" = {query.Id}) as "TotalCount",
+                        (SELECT COUNT(*) 
+                        FROM "Review" AS r
+                        JOIN "User" AS u ON u."Id" = r."UserId"
+                        WHERE r."PropertyId" = {query.Id}
+                        ) as "TotalCount",
                             CASE
                                 WHEN (SELECT COUNT(*) FROM PropertyReviews) > 0
                                     THEN jsonb_agg(PropertyReviews)

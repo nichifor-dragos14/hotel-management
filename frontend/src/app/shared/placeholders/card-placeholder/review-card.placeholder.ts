@@ -32,6 +32,11 @@ import { AppCirclePlaceholderComponent } from '../circle-placeholder';
 
         <mat-card-content>
           <span>
+            <app-line-placeholder [width]="300" [height]="18">
+            </app-line-placeholder>
+          </span>
+
+          <span>
             <app-line-placeholder [width]="500" [height]="18">
             </app-line-placeholder>
           </span>
@@ -66,7 +71,7 @@ import { AppCirclePlaceholderComponent } from '../circle-placeholder';
         grid-template-columns: 1fr auto;
         gap: 8px;
         padding: 8px;
-        height: 142px;
+        height: 155px;
     }
 
     section[role='review'] {
@@ -74,6 +79,12 @@ import { AppCirclePlaceholderComponent } from '../circle-placeholder';
         display: flex;
         flex-direction: column;
         gap: 16px;
+    }
+
+    mat-card-content {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
     }
 
     section[role='user-and-picture'] {

@@ -1,4 +1,4 @@
-import { PropertyReview, PropertyService } from '$backend/services';
+import { PropertyService } from '$backend/services';
 import {
   ChangeDetectionStrategy,
   Component,

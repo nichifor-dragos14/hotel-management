@@ -9,6 +9,9 @@ public record PropertyReview(
     double Rating,
     DateTime CreatedOn,
     DateTime UpdatedOn,
+    string UserFirstName,
+    string UserLastName,
+    string UserNationality,
     int RowNumber
 );
 

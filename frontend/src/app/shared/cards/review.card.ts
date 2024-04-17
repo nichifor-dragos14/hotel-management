@@ -1,4 +1,4 @@
-import { ReviewPropertyDetails } from '$backend/services';
+import { PropertyReview } from '$backend/services';
 import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { CommonModule } from '@angular/common';
@@ -16,28 +16,17 @@ import { DateConverterModule } from '$shared/date-converter';
 
             <section role="user">
               <span matCardTitle>
-                @if (review.user) {
-                  {{ review.user.firstName }} {{ review.user.lastName }}
-                } @else {
-                  Unknown
-                }
+                {{ review.userFirstName }} {{ review.userLastName }}
               </span>
 
-              <span matCardSubtitle>
-                🎏
-                @if (review.user) {
-                  {{ review.user.nationality }}
-                } @else {
-                  Not specified
-                }
-              </span>
+              <span matCardSubtitle> 🎏 {{ review.userNationality }} </span>
             </section>
           </section>
         </mat-card-header>
 
         <mat-card-content>
-          <span matCardSubtitle>{{ review.title }}</span>
-          <p [innerHTML]="review.description"></p>
+          <span>{{ review.title }}</span>
+          <span [innerHTML]="review.description" matCardSubtitle></span>
         </mat-card-content>
       </section>
 
@@ -120,7 +109,7 @@ import { DateConverterModule } from '$shared/date-converter';
   imports: [MatCardModule, CommonModule, RouterModule, DateConverterModule],
 })
 export class ReviewCardComponent {
-  @Input() review!: ReviewPropertyDetails;
+  @Input() review!: PropertyReview;
 
   transformToTwoDecimals(rating: number) {
     return rating.toPrecision(2);

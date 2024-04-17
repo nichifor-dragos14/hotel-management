@@ -2093,7 +2093,10 @@
           "rating",
           "rowNumber",
           "title",
-          "updatedOn"
+          "updatedOn",
+          "userFirstName",
+          "userLastName",
+          "userNationality"
         ],
         "type": "object",
         "properties": {
@@ -2118,6 +2121,15 @@
           "updatedOn": {
             "type": "string",
             "format": "date-time"
+          },
+          "userFirstName": {
+            "type": "string"
+          },
+          "userLastName": {
+            "type": "string"
+          },
+          "userNationality": {
+            "type": "string"
           },
           "rowNumber": {
             "type": "integer",

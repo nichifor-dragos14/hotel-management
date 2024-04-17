@@ -25,11 +25,7 @@
 </section>
 
 <mat-dialog-content>
-  <cdk-virtual-scroll-viewport
-    scrollWindow
-    [itemSize]="164"
-    [maxBufferPx]="1000"
-  >
+  <cdk-virtual-scroll-viewport [itemSize]="164" [maxBufferPx]="1000">
     <ng-container *cdkVirtualFor="let room of roomsDataSource">
       @if (!room) {
         <app-room-card-placeholder></app-room-card-placeholder>
