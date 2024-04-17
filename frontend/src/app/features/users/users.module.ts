@@ -5,9 +5,8 @@ import { UserProfileDetailsPageComponent } from './user-profile-details/user-pro
 import { UserProfilePreferencesPageComponent } from './user-profile-preferences/user-profile-preferences-page.component';
 import { UserProfileSecurityPageComponent } from './user-profile-security/user-profile-security-page.component';
 import { LoginService } from '$features/auth/login.service';
-import { UpdateUserDetailsCommand, UserService } from '$backend/services';
+import { UserService } from '$backend/services';
 import { EditUserDetailsFormFactory } from './user-details.form';
-import { UpdatePropertyPageComponent } from '$features/properties/update-property/update-property.component';
 import { EditUserPreferencesFormFactory } from './user-preferences.form';
 
 const USER_ROUTES: Routes = [
@@ -20,18 +19,14 @@ const USER_ROUTES: Routes = [
         component: UserProfileDetailsPageComponent,
         resolve: {
           userForm: async () => {
-            let claims = inject(LoginService).getLoggedUserEmail();
-
-            if (claims == null) {
-              return;
-            }
+            let email = inject(LoginService).getLoggedUserEmail();
 
             const editUserDetailsFormFactory = inject(
               EditUserDetailsFormFactory
             );
 
             let user = await inject(UserService).usersEmailGetAsync({
-              email: claims['emailaddress'],
+              email,
             });
 
             return editUserDetailsFormFactory.build(user);
@@ -43,18 +38,14 @@ const USER_ROUTES: Routes = [
         component: UserProfilePreferencesPageComponent,
         resolve: {
           userForm: async () => {
-            let claims = inject(LoginService).getLoggedUserEmail();
-
-            if (claims == null) {
-              return;
-            }
+            let email = inject(LoginService).getLoggedUserEmail();
 
             const editUserPreferencesFormFactory = inject(
               EditUserPreferencesFormFactory
             );
 
             var user = await inject(UserService).usersEmailGetAsync({
-              email: claims['emailaddress'],
+              email,
             });
 
             return editUserPreferencesFormFactory.build(user);
@@ -66,14 +57,10 @@ const USER_ROUTES: Routes = [
         component: UserProfileSecurityPageComponent,
         resolve: {
           user: async () => {
-            let claims = inject(LoginService).getLoggedUserEmail();
-
-            if (claims == null) {
-              return;
-            }
+            let email = inject(LoginService).getLoggedUserEmail();
 
             return await inject(UserService).usersEmailGetAsync({
-              email: claims['emailaddress'],
+              email,
             });
           },
         },
