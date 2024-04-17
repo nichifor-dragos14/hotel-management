@@ -54,7 +54,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
           formControlName="rating"
           type="number"
           min="1"
-          max="5"
+          max="10"
         />
         <mat-error>The review rating is required</mat-error>
       </mat-form-field>

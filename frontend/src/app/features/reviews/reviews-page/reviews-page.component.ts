@@ -49,4 +49,20 @@ export class ReviewsPageComponent {
     fetch: ({ from, to }) =>
       this.reviewService.reviewsGet({ from, to, userId: this.userId }),
   });
+
+  getColor(rating: number): string {
+    console.log(rating);
+    if (rating >= 1 && rating <= 2) {
+      console.log(rating);
+      return 'red';
+    } else if (rating >= 3 && rating <= 4) {
+      return 'lightcoral';
+    } else if (rating >= 5 && rating <= 6) {
+      return 'orange';
+    } else if (rating >= 7 && rating <= 8) {
+      return 'lightgreen';
+    } else {
+      return 'green';
+    }
+  }
 }

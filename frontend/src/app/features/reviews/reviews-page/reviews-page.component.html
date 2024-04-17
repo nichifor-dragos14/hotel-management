@@ -1,5 +1,12 @@
-<app-page-header title="Reports">
-  <button mat-button button color="primary" routerLink="new">We'll see</button>
+<app-page-header title="My reviews">
+  <button
+    mat-button
+    button
+    color="primary"
+    routerLink="/bookings/my-reservations"
+  >
+    Leave a review
+  </button>
 </app-page-header>
 
 <mat-nav-list>
@@ -7,32 +14,26 @@
     <ng-container *cdkVirtualFor="let review of reviewsDataSource">
       @if (!review) {
         <a mat-list-item disabled>
-          <app-circle-placeholder
-            matListItemIcon
-            [radius]="35"
-          ></app-circle-placeholder>
-          <app-line-placeholder
-            matListItemTitle
-            [width]="250"
-            [height]="15"
-          ></app-line-placeholder>
-          <app-line-placeholder
-            matListItemLine
-            [width]="150"
-            [height]="10"
-          ></app-line-placeholder>
+          <app-circle-placeholder matListItemIcon [radius]="35">
+          </app-circle-placeholder>
+          <app-line-placeholder matListItemTitle [width]="250" [height]="15">
+          </app-line-placeholder>
+          <app-line-placeholder matListItemLine [width]="150" [height]="10">
+          </app-line-placeholder>
         </a>
       } @else {
         <a mat-list-item [routerLink]="[review.id]" routerLinkActive="active">
           <span matListItemIcon>
-            <mat-icon color="primary"> tag_faces </mat-icon>
+            <mat-icon [ngStyle]="{ color: getColor(review.rating) }">
+              tag_faces
+            </mat-icon>
           </span>
 
           <span matListItemTitle>
-            Your review for {{ review.propertyName }}
+            {{ review.title }}
           </span>
           <span matListItemLine>
-            {{ review.title }}
+            Your review for {{ review.propertyName }}
           </span>
           <span matListItemMeta>
             {{ review.createdOn | dateFormat }}
