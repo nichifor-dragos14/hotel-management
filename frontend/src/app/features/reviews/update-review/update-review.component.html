@@ -1,0 +1,43 @@
+<section role="actions">
+  <a mat-icon-button routerLink="../" color="accent">
+    <mat-icon>close</mat-icon>
+  </a>
+
+  <a
+    mat-button
+    color="primary"
+    [disabled]="reviewForm.invalid"
+    (click)="updateReview(reviewForm.value)"
+  >
+    Update
+  </a>
+
+  <a mat-button [routerLink]="['actions', 'close']" color="warn">Delete</a>
+</section>
+
+<p>
+  The property would like to know what went well and what not. Your review helps
+  us improve customer experience!
+</p>
+
+<form [formGroup]="reviewForm">
+  <mat-form-field appearance="outline">
+    <mat-label>Title</mat-label>
+    <input matInput formControlName="title" />
+    <mat-error>The review title is required</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Rating</mat-label>
+    <input matInput formControlName="rating" type="number" min="1" max="10" />
+    <mat-error>The review rating is required</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Description</mat-label>
+    <editor appTinyEditor formControlName="description" />
+    <mat-error>The review description is required</mat-error>
+  </mat-form-field>
+</form>
+
+<router-outlet hidden />

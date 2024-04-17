@@ -6,7 +6,7 @@ public record ReviewSummary(
     Guid Id,
     string Title,
     string Description,
-    int Rating,
+    double Rating,
     DateTime CreatedOn,
     string PropertyName,
     int RowNumber

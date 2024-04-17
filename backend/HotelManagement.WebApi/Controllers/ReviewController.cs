@@ -21,10 +21,40 @@ public class ReviewController : ControllerBase
         return TypedResults.Ok(await queryService.ExecuteAsync(new AllReviewSummariesQuery(from, to, userId), cancelationToken));
     }
 
+    [HttpGet("{id}")]
+    public async Task<Results<Ok<ReviewDetails>, NotFound, BadRequest>> GetOne(Guid id,
+      [FromServices] IQueryHandler<OneReviewQuery, ReviewDetails> queryService,
+      CancellationToken cancellationToken)
+    {
+        if (id == Guid.Empty)
+            return TypedResults.BadRequest();
+
+
+        return await queryService.ExecuteAsync(new OneReviewQuery(id), cancellationToken) switch
+        {
+            { } report => TypedResults.Ok(report),
+            _ => TypedResults.NotFound()
+        };
+    }
+
     [HttpPost]
     public async Task<Results<Ok<Guid>, BadRequest>> Create(
        [FromBody] CreateReviewCommand command,
        [FromServices] ICommandHandler<CreateReviewCommand, Guid?> commandHandler,
+       CancellationToken cancellationToken
+    )
+    {
+        return await commandHandler.ExecuteAsync(command, cancellationToken) switch
+        {
+            { } id => TypedResults.Ok(id),
+            _ => TypedResults.BadRequest()
+        };
+    }
+
+    [HttpPatch]
+    public async Task<Results<Ok<Guid>, BadRequest>> Update(
+       [FromBody] UpdateReviewCommand command,
+       [FromServices] ICommandHandler<UpdateReviewCommand, Guid?> commandHandler,
        CancellationToken cancellationToken
     )
     {

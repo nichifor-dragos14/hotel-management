@@ -51,9 +51,7 @@ export class ReviewsPageComponent {
   });
 
   getColor(rating: number): string {
-    console.log(rating);
     if (rating >= 1 && rating <= 2) {
-      console.log(rating);
       return 'red';
     } else if (rating >= 3 && rating <= 4) {
       return 'lightcoral';
