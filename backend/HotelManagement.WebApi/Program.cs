@@ -1,6 +1,7 @@
 ﻿using System.Reflection;
 using System.Text;
 using HealthChecks.UI.Client;
+using HotelManagement.Core.EmailService;
 using HotelManagement.WebApi;
 using HotelManagement.WebApi.Development;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -13,7 +14,7 @@ using Vernou.Swashbuckle.HttpResultsAdapter;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Configuration.AddJsonFile("appsettings.Mocks.json", true, true);
+builder.Services.Configure<EmailOptions>(builder.Configuration.GetSection("EmailOptions"));
 
 builder.Host.UseSerilog((context, configuration) =>
 {

@@ -1,5 +1,6 @@
 ﻿using HotelManagement.Core.Abstractions;
 using HotelManagement.Core.Bookings;
+using HotelManagement.Core.EmailService;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 
@@ -7,7 +8,7 @@ namespace HotelManagement.WebApi.Controllers;
 
 [Route("bookings")]
 [ApiController]
-public class BookingController : ControllerBase
+public class BookingController(IEmailService _emailService) : ControllerBase
 {
     [HttpGet("past")]
     public async Task<Results<Ok<IPaginatedResult<BookingSummary>>, NotFound>> GetAllPastBookings(
@@ -55,11 +56,28 @@ public class BookingController : ControllerBase
        CancellationToken cancellationToken
     )
     {
-        return await commandHandler.ExecuteAsync(command, cancellationToken) switch
+        string host = HttpContext.Request.Host.Host;
+        int port = HttpContext.Request.Host.Port ?? 80;
+
+        var id = await commandHandler.ExecuteAsync(command, cancellationToken);
+
+        switch (id)
         {
-            { } id => TypedResults.Ok(id),
-            _ => TypedResults.BadRequest()
-        };
+            case { } validId:
+                await _emailService.ComposeBookingConfirmationEmail(
+                    command.UserDetails.FirstName,
+                    command.UserDetails.LastName,
+                    command.UserDetails.Email,
+                    command.StartDate,
+                    command.EndDate,
+                    host,
+                    port);
+
+                return TypedResults.Ok(validId);
+
+            default: 
+                return TypedResults.BadRequest();
+        }
     }
 
     [HttpPatch]
