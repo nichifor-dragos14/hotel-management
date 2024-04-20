@@ -1,5 +1,5 @@
 import { NgModule, inject } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { Router, RouterModule, Routes } from '@angular/router';
 import { UserProfilePageComponent } from './user-profile/user-profile-page.component';
 import { UserProfileDetailsPageComponent } from './user-profile-details/user-profile-details-page.component';
 import { UserProfilePreferencesPageComponent } from './user-profile-preferences/user-profile-preferences-page.component';
@@ -19,17 +19,27 @@ const USER_ROUTES: Routes = [
         component: UserProfileDetailsPageComponent,
         resolve: {
           userForm: async () => {
-            let email = inject(LoginService).getLoggedUserEmail();
+            const router = inject(Router);
+            const loginService = inject(LoginService);
+            const userService = inject(UserService);
 
-            const editUserDetailsFormFactory = inject(
-              EditUserDetailsFormFactory
-            );
+            try {
+              const email = loginService.getLoggedUserEmail();
 
-            let user = await inject(UserService).usersEmailGetAsync({
-              email,
-            });
+              const editUserDetailsFormFactory = inject(
+                EditUserDetailsFormFactory
+              );
 
-            return editUserDetailsFormFactory.build(user);
+              const user = await userService.usersEmailGetAsync({
+                email,
+              });
+
+              return editUserDetailsFormFactory.build(user);
+            } catch (error) {
+              router.navigate(['/error']);
+
+              return null;
+            }
           },
         },
       },
@@ -38,17 +48,27 @@ const USER_ROUTES: Routes = [
         component: UserProfilePreferencesPageComponent,
         resolve: {
           userForm: async () => {
-            let email = inject(LoginService).getLoggedUserEmail();
+            const router = inject(Router);
+            const loginService = inject(LoginService);
+            const userService = inject(UserService);
 
             const editUserPreferencesFormFactory = inject(
               EditUserPreferencesFormFactory
             );
 
-            var user = await inject(UserService).usersEmailGetAsync({
-              email,
-            });
+            try {
+              const email = loginService.getLoggedUserEmail();
 
-            return editUserPreferencesFormFactory.build(user);
+              const user = await userService.usersEmailGetAsync({
+                email,
+              });
+
+              return editUserPreferencesFormFactory.build(user);
+            } catch (error) {
+              router.navigate(['/error']);
+
+              return null;
+            }
           },
         },
       },
@@ -57,11 +77,21 @@ const USER_ROUTES: Routes = [
         component: UserProfileSecurityPageComponent,
         resolve: {
           user: async () => {
-            let email = inject(LoginService).getLoggedUserEmail();
+            const router = inject(Router);
+            const userService = inject(UserService);
+            const loginService = inject(LoginService);
 
-            return await inject(UserService).usersEmailGetAsync({
-              email,
-            });
+            try {
+              const email = loginService.getLoggedUserEmail();
+
+              return await userService.usersEmailGetAsync({
+                email,
+              });
+            } catch (error) {
+              router.navigate(['/error']);
+
+              return null;
+            }
           },
         },
       },

@@ -1,6 +1,11 @@
 import { NgModule, inject } from '@angular/core';
 import { ReviewsPageComponent } from './reviews-page/reviews-page.component';
-import { ActivatedRouteSnapshot, RouterModule, Routes } from '@angular/router';
+import {
+  ActivatedRouteSnapshot,
+  Router,
+  RouterModule,
+  Routes,
+} from '@angular/router';
 import { ReviewsDummyComponent } from './reviews.dummy.component';
 import { LoginService } from '$features/auth/login.service';
 import { UpdateReviewPageComponent } from './update-review/update-review.component';
@@ -20,9 +25,16 @@ const REVIEW_ROUTES: Routes = [
         component: ReviewsPageComponent,
         resolve: {
           userId: () => {
+            const router = inject(Router);
             const loginService = inject(LoginService);
 
-            return loginService.getLoggedUserId();
+            try {
+              return loginService.getLoggedUserId();
+            } catch (error) {
+              router.navigate(['/error']);
+
+              return null;
+            }
           },
         },
         children: [
@@ -31,20 +43,27 @@ const REVIEW_ROUTES: Routes = [
             component: UpdateReviewPageComponent,
             resolve: {
               reviewForm: async ({ params }: ActivatedRouteSnapshot) => {
+                const router = inject(Router);
                 const reviewService = inject(ReviewService);
 
-                let updateReviewFormFactory = new UpdateReviewFormFactory();
+                const updateReviewFormFactory = new UpdateReviewFormFactory();
 
-                let review = await reviewService.reviewsIdGetAsync({
-                  id: params['id'],
-                });
+                try {
+                  const review = await reviewService.reviewsIdGetAsync({
+                    id: params['id'],
+                  });
 
-                return updateReviewFormFactory.build({
-                  description: review.description,
-                  id: review.id,
-                  title: review.title,
-                  rating: review.rating,
-                });
+                  return updateReviewFormFactory.build({
+                    description: review.description,
+                    id: review.id,
+                    title: review.title,
+                    rating: review.rating,
+                  });
+                } catch (error) {
+                  router.navigate(['/error']);
+
+                  return null;
+                }
               },
             },
           },

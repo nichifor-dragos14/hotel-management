@@ -1,7 +1,12 @@
 import { NgModule, inject } from '@angular/core';
 import { PropertyService } from '$backend/services';
 import { DeletePropertyComponent } from './delete-property.component';
-import { ActivatedRouteSnapshot, RouterModule, Routes } from '@angular/router';
+import {
+  ActivatedRouteSnapshot,
+  Router,
+  RouterModule,
+  Routes,
+} from '@angular/router';
 import { PropertiesPageComponent } from './properties-page/properties-page.component';
 import { PropertyPageComponent } from './property-page/property-page.component';
 import { DialogPageComponent } from '$shared/dialog-page';
@@ -28,8 +33,18 @@ const PROPERTY_ROUTES: Routes = [
             path: 'new',
             component: NewPropertyPageComponent,
             resolve: {
-              propertyTypes: async () =>
-                await inject(PropertyService).propertiesTypesGetAsync(),
+              propertyTypes: async () => {
+                const router = inject(Router);
+                const propertyService = inject(PropertyService);
+
+                try {
+                  return await propertyService.propertiesTypesGetAsync();
+                } catch (error) {
+                  router.navigate(['/error']);
+
+                  return null;
+                }
+              },
             },
           },
           {
@@ -37,15 +52,22 @@ const PROPERTY_ROUTES: Routes = [
             component: UpdatePropertyPageComponent,
             resolve: {
               propertyForm: async ({ params }: ActivatedRouteSnapshot) => {
+                const router = inject(Router);
+                const propertyService = inject(PropertyService);
+
                 const editPropertyFormFactory = inject(EditPropertyFormFactory);
 
-                const property = await inject(
-                  PropertyService
-                ).propertiesIdGetAsync({
-                  id: params['id'],
-                });
+                try {
+                  const property = await propertyService.propertiesIdGetAsync({
+                    id: params['id'],
+                  });
 
-                return editPropertyFormFactory.build(property);
+                  return editPropertyFormFactory.build(property);
+                } catch (error) {
+                  router.navigate(['/error']);
+
+                  return null;
+                }
               },
             },
             runGuardsAndResolvers: 'always',
@@ -58,8 +80,15 @@ const PROPERTY_ROUTES: Routes = [
                     path: 'delete',
                     component: DeletePropertyComponent,
                     resolve: {
-                      id: ({ parent }: ActivatedRouteSnapshot) =>
-                        parent?.parent?.params['id'],
+                      id: ({ parent }: ActivatedRouteSnapshot) => {
+                        const router = inject(Router);
+
+                        if (parent?.parent?.params['id']) {
+                          return parent?.parent?.params['id'];
+                        } else {
+                          router.navigate(['/error']);
+                        }
+                      },
                     },
                   },
                 ],
@@ -72,12 +101,22 @@ const PROPERTY_ROUTES: Routes = [
         path: ':id/preview',
         component: PropertyPageComponent,
         resolve: {
-          property: async ({ params, queryParams }: ActivatedRouteSnapshot) =>
-            await inject(PropertyService).propertiesIdGetAsync({
-              id: params['id'],
-              startDate: queryParams['startDate'],
-              endDate: queryParams['endDate'],
-            }),
+          property: async ({ params, queryParams }: ActivatedRouteSnapshot) => {
+            const router = inject(Router);
+            const propertyService = inject(PropertyService);
+
+            try {
+              return await propertyService.propertiesIdGetAsync({
+                id: params['id'],
+                startDate: queryParams['startDate'],
+                endDate: queryParams['endDate'],
+              });
+            } catch (error) {
+              router.navigate(['/error']);
+
+              return null;
+            }
+          },
         },
         children: [
           {

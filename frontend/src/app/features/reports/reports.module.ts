@@ -1,6 +1,11 @@
 import { NgModule, inject } from '@angular/core';
 import { ReportsPageComponent } from './reports-page/reports-page.component';
-import { ActivatedRouteSnapshot, RouterModule, Routes } from '@angular/router';
+import {
+  ActivatedRouteSnapshot,
+  Router,
+  RouterModule,
+  Routes,
+} from '@angular/router';
 import { ReportPageComponent } from './report-page/report-page.component';
 import { ReportService } from '$backend/services';
 import { DialogPageComponent } from '$shared/dialog-page';
@@ -14,7 +19,7 @@ const REPORT_ROUTES: Routes = [
     children: [
       {
         path: 'reinit',
-        component: ReportsDummyComponent
+        component: ReportsDummyComponent,
       },
       {
         path: 'admin',
@@ -24,10 +29,20 @@ const REPORT_ROUTES: Routes = [
             path: ':id',
             component: ReportPageComponent,
             resolve: {
-              report: async ({ params }: ActivatedRouteSnapshot) =>
-                await inject(ReportService).reportsIdGetAsync({
-                  id: params['id'],
-                }),
+              report: async ({ params }: ActivatedRouteSnapshot) => {
+                const router = inject(Router);
+                const reportService = inject(ReportService);
+
+                try {
+                  return await reportService.reportsIdGetAsync({
+                    id: params['id'],
+                  });
+                } catch (error) {
+                  router.navigate(['/error']);
+
+                  return null;
+                }
+              },
             },
             children: [
               {
@@ -38,16 +53,34 @@ const REPORT_ROUTES: Routes = [
                     path: 'close',
                     component: CloseReportComponent,
                     resolve: {
-                      id: ({ parent }: ActivatedRouteSnapshot) =>
-                        parent?.parent?.params['id'],
+                      id: ({ parent }: ActivatedRouteSnapshot) => {
+                        const router = inject(Router);
+
+                        if (parent?.parent?.params['id']) {
+                          return parent?.parent?.params['id'];
+                        } else {
+                          router.navigate(['/error']);
+
+                          return null;
+                        }
+                      },
                     },
                   },
                   {
                     path: 'open',
                     component: OpenReportComponent,
                     resolve: {
-                      id: ({ parent }: ActivatedRouteSnapshot) =>
-                        parent?.parent?.params['id'],
+                      id: ({ parent }: ActivatedRouteSnapshot) => {
+                        const router = inject(Router);
+
+                        if (parent?.parent?.params['id']) {
+                          return parent?.parent?.params['id'];
+                        } else {
+                          router.navigate(['/error']);
+
+                          return null;
+                        }
+                      },
                     },
                   },
                 ],
