@@ -1,4 +1,9 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+} from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
@@ -43,12 +48,12 @@ import { MatDividerModule } from '@angular/material/divider';
     MatDividerModule,
   ],
 })
-export class MainPagePropertiesComponent {
+export class MainPagePropertiesComponent implements AfterViewInit {
   readonly searchPropertyForm = inject(SEARCH_PROPERTY_FORM);
   readonly filterPropertyForm = inject(FILTER_PROPERTY_FORM);
   readonly router = inject(Router);
 
-  constructor() {
+  ngAfterViewInit() {
     this.submitForm();
   }
 
