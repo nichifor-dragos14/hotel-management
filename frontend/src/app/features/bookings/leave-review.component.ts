@@ -31,6 +31,7 @@ import { MatSliderModule } from '@angular/material/slider';
       >
         Send
       </button>
+
       <button mat-button color="warn" routerLink="../../../" button>
         Close
       </button>
@@ -64,19 +65,19 @@ import { MatSliderModule } from '@angular/material/slider';
   `,
   styles: `
     :host {
-        padding: 32px 24px;
-        width: 72vw;
-        height: 64vh;
-        display: flex;
-        flex-direction: column;
-        gap: 16px;
+      padding: 32px 24px;
+      width: 72vw;
+      height: 64vh;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
     }
 
     form {
-        display: flex;
-        flex-direction: column;
-        gap: 8px;
-        padding: 0 64px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      padding: 0 64px;
     }
 
     section[role='rating'] {

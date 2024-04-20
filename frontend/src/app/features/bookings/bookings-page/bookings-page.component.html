@@ -3,6 +3,48 @@
 </app-page-header>
 
 <mat-tab-group dynamicHeight="true">
+  <mat-tab label="Upcoming bookings">
+    <mat-nav-list>
+      <cdk-virtual-scroll-viewport
+        scrollWindow
+        [itemSize]="64"
+        [maxBufferPx]="500"
+      >
+        <ng-container
+          *cdkVirtualFor="let booking of upcomingBookingsDataSource"
+        >
+          @if (!booking) {
+            <a mat-list-item disabled>
+              <app-circle-placeholder matListItemIcon [radius]="35">
+              </app-circle-placeholder>
+              <app-line-placeholder
+                matListItemTitle
+                [width]="250"
+                [height]="15"
+              >
+              </app-line-placeholder>
+            </a>
+          } @else {
+            <a
+              mat-list-item
+              [routerLink]="[booking.id]"
+              routerLinkActive="active"
+            >
+              <span matListItemTitle>
+                Your upcoming stay at {{ booking.propertyName }}
+              </span>
+              <span matListItemMeta>{{ booking.location }}</span>
+              <span matListItemLine>
+                From {{ booking.startDate | dateFormat }} to
+                {{ booking.endDate | dateFormat }}
+              </span>
+            </a>
+          }
+        </ng-container>
+      </cdk-virtual-scroll-viewport>
+    </mat-nav-list>
+  </mat-tab>
+
   <mat-tab label="Past bookings">
     <mat-nav-list>
       <cdk-virtual-scroll-viewport
@@ -38,48 +80,6 @@
                 {{ booking.endDate | dateFormat }}
               </span>
               <span matListItemMeta>{{ booking.location }}</span>
-            </a>
-          }
-        </ng-container>
-      </cdk-virtual-scroll-viewport>
-    </mat-nav-list>
-  </mat-tab>
-
-  <mat-tab label="Upcoming bookings"
-    ><mat-nav-list>
-      <cdk-virtual-scroll-viewport
-        scrollWindow
-        [itemSize]="64"
-        [maxBufferPx]="500"
-      >
-        <ng-container
-          *cdkVirtualFor="let booking of upcomingBookingsDataSource"
-        >
-          @if (!booking) {
-            <a mat-list-item disabled>
-              <app-circle-placeholder matListItemIcon [radius]="35">
-              </app-circle-placeholder>
-              <app-line-placeholder
-                matListItemTitle
-                [width]="250"
-                [height]="15"
-              >
-              </app-line-placeholder>
-            </a>
-          } @else {
-            <a
-              mat-list-item
-              [routerLink]="[booking.id]"
-              routerLinkActive="active"
-            >
-              <span matListItemTitle>
-                Your upcoming stay at {{ booking.propertyName }}
-              </span>
-              <span matListItemMeta>{{ booking.location }}</span>
-              <span matListItemLine>
-                From {{ booking.startDate | dateFormat }} to
-                {{ booking.endDate | dateFormat }}
-              </span>
             </a>
           }
         </ng-container>

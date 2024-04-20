@@ -56,13 +56,10 @@ import { AppToastService } from '$shared/toast';
 export class NewBookingPageComponent implements AfterViewInit {
   @Input() property!: PropertyDetails;
   @Input() propertyRooms!: RoomPropertyDetails[];
-
   @Input() startDate!: Date;
   @Input() endDate!: Date;
-
   @Input() numberOfChildren!: string;
   @Input() numberOfAdults!: string;
-
   @Input() userId!: string;
   @Input() userForm!: FormGroup;
 
@@ -77,6 +74,7 @@ export class NewBookingPageComponent implements AfterViewInit {
 
   ngAfterViewInit() {
     this.setControls();
+
     this.loggedUserEmail = this.userForm.get('email')?.value;
   }
 
@@ -198,6 +196,6 @@ export class NewBookingPageComponent implements AfterViewInit {
       }
     }
 
-    this.router.navigateByUrl('');
+    this.router.navigateByUrl('/bookings/my-reservations');
   }
 }

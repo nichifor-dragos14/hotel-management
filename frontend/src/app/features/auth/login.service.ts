@@ -15,6 +15,7 @@ export class LoginService {
 
   logout() {
     localStorage.removeItem('JWT');
+
     this.isLoggedIn.next(false);
   }
 
@@ -56,6 +57,7 @@ export class LoginService {
       if (JWT.length != 0) {
         try {
           localStorage.setItem('JWT', JWT);
+
           this.notifyLoginSuccess();
           resolve();
         } catch (error) {
@@ -96,7 +98,7 @@ export class LoginService {
     let claims = this.decodeToken();
 
     if (claims == null) {
-      return;
+      throw Error('No user logged in');
     }
 
     return claims['emailaddress'];
@@ -106,7 +108,7 @@ export class LoginService {
     let claims = this.decodeToken();
 
     if (claims == null) {
-      return;
+      throw Error('No user logged in');
     }
 
     return claims['nameidentifier'];

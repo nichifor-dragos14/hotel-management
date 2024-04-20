@@ -1,4 +1,4 @@
-import { BookingService, ReportService } from '$backend/services';
+import { BookingService } from '$backend/services';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -16,7 +16,9 @@ import { AppToastService } from '$shared/toast';
   standalone: true,
   template: `
     <h1 mat-dialog-title>Cancel booking?</h1>
+
     <p mat-dialog-content>Are you sure you want to cancel this booking?</p>
+    
     <mat-dialog-actions align="end">
       <button mat-button color="primary" (click)="ok()">Ok</button>
       <button mat-button color="warn" routerLink="../../">Close</button>
