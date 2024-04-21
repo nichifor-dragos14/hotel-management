@@ -644,6 +644,56 @@
         }
       }
     },
+    "/properties/recommendations": {
+      "get": {
+        "tags": [
+          "Property"
+        ],
+        "parameters": [
+          {
+            "name": "from",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "to",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "searchHistoryFields",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/SearchHistoryFields"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PropertySummaryRecommendationIPaginatedResult"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
     "/properties/types": {
       "get": {
         "tags": [
@@ -2428,6 +2478,94 @@
         },
         "additionalProperties": false
       },
+      "PropertySummaryRecommendation": {
+        "required": [
+          "availableRooms",
+          "createdOn",
+          "hasFreeCancellation",
+          "id",
+          "location",
+          "name",
+          "prepaymentNeeded",
+          "rating",
+          "rowNumber",
+          "typeOfRooms"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string"
+          },
+          "location": {
+            "type": "string"
+          },
+          "rating": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "hasFreeCancellation": {
+            "type": "boolean"
+          },
+          "prepaymentNeeded": {
+            "type": "boolean"
+          },
+          "typeOfRooms": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RoomType"
+            }
+          },
+          "availableRooms": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "reviewRating": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "totalReviews": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "createdOn": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "rowNumber": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "PropertySummaryRecommendationIPaginatedResult": {
+        "required": [
+          "results",
+          "totalCount"
+        ],
+        "type": "object",
+        "properties": {
+          "results": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PropertySummaryRecommendation"
+            },
+            "readOnly": true
+          },
+          "totalCount": {
+            "type": "integer",
+            "format": "int32",
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
       "PropertyType": {
         "enum": [
           0,
@@ -2817,6 +2955,33 @@
         ],
         "type": "integer",
         "format": "int32"
+      },
+      "SearchHistoryFields": {
+        "required": [
+          "location",
+          "numberOfAdults",
+          "numberOfChildren",
+          "numberOfRooms"
+        ],
+        "type": "object",
+        "properties": {
+          "location": {
+            "type": "string"
+          },
+          "numberOfAdults": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "numberOfChildren": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "numberOfRooms": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
       },
       "UpdateBookingCommand": {
         "required": [

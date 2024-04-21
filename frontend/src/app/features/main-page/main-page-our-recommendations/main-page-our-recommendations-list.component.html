@@ -1,1 +1,31 @@
-<h1>Our recommendations</h1>
+<app-page-header title="Our recommendations">
+  <button
+    mat-button
+    color="primary"
+    button
+    [routerLink]="['/users/my-profile/preferences']"
+  >
+    See how we make these recommendations
+  </button>
+</app-page-header>
+
+<mat-nav-list>
+  <cdk-virtual-scroll-viewport
+    scrollWindow
+    [itemSize]="248"
+    [maxBufferPx]="3000"
+  >
+    <ng-container *cdkVirtualFor="let property of propertiesDataSource">
+      @if (!property) {
+        <app-property-recommendation-card-placeholder></app-property-recommendation-card-placeholder>
+      } @else {
+        <app-property-recommendation-card
+          [property]="property"
+          [routerLink]="['/properties', property.id, 'preview']"
+          [queryParams]="activatedRoute.snapshot.queryParams"
+        >
+        </app-property-recommendation-card>
+      }
+    </ng-container>
+  </cdk-virtual-scroll-viewport>
+</mat-nav-list>

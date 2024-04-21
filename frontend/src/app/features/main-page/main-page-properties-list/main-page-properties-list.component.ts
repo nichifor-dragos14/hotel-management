@@ -8,7 +8,7 @@ import { PropertyService } from '$backend/services';
 import { PaginatedDataSource } from '$core/pagination';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { PropertyCardPlaceholderComponent } from '$shared/placeholders/card-placeholder';
-import { Subscription } from 'rxjs';
+import { AppPageHeaderComponent } from '$shared/page-header';
 
 @Component({
   selector: 'app-main-page-properties-list',
@@ -25,13 +25,12 @@ import { Subscription } from 'rxjs';
     PropertyCardComponent,
     ScrollingModule,
     PropertyCardPlaceholderComponent,
+    AppPageHeaderComponent,
   ],
 })
 export class MainPagePropertiesListComponent {
   propertyService = inject(PropertyService);
   activatedRoute = inject(ActivatedRoute);
-
-  queryParamsSubscription!: Subscription;
 
   propertiesDataSource = new PaginatedDataSource({
     fetch: ({ from, to }) => {

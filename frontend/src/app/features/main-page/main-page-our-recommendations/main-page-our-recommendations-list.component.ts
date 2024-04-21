@@ -3,12 +3,20 @@ import { ActivatedRoute, RouterModule } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
 import { MatListModule } from '@angular/material/list';
-import { PropertyCardComponent } from '$shared/cards';
+import {
+  PropertyCardComponent,
+  PropertyRecommendationCardComponent,
+} from '$shared/cards';
 import { PropertyService } from '$backend/services';
 import { PaginatedDataSource } from '$core/pagination';
 import { ScrollingModule } from '@angular/cdk/scrolling';
-import { PropertyCardPlaceholderComponent } from '$shared/placeholders/card-placeholder';
-import { Subscription } from 'rxjs';
+import {
+  PropertyCardPlaceholderComponent,
+  PropertyRecommendationCardPlaceholderComponent,
+} from '$shared/placeholders/card-placeholder';
+import { SearchHistoryService } from '$core/search-history.service';
+import { AppPageHeaderComponent } from '$shared/page-header';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-main-page-our-recommendations-list',
@@ -22,14 +30,27 @@ import { Subscription } from 'rxjs';
     MatIconModule,
     CommonModule,
     MatListModule,
-    PropertyCardComponent,
+    PropertyRecommendationCardComponent,
     ScrollingModule,
-    PropertyCardPlaceholderComponent,
+    PropertyRecommendationCardPlaceholderComponent,
+    AppPageHeaderComponent,
+    MatButtonModule,
   ],
 })
 export class MainPageOurRecommendationsComponent {
-  propertyService = inject(PropertyService);
   activatedRoute = inject(ActivatedRoute);
+  propertyService = inject(PropertyService);
+  searchHistoryService = inject(SearchHistoryService);
 
-  queryParamsSubscription!: Subscription;
+  propertiesDataSource = new PaginatedDataSource({
+    fetch: ({ from, to }) => {
+      const searchHistoryFields = this.searchHistoryService.GetSearchHistory();
+
+      return this.propertyService.propertiesRecommendationsGet({
+        from: from,
+        to: to,
+        searchHistoryFields: searchHistoryFields,
+      });
+    },
+  });
 }

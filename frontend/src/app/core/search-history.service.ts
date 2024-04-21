@@ -1,3 +1,4 @@
+import { SearchHistoryFields } from '$backend/services';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -34,14 +35,30 @@ export class SearchHistoryService {
     localStorage.setItem('SearchHistory', searchHistoryString);
   }
 
-  GetSearchHistory(): string[] {
+  GetSearchHistory(): SearchHistoryFields[] {
     let searchHistoryString = localStorage.getItem('SearchHistory');
 
     if (!searchHistoryString) {
       return [];
     }
 
-    return searchHistoryString.split(';');
+    let searchHistory = searchHistoryString.split(';');
+    let searchHistoryArray: SearchHistoryFields[] = [];
+
+    searchHistory.forEach((element) => {
+      if (element != '') {
+        let field: SearchHistoryFields = JSON.parse(element);
+
+        searchHistoryArray.push({
+          location: field.location,
+          numberOfAdults: field.numberOfAdults,
+          numberOfChildren: field.numberOfChildren,
+          numberOfRooms: field.numberOfRooms,
+        });
+      }
+    });
+
+    return searchHistoryArray;
   }
 
   RemoveSearchHistory() {

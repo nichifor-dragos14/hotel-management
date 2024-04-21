@@ -39,6 +39,17 @@ public class PropertyController : ControllerBase
         return TypedResults.Ok(await queryService.ExecuteAsync(new AllPropertySummariesFilteredQuery(from, to, propertyFiltersMandatory, propertyFiltersOptional), cancelationToken));
     }
 
+    [HttpGet("recommendations")]
+    public async Task<Results<Ok<IPaginatedResult<PropertySummaryRecommendation>>, NotFound>> GetAllFiltered(
+    [FromServices] IQueryHandler<AllPropertyRecommendationSummariesQuery, IPaginatedResult<PropertySummaryRecommendation>> queryService,
+    int from,
+    int to,
+    [FromQuery] List<SearchHistoryFields> searchHistoryFields,
+    CancellationToken cancelationToken)
+    {
+        return TypedResults.Ok(await queryService.ExecuteAsync(new AllPropertyRecommendationSummariesQuery(from, to, searchHistoryFields), cancelationToken));
+    }
+
     [HttpGet("types")]
     public async Task<Results<Ok<IEnumerable<PropertyTypeSummary>>, NotFound>> GetAllTypes(
         [FromServices] IQueryHandler<AllPropertyTypesQuery, IEnumerable<PropertyTypeSummary>> queryService,
