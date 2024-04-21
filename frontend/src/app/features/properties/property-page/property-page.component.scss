@@ -22,16 +22,70 @@ mat-grid-tile img {
   object-fit: cover;
 }
 
-section[role='gallery-facilities-map'] {
+section[role='gallery-search'] {
   display: grid;
-  grid-template-columns: 5fr 3fr;
-  grid-template-areas: 'gallery facilities-map';
+  grid-template-columns: 1fr auto;
+  grid-template-areas: 'gallery search';
   gap: 64px;
   padding: 16px 0;
 }
 
-#general-rating-heading {
+section[role='general-rating-map'] {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+section[role='map'] {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+section[role='map'] img {
+  height: 200px;
+  width: 350px;
+}
+
+.aligned-span {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  align-items: center;
+}
+
+.space-between-span {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.aligned-span h2 {
   margin: 0;
+}
+
+.space-between-span h2 {
+  margin: 0;
+}
+
+section[role='search'] {
+  grid-area: search;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+section[role='search'] form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+section[role='search'] form section {
+  display: flex;
+  flex-direction: column;
 }
 
 .property-rating-square {
@@ -50,65 +104,34 @@ mat-grid-list {
   grid-area: gallery;
 }
 
-section[role='facilities-map'] {
-  grid-area: facilities-map;
+section[role='facilities-section'] {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  gap: 8px;
 }
 
 section[role='facilities'] {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-gap: 16px;
+}
+
+mat-card-content {
   display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-section[role='facilities'] span {
-  align-items: center;
-}
-
-section[role='location-general-rating'] {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
-
-section[role='general-rating'] {
-  display: flex;
-  flex-direction: row;
-  gap: 8px;
-  align-items: center;
-}
-
-section[role='map'] {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-section[role='map'] img {
-  height: 200px;
-  width: 350px;
-}
-
-section[role='facilities'] span {
-  display: flex;
-  flex-direction: row;
   gap: 4px;
+  align-items: center;
+  justify-content: center;
+}
+
+section[role='about'] {
+  display: flex;
+  flex-direction: column;
 }
 
 section[role='rooms'] {
   display: flex;
   flex-direction: column;
   gap: 16px;
-}
-
-section[role='rooms'] h2 {
-  margin: 0;
-}
-
-section[role='rooms'] button {
-  justify-self: end;
 }
 
 section[role='title-rooms'] {
@@ -123,7 +146,7 @@ section[role='rooms'] table th {
 }
 
 section[role='rooms'] table td {
-  padding: 16px 0;
+  padding: 16px;
 }
 
 section[role='rooms'] table section[role='room-facilities'] {

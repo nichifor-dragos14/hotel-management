@@ -7,7 +7,7 @@ import {
   inject,
 } from '@angular/core';
 import { PropertyDetails, RoomType } from '$backend/services';
-import { ActivatedRoute, RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
@@ -15,6 +15,13 @@ import { AppPageHeaderComponent } from '$shared/page-header';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatTableModule } from '@angular/material/table';
 import { ReviewPropertyCardComponent } from '$shared/cards';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { SEARCH_PROPERTY_FORM } from '$features/main-page/search-property.form';
+import { MatCardModule } from '@angular/material/card';
 
 export interface GridImage {
   image: string;
@@ -37,11 +44,20 @@ export interface GridImage {
     MatGridListModule,
     MatTableModule,
     ReviewPropertyCardComponent,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatCardModule,
   ],
 })
 export class PropertyPageComponent implements OnInit {
   @Input() property!: PropertyDetails;
   activatedRoute = inject(ActivatedRoute);
+  router = inject(Router);
+
+  searchPropertyForm = inject(SEARCH_PROPERTY_FORM);
 
   displayedColumns = ['roomType', 'numberOfGuests', 'price'];
 
@@ -146,5 +162,30 @@ export class PropertyPageComponent implements OnInit {
 
   transformToOneDecimal(rating: number) {
     return rating.toPrecision(2);
+  }
+
+  transformReviewRatingToString(rating: number) {
+    if (rating >= 9) return 'Superb';
+    if (rating >= 8) return 'Very good';
+    if (rating >= 7) return 'Good';
+    if (rating >= 6) return 'Pleasant';
+
+    return '👍';
+  }
+
+  sendParams() {
+    let queryParams = {
+      location: this.searchPropertyForm.value.location,
+      startDate: this.searchPropertyForm.value.startDate?.toISOString(),
+      endDate: this.searchPropertyForm.value.endDate?.toISOString(),
+      numberOfAdults: this.searchPropertyForm.value.numberOfAdults,
+      numberOfChildren: this.searchPropertyForm.value.numberOfChildren,
+      numberOfRooms: this.searchPropertyForm.value.numberOfRooms,
+    };
+
+    this.router.navigate([], {
+      relativeTo: this.activatedRoute,
+      queryParams: queryParams,
+    });
   }
 }

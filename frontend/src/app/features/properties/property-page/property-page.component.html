@@ -13,8 +13,8 @@
   </button>
 </app-page-header>
 
-<section role="gallery-facilities-map">
-  <mat-grid-list [cols]="gridCols" gutterSize="12px" [rowHeight]="200">
+<section role="gallery-search">
+  <mat-grid-list [cols]="gridCols" gutterSize="12px">
     @for (image of gridImages; track image) {
       <mat-grid-tile [colspan]="image.cols" [rowspan]="image.rows">
         <img alt="Hotel picture" [src]="image.image" />
@@ -22,97 +22,187 @@
     }
   </mat-grid-list>
 
-  <section role="facilities-map">
-    <section role="facilities">
-      <section role="location-general-rating">
-        <span>
+  <section role="search">
+    <section role="general-rating-map">
+      <span class="aligned-span">
+        <h2>{{ transformReviewRatingToString(property.reviewRating) }}</h2>
+        <div class="property-rating-square">
+          {{ transformToOneDecimal(property.reviewRating) }}
+        </div>
+      </span>
+
+      <section role="map">
+        <span class="aligned-span">
           <mat-icon color="primary">location_pin</mat-icon>
           <span>
             {{ property.location }} - <a href="" target="_blank">View on map</a>
           </span>
         </span>
-
-        <section role="general-rating">
-          <h2 id="general-rating-heading">Superb</h2>
-          <div class="property-rating-square">
-            {{ transformToOneDecimal(property.reviewRating) }}
-          </div>
-        </section>
+        <img alt="Google maps location" src="assets/google-maps.jpg" />
       </section>
-      <h2>Property facilities</h2>
-
-      @if (property.hasFreeWiFi) {
-        <span>
-          <mat-icon color="primary">wifi</mat-icon>
-          <span>Free wifi</span>
-        </span>
-      }
-
-      @if (property.hasParking) {
-        <span>
-          <mat-icon color="primary">local_parking</mat-icon>
-          <span>Parking</span>
-        </span>
-      }
-
-      @if (property.hasPool) {
-        <span>
-          <mat-icon color="primary">pool</mat-icon>
-          <span>Pool</span>
-        </span>
-      }
-
-      @if (property.hasRestaurant) {
-        <span>
-          <mat-icon color="primary">restaurant</mat-icon>
-          <span>Restaurant</span>
-        </span>
-      }
-
-      @if (property.hasBreakfast) {
-        <span>
-          <mat-icon color="primary">free_breakfast</mat-icon>
-          <span>Breakfast</span>
-        </span>
-      }
-
-      @if (property.hasFitnessCenter) {
-        <span>
-          <mat-icon color="primary">fitness_center</mat-icon>
-          <span>Fitness center</span>
-        </span>
-      }
-
-      @if (property.hasRoomService) {
-        <span>
-          <mat-icon color="primary">room_service</mat-icon>
-          <span>Room service</span>
-        </span>
-      }
-
-      @if (property.hasPetFriendlyPolicy) {
-        <span>
-          <mat-icon color="primary">pets</mat-icon>
-          <span>Pet friendly</span>
-        </span>
-      }
-
-      @if (property.hasFreeCancellation) {
-        <span>
-          <mat-icon color="primary">cancel</mat-icon>
-          <span>Free cancellation</span>
-        </span>
-      }
     </section>
 
-    <section role="map">
-      <h2>View on map</h2>
-      <img alt="Google maps location" src="assets/google-maps.jpg" />
-    </section>
+    <form [formGroup]="searchPropertyForm" role="searchForm">
+      <span class="space-between-span">
+        <h2>Your search</h2>
+        <button
+          mat-button
+          color="primary"
+          [disabled]="searchPropertyForm.invalid"
+          (click)="sendParams()"
+        >
+          Search
+        </button>
+      </span>
+
+      <section>
+        <mat-form-field appearance="outline">
+          <mat-label>Location</mat-label>
+          <input matInput formControlName="location" />
+          <mat-icon matPrefix class="my-icon">bed</mat-icon>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Enter a date range</mat-label>
+          <mat-date-range-input [rangePicker]="picker">
+            <input matStartDate formControlName="startDate" />
+            <input matEndDate formControlName="endDate" />
+          </mat-date-range-input>
+
+          <mat-datepicker-toggle matIconSuffix [for]="picker">
+          </mat-datepicker-toggle>
+
+          <mat-date-range-picker #picker></mat-date-range-picker>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Adults</mat-label>
+          <input
+            matInput
+            formControlName="numberOfAdults"
+            type="number"
+            min="1"
+          />
+          <mat-icon matPrefix class="my-icon">person</mat-icon>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Children</mat-label>
+          <input
+            matInput
+            formControlName="numberOfChildren"
+            type="number"
+            min="0"
+          />
+          <mat-icon matPrefix class="my-icon">child_care</mat-icon>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Rooms</mat-label>
+          <input
+            matInput
+            formControlName="numberOfRooms"
+            type="number"
+            min="1"
+          />
+          <mat-icon matPrefix class="my-icon">hotel</mat-icon>
+        </mat-form-field>
+      </section>
+    </form>
   </section>
 </section>
 
-<div [innerHTML]="property.description"></div>
+<section role="facilities-section">
+  <h2>Property facilities</h2>
+
+  <section role="facilities">
+    @if (property.hasFreeWiFi) {
+      <mat-card>
+        <mat-card-content>
+          <mat-icon color="primary">wifi</mat-icon>
+          <span>Free wifi</span>
+        </mat-card-content>
+      </mat-card>
+    }
+
+    @if (property.hasParking) {
+      <mat-card>
+        <mat-card-content>
+          <mat-icon color="primary">local_parking</mat-icon>
+          <span>Parking</span>
+        </mat-card-content>
+      </mat-card>
+    }
+
+    @if (property.hasPool) {
+      <mat-card>
+        <mat-card-content>
+          <mat-icon color="primary">pool</mat-icon>
+          <span>Pool</span>
+        </mat-card-content>
+      </mat-card>
+    }
+
+    @if (property.hasRestaurant) {
+      <mat-card>
+        <mat-card-content>
+          <mat-icon color="primary">restaurant</mat-icon>
+          <span>Restaurant</span>
+        </mat-card-content>
+      </mat-card>
+    }
+
+    @if (property.hasBreakfast) {
+      <mat-card>
+        <mat-card-content>
+          <mat-icon color="primary">free_breakfast</mat-icon>
+          <span>Breakfast</span>
+        </mat-card-content>
+      </mat-card>
+    }
+
+    @if (property.hasFitnessCenter) {
+      <mat-card>
+        <mat-card-content>
+          <mat-icon color="primary">fitness_center</mat-icon>
+          <span>Fitness center</span>
+        </mat-card-content>
+      </mat-card>
+    }
+
+    @if (property.hasRoomService) {
+      <mat-card>
+        <mat-card-content>
+          <mat-icon color="primary">room_service</mat-icon>
+          <span>Room service</span>
+        </mat-card-content>
+      </mat-card>
+    }
+
+    @if (property.hasPetFriendlyPolicy) {
+      <mat-card>
+        <mat-card-content>
+          <mat-icon color="primary">pets</mat-icon>
+          <span>Pet friendly</span>
+        </mat-card-content>
+      </mat-card>
+    }
+
+    @if (property.hasFreeCancellation) {
+      <mat-card>
+        <mat-card-content>
+          <mat-icon color="primary">cancel</mat-icon>
+          <span>Free cancellation</span>
+        </mat-card-content>
+      </mat-card>
+    }
+  </section>
+</section>
+
+<section role="about">
+  <h2>About</h2>
+  <div [innerHTML]="property.description"></div>
+</section>
 
 <section role="rooms">
   <section role="title-rooms">
