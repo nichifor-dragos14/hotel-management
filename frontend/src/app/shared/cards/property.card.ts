@@ -72,6 +72,8 @@ import { MatRippleModule } from '@angular/material/core';
               <div class="property-rating-square">
                 {{ transformToTwoDecimals(property.reviewRating) }}
               </div>
+            } @else {
+              <div class="property-rating-square">🤔</div>
             }
           </span>
           <span matCardSubtitle>

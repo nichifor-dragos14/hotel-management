@@ -50,17 +50,6 @@ import { MatRippleModule } from '@angular/material/core';
               No prepayment needed - pay at arrival
             </span>
           }
-          @if (property.availableRooms <= 3) {
-            <span matCardSubtitle class="red-text">
-              Only {{ property.availableRooms }}
-              @if (property.availableRooms == 1) {
-                room
-              } @else {
-                rooms
-              }
-              left on our site at this price
-            </span>
-          }
         </mat-card-content>
       </section>
 
@@ -72,6 +61,8 @@ import { MatRippleModule } from '@angular/material/core';
               <div class="property-rating-square">
                 {{ transformToTwoDecimals(property.reviewRating) }}
               </div>
+            } @else {
+              <div class="property-rating-square">🤔</div>
             }
           </span>
           <span matCardSubtitle>

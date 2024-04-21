@@ -7,7 +7,10 @@ import {
   PropertyCardComponent,
   PropertyRecommendationCardComponent,
 } from '$shared/cards';
-import { PropertyService } from '$backend/services';
+import {
+  PropertyService,
+  PropertySummaryRecommendation,
+} from '$backend/services';
 import { PaginatedDataSource } from '$core/pagination';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import {
@@ -17,6 +20,7 @@ import {
 import { SearchHistoryService } from '$core/search-history.service';
 import { AppPageHeaderComponent } from '$shared/page-header';
 import { MatButtonModule } from '@angular/material/button';
+import { PropertyQueryParams } from '../property-query-params.interface';
 
 @Component({
   selector: 'app-main-page-our-recommendations-list',
@@ -38,7 +42,6 @@ import { MatButtonModule } from '@angular/material/button';
   ],
 })
 export class MainPageOurRecommendationsComponent {
-  activatedRoute = inject(ActivatedRoute);
   propertyService = inject(PropertyService);
   searchHistoryService = inject(SearchHistoryService);
 
@@ -53,4 +56,19 @@ export class MainPageOurRecommendationsComponent {
       });
     },
   });
+
+  generateDefaultQueryParams(property: PropertySummaryRecommendation) {
+    let propertyQueryParams: PropertyQueryParams = {
+      startDate: new Date().toISOString(),
+      endDate: new Date(
+        new Date().getTime() + 24 * 60 * 60 * 1000
+      ).toISOString(),
+      numberOfChildren: 1,
+      numberOfAdults: 2,
+      numberOfRooms: 1,
+      location: property.location,
+    };
+
+    return propertyQueryParams;
+  }
 }

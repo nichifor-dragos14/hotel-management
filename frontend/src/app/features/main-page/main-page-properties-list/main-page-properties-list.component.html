@@ -1,4 +1,12 @@
 <app-page-header title="Properties corresponding your search">
+  <button
+    mat-button
+    color="primary"
+    button
+    [routerLink]="['/main/our-recommendations']"
+  >
+    See our recommendations
+  </button>
 </app-page-header>
 
 <mat-nav-list>
@@ -15,7 +23,8 @@
           [property]="property"
           [routerLink]="['/properties', property.id, 'preview']"
           [queryParams]="activatedRoute.snapshot.queryParams"
-        ></app-property-card>
+        >
+        </app-property-card>
       }
     </ng-container>
   </cdk-virtual-scroll-viewport>

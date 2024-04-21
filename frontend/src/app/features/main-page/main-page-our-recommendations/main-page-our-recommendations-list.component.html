@@ -22,7 +22,7 @@
         <app-property-recommendation-card
           [property]="property"
           [routerLink]="['/properties', property.id, 'preview']"
-          [queryParams]="activatedRoute.snapshot.queryParams"
+          [queryParams]="generateDefaultQueryParams(property)"
         >
         </app-property-recommendation-card>
       }

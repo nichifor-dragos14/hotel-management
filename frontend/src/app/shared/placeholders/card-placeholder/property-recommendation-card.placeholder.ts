@@ -30,9 +30,6 @@ import { AppLinePlaceholderComponent } from '../line-placeholder';
 
           <app-line-placeholder [width]="240" [height]="10">
           </app-line-placeholder>
-
-          <app-line-placeholder [width]="220" [height]="10">
-          </app-line-placeholder>
         </mat-card-content>
       </section>
 

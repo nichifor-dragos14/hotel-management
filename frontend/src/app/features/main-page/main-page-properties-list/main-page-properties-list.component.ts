@@ -9,6 +9,7 @@ import { PaginatedDataSource } from '$core/pagination';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { PropertyCardPlaceholderComponent } from '$shared/placeholders/card-placeholder';
 import { AppPageHeaderComponent } from '$shared/page-header';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-main-page-properties-list',
@@ -26,6 +27,7 @@ import { AppPageHeaderComponent } from '$shared/page-header';
     ScrollingModule,
     PropertyCardPlaceholderComponent,
     AppPageHeaderComponent,
+    MatButtonModule,
   ],
 })
 export class MainPagePropertiesListComponent {
