@@ -22,6 +22,7 @@ import { FILTER_PROPERTY_FORM } from '../filter-property.form';
 import { PropertyQueryParams } from '../property-query-params.interface';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatDividerModule } from '@angular/material/divider';
+import { SearchHistoryService } from '$core/search-history.service';
 
 @Component({
   selector: 'app-main-page-properties',
@@ -52,6 +53,8 @@ export class MainPagePropertiesComponent implements AfterViewInit {
   readonly searchPropertyForm = inject(SEARCH_PROPERTY_FORM);
   readonly filterPropertyForm = inject(FILTER_PROPERTY_FORM);
   readonly router = inject(Router);
+
+  readonly searchHistoryService = inject(SearchHistoryService);
 
   ngAfterViewInit() {
     this.submitForm();
@@ -172,6 +175,10 @@ export class MainPagePropertiesComponent implements AfterViewInit {
     } else if (filterValue.isSuperb) {
       queryParams['isSuperb'] = true;
     }
+
+    this.searchHistoryService.AddSearchToSearchHistory(
+      JSON.stringify(this.searchPropertyForm.value)
+    );
 
     this.router.navigate(['main/search-results'], { queryParams: queryParams });
   }
