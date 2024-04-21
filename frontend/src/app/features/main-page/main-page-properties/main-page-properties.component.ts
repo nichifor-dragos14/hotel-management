@@ -63,7 +63,11 @@ export class MainPagePropertiesComponent implements AfterViewInit {
   submitForm() {
     if (this.searchPropertyForm.valid) {
       this.search(this.searchPropertyForm.value);
+
+      return;
     }
+
+    this.router.navigate(['main/our-recommendations']);
   }
 
   search(newSearch: typeof this.searchPropertyForm.value) {
