@@ -18,15 +18,25 @@ section[role='header'] {
   gap: 16px;
 }
 
-form {
+section[role='content'] {
   display: grid;
-  grid-template-areas: 'form button';
+  grid-template-areas: 'display buttons';
   grid-template-columns: 1fr auto;
   grid-column-gap: 64px;
 }
 
+section[role='display'] {
+  grid-area: display;
+}
+
+section[role='buttons'] {
+  grid-area: buttons;
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+}
+
 section[role='personal-information'] {
-  grid-area: form;
   display: flex;
   flex-direction: column;
   gap: 32px;
@@ -37,19 +47,22 @@ section[role='personal-information'] section {
   grid-template-columns: 1fr 1fr;
 }
 
-section[role='form'] {
+form {
   display: flex;
   flex-direction: column;
-  gap: 8px;
 }
 
 mat-radio-group {
   margin-bottom: 22px;
 }
 
-section[role='edit'] {
-  grid-area: button;
+section[role='bottom'] {
   display: flex;
-  flex-direction: row;
-  gap: 4px;
+  flex-direction: column;
+  margin-top: 5vh;
+}
+
+.font-light {
+  font-weight: lighter;
+  font-size: 0.8rem;
 }

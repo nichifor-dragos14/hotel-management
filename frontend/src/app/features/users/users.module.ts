@@ -17,6 +17,7 @@ const USER_ROUTES: Routes = [
       {
         path: 'details',
         component: UserProfileDetailsPageComponent,
+        runGuardsAndResolvers: 'always',
         resolve: {
           userForm: async () => {
             const router = inject(Router);

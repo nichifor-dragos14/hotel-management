@@ -12,7 +12,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { MatRadioModule } from '@angular/material/radio';
 import { AppToastService } from '$shared/toast';
 
@@ -35,6 +35,9 @@ import { AppToastService } from '$shared/toast';
   ],
 })
 export class UserProfileDetailsPageComponent {
+  readonly router = inject(Router);
+  readonly activatedRoute = inject(ActivatedRoute);
+
   @Input() userForm!: FormGroup;
   @Input() user!: UserDetails;
 
@@ -53,6 +56,8 @@ export class UserProfileDetailsPageComponent {
   toastService = inject(AppToastService);
 
   editing: boolean = false;
+
+  genderEnum = Gender;
 
   userGenderMapper(value: Gender): String {
     if (value == Gender.$0) {
@@ -122,7 +127,11 @@ export class UserProfileDetailsPageComponent {
         error instanceof Error ? error.message : 'Failed to update profile',
         'error'
       );
-      this.cancelEditing();
+    } finally {
+      this.router.navigate([], {
+        relativeTo: this.activatedRoute,
+        onSameUrlNavigation: 'reload',
+      });
     }
   }
 }

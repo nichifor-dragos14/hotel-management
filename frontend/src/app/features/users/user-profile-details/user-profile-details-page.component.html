@@ -10,8 +10,8 @@
   />
 </section>
 
-<form [formGroup]="userForm">
-  <section role="edit">
+<section role="content">
+  <section role="buttons">
     <button
       mat-button
       color="primary"
@@ -36,102 +36,111 @@
     }
   </section>
 
-  @if (!editing) {
-    <section role="personal-information">
-      <section>
-        <span>First name</span>
-        <span> {{ userForm.get('firstName')?.value }} </span>
+  <section role="display">
+    @if (!editing) {
+      <section role="personal-information">
+        <section>
+          <span>First name</span>
+          <span> {{ user.firstName }} </span>
+        </section>
+
+        <section>
+          <span>Last name</span>
+          <span>
+            {{ user.lastName }}
+          </span>
+        </section>
+
+        <section>
+          <span>Phone number</span>
+          <span>{{ user.phoneNumber }}</span>
+        </section>
+
+        <section>
+          <span>Nationality</span>
+          <span>{{ user.nationality }}</span>
+        </section>
+
+        <section>
+          <span>Gender</span>
+          <span>{{ userGenderMapper(user.gender) }}</span>
+        </section>
+
+        <section>
+          <span>Address</span>
+          <span>{{ user.address }}</span>
+        </section>
+
+        <section>
+          <span>Date of birth</span>
+          <span>{{ user.dateOfBirth | dateFormat }}</span>
+        </section>
       </section>
+    } @else {
+      <form [formGroup]="userForm">
+        <mat-form-field appearance="outline">
+          <mat-label>First name</mat-label>
+          <input matInput formControlName="firstName" />
+          <mat-error>The first name is required</mat-error>
+        </mat-form-field>
 
-      <section>
-        <span>Last name</span>
-        <span>
-          {{ userForm.get('lastName')?.value }}
-        </span>
-      </section>
+        <mat-form-field appearance="outline">
+          <mat-label>Last name</mat-label>
+          <input matInput formControlName="lastName" />
+          <mat-error>The last name is required</mat-error>
+        </mat-form-field>
 
-      <section>
-        <span>Phone number</span>
-        <span>{{ userForm.get('phoneNumber')?.value }}</span>
-      </section>
+        <mat-form-field appearance="outline">
+          <mat-label>Phone number</mat-label>
+          <input matInput formControlName="phoneNumber" />
+          <mat-error>The phone number is required</mat-error>
+        </mat-form-field>
 
-      <section>
-        <span>Nationality</span>
-        <span>{{ userForm.get('nationality')?.value }}</span>
-      </section>
+        <mat-form-field appearance="outline">
+          <mat-label>Nationality</mat-label>
+          <input matInput formControlName="nationality" />
+          <mat-error>The nationality is required</mat-error>
+        </mat-form-field>
 
-      <section>
-        <span>Gender</span>
-        <span>{{ userGenderMapper(userForm.get('gender')?.value) }}</span>
-      </section>
+        <mat-form-field appearance="outline">
+          <mat-label>Address</mat-label>
+          <input matInput formControlName="address" />
+          <mat-error>The address is required</mat-error>
+        </mat-form-field>
 
-      <section>
-        <span>Address</span>
-        <span>{{ userForm.get('address')?.value }}</span>
-      </section>
+        <mat-radio-group
+          aria-label="Select your gender"
+          formControlName="gender"
+        >
+          <mat-radio-button [value]="genderEnum.$0">Man</mat-radio-button>
+          <mat-radio-button [value]="genderEnum.$1">Woman</mat-radio-button>
+          <mat-radio-button [value]="genderEnum.$2">Other</mat-radio-button>
+        </mat-radio-group>
 
-      <section>
-        <span>Date of birth</span>
-        <span>{{ userForm.get('dateOfBirth')?.value | dateFormat }}</span>
-      </section>
-    </section>
-  } @else {
-    <section role="form">
-      <mat-form-field appearance="outline">
-        <mat-label>First name</mat-label>
-        <input matInput formControlName="firstName" />
-        <mat-error>The first name is required</mat-error>
-      </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Date of birth</mat-label>
+          <input
+            matInput
+            [matDatepicker]="picker"
+            formControlName="dateOfBirth"
+          />
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="picker"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      </form>
+    }
+  </section>
+</section>
 
-      <mat-form-field appearance="outline">
-        <mat-label>Last name</mat-label>
-        <input matInput formControlName="lastName" />
-        <mat-error>The last name is required</mat-error>
-      </mat-form-field>
-
-      <mat-form-field appearance="outline">
-        <mat-label>Phone number</mat-label>
-        <input matInput formControlName="phoneNumber" />
-        <mat-error>The phone number is required</mat-error>
-      </mat-form-field>
-
-      <mat-form-field appearance="outline">
-        <mat-label>Nationality</mat-label>
-        <input matInput formControlName="nationality" />
-        <mat-error>The nationality is required</mat-error>
-      </mat-form-field>
-
-      <mat-form-field appearance="outline">
-        <mat-label>Address</mat-label>
-        <input matInput formControlName="address" />
-        <mat-error>The address is required</mat-error>
-      </mat-form-field>
-
-      <mat-radio-group aria-label="Select your gender" formControlName="gender">
-        <mat-radio-button value="{{ 0 }}">Man</mat-radio-button>
-        <mat-radio-button value="{{ 1 }}">Woman</mat-radio-button>
-        <mat-radio-button value="{{ 2 }}">Other</mat-radio-button>
-      </mat-radio-group>
-
-      <mat-form-field appearance="outline">
-        <mat-label>Date of birth</mat-label>
-        <input
-          matInput
-          [matDatepicker]="picker"
-          formControlName="dateOfBirth"
-        />
-        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
-      </mat-form-field>
-    </section>
-  }
-</form>
-<hr />
-
-<section>
-  <p>
+<section role="bottom">
+  <p class="font-light">
     * We use your email address to send you personalized offers and to confirm
     your bookings.
   </p>
-  <p>* Properties can use your phone number to contact you.</p>
+  <p class="font-light">
+    * Properties can use your phone number to contact you.
+  </p>
 </section>

@@ -22,7 +22,7 @@ export class CustomReuseStrategy implements RouteReuseStrategy {
     future: ActivatedRouteSnapshot,
     curr: ActivatedRouteSnapshot
   ): boolean {
-    const neverReuseUrls = ['search-results'];
+    const neverReuseUrls = ['search-results', 'details'];
     const futureUrl = future.routeConfig ? future.routeConfig.path : '';
 
     if (futureUrl == null) {
