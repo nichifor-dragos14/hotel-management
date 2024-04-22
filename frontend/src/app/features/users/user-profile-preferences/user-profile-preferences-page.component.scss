@@ -22,3 +22,13 @@ section[role='personal-preferences'] section {
   display: grid;
   grid-template-columns: 1fr 1fr;
 }
+
+section[role='bottom'] {
+  display: flex;
+  flex-direction: column;
+}
+
+.font-light {
+  font-weight: lighter;
+  font-size: 0.8rem;
+}
