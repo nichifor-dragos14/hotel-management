@@ -3,11 +3,17 @@
     <h1>Your personal details</h1>
     <p>Update your information and find out how it is used.</p>
   </span>
-  <img
-    id="profile-picture"
-    alt="User profile picture"
-    [src]="user.profilePicture"
-  />
+
+  <div class="profile-picture-container">
+    <img
+      id="profile-picture"
+      alt="User profile picture"
+      [src]="user.profilePicture"
+    />
+    <div class="hover-text">
+      <mat-icon> camera_alt </mat-icon>
+    </div>
+  </div>
 </section>
 
 <section role="content">
