@@ -1498,19 +1498,9 @@
       }
     },
     "/users/upload": {
-      "post": {
+      "patch": {
         "tags": [
           "User"
-        ],
-        "parameters": [
-          {
-            "name": "userId",
-            "in": "query",
-            "schema": {
-              "type": "string",
-              "format": "uuid"
-            }
-          }
         ],
         "requestBody": {
           "content": {
@@ -1518,14 +1508,21 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "file": {
+                  "UserId": {
+                    "type": "string",
+                    "format": "uuid"
+                  },
+                  "File": {
                     "type": "string",
                     "format": "binary"
                   }
                 }
               },
               "encoding": {
-                "file": {
+                "UserId": {
+                  "style": "form"
+                },
+                "File": {
                   "style": "form"
                 }
               }
@@ -1545,7 +1542,14 @@
             }
           },
           "400": {
-            "description": "Bad Request"
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
           }
         }
       }

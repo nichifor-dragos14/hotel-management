@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 using System.Threading;
+using HotelManagement.WebApi.DTOs;
+using Google.Apis.Drive.v3.Data;
 
 namespace HotelManagement.WebApi.Controllers;
 
@@ -58,30 +60,32 @@ public class UserController(IFileStorageService _storageService) : Controller
         };
     }
 
-    [HttpPost("upload")]
-    public async Task<Results<Ok<Guid>, BadRequest>> UploadFile(
+    [HttpPatch("upload")]
+    public async Task<Results<Ok<Guid>, BadRequest<string>>> UploadFile(
         [FromServices] ICommandHandler<UpdateProfilePictureCommand, Guid?> commandHandler,
-        Guid userId,
-        IFormFile file,
+        [FromForm] UpdateUserPictureDTO updateUserPictureDTO,
         CancellationToken cancellationToken
     )
     {
-        if (file == null || file.Length == 0)
+        Console.WriteLine("Guid is ", updateUserPictureDTO.UserId);
+        if (updateUserPictureDTO.File == null || updateUserPictureDTO.File.Length == 0)
         {
-            return TypedResults.BadRequest();
+            return TypedResults.BadRequest("No profile picture was uploaded");
         }
 
-        var imageUrl = await _storageService.UploadImage(file.OpenReadStream());
+        var imageUrl = await _storageService.UploadImage(updateUserPictureDTO.File.OpenReadStream());
 
         if (imageUrl == null)
         {
-            return TypedResults.BadRequest();
+            return TypedResults.BadRequest("The image could not be uploaded");
         }
 
-        return await commandHandler.ExecuteAsync(new UpdateProfilePictureCommand(userId, imageUrl.Url), cancellationToken) switch
+        var command = new UpdateProfilePictureCommand(updateUserPictureDTO.UserId, imageUrl.Url);
+
+        return await commandHandler.ExecuteAsync(command, cancellationToken) switch
         {
             { } id => TypedResults.Ok(id),
-            _ => TypedResults.BadRequest()
+            _ => TypedResults.BadRequest("No user logged in")
         };
     }
 }

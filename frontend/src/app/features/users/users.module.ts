@@ -1,5 +1,10 @@
 import { NgModule, inject } from '@angular/core';
-import { Router, RouterModule, Routes } from '@angular/router';
+import {
+  ActivatedRouteSnapshot,
+  Router,
+  RouterModule,
+  Routes,
+} from '@angular/router';
 import { UserProfilePageComponent } from './user-profile/user-profile-page.component';
 import { UserProfileDetailsPageComponent } from './user-profile-details/user-profile-details-page.component';
 import { UserProfilePreferencesPageComponent } from './user-profile-preferences/user-profile-preferences-page.component';
@@ -8,6 +13,8 @@ import { LoginService } from '$features/auth/login.service';
 import { UserService } from '$backend/services';
 import { EditUserDetailsFormFactory } from './user-details.form';
 import { EditUserPreferencesFormFactory } from './user-preferences.form';
+import { DialogPageComponent } from '$shared/dialog-page';
+import { UploadProfilePictureComponent } from './upload-profile-picture.component';
 
 const USER_ROUTES: Routes = [
   {
@@ -62,6 +69,39 @@ const USER_ROUTES: Routes = [
             }
           },
         },
+        children: [
+          {
+            path: 'actions',
+            component: DialogPageComponent,
+            children: [
+              {
+                path: 'upload-profile-picture',
+                component: UploadProfilePictureComponent,
+                resolve: {
+                  user: async () => {
+                    const router = inject(Router);
+                    const loginService = inject(LoginService);
+                    const userService = inject(UserService);
+
+                    try {
+                      const email = loginService.getLoggedUserEmail();
+
+                      const user = await userService.usersEmailGetAsync({
+                        email,
+                      });
+
+                      return user;
+                    } catch (error) {
+                      router.navigate(['/error']);
+
+                      return null;
+                    }
+                  },
+                },
+              },
+            ],
+          },
+        ],
       },
       {
         path: 'preferences',

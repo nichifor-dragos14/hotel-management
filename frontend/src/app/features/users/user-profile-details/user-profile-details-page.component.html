@@ -4,7 +4,10 @@
     <p>Update your information and find out how it is used.</p>
   </span>
 
-  <div class="profile-picture-container">
+  <div
+    class="profile-picture-container"
+    [routerLink]="['actions', 'upload-profile-picture']"
+  >
     <img
       id="profile-picture"
       alt="User profile picture"
@@ -150,3 +153,5 @@
     * Properties can use your phone number to contact you.
   </p>
 </section>
+
+<router-outlet hidden />
