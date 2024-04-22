@@ -41,6 +41,25 @@ const USER_ROUTES: Routes = [
               return null;
             }
           },
+          user: async () => {
+            const router = inject(Router);
+            const loginService = inject(LoginService);
+            const userService = inject(UserService);
+
+            try {
+              const email = loginService.getLoggedUserEmail();
+
+              const user = await userService.usersEmailGetAsync({
+                email,
+              });
+
+              return user;
+            } catch (error) {
+              router.navigate(['/error']);
+
+              return null;
+            }
+          },
         },
       },
       {

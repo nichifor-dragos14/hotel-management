@@ -2,6 +2,7 @@
 using System.Text;
 using HealthChecks.UI.Client;
 using HotelManagement.Core.EmailService;
+using HotelManagement.Core.FileStorageService;
 using HotelManagement.WebApi;
 using HotelManagement.WebApi.Development;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -15,6 +16,7 @@ using Vernou.Swashbuckle.HttpResultsAdapter;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.Configure<EmailOptions>(builder.Configuration.GetSection("EmailOptions"));
+builder.Services.Configure<GoogleDriveOptions>(builder.Configuration.GetSection("GoogleDriveOptions"));
 
 builder.Host.UseSerilog((context, configuration) =>
 {

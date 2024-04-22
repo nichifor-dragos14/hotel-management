@@ -3,7 +3,11 @@
     <h1>Your personal details</h1>
     <p>Update your information and find out how it is used.</p>
   </span>
-  <img id="profile-picture" alt="profile picture" src="assets/hotel1.jpg" />
+  <img
+    id="profile-picture"
+    alt="User profile picture"
+    [src]="user.profilePicture"
+  />
 </section>
 
 <form [formGroup]="userForm">

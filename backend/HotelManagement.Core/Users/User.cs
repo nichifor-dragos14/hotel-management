@@ -43,6 +43,8 @@ public class User
 
     public bool SendOffersOnEmail { get; private set; }
 
+    public string ProfilePicture { get; private set; }
+
     public DateTime CreatedOn { get; private set; }
 
     public DateTime UpdatedOn { get; private set; }
@@ -96,6 +98,14 @@ public class User
     {
         RetainSearchHistory = retainSearchHistory;
         SendOffersOnEmail = sendOffersOnEmail;
+        UpdatedOn = DateTime.UtcNow;
+    }
+
+    public void UpdateProfilePicture(
+      string profilePicture
+   )
+    {
+        ProfilePicture = profilePicture;
         UpdatedOn = DateTime.UtcNow;
     }
 }

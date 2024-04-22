@@ -1,4 +1,4 @@
-import { Gender, UserService } from '$backend/services';
+import { Gender, UserDetails, UserService } from '$backend/services';
 import { DateConverterModule } from '$shared/date-converter';
 import {
   ChangeDetectionStrategy,
@@ -36,6 +36,7 @@ import { AppToastService } from '$shared/toast';
 })
 export class UserProfileDetailsPageComponent {
   @Input() userForm!: FormGroup;
+  @Input() user!: UserDetails;
 
   uneditedUserForm = inject(FormBuilder).group({
     firstName: [''],

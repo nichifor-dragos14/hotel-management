@@ -1496,6 +1496,59 @@
           }
         }
       }
+    },
+    "/users/upload": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "file": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              },
+              "encoding": {
+                "file": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "uuid"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
     }
   },
   "components": {
@@ -3169,6 +3222,7 @@
           "lastName",
           "nationality",
           "phoneNumber",
+          "profilePicture",
           "retainSearchHistory",
           "sendOffersOnEmail"
         ],
@@ -3208,6 +3262,9 @@
           },
           "sendOffersOnEmail": {
             "type": "boolean"
+          },
+          "profilePicture": {
+            "type": "string"
           }
         },
         "additionalProperties": false

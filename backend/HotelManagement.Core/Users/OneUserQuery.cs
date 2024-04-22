@@ -13,7 +13,8 @@ public record UserDetails(
     string Address,
     DateTime DateOfBirth,
     bool RetainSearchHistory,
-    bool SendOffersOnEmail
+    bool SendOffersOnEmail,
+    string ProfilePicture
 );
 
 public record OneUserQuery(string Email) : IQuery<UserDetails>;
@@ -39,7 +40,8 @@ internal class OneUserQueryHandler(
                     user.Address,
                     user.DateOfBirth,
                     user.RetainSearchHistory,
-                    user.SendOffersOnEmail
+                    user.SendOffersOnEmail,
+                    user.ProfilePicture
                     )).FirstOrDefault();
     }
 }
