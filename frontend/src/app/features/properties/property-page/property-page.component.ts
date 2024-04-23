@@ -22,6 +22,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { SEARCH_PROPERTY_FORM } from '$features/main-page/search-property.form';
 import { MatCardModule } from '@angular/material/card';
+import { GoogleMapsPreviewComponent } from '$shared/google-maps';
 
 export interface GridImage {
   image: string;
@@ -50,6 +51,7 @@ export interface GridImage {
     MatDatepickerModule,
     MatNativeDateModule,
     MatCardModule,
+    GoogleMapsPreviewComponent
   ],
 })
 export class PropertyPageComponent implements OnInit {

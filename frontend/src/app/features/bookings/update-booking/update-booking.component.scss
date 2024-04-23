@@ -5,9 +5,11 @@
   gap: 16px;
 }
 
-#map-img {
-  height: 200px;
-  width: 350px;
+#location-text {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-self: flex-start;
 }
 
 section[role='booking-actions'] {

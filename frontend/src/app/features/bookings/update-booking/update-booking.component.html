@@ -123,16 +123,27 @@
     <section role="booking-details">
       <section role="booking-layout">
         <h2>Location</h2>
-        <span>
-          🌍 {{ bookingDetails.propertyDetails.location }} -
-          <a href="#" target="_blank">See on map</a>
+        <span id="location-text">
+          <span>
+            <mat-icon color="primary">location_pin</mat-icon>
+          </span>
+          {{ bookingDetails.propertyDetails.location }} -
+          <a
+            href="https://www.google.com/maps/place/{{
+              bookingDetails.propertyDetails.location
+            }}"
+            target="_blank"
+          >
+            See on map
+          </a>
         </span>
 
-        <img
-          id="map-img"
-          alt="Google maps location"
-          src="assets/google-maps.jpg"
-        />
+        <app-google-maps-preview
+          [address]="bookingDetails.propertyDetails.location"
+          [height]="300"
+          [width]="450"
+        >
+        </app-google-maps-preview>
       </section>
 
       <section role="booking-layout">

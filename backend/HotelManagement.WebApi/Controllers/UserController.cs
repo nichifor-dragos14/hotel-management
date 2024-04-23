@@ -67,7 +67,6 @@ public class UserController(IFileStorageService _storageService) : Controller
         CancellationToken cancellationToken
     )
     {
-        Console.WriteLine("Guid is ", updateUserPictureDTO.UserId);
         if (updateUserPictureDTO.File == null || updateUserPictureDTO.File.Length == 0)
         {
             return TypedResults.BadRequest("No profile picture was uploaded");

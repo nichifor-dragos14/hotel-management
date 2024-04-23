@@ -35,10 +35,21 @@
         <span class="aligned-span">
           <mat-icon color="primary">location_pin</mat-icon>
           <span>
-            {{ property.location }} - <a href="" target="_blank">View on map</a>
+            {{ property.location }} -
+            <a
+              href="https://www.google.com/maps/place/{{ property.location }}"
+              target="_blank"
+              >View on map</a
+            >
           </span>
         </span>
-        <img alt="Google maps location" src="assets/google-maps.jpg" />
+
+        <app-google-maps-preview
+          [address]="property.location"
+          [height]="300"
+          [width]="450"
+        >
+        </app-google-maps-preview>
       </section>
     </section>
 
