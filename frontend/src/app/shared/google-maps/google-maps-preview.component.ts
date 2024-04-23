@@ -6,6 +6,7 @@ import {
   AfterViewInit,
   ChangeDetectorRef,
   Input,
+  OnChanges,
 } from '@angular/core';
 import {
   GoogleMap,
@@ -43,7 +44,7 @@ import { AppToastService } from '$shared/toast';
   imports: [GoogleMapsModule, RouterModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class GoogleMapsPreviewComponent implements AfterViewInit {
+export class GoogleMapsPreviewComponent implements AfterViewInit, OnChanges {
   @ViewChild(GoogleMap, { static: false }) map!: GoogleMap;
   @ViewChild(MapInfoWindow, { static: false }) infoWindow!: MapInfoWindow;
 
@@ -52,6 +53,10 @@ export class GoogleMapsPreviewComponent implements AfterViewInit {
   @Input() width: number = 450;
 
   ngAfterViewInit() {
+    this.findAddress();
+  }
+
+  ngOnChanges() {
     this.findAddress();
   }
 
