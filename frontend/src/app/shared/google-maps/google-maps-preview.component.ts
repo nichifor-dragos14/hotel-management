@@ -53,11 +53,11 @@ export class GoogleMapsPreviewComponent implements AfterViewInit, OnChanges {
   @Input() width: number = 450;
 
   ngAfterViewInit() {
-    this.findAddress();
+    //this.findAddress();
   }
 
   ngOnChanges() {
-    this.findAddress();
+    //this.findAddress();
   }
 
   geocodingService = inject(GeocodingService);

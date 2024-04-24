@@ -1,52 +1,59 @@
-import { UserDetails, UserService } from '$backend/services';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  Input,
-  OnInit,
-  inject,
-} from '@angular/core';
-import { MatDialogModule } from '@angular/material/dialog';
-import { MatButtonModule } from '@angular/material/button';
-import { ActivatedRoute, Router, RouterModule } from '@angular/router';
-import { CommonModule } from '@angular/common';
-import { AppToastService } from '$shared/toast';
-import { AppPageHeaderComponent } from '$shared/page-header';
+// upload-profile-picture.component.ts
+import { Component, Input, OnInit, inject } from '@angular/core';
 import {
   FormControl,
   FormGroup,
-  ReactiveFormsModule,
   Validators,
+  ReactiveFormsModule,
 } from '@angular/forms';
-import { TinyEditorModule } from '$shared/tiny-editor';
+import { Router, ActivatedRoute, RouterModule } from '@angular/router';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { AppToastService } from '$shared/toast';
+import { AppPageHeaderComponent } from '$shared/page-header';
+import { CommonModule } from '@angular/common';
+import {
+  SingleImageUploadComponent,
+  SingleImageUploadService,
+} from '$shared/file-uploader';
+import { UserDetails, UserService } from '$backend/services';
 
 @Component({
   selector: 'app-upload-profile-picture',
   standalone: true,
+  imports: [
+    CommonModule,
+    RouterModule,
+    MatDialogModule,
+    MatButtonModule,
+    MatInputModule,
+    MatFormFieldModule,
+    ReactiveFormsModule,
+    AppPageHeaderComponent,
+    SingleImageUploadComponent,
+  ],
   template: `
     <app-page-header title="Update your profile picture 📸">
       <button
+        button
         mat-button
         color="primary"
-        button
         [disabled]="uploadForm.invalid"
         (click)="uploadImage(uploadForm.value)"
       >
         Update
       </button>
-      <button mat-button color="warn" routerLink="../../" button>Close</button>
+      <button button mat-button color="warn" routerLink="../../">Close</button>
     </app-page-header>
 
     <form [formGroup]="uploadForm">
-      <div>
-        <label for="photo">Photo:</label>
-        <input type="file" id="photo" (change)="onFileSelect($event)" />
-      </div>
+      <app-single-picture-uploader></app-single-picture-uploader>
     </form>
   `,
-  styles: `
+  styles: [
+    `
       :host {
         padding: 32px 24px;
         width: 72vw;
@@ -55,60 +62,47 @@ import { MatFormFieldModule } from '@angular/material/form-field';
         flex-direction: column;
         gap: 16px;
       }
-  
+
       form {
         display: flex;
         flex-direction: column;
         gap: 8px;
         padding: 0 64px;
       }
-  `,
-  imports: [
-    MatDialogModule,
-    MatButtonModule,
-    CommonModule,
-    RouterModule,
-    AppPageHeaderComponent,
-    ReactiveFormsModule,
-    TinyEditorModule,
-    MatInputModule,
-    MatFormFieldModule,
+    `,
   ],
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UploadProfilePictureComponent implements OnInit {
   readonly router = inject(Router);
   readonly activatedRoute = inject(ActivatedRoute);
   readonly userService = inject(UserService);
   readonly toastService = inject(AppToastService);
+  readonly singleImageUploadService = inject(SingleImageUploadService);
+
+  uploadForm!: FormGroup;
 
   @Input() user!: UserDetails;
-  uploadForm!: FormGroup;
 
   ngOnInit(): void {
     this.uploadForm = new FormGroup({
       id: new FormControl(this.user.id, Validators.required),
       picture: new FormControl(null, Validators.required),
     });
-  }
 
-  onFileSelect(event: Event) {
-    const file = (event.target as HTMLInputElement).files![0];
-
-    if (!file) {
-      return;
-    }
-
-    if (file) {
-      this.uploadForm.patchValue({ picture: file });
-    }
+    this.singleImageUploadService.imageFile$.subscribe((imageFile) => {
+      if (imageFile) {
+        this.uploadForm.patchValue({ picture: imageFile.file });
+      }
+    });
   }
 
   async uploadImage(newUploadImage: typeof this.uploadForm.value) {
     if (this.uploadForm.invalid) {
       return;
     }
-    console.log(newUploadImage);
+
+    console.log(this.uploadForm.value);
+
     try {
       await this.userService.usersUploadPatchAsync({
         body: {
@@ -117,7 +111,8 @@ export class UploadProfilePictureComponent implements OnInit {
         },
       });
 
-      this.toastService.open('Succesfully updated profile picture', 'info');
+      this.toastService.open('Successfully updated profile picture', 'info');
+      this.router.navigate(['../../'], { relativeTo: this.activatedRoute });
     } catch (error) {
       if (error instanceof Error) {
         this.toastService.open(error.message, 'error');
