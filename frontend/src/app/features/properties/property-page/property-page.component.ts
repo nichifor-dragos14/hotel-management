@@ -187,7 +187,19 @@ export class PropertyPageComponent implements OnInit {
       numberOfRooms: this.searchPropertyForm.value.numberOfRooms,
     };
 
-    this.router.navigate([], {
+    if (
+      queryParams.location ==
+      this.activatedRoute.snapshot.queryParams['location']
+    ) {
+      this.router.navigate([], {
+        relativeTo: this.activatedRoute,
+        queryParams: queryParams,
+      });
+
+      return;
+    }
+
+    this.router.navigate(['/main/search-results'], {
       relativeTo: this.activatedRoute,
       queryParams: queryParams,
     });
