@@ -2154,12 +2154,14 @@
           "hasFitnessCenter",
           "hasFreeCancellation",
           "hasFreeWiFi",
+          "hasKitchen",
           "hasParking",
           "hasPetFriendlyPolicy",
           "hasPool",
           "hasRestaurant",
           "hasRoomService",
           "id",
+          "imageUrls",
           "location",
           "name",
           "phoneNumber",
@@ -2236,6 +2238,9 @@
           "hasBreakfast": {
             "type": "boolean"
           },
+          "hasKitchen": {
+            "type": "boolean"
+          },
           "hasFreeCancellation": {
             "type": "boolean"
           },
@@ -2245,6 +2250,12 @@
           "reviewCount": {
             "type": "integer",
             "format": "int32"
+          },
+          "imageUrls": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
           },
           "rooms": {
             "type": "array",
@@ -3138,14 +3149,18 @@
           "hasFitnessCenter",
           "hasFreeCancellation",
           "hasFreeWiFi",
+          "hasKitchen",
           "hasParking",
           "hasPetFriendlyPolicy",
           "hasPool",
           "hasRestaurant",
           "hasRoomService",
           "id",
+          "imageUrls",
           "name",
-          "phoneNumber"
+          "phoneNumber",
+          "prepaymentNeeded",
+          "rating"
         ],
         "type": "object",
         "properties": {
@@ -3165,10 +3180,20 @@
           "phoneNumber": {
             "type": "string"
           },
+          "rating": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "prepaymentNeeded": {
+            "type": "boolean"
+          },
           "hasFreeWiFi": {
             "type": "boolean"
           },
           "hasParking": {
+            "type": "boolean"
+          },
+          "hasKitchen": {
             "type": "boolean"
           },
           "hasPool": {
@@ -3191,6 +3216,9 @@
           },
           "hasFreeCancellation": {
             "type": "boolean"
+          },
+          "imageUrls": {
+            "type": "string"
           }
         },
         "additionalProperties": false

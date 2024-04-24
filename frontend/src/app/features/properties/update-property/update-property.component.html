@@ -37,35 +37,51 @@
     <mat-error>The property phone number is required</mat-error>
   </mat-form-field>
 
-  <section role="utilities">
-    <mat-slide-toggle formControlName="hasFreeWiFi">Wi-Fi</mat-slide-toggle>
-    <mat-slide-toggle formControlName="hasParking">Parking</mat-slide-toggle>
-    <mat-slide-toggle formControlName="hasRestaurant"
-      >Restaurant</mat-slide-toggle
-    >
-    <mat-slide-toggle formControlName="hasPool">Pool</mat-slide-toggle>
-    <mat-slide-toggle formControlName="hasFitnessCenter">
-      Fitness center
-    </mat-slide-toggle>
-    <mat-slide-toggle formControlName="hasFreeCancellation">
-      Free cancellation
-    </mat-slide-toggle>
-    <mat-slide-toggle formControlName="hasPetFriendlyPolicy">
-      Pet friendly
-    </mat-slide-toggle>
-    <mat-slide-toggle formControlName="hasRoomService"
-      >Room service</mat-slide-toggle
-    >
-    <mat-slide-toggle formControlName="hasBreakfast"
-      >Breakfast</mat-slide-toggle
-    >
-  </section>
+  <section role="utilities-description">
+    <section role="utilities">
+      <mat-slide-toggle formControlName="hasFreeWiFi">Wi-Fi</mat-slide-toggle>
+      <mat-slide-toggle formControlName="hasParking">Parking</mat-slide-toggle>
+      <mat-slide-toggle formControlName="hasRoomService">
+        Room service
+      </mat-slide-toggle>
+      <mat-slide-toggle formControlName="hasFreeCancellation">
+        Free cancellation
+      </mat-slide-toggle>
+      <mat-slide-toggle formControlName="prepaymentNeeded">
+        Prepayment needed
+      </mat-slide-toggle>
+      <mat-slide-toggle formControlName="hasRestaurant">
+        Restaurant
+      </mat-slide-toggle>
+      <mat-slide-toggle formControlName="hasBreakfast">
+        Breakfast
+      </mat-slide-toggle>
 
-  <mat-form-field appearance="outline">
-    <mat-label>Description</mat-label>
-    <editor appTinyEditor formControlName="description" />
-    <mat-error>The property description is required</mat-error>
-  </mat-form-field>
+      <mat-slide-toggle formControlName="hasKitchen">
+        Kitchen
+      </mat-slide-toggle>
+      <mat-slide-toggle formControlName="hasPool">Pool</mat-slide-toggle>
+      <mat-slide-toggle formControlName="hasFitnessCenter">
+        Fitness center
+      </mat-slide-toggle>
+      <mat-slide-toggle formControlName="hasPetFriendlyPolicy">
+        Pet friendly
+      </mat-slide-toggle>
+    </section>
+
+    <section role="rating">
+      <h2>Rating 🚀</h2>
+      <mat-slider min="1" max="5" step="1" discrete>
+        <input matSliderThumb formControlName="rating" />
+      </mat-slider>
+    </section>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Description</mat-label>
+      <editor appTinyEditor formControlName="description" />
+      <mat-error>The property description is required</mat-error>
+    </mat-form-field>
+  </section>
 </form>
 
 <router-outlet hidden />

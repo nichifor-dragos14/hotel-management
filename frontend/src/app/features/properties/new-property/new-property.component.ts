@@ -159,6 +159,6 @@ export class NewPropertyPageComponent implements OnInit {
       }
     }
 
-    await this.router.navigateByUrl('properties/admin');
+    await this.router.navigateByUrl('/properties/reinit');
   }
 }

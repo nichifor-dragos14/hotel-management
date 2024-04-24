@@ -99,18 +99,18 @@
       </mat-slide-toggle>
     </section>
 
+    <section role="rating">
+      <h2>Rating 🚀</h2>
+      <mat-slider min="1" max="5" step="1" discrete>
+        <input matSliderThumb formControlName="rating" />
+      </mat-slider>
+    </section>
+
     <mat-form-field appearance="outline">
       <mat-label>Description</mat-label>
       <editor appTinyEditor formControlName="description" />
       <mat-error>The description is required</mat-error>
     </mat-form-field>
-  </section>
-
-  <section role="rating">
-    <h2>Rating 🚀</h2>
-    <mat-slider min="1" max="5" step="1" discrete>
-      <input matSliderThumb formControlName="rating" />
-    </mat-slider>
   </section>
 
   <app-multiple-picture-uploader [title]="'Add pictures of the property'">

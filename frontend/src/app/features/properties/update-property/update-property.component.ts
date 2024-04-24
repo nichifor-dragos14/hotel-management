@@ -16,6 +16,7 @@ import { MatInputModule } from '@angular/material/input';
 import { TinyEditorModule } from '$shared/tiny-editor';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatSliderModule } from '@angular/material/slider';
 
 @Component({
   selector: 'app-update-property-page',
@@ -31,6 +32,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     RouterModule,
     MatSelectModule,
     MatSlideToggleModule,
+    MatSliderModule,
   ],
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -48,10 +50,8 @@ export class UpdatePropertyPageComponent {
       id,
       name,
       description,
-      location,
       email,
       phoneNumber,
-      type,
       hasBreakfast,
       hasFitnessCenter,
       hasFreeCancellation,
@@ -61,16 +61,18 @@ export class UpdatePropertyPageComponent {
       hasPool,
       hasRestaurant,
       hasRoomService,
+      hasKitchen,
+      prepaymentNeeded,
+      rating,
+      imageUrls,
     } = newProperty;
 
     if (
       !id ||
       !name ||
       !description ||
-      !location ||
       !email ||
       !phoneNumber ||
-      type == undefined ||
       hasBreakfast == undefined ||
       hasFitnessCenter == undefined ||
       hasFreeCancellation == undefined ||
@@ -79,8 +81,12 @@ export class UpdatePropertyPageComponent {
       hasPetFriendlyPolicy == undefined ||
       hasPool == undefined ||
       hasRestaurant == undefined ||
-      hasRoomService == undefined
+      hasRoomService == undefined ||
+      hasKitchen == undefined ||
+      prepaymentNeeded == undefined ||
+      rating == undefined
     ) {
+      console.log(newProperty);
       return;
     }
 
@@ -101,6 +107,10 @@ export class UpdatePropertyPageComponent {
           hasPool,
           hasRestaurant,
           hasRoomService,
+          hasKitchen,
+          prepaymentNeeded,
+          rating,
+          imageUrls,
         },
       });
 

@@ -62,7 +62,26 @@ const PROPERTY_ROUTES: Routes = [
                     id: params['id'],
                   });
 
-                  return editPropertyFormFactory.build(property);
+                  return editPropertyFormFactory.build({
+                    description: property.description,
+                    email: property.email,
+                    hasBreakfast: property.hasBreakfast,
+                    hasFitnessCenter: property.hasFitnessCenter,
+                    hasFreeCancellation: property.hasFreeCancellation,
+                    hasFreeWiFi: property.hasFreeWiFi,
+                    hasKitchen: property.hasKitchen,
+                    hasParking: property.hasParking,
+                    hasPetFriendlyPolicy: property.hasPetFriendlyPolicy,
+                    hasPool: property.hasPool,
+                    hasRestaurant: property.hasRestaurant,
+                    hasRoomService: property.hasRoomService,
+                    id: property.id,
+                    imageUrls: property.imageUrls.join(';'),
+                    name: property.name,
+                    phoneNumber: property.phoneNumber,
+                    prepaymentNeeded: property.prepaymentNeeded,
+                    rating: property.rating,
+                  });
                 } catch (error) {
                   router.navigate(['/error']);
 

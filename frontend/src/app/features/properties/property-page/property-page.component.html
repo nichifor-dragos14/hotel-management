@@ -14,7 +14,7 @@
 </app-page-header>
 
 <section role="gallery-search">
-  <mat-grid-list [cols]="gridCols" gutterSize="12px">
+  <mat-grid-list [cols]="gridCols" gutterSize="12px" [rowHeight]="260">
     @for (image of gridImages; track image) {
       <mat-grid-tile [colspan]="image.cols" [rowspan]="image.rows">
         <img alt="Hotel picture" [src]="image.image" />

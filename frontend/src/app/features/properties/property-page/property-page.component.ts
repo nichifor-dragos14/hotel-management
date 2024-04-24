@@ -51,7 +51,7 @@ export interface GridImage {
     MatDatepickerModule,
     MatNativeDateModule,
     MatCardModule,
-    GoogleMapsPreviewComponent
+    GoogleMapsPreviewComponent,
   ],
 })
 export class PropertyPageComponent implements OnInit {
@@ -64,75 +64,77 @@ export class PropertyPageComponent implements OnInit {
   displayedColumns = ['roomType', 'numberOfGuests', 'price'];
 
   gridImages: GridImage[] = [];
-  imageSize = 7;
   gridCols = 0;
 
   ngOnInit(): void {
-    if (this.imageSize === 1) {
+    console.log(this.property.imageUrls);
+    if (this.property.imageUrls.length === 1) {
       this.gridCols = 1;
-      this.gridImages = [{ image: 'assets/hotel1.jpg', cols: 1, rows: 3 }];
-    }
-
-    if (this.imageSize === 2) {
-      this.gridCols = 2;
       this.gridImages = [
-        { image: 'assets/hotel1.jpg', cols: 1, rows: 3 },
-        { image: 'assets/hotel2.jpg', cols: 1, rows: 3 },
+        { image: this.property.imageUrls[0], cols: 1, rows: 3 },
       ];
     }
 
-    if (this.imageSize === 3) {
+    if (this.property.imageUrls.length === 2) {
       this.gridCols = 2;
       this.gridImages = [
-        { image: 'assets/hotel1.jpg', cols: 1, rows: 1 },
-        { image: 'assets/hotel2.jpg', cols: 1, rows: 3 },
-        { image: 'assets/hotel3.jpg', cols: 1, rows: 2 },
+        { image: this.property.imageUrls[0], cols: 1, rows: 3 },
+        { image: this.property.imageUrls[1], cols: 1, rows: 3 },
       ];
     }
 
-    if (this.imageSize === 4) {
+    if (this.property.imageUrls.length === 3) {
       this.gridCols = 2;
       this.gridImages = [
-        { image: 'assets/hotel1.jpg', cols: 1, rows: 1 },
-        { image: 'assets/hotel1.jpg', cols: 1, rows: 2 },
-        { image: 'assets/hotel1.jpg', cols: 1, rows: 2 },
-        { image: 'assets/hotel1.jpg', cols: 1, rows: 1 },
+        { image: this.property.imageUrls[0], cols: 1, rows: 1 },
+        { image: this.property.imageUrls[1], cols: 1, rows: 3 },
+        { image: this.property.imageUrls[2], cols: 1, rows: 2 },
       ];
     }
 
-    if (this.imageSize === 5) {
+    if (this.property.imageUrls.length === 4) {
+      this.gridCols = 2;
+      this.gridImages = [
+        { image: this.property.imageUrls[0], cols: 1, rows: 1 },
+        { image: this.property.imageUrls[1], cols: 1, rows: 2 },
+        { image: this.property.imageUrls[2], cols: 1, rows: 2 },
+        { image: this.property.imageUrls[3], cols: 1, rows: 1 },
+      ];
+    }
+
+    if (this.property.imageUrls.length === 5) {
       this.gridCols = 3;
       this.gridImages = [
-        { image: 'assets/hotel1.jpg', cols: 1, rows: 1 },
-        { image: 'assets/hotel1.jpg', cols: 2, rows: 2 },
-        { image: 'assets/hotel1.jpg', cols: 1, rows: 1 },
-        { image: 'assets/hotel1.jpg', cols: 2, rows: 1 },
-        { image: 'assets/hotel1.jpg', cols: 1, rows: 1 },
+        { image: this.property.imageUrls[0], cols: 1, rows: 1 },
+        { image: this.property.imageUrls[1], cols: 2, rows: 2 },
+        { image: this.property.imageUrls[2], cols: 1, rows: 1 },
+        { image: this.property.imageUrls[3], cols: 2, rows: 1 },
+        { image: this.property.imageUrls[4], cols: 1, rows: 1 },
       ];
     }
 
-    if (this.imageSize === 6) {
+    if (this.property.imageUrls.length === 6) {
       this.gridCols = 4;
       this.gridImages = [
-        { image: 'assets/hotel1.jpg', cols: 1, rows: 1 },
-        { image: 'assets/hotel2.jpg', cols: 3, rows: 2 },
-        { image: 'assets/hotel3.jpg', cols: 1, rows: 1 },
-        { image: 'assets/hotel1.jpg', cols: 2, rows: 1 },
-        { image: 'assets/hotel2.jpg', cols: 1, rows: 1 },
-        { image: 'assets/hotel3.jpg', cols: 1, rows: 1 },
+        { image: this.property.imageUrls[0], cols: 1, rows: 1 },
+        { image: this.property.imageUrls[1], cols: 3, rows: 2 },
+        { image: this.property.imageUrls[2], cols: 1, rows: 1 },
+        { image: this.property.imageUrls[3], cols: 2, rows: 1 },
+        { image: this.property.imageUrls[4], cols: 1, rows: 1 },
+        { image: this.property.imageUrls[5], cols: 1, rows: 1 },
       ];
     }
 
-    if (this.imageSize >= 7) {
+    if (this.property.imageUrls.length >= 7) {
       this.gridCols = 4;
       this.gridImages = [
-        { image: 'assets/hotel1.jpg', cols: 2, rows: 1 },
-        { image: 'assets/hotel2.jpg', cols: 2, rows: 2 },
-        { image: 'assets/hotel3.jpg', cols: 2, rows: 1 },
-        { image: 'assets/hotel1.jpg', cols: 1, rows: 1 },
-        { image: 'assets/hotel2.jpg', cols: 1, rows: 1 },
-        { image: 'assets/hotel3.jpg', cols: 1, rows: 1 },
-        { image: 'assets/hotel1.jpg', cols: 1, rows: 1 },
+        { image: this.property.imageUrls[0], cols: 2, rows: 1 },
+        { image: this.property.imageUrls[1], cols: 2, rows: 2 },
+        { image: this.property.imageUrls[2], cols: 2, rows: 1 },
+        { image: this.property.imageUrls[3], cols: 1, rows: 1 },
+        { image: this.property.imageUrls[4], cols: 1, rows: 1 },
+        { image: this.property.imageUrls[5], cols: 1, rows: 1 },
+        { image: this.property.imageUrls[6], cols: 1, rows: 1 },
       ];
     }
   }

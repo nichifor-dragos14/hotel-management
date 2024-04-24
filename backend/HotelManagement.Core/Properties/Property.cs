@@ -191,23 +191,30 @@ public class Property
         string description,
         string email,
         string phoneNumber,
+        int rating,
+        bool prepaymentNeeded,
         bool hasFreeWiFi,
         bool hasParking,
+        bool hasKitchen,
         bool hasPool,
         bool hasRestaurant,
         bool hasFitnessCenter,
         bool hasRoomService,
         bool hasPetFriendlyPolicy,
         bool hasBreakfast,
-        bool hasFreeCancellation
+        bool hasFreeCancellation,
+        string imageUrls
     )
     {
         Name = name;
         Description = description;
         Email = email;
         PhoneNumber = phoneNumber;
+        Rating = rating;
+        PrepaymentNeeded = prepaymentNeeded;
         HasFreeWiFi = hasFreeWiFi;
         HasParking = hasParking;
+        HasKitchen = hasKitchen;
         HasPool = hasPool;
         HasRestaurant = hasRestaurant;
         HasFitnessCenter = hasFitnessCenter;
@@ -215,6 +222,7 @@ public class Property
         HasPetFriendlyPolicy = hasPetFriendlyPolicy;
         HasBreakfast = hasBreakfast;
         HasFreeCancellation = hasFreeCancellation;
+        PictureUrls = imageUrls;
         UpdatedOn = DateTime.UtcNow;
     }
 }

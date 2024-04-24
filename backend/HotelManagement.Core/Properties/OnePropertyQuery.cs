@@ -23,9 +23,11 @@ public record PropertyDetails(
     bool HasRoomService,
     bool HasPetFriendlyPolicy,
     bool HasBreakfast,
+    bool HasKitchen,
     bool HasFreeCancellation,
     bool PrepaymentNeeded,
     int ReviewCount,
+    List<string> ImageUrls,
     IEnumerable<RoomPropertyDetails> Rooms,
     IEnumerable<ReviewPropertyDetails> Reviews
 );

@@ -90,9 +90,11 @@ IQueryFacade facade
             property.HasRoomService,
             property.HasPetFriendlyPolicy,
             property.HasBreakfast,
+            property.HasKitchen,
             property.HasFreeCancellation,
             property.PrepaymentNeeded,
             propertyDetails.ReviewCount,
+            [.. property.PictureUrls.Split(';')],
             roomsDetails,
             reviewsDetails
         );
