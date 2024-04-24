@@ -1,6 +1,8 @@
 ﻿using HotelManagement.Core.Abstractions;
+using HotelManagement.Core.FileStorageService;
 using HotelManagement.Core.Properties;
 using HotelManagement.Core.Properties.Filters;
+using HotelManagement.WebApi.DTOs;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,7 +10,7 @@ namespace HotelManagement.WebApi.Controllers;
 
 [Route("properties")]
 [ApiController]
-public class PropertyController : ControllerBase
+public class PropertyController(IFileStorageService _storageService) : ControllerBase
 {
     [HttpGet]
     public async Task<Results<Ok<IPaginatedResult<PropertySummary>>, NotFound>> GetAll(
@@ -127,6 +129,48 @@ public class PropertyController : ControllerBase
             { } id => TypedResults.Ok(id),
             _ => TypedResults.BadRequest()
         };
+    }
+
+    [DisableRequestSizeLimit]
+    [HttpPatch("upload-pictures")]
+    public async Task<Results<Ok<string>, BadRequest<string>>> UploadFile(
+    [FromForm] AddPropertyPicturesDTO addPropertyPicturesDTO
+)
+    {
+        if (addPropertyPicturesDTO.Files == null || addPropertyPicturesDTO.Files.Count == 0)
+        {
+            return TypedResults.BadRequest("No profile picture was uploaded");
+        }
+
+        var finalImageUrl = "";
+
+        foreach (var file in addPropertyPicturesDTO.Files)
+        {
+            var imageUrl = (await _storageService.UploadImage(file.OpenReadStream())).Url;
+
+            if (imageUrl == null)
+            {
+                return TypedResults.BadRequest("One of the pictures did not upload correctly");
+            }
+
+            if (finalImageUrl == "")
+            {
+                finalImageUrl += imageUrl;
+            }
+            else
+            {
+                finalImageUrl += ";" + imageUrl;
+            }
+        }
+
+
+        if (finalImageUrl == null)
+        {
+            return TypedResults.BadRequest("Something went wrong");
+        }
+
+
+        return TypedResults.Ok(finalImageUrl);
     }
 
     [HttpDelete("{id}")]

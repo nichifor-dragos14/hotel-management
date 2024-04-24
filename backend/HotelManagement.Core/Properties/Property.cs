@@ -13,17 +13,21 @@ public class Property
         string location,
         string email,
         string phoneNumber,
-        DateTime createdOn,
-        DateTime updatedOn,
+        int rating,
+        bool prepaymentNeeded,
         bool hasFreeWiFi,
         bool hasParking,
+        bool hasKitchen,
         bool hasPool,
         bool hasRestaurant,
         bool hasFitnessCenter,
         bool hasRoomService,
         bool hasPetFriendlyPolicy,
         bool hasBreakfast,
-        bool hasFreeCancellation
+        bool hasFreeCancellation,
+        string pictureUrls,
+        DateTime createdOn,
+        DateTime updatedOn
     )
     {
         Name = name;
@@ -32,17 +36,21 @@ public class Property
         Location = location;
         Email = email;
         PhoneNumber = phoneNumber;
-        CreatedOn = createdOn;
-        UpdatedOn = updatedOn;
+        Rating = rating;
+        PrepaymentNeeded = prepaymentNeeded;
         HasFreeWiFi = hasFreeWiFi;
         HasParking = hasParking;
+        HasKitchen = hasKitchen;
         HasPool = hasPool;
         HasRestaurant = hasRestaurant;
         HasFitnessCenter = hasFitnessCenter;
         HasRoomService = hasRoomService;
         HasPetFriendlyPolicy = hasPetFriendlyPolicy;
         HasBreakfast = hasBreakfast;
-        HasFreeCancellation = hasFreeCancellation;
+        HasFreeCancellation = hasFreeCancellation;    
+        PictureUrls = pictureUrls;
+        CreatedOn = createdOn;
+        UpdatedOn = updatedOn;
     }
 
     public Guid Id { get; }
@@ -83,6 +91,8 @@ public class Property
 
     public bool HasFreeCancellation { get; private set; }
 
+    public string PictureUrls { get; private set; }
+
     public DateTime CreatedOn { get; private set; }
 
     public DateTime UpdatedOn { get; private set; }
@@ -100,15 +110,19 @@ public class Property
         string location,
         string email,
         string phoneNumber,
+        int rating,
+        bool prepaymentNeeded,
         bool hasFreeWiFi,
         bool hasParking,
+        bool hasKitchen,
         bool hasPool,
         bool hasRestaurant,
         bool hasFitnessCenter,
         bool hasRoomService,
         bool hasPetFriendlyPolicy,
         bool hasBreakfast,
-        bool hasFreeCancellation
+        bool hasFreeCancellation,
+        string pictureUrls
     )
     {
         return new Property(
@@ -118,16 +132,21 @@ public class Property
             location,
             email,
             phoneNumber,
-            DateTime.UtcNow,
-            DateTime.UtcNow,
-            hasFreeWiFi, hasParking,
+            rating,
+            prepaymentNeeded,
+            hasFreeWiFi, 
+            hasParking,
+            hasKitchen,
             hasPool,
             hasRestaurant,
             hasFitnessCenter,
             hasRoomService,
             hasPetFriendlyPolicy,
             hasBreakfast,
-            hasFreeCancellation
+            hasFreeCancellation,  
+            pictureUrls,
+            DateTime.UtcNow,
+            DateTime.UtcNow 
         )
         {
             Rooms = [],

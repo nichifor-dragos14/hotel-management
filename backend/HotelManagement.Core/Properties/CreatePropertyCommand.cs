@@ -9,15 +9,19 @@ public record CreatePropertyCommand(
     string Location,
     string Email,
     string PhoneNumber,
+    int Rating,
+    bool PrepaymentNeeded,
     bool HasFreeWiFi,
     bool HasParking,
+    bool HasKitchen,
     bool HasPool,
     bool HasRestaurant,
     bool HasFitnessCenter,
     bool HasRoomService,
     bool HasPetFriendlyPolicy,
     bool HasBreakfast,
-    bool HasFreeCancellation
+    bool HasFreeCancellation,
+    string PictureUrls
 ) : ICommand<Guid?>;
 
 internal class CreatePropertyCommandHandler(
@@ -35,15 +39,19 @@ internal class CreatePropertyCommandHandler(
             command.Location,
             command.Email,
             command.PhoneNumber,
+            command.Rating,
+            command.PrepaymentNeeded,
             command.HasFreeWiFi,
             command.HasParking,
+            command.HasKitchen,
             command.HasPool,
             command.HasRestaurant,
             command.HasFitnessCenter,
             command.HasRoomService,
             command.HasPetFriendlyPolicy,
             command.HasBreakfast,
-            command.HasFreeCancellation
+            command.HasFreeCancellation,
+            command.PictureUrls
         );
 
         properties.Add(newProperty);

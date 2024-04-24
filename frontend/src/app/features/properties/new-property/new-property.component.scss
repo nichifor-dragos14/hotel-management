@@ -14,10 +14,46 @@ section[role='property-actions'] {
 
 section[role='utilities'] {
   display: grid;
-  grid-template-columns: repeat(5, auto);
+  grid-template-columns: repeat(6, auto);
   grid-template-rows: auto auto;
+  grid-column-gap: 8px;
+  grid-row-gap: 16px;
 }
 
-mat-slide-toggle {
-  padding: 10px;
+section[role='grid'] {
+  display: grid;
+  grid-template-areas: 'left right';
+  grid-template-columns: 1fr auto;
+  grid-column-gap: 16px;
+}
+
+section[role='grid-left'] {
+  grid-area: left;
+  display: flex;
+  flex-direction: column;
+}
+
+section[role='grid-right'] {
+  grid-area: right;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+section[role='utilities-description'] {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+section[role='rating'] {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  align-items: center;
+}
+
+section[role='rating'] h2 {
+  margin: 0;
+  font-weight: normal;
 }

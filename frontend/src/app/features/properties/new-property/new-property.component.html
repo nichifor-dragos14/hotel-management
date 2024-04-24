@@ -11,72 +11,108 @@
       mat-button
       color="primary"
       type="submit"
-      [disabled]="propertyForm.invalid"
+      [disabled]="propertyForm.invalid || this.files.length == 0"
     >
       Save
     </button>
   </section>
 
-  <mat-form-field appearance="outline">
-    <mat-label>Name</mat-label>
-    <input matInput formControlName="name" />
-    <mat-error>The property name is required</mat-error>
-  </mat-form-field>
+  <section role="grid">
+    <section role="grid-right">
+      <app-google-maps-preview
+        [address]="addressOnMap"
+        [height]="300"
+        [width]="450"
+      >
+      </app-google-maps-preview>
 
-  <mat-form-field appearance="outline">
-    <mat-label>Location</mat-label>
-    <input matInput formControlName="location" />
-    <mat-error>The property location is required</mat-error>
-  </mat-form-field>
+      <a mat-button (click)="bindAddressToAddressOnMap()">
+        Check location on map
+      </a>
+    </section>
 
-  <mat-form-field appearance="outline">
-    <mat-label>Property type</mat-label>
-    <mat-select matInput formControlName="type">
-      @for (type of propertyTypes; track type) {
-        <mat-option [value]="type.value">{{ type.type }}</mat-option>
-      }
-    </mat-select>
-  </mat-form-field>
+    <section role="grid-left">
+      <mat-form-field appearance="outline">
+        <mat-label>Name</mat-label>
+        <input matInput formControlName="name" />
+        <mat-error>The name is required</mat-error>
+      </mat-form-field>
 
-  <mat-form-field appearance="outline">
-    <mat-label>Email</mat-label>
-    <input matInput formControlName="email" />
-    <mat-error>The property email is required</mat-error>
-  </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Property type</mat-label>
+        <mat-select matInput formControlName="type">
+          @for (type of propertyTypes; track type) {
+            <mat-option [value]="type.value">{{ type.type }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
 
-  <mat-form-field appearance="outline">
-    <mat-label>Phone number</mat-label>
-    <input matInput formControlName="phoneNumber" />
-    <mat-error>The property phone number is required</mat-error>
-  </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Location</mat-label>
+        <input matInput formControlName="location" />
+        <mat-error>The location is required</mat-error>
+      </mat-form-field>
 
-  <section role="utilities">
-    <mat-slide-toggle formControlName="hasFreeWiFi">Wi-Fi</mat-slide-toggle>
-    <mat-slide-toggle formControlName="hasParking">Parking</mat-slide-toggle>
-    <mat-slide-toggle formControlName="hasRestaurant"
-      >Restaurant</mat-slide-toggle
-    >
-    <mat-slide-toggle formControlName="hasPool">Pool</mat-slide-toggle>
-    <mat-slide-toggle formControlName="hasFitnessCenter">
-      Fitness center
-    </mat-slide-toggle>
-    <mat-slide-toggle formControlName="hasFreeCancellation">
-      Free cancellation
-    </mat-slide-toggle>
-    <mat-slide-toggle formControlName="hasPetFriendlyPolicy">
-      Pet friendly
-    </mat-slide-toggle>
-    <mat-slide-toggle formControlName="hasRoomService"
-      >Room service</mat-slide-toggle
-    >
-    <mat-slide-toggle formControlName="hasBreakfast"
-      >Breakfast</mat-slide-toggle
-    >
+      <mat-form-field appearance="outline">
+        <mat-label>Email</mat-label>
+        <input matInput formControlName="email" />
+        <mat-error>The email is required</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Phone number</mat-label>
+        <input matInput formControlName="phoneNumber" />
+        <mat-error>The phone number is required</mat-error>
+      </mat-form-field>
+    </section>
   </section>
 
-  <mat-form-field appearance="outline">
-    <mat-label>Description</mat-label>
-    <editor appTinyEditor formControlName="description" />
-    <mat-error>The property description is required</mat-error>
-  </mat-form-field>
+  <section role="utilities-description">
+    <section role="utilities">
+      <mat-slide-toggle formControlName="hasFreeWiFi">Wi-Fi</mat-slide-toggle>
+      <mat-slide-toggle formControlName="hasParking">Parking</mat-slide-toggle>
+      <mat-slide-toggle formControlName="hasRoomService">
+        Room service
+      </mat-slide-toggle>
+      <mat-slide-toggle formControlName="hasFreeCancellation">
+        Free cancellation
+      </mat-slide-toggle>
+      <mat-slide-toggle formControlName="prepaymentNeeded">
+        Prepayment needed
+      </mat-slide-toggle>
+      <mat-slide-toggle formControlName="hasRestaurant">
+        Restaurant
+      </mat-slide-toggle>
+      <mat-slide-toggle formControlName="hasBreakfast">
+        Breakfast
+      </mat-slide-toggle>
+
+      <mat-slide-toggle formControlName="hasKitchen">
+        Kitchen
+      </mat-slide-toggle>
+      <mat-slide-toggle formControlName="hasPool">Pool</mat-slide-toggle>
+      <mat-slide-toggle formControlName="hasFitnessCenter">
+        Fitness center
+      </mat-slide-toggle>
+      <mat-slide-toggle formControlName="hasPetFriendlyPolicy">
+        Pet friendly
+      </mat-slide-toggle>
+    </section>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Description</mat-label>
+      <editor appTinyEditor formControlName="description" />
+      <mat-error>The description is required</mat-error>
+    </mat-form-field>
+  </section>
+
+  <section role="rating">
+    <h2>Rating 🚀</h2>
+    <mat-slider min="1" max="5" step="1" discrete>
+      <input matSliderThumb formControlName="rating" />
+    </mat-slider>
+  </section>
+
+  <app-multiple-picture-uploader [title]="'Add pictures of the property'">
+  </app-multiple-picture-uploader>
 </form>

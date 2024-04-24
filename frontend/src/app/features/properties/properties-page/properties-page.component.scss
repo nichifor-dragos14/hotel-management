@@ -27,6 +27,15 @@ app-page-header {
     height: min-content;
     position: sticky;
     top: 88px;
+    overflow-y: scroll;
+    max-height: 80vh;
+    margin-right: 1px;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    scrollbar-width: none;
   }
 }
 

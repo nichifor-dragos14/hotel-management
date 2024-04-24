@@ -909,6 +909,58 @@
         }
       }
     },
+    "/properties/upload-pictures": {
+      "patch": {
+        "tags": [
+          "Property"
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "Files": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "format": "binary"
+                    }
+                  }
+                }
+              },
+              "encoding": {
+                "Files": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/reports": {
       "get": {
         "tags": [
@@ -1921,6 +1973,7 @@
           "hasFitnessCenter",
           "hasFreeCancellation",
           "hasFreeWiFi",
+          "hasKitchen",
           "hasParking",
           "hasPetFriendlyPolicy",
           "hasPool",
@@ -1929,6 +1982,9 @@
           "location",
           "name",
           "phoneNumber",
+          "pictureUrls",
+          "prepaymentNeeded",
+          "rating",
           "type"
         ],
         "type": "object",
@@ -1951,10 +2007,20 @@
           "phoneNumber": {
             "type": "string"
           },
+          "rating": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "prepaymentNeeded": {
+            "type": "boolean"
+          },
           "hasFreeWiFi": {
             "type": "boolean"
           },
           "hasParking": {
+            "type": "boolean"
+          },
+          "hasKitchen": {
             "type": "boolean"
           },
           "hasPool": {
@@ -1977,6 +2043,9 @@
           },
           "hasFreeCancellation": {
             "type": "boolean"
+          },
+          "pictureUrls": {
+            "type": "string"
           }
         },
         "additionalProperties": false

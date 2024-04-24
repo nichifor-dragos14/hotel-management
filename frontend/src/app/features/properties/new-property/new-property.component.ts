@@ -2,6 +2,7 @@ import {
   ChangeDetectionStrategy,
   Component,
   Input,
+  OnInit,
   inject,
 } from '@angular/core';
 import { NEW_PROPERTY_FORM } from '../new-property.form';
@@ -16,6 +17,12 @@ import { PropertyService, PropertyTypeSummary } from '$backend/services';
 import { AppToastService } from '$shared/toast';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { GoogleMapsPreviewComponent } from '$shared/google-maps';
+import {
+  MultipleImageUploadComponent,
+  MultipleImageUploadService,
+} from '$shared/file-uploader';
+import { MatSliderModule } from '@angular/material/slider';
 
 @Component({
   selector: 'app-new-property-page',
@@ -31,17 +38,37 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     RouterModule,
     MatSelectModule,
     MatSlideToggleModule,
+    GoogleMapsPreviewComponent,
+    MultipleImageUploadComponent,
+    MatSliderModule,
   ],
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NewPropertyPageComponent {
+export class NewPropertyPageComponent implements OnInit {
+  readonly router = inject(Router);
   readonly propertyService = inject(PropertyService);
   readonly toastService = inject(AppToastService);
   readonly propertyForm = inject(NEW_PROPERTY_FORM);
-  readonly router = inject(Router);
+  readonly multipleImageUploadService = inject(MultipleImageUploadService);
+
+  addressOnMap = '';
+
+  files: File[] = [];
 
   @Input() propertyTypes: PropertyTypeSummary[] = [];
+
+  ngOnInit() {
+    this.multipleImageUploadService.imageFiles$.subscribe((imageFiles) => {
+      if (imageFiles) {
+        this.files = imageFiles.map((file) => file.file);
+      }
+    });
+  }
+
+  bindAddressToAddressOnMap() {
+    this.addressOnMap = this.propertyForm.value['location']!;
+  }
 
   async createProperty(newProperty: typeof this.propertyForm.value) {
     const {
@@ -60,6 +87,9 @@ export class NewPropertyPageComponent {
       hasPool,
       hasRestaurant,
       hasRoomService,
+      hasKitchen,
+      prepaymentNeeded,
+      rating,
     } = newProperty;
 
     if (
@@ -69,6 +99,7 @@ export class NewPropertyPageComponent {
       !email ||
       !phoneNumber ||
       type == undefined ||
+      rating == undefined ||
       hasBreakfast == undefined ||
       hasFitnessCenter == undefined ||
       hasFreeCancellation == undefined ||
@@ -77,12 +108,26 @@ export class NewPropertyPageComponent {
       hasPetFriendlyPolicy == undefined ||
       hasPool == undefined ||
       hasRestaurant == undefined ||
-      hasRoomService == undefined
+      hasRoomService == undefined ||
+      hasKitchen == undefined ||
+      prepaymentNeeded == undefined
     ) {
       return;
     }
 
     try {
+      const pictureUrls =
+        await this.propertyService.propertiesUploadPicturesPatchAsync({
+          body: {
+            Files: this.files,
+          },
+        });
+
+      if (pictureUrls == 'init' || !pictureUrls) {
+        return;
+      }
+      console.log(pictureUrls);
+
       await this.propertyService.propertiesPostAsync({
         body: {
           name,
@@ -100,6 +145,10 @@ export class NewPropertyPageComponent {
           hasPool,
           hasRestaurant,
           hasRoomService,
+          hasKitchen,
+          pictureUrls,
+          prepaymentNeeded,
+          rating,
         },
       });
 

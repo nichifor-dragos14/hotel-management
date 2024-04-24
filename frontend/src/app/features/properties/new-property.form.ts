@@ -22,5 +22,9 @@ export const NEW_PROPERTY_FORM = new InjectionToken('NEW_PROPERTY_FORM', {
       hasPool: [false, { validators: [Validators.required] }],
       hasRestaurant: [false, { validators: [Validators.required] }],
       hasRoomService: [false, { validators: [Validators.required] }],
+      hasKitchen: [false, { validators: [Validators.required] }],
+      prepaymentNeeded: [false, { validators: [Validators.required] }],
+      rating: [3, { validators: [Validators.required] }],
+      pictureUrls: ['init', { validators: [Validators.required] }],
     }),
 });
