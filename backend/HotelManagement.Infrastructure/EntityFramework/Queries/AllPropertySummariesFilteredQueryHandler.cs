@@ -129,6 +129,7 @@ internal class AllPropertySummariesFilteredQueryHandler(
                             {query.PropertyFiltersMandatory.NumberOfAdults} AS "AdultCount",
                             {query.PropertyFiltersMandatory.NumberOfChildren} AS "ChildrenCount",
                             {query.PropertyFiltersMandatory.NumberOfRooms} AS "RoomCount",
+                            split_part(p."PictureUrls", ';', 1) AS "ImageUrl",
                             p."CreatedOn",
                             ROW_NUMBER() OVER (ORDER BY p."CreatedOn" DESC) AS "RowNumber"
                         FROM

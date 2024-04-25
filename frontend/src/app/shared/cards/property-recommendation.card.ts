@@ -11,11 +11,7 @@ import { MatRippleModule } from '@angular/material/core';
   template: `
     <mat-card matRipple>
       <div class="image-container">
-        <img
-          matCardImage
-          src="https://material.angular.io/assets/img/examples/shiba2.jpg"
-          alt="Photo of a Shiba Inu"
-        />
+        <img matCardImage [src]="property.imageUrl" alt="Property picture" />
       </div>
 
       <section role="information">
@@ -25,8 +21,21 @@ import { MatRippleModule } from '@angular/material/core';
           </span>
 
           <span matCardSubtitle>
-            <a href="#" target="_blank"> {{ property.location }} </a> ·
-            <a href="#" target="_blank">Show on map </a>
+            <a
+              href="https://www.google.com/maps/place/{{ property.location }}"
+              target="_blank"
+              (click)="preventNavigation($event)"
+            >
+              {{ property.location }}
+            </a>
+            ·
+            <a
+              href="https://www.google.com/maps/place/{{ property.location }}"
+              target="_blank"
+              (click)="preventNavigation($event)"
+            >
+              Show on map
+            </a>
           </span>
 
           <span
@@ -200,5 +209,9 @@ export class PropertyRecommendationCardComponent {
 
   transformToTwoDecimals(rating: number) {
     return rating.toPrecision(2);
+  }
+
+  preventNavigation(event: MouseEvent): void {
+    event.stopPropagation();
   }
 }

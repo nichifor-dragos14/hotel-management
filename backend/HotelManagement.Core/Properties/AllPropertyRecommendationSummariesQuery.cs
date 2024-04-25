@@ -15,6 +15,7 @@ public record PropertySummaryRecommendation(
     int AvailableRooms,
     double? ReviewRating,
     int? TotalReviews,
+    string ImageUrl,
     DateTime CreatedOn,
     int RowNumber
 );

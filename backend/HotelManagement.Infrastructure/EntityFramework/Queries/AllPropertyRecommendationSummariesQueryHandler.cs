@@ -45,7 +45,8 @@ internal class AllPropertyRecommendationSummariesQueryHandler(
                             json_agg(DISTINCT r."Type") AS "TypeOfRooms",
                             COUNT(DISTINCT r."Id") AS "AvailableRooms",
                             AVG(re."Rating") AS "ReviewRating",
-                            COUNT(DISTINCT re."Id") AS "TotalReviews",           
+                            COUNT(DISTINCT re."Id") AS "TotalReviews",         
+                            split_part(p."PictureUrls", ';', 1) AS "ImageUrl",
                             p."CreatedOn",
                             ROW_NUMBER() OVER (ORDER BY p."CreatedOn" DESC) AS "RowNumber"
                         FROM

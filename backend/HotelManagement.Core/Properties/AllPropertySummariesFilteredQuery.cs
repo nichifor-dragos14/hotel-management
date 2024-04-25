@@ -20,6 +20,7 @@ public record PropertySummaryFiltered(
     int AdultCount,
     int ChildrenCount,
     int RoomCount,
+    string ImageUrl,
     DateTime CreatedOn,
     int RowNumber
 );

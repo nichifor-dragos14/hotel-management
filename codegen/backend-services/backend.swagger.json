@@ -2488,6 +2488,7 @@
           "createdOn",
           "hasFreeCancellation",
           "id",
+          "imageUrl",
           "location",
           "name",
           "nightCount",
@@ -2560,6 +2561,9 @@
             "type": "integer",
             "format": "int32"
           },
+          "imageUrl": {
+            "type": "string"
+          },
           "createdOn": {
             "type": "string",
             "format": "date-time"
@@ -2621,6 +2625,7 @@
           "createdOn",
           "hasFreeCancellation",
           "id",
+          "imageUrl",
           "location",
           "name",
           "prepaymentNeeded",
@@ -2669,6 +2674,9 @@
             "type": "integer",
             "format": "int32",
             "nullable": true
+          },
+          "imageUrl": {
+            "type": "string"
           },
           "createdOn": {
             "type": "string",
