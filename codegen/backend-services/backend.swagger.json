@@ -909,7 +909,7 @@
         }
       }
     },
-    "/properties/upload-pictures": {
+    "/properties/upload": {
       "patch": {
         "tags": [
           "Property"
@@ -920,17 +920,14 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "Files": {
-                    "type": "array",
-                    "items": {
-                      "type": "string",
-                      "format": "binary"
-                    }
+                  "File": {
+                    "type": "string",
+                    "format": "binary"
                   }
                 }
               },
               "encoding": {
-                "Files": {
+                "File": {
                   "style": "form"
                 }
               }

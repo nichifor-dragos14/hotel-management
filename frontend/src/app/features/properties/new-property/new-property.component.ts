@@ -59,6 +59,8 @@ export class NewPropertyPageComponent implements OnInit {
   @Input() propertyTypes: PropertyTypeSummary[] = [];
 
   ngOnInit() {
+    this.multipleImageUploadService.clearFiles();
+
     this.multipleImageUploadService.imageFiles$.subscribe((imageFiles) => {
       if (imageFiles) {
         this.files = imageFiles.map((file) => file.file);
@@ -115,18 +117,27 @@ export class NewPropertyPageComponent implements OnInit {
       return;
     }
 
-    try {
-      const pictureUrls =
-        await this.propertyService.propertiesUploadPicturesPatchAsync({
-          body: {
-            Files: this.files,
-          },
-        });
+    let pictureUrls = '';
 
-      if (pictureUrls == 'init' || !pictureUrls) {
-        return;
+    try {
+      try {
+        const urls = await Promise.all(
+          this.files.map(async (file) => {
+            try {
+              return await this.propertyService.propertiesUploadPatchAsync({
+                body: { File: file },
+              });
+            } catch (err) {
+              console.error(err);
+              return '';
+            }
+          })
+        );
+
+        pictureUrls = urls.filter((url) => url !== '').join(';');
+      } catch (err) {
+        console.error('Error processing files:', err);
       }
-      console.log(pictureUrls);
 
       await this.propertyService.propertiesPostAsync({
         body: {

@@ -131,46 +131,25 @@ public class PropertyController(IFileStorageService _storageService) : Controlle
         };
     }
 
-    [DisableRequestSizeLimit]
-    [HttpPatch("upload-pictures")]
+    [HttpPatch("upload")]
     public async Task<Results<Ok<string>, BadRequest<string>>> UploadFile(
-    [FromForm] AddPropertyPicturesDTO addPropertyPicturesDTO
+    [FromForm] AddPropertyPictureDTO addPropertyPicturesDTO
 )
     {
-        if (addPropertyPicturesDTO.Files == null || addPropertyPicturesDTO.Files.Count == 0)
+        if (addPropertyPicturesDTO.File == null )
         {
-            return TypedResults.BadRequest("No profile picture was uploaded");
-        }
-
-        var finalImageUrl = "";
-
-        foreach (var file in addPropertyPicturesDTO.Files)
-        {
-            var imageUrl = (await _storageService.UploadImage(file.OpenReadStream())).Url;
-
-            if (imageUrl == null)
-            {
-                return TypedResults.BadRequest("One of the pictures did not upload correctly");
-            }
-
-            if (finalImageUrl == "")
-            {
-                finalImageUrl += imageUrl;
-            }
-            else
-            {
-                finalImageUrl += ";" + imageUrl;
-            }
+            return TypedResults.BadRequest("No picture was uploaded");
         }
 
 
-        if (finalImageUrl == null)
+        var imageUrl = (await _storageService.UploadImage(addPropertyPicturesDTO.File.OpenReadStream())).Url;
+
+        if (imageUrl == null)
         {
-            return TypedResults.BadRequest("Something went wrong");
+            return TypedResults.BadRequest("The picture did not upload correctly");
         }
 
-
-        return TypedResults.Ok(finalImageUrl);
+        return TypedResults.Ok(imageUrl);
     }
 
     [HttpDelete("{id}")]

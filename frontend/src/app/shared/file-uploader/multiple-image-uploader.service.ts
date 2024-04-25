@@ -13,6 +13,14 @@ export class MultipleImageUploadService {
   imageFiles$ = this.filesSource.asObservable();
   maxFilesCount = 7;
 
+  preloadFiles(urls: string[]): void {
+    const preloadedFiles = urls.map((url) => ({
+      url: url,
+      file: null,
+    })) as unknown as ImageFile[];
+    this.filesSource.next(preloadedFiles);
+  }
+
   addFiles(files: ImageFile[]): void {
     const currentFiles = this.filesSource.value;
     const availableSlots = this.maxFilesCount - currentFiles.length;

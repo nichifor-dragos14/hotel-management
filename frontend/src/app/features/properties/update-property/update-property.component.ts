@@ -4,6 +4,7 @@ import {
   ChangeDetectionStrategy,
   Component,
   Input,
+  OnChanges,
   inject,
 } from '@angular/core';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
@@ -17,6 +18,11 @@ import { TinyEditorModule } from '$shared/tiny-editor';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSliderModule } from '@angular/material/slider';
+import {
+  ImageFile,
+  MultipleImageUploadComponent,
+  MultipleImageUploadService,
+} from '$shared/file-uploader';
 
 @Component({
   selector: 'app-update-property-page',
@@ -33,17 +39,34 @@ import { MatSliderModule } from '@angular/material/slider';
     MatSelectModule,
     MatSlideToggleModule,
     MatSliderModule,
+    MultipleImageUploadComponent,
   ],
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class UpdatePropertyPageComponent {
+export class UpdatePropertyPageComponent implements OnChanges {
+  readonly multipleImageUploadService = inject(MultipleImageUploadService);
   readonly propertyService = inject(PropertyService);
   readonly toastService = inject(AppToastService);
   readonly router = inject(Router);
   @Input() propertyForm!: FormGroup;
 
   @Input() propertyTypes: PropertyTypeSummary[] = [];
+
+  files: ImageFile[] = [];
+
+  ngOnChanges() {
+    const files = this.propertyForm.get('imageUrls')!.value;
+    const arrayFiles = files.split(';');
+
+    this.multipleImageUploadService.preloadFiles(arrayFiles);
+
+    this.multipleImageUploadService.imageFiles$.subscribe((imageFiles) => {
+      if (imageFiles) {
+        this.files = imageFiles;
+      }
+    });
+  }
 
   async updateProperty(newProperty: typeof this.propertyForm.value) {
     const {
@@ -64,7 +87,6 @@ export class UpdatePropertyPageComponent {
       hasKitchen,
       prepaymentNeeded,
       rating,
-      imageUrls,
     } = newProperty;
 
     if (
@@ -86,11 +108,40 @@ export class UpdatePropertyPageComponent {
       prepaymentNeeded == undefined ||
       rating == undefined
     ) {
-      console.log(newProperty);
       return;
     }
 
+    let imageUrls = this.files
+      .filter((file) => file.file === null)
+      .map((file) => file.url)
+      .join(';');
+
+    let uploadFiles = this.files.filter((file) => file.file !== null);
+
     try {
+      try {
+        const urls = await Promise.all(
+          uploadFiles.map(async (file) => {
+            try {
+              return await this.propertyService.propertiesUploadPatchAsync({
+                body: { File: file.file },
+              });
+            } catch (err) {
+              console.error(err);
+              return '';
+            }
+          })
+        );
+
+        if (urls.filter((url) => url !== '').length > 0) {
+          imageUrls += ';';
+        }
+
+        imageUrls += urls.filter((url) => url !== '').join(';');
+      } catch (err) {
+        console.error('Error processing files:', err);
+      }
+
       await this.propertyService.propertiesPatchAsync({
         body: {
           id,
