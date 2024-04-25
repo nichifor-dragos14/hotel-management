@@ -4,13 +4,15 @@ import { ImageFile } from './image-file.model';
 import { ImageUploaderModule } from './image-uploader.module';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-multiple-picture-uploader',
   standalone: true,
-  imports: [CommonModule, ImageUploaderModule, MatIconModule],
+  imports: [CommonModule, ImageUploaderModule, MatIconModule, MatButtonModule],
   template: `
     <h2>{{ title }}</h2>
+
     <section role="content">
       <section role="upload">
         <div
@@ -20,6 +22,7 @@ import { MatIconModule } from '@angular/material/icon';
           (drop)="onDrop($event)"
           (mouseenter)="hovering = true"
           (mouseleave)="hovering = false"
+          (click)="onClickFileInput()"
         >
           <span class="message" *ngIf="!hovering">Drop pictures here</span>
           <mat-icon class="message" *ngIf="hovering">cloud_upload</mat-icon>
@@ -30,17 +33,27 @@ import { MatIconModule } from '@angular/material/icon';
           id="file-input"
           (change)="onFileSelected($event)"
           accept="image/*"
+          style="display: none;"
         />
       </section>
 
       <div id="picture-display">
-        <a
-          *ngFor="let file of imageFiles$ | async"
-          [href]="file.url"
-          target="_blank"
+        <div
+          *ngFor="let file of imageFiles$ | async; let i = index"
+          class="image-container"
         >
-          <img [src]="file.url" />
-        </a>
+          <a [href]="file.url" target="_blank">
+            <img [src]="file.url" />
+          </a>
+          <button
+            mat-icon-button
+            (click)="deleteImage(i)"
+            class="delete-btn"
+            color="warn"
+          >
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
       </div>
     </section>
   `,
@@ -67,6 +80,7 @@ import { MatIconModule } from '@angular/material/icon';
         border: solid 5px #75c5e7;
         border-style: dashed;
         display: table;
+        cursor: pointer;
       }
 
       .message {
@@ -76,26 +90,30 @@ import { MatIconModule } from '@angular/material/icon';
         color: #686868;
       }
 
-      img {
-        width: 150px;
-        height: 150px;
-        object-fit: cover;
-      }
-
-      section[role='upload'] {
-        display: flex;
-        flex-direction: column;
-        gap: 16px;
-      }
-
-      h2 {
-        font-weight: normal;
-      }
-
       #picture-display {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
-        grid-gap: 8px;
+        gap: 8px;
+      }
+
+      .image-container {
+        position: relative;
+        display: inline-block;
+        width: 150px;
+        height: 150px;
+      }
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .delete-btn {
+        z-index: 10;
+        position: absolute;
+        top: 0;
+        right: 0;
       }
     `,
   ],
@@ -125,6 +143,10 @@ export class MultipleImageUploadComponent {
   onFileSelected(event: Event): void {
     const files = (event.target as HTMLInputElement).files;
     this.processFiles(files);
+  }
+
+  deleteImage(index: number): void {
+    this.multipleImageUploadService.removeFile(index);
   }
 
   private processFiles(files: FileList | null): void {
