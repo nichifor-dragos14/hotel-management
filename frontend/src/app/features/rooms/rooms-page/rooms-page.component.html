@@ -1,0 +1,35 @@
+<app-page-header title="Rooms">
+  <button mat-button button color="primary" routerLink="new">Add</button>
+</app-page-header>
+
+<mat-nav-list>
+  <cdk-virtual-scroll-viewport scrollWindow [itemSize]="56" [maxBufferPx]="500">
+    <ng-container *cdkVirtualFor="let room of roomsDataSource">
+      @if (!room) {
+        <a mat-list-item disabled>
+          <app-circle-placeholder matListItemIcon [radius]="35">
+          </app-circle-placeholder>
+          <app-line-placeholder matListItemTitle [width]="250" [height]="15">
+          </app-line-placeholder>
+        </a>
+      } @else {
+        <a mat-list-item [routerLink]="[room.id]" routerLinkActive="active">
+          <span matListItemIcon>
+            <mat-icon
+              [matBadge]="room.adultCapacity + room.childrenCapacity"
+              matBadgeSize="small"
+            >
+              person_pin
+            </mat-icon>
+          </span>
+
+          <span matListItemTitle>{{ roomTypeMapper(room.type) }} room </span>
+          <span matListItemLine>Number {{ room.number }}</span>
+          <span matListItemMeta>{{ room.price }} lei/night</span>
+        </a>
+      }
+    </ng-container>
+  </cdk-virtual-scroll-viewport>
+</mat-nav-list>
+
+<router-outlet hidden />

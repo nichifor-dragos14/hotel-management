@@ -16,6 +16,14 @@
       Update
     </button>
 
+    <a
+      mat-button
+      color="primary"
+      [routerLink]="['/rooms/admin/property', propertyForm.get(['id'])!.value]"
+    >
+      Rooms
+    </a>
+
     <a mat-button [routerLink]="['actions', 'delete']">Delete</a>
   </section>
 

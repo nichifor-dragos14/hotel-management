@@ -1369,22 +1369,125 @@
         "tags": [
           "Room"
         ],
+        "parameters": [
+          {
+            "name": "from",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "to",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "propertyId",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/RoomSummary"
-                  }
+                  "$ref": "#/components/schemas/RoomSummaryIPaginatedResult"
                 }
               }
             }
           },
           "404": {
             "description": "Not Found"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Room"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateRoomCommand"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateRoomCommand"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateRoomCommand"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "uuid"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Room"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateRoomCommand"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateRoomCommand"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateRoomCommand"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "uuid"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
           }
         }
       }
@@ -1420,6 +1523,66 @@
                 }
               }
             }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/rooms/{id}": {
+      "get": {
+        "tags": [
+          "Room"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RoomDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Room"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
           },
           "404": {
             "description": "Not Found"
@@ -2100,6 +2263,81 @@
           },
           "description": {
             "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateRoomCommand": {
+        "required": [
+          "adultCapacity",
+          "childrenCapacity",
+          "createdOn",
+          "hasAirConditioning",
+          "hasBalcony",
+          "hasHairdryer",
+          "hasPrivateBathroom",
+          "hasRefrigerator",
+          "hasSeaView",
+          "hasTowels",
+          "number",
+          "price",
+          "propertyId",
+          "type",
+          "updatedOn"
+        ],
+        "type": "object",
+        "properties": {
+          "propertyId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "number": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "type": {
+            "$ref": "#/components/schemas/RoomType"
+          },
+          "price": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "adultCapacity": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "childrenCapacity": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "hasPrivateBathroom": {
+            "type": "boolean"
+          },
+          "hasTowels": {
+            "type": "boolean"
+          },
+          "hasHairdryer": {
+            "type": "boolean"
+          },
+          "hasAirConditioning": {
+            "type": "boolean"
+          },
+          "hasBalcony": {
+            "type": "boolean"
+          },
+          "hasRefrigerator": {
+            "type": "boolean"
+          },
+          "hasSeaView": {
+            "type": "boolean"
+          },
+          "createdOn": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedOn": {
+            "type": "string",
+            "format": "date-time"
           }
         },
         "additionalProperties": false
@@ -2995,6 +3233,52 @@
         },
         "additionalProperties": false
       },
+      "RoomDetails": {
+        "required": [
+          "hasAirConditioning",
+          "hasBalcony",
+          "hasHairdryer",
+          "hasPrivateBathroom",
+          "hasRefrigerator",
+          "hasSeaView",
+          "hasTowels",
+          "id",
+          "price"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "price": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "hasPrivateBathroom": {
+            "type": "boolean"
+          },
+          "hasTowels": {
+            "type": "boolean"
+          },
+          "hasHairdryer": {
+            "type": "boolean"
+          },
+          "hasAirConditioning": {
+            "type": "boolean"
+          },
+          "hasBalcony": {
+            "type": "boolean"
+          },
+          "hasRefrigerator": {
+            "type": "boolean"
+          },
+          "hasSeaView": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
       "RoomPropertyDetails": {
         "required": [
           "adultCapacity",
@@ -3072,8 +3356,13 @@
       },
       "RoomSummary": {
         "required": [
+          "adultCapacity",
+          "childrenCapacity",
           "id",
-          "number"
+          "number",
+          "price",
+          "rowNumber",
+          "type"
         ],
         "type": "object",
         "properties": {
@@ -3084,6 +3373,47 @@
           "number": {
             "type": "integer",
             "format": "int32"
+          },
+          "type": {
+            "$ref": "#/components/schemas/RoomType"
+          },
+          "price": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "adultCapacity": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "childrenCapacity": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "rowNumber": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "RoomSummaryIPaginatedResult": {
+        "required": [
+          "results",
+          "totalCount"
+        ],
+        "type": "object",
+        "properties": {
+          "results": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RoomSummary"
+            },
+            "readOnly": true
+          },
+          "totalCount": {
+            "type": "integer",
+            "format": "int32",
+            "readOnly": true
           }
         },
         "additionalProperties": false
@@ -3250,6 +3580,52 @@
           "rating": {
             "type": "number",
             "format": "double"
+          }
+        },
+        "additionalProperties": false
+      },
+      "UpdateRoomCommand": {
+        "required": [
+          "hasAirConditioning",
+          "hasBalcony",
+          "hasHairdryer",
+          "hasPrivateBathroom",
+          "hasRefrigerator",
+          "hasSeaView",
+          "hasTowels",
+          "id",
+          "price"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "price": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "hasPrivateBathroom": {
+            "type": "boolean"
+          },
+          "hasTowels": {
+            "type": "boolean"
+          },
+          "hasHairdryer": {
+            "type": "boolean"
+          },
+          "hasAirConditioning": {
+            "type": "boolean"
+          },
+          "hasBalcony": {
+            "type": "boolean"
+          },
+          "hasRefrigerator": {
+            "type": "boolean"
+          },
+          "hasSeaView": {
+            "type": "boolean"
           }
         },
         "additionalProperties": false

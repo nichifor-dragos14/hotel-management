@@ -155,37 +155,6 @@ public class Property
         };
     }
 
-    public Room CreateRoom(
-        int number,
-        RoomType type,
-        bool hasPrivateBathroom,
-        bool hasTowels,
-        bool hasHairdryer,
-        bool hasAirConditioning,
-        bool hasBalcony,
-        bool hasRefrigerator,
-        bool hasSeaView
-    )
-    {
-        return new Room(
-            number,
-            type,
-            hasPrivateBathroom,
-            hasTowels,
-            hasHairdryer,
-            hasAirConditioning,
-            hasBalcony,
-            hasRefrigerator,
-            hasSeaView,
-            DateTime.UtcNow,
-            DateTime.UtcNow
-        )
-        {
-            Property = this,
-            Bookings = []
-        };
-    }
-
     public void Update(
         string name,
         string description,

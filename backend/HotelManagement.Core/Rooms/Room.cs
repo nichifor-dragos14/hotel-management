@@ -8,6 +8,9 @@ public class Room
     internal Room(
         int number,
         RoomType type,
+        int price,
+        int adultCapacity,
+        int childrenCapacity,
         bool hasPrivateBathroom,
         bool hasTowels,
         bool hasHairdryer,
@@ -21,6 +24,9 @@ public class Room
     {
         Number = number;
         Type = type;
+        Price = price;
+        AdultCapacity = adultCapacity;
+        ChildrenCapacity = childrenCapacity;
         HasPrivateBathroom = hasPrivateBathroom;
         HasTowels = hasTowels;
         HasHairdryer = hasHairdryer;
@@ -66,21 +72,63 @@ public class Room
 
     public virtual List<Booking> Bookings { get; internal init; }
 
-    public void Update(
+    public static Room Create(
+        int number,
+        RoomType type,
+        int price,
+        int adultCapacity,
+        int childrenCapacity,
         bool hasPrivateBathroom,
         bool hasTowels,
         bool hasHairdryer,
         bool hasAirConditioning,
         bool hasBalcony,
-        bool hasRefrigerator
+        bool hasRefrigerator,
+        bool hasSeaView,
+        Property property
     )
     {
+        return new Room(
+            number,
+            type,
+            price,
+            adultCapacity,
+            childrenCapacity,
+            hasPrivateBathroom,
+            hasTowels,
+            hasHairdryer,
+            hasAirConditioning,
+            hasBalcony,
+            hasRefrigerator,
+            hasSeaView,
+            DateTime.UtcNow,
+            DateTime.UtcNow
+        )
+        {
+            Property = property,
+            Bookings = []
+        };
+    }
+
+    public void Update(
+        int price,
+        bool hasPrivateBathroom,
+        bool hasTowels,
+        bool hasHairdryer,
+        bool hasAirConditioning,
+        bool hasBalcony,
+        bool hasRefrigerator,
+        bool hasSeaView
+    )
+    {
+        Price = price;
         HasPrivateBathroom = hasPrivateBathroom;
         HasTowels = hasTowels;
         HasHairdryer = hasHairdryer;
         HasAirConditioning = hasAirConditioning;
         HasBalcony = hasBalcony;
         HasRefrigerator = hasRefrigerator;
+        HasSeaView = hasSeaView;
         UpdatedOn = DateTime.UtcNow;
     }
 }
