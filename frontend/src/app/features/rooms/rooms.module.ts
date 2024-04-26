@@ -10,6 +10,9 @@ import { RoomsPageComponent } from './rooms-page/rooms-page.component';
 import { RoomsDummyComponent } from './rooms.dummy.component';
 import { UpdateRoomPageComponent } from './update-room/update-room.component';
 import { EditRoomFormFactory } from './update-room.form-builder';
+import { NewRoomPageComponent } from './new-room/new-room.component';
+import { DialogPageComponent } from '$shared/dialog-page';
+import { DeleteRoomComponent } from './delete-room.component';
 
 const ROOM_ROUTES: Routes = [
   {
@@ -46,6 +49,24 @@ const ROOM_ROUTES: Routes = [
         },
         children: [
           {
+            path: 'new',
+            component: NewRoomPageComponent,
+            resolve: {
+              roomTypes: async () => {
+                const router = inject(Router);
+                const roomService = inject(RoomService);
+
+                try {
+                  return await roomService.roomsTypesGetAsync();
+                } catch (error) {
+                  router.navigate(['/error']);
+
+                  return null;
+                }
+              },
+            },
+          },
+          {
             path: ':id',
             component: UpdateRoomPageComponent,
             resolve: {
@@ -69,6 +90,29 @@ const ROOM_ROUTES: Routes = [
               },
             },
             runGuardsAndResolvers: 'always',
+            children: [
+              {
+                path: 'actions',
+                component: DialogPageComponent,
+                children: [
+                  {
+                    path: 'delete',
+                    component: DeleteRoomComponent,
+                    resolve: {
+                      id: ({ parent }: ActivatedRouteSnapshot) => {
+                        const router = inject(Router);
+
+                        if (parent?.parent?.params['id']) {
+                          return parent?.parent?.params['id'];
+                        } else {
+                          router.navigate(['/error']);
+                        }
+                      },
+                    },
+                  },
+                ],
+              },
+            ],
           },
         ],
       },

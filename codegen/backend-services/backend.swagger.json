@@ -1492,6 +1492,31 @@
         }
       }
     },
+    "/rooms/types": {
+      "get": {
+        "tags": [
+          "Room"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/RoomTypeSummary"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
     "/rooms/ids": {
       "get": {
         "tags": [
@@ -2271,7 +2296,6 @@
         "required": [
           "adultCapacity",
           "childrenCapacity",
-          "createdOn",
           "hasAirConditioning",
           "hasBalcony",
           "hasHairdryer",
@@ -2282,8 +2306,7 @@
           "number",
           "price",
           "propertyId",
-          "type",
-          "updatedOn"
+          "type"
         ],
         "type": "object",
         "properties": {
@@ -2330,14 +2353,6 @@
           },
           "hasSeaView": {
             "type": "boolean"
-          },
-          "createdOn": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "updatedOn": {
-            "type": "string",
-            "format": "date-time"
           }
         },
         "additionalProperties": false
@@ -3427,6 +3442,22 @@
         ],
         "type": "integer",
         "format": "int32"
+      },
+      "RoomTypeSummary": {
+        "required": [
+          "type",
+          "value"
+        ],
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string"
+          },
+          "value": {
+            "$ref": "#/components/schemas/RoomType"
+          }
+        },
+        "additionalProperties": false
       },
       "SearchHistoryFields": {
         "required": [

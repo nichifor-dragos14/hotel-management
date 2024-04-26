@@ -1,5 +1,4 @@
 ﻿using HotelManagement.Core.Abstractions;
-using HotelManagement.Core.Bookings;
 using HotelManagement.Core.Properties;
 using HotelManagement.Core.Rooms;
 using Microsoft.AspNetCore.Http.HttpResults;
@@ -20,6 +19,14 @@ public class RoomController : Controller
         CancellationToken cancelationToken)
     {
         return TypedResults.Ok(await queryService.ExecuteAsync(new AllRoomSummariesQuery(from, to, propertyId), cancelationToken));
+    }
+
+    [HttpGet("types")]
+    public async Task<Results<Ok<IEnumerable<RoomTypeSummary>>, NotFound>> GetAllTypes(
+       [FromServices] IQueryHandler<AllRoomTypesQuery, IEnumerable<RoomTypeSummary>> queryService,
+       CancellationToken cancelationToken)
+    {
+        return TypedResults.Ok(await queryService.ExecuteAsync(new AllRoomTypesQuery(), cancelationToken));
     }
 
     [HttpGet("ids")]

@@ -1,0 +1,80 @@
+<section role="property-actions">
+  <a mat-icon-button routerLink="../" color="accent">
+    <mat-icon>close</mat-icon>
+  </a>
+
+  <button
+    mat-button
+    color="primary"
+    type="submit"
+    [disabled]="roomForm.invalid"
+    (click)="createRoom(roomForm.value)"
+  >
+    Save
+  </button>
+</section>
+
+<form [formGroup]="roomForm" (ngSubmit)="createRoom(roomForm.value)">
+  <mat-form-field appearance="outline">
+    <mat-label>Number</mat-label>
+    <input matInput formControlName="number" />
+    <mat-error>The number is required</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Room type</mat-label>
+    <mat-select matInput formControlName="type">
+      @for (type of roomTypes; track type) {
+        <mat-option [value]="type.value">{{ type.type }}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Price</mat-label>
+    <input matInput formControlName="price" type="number" min="0" />
+    <mat-error>The price is required</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Adult capacity</mat-label>
+    <input
+      matInput
+      formControlName="adultCapacity"
+      type="number"
+      min="0"
+      max="8"
+    />
+    <mat-error>The adult capacity is required</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Children capacity</mat-label>
+    <input
+      matInput
+      formControlName="childrenCapacity"
+      type="number"
+      min="0"
+      max="8"
+    />
+    <mat-error>The children capacity is required</mat-error>
+  </mat-form-field>
+
+  <section role="utilities">
+    <mat-slide-toggle formControlName="hasPrivateBathroom">
+      Private bathroom
+    </mat-slide-toggle>
+    <mat-slide-toggle formControlName="hasTowels">Towels</mat-slide-toggle>
+    <mat-slide-toggle formControlName="hasHairdryer">
+      Hairdryer
+    </mat-slide-toggle>
+    <mat-slide-toggle formControlName="hasAirConditioning">
+      Air conditioning
+    </mat-slide-toggle>
+    <mat-slide-toggle formControlName="hasBalcony"> Balcony </mat-slide-toggle>
+    <mat-slide-toggle formControlName="hasRefrigerator">
+      Refrigerator
+    </mat-slide-toggle>
+    <mat-slide-toggle formControlName="hasSeaView"> Sea view </mat-slide-toggle>
+  </section>
+</form>

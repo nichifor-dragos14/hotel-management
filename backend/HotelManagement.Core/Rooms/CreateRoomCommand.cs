@@ -16,9 +16,7 @@ public record CreateRoomCommand(
     bool HasAirConditioning,
     bool HasBalcony,
     bool HasRefrigerator,
-    bool HasSeaView,
-    DateTime CreatedOn,
-    DateTime UpdatedOn
+    bool HasSeaView
 ) : ICommand<Guid?>;
 
 internal class CreateRoomCommandHandler(
