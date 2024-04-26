@@ -1,1 +1,62 @@
-register page
+<section role="image">
+  <img alt="Google maps location" src="assets/hotel1.jpg" />
+</section>
+
+<form [formGroup]="registerForm" (ngSubmit)="register(registerForm.value)">
+  <mat-form-field appearance="outline">
+    <mat-label>First name</mat-label>
+    <input matInput formControlName="firstName" required />
+    <mat-error>The email is required</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Last name</mat-label>
+    <input matInput formControlName="lastName" required />
+    <mat-error>The email is required</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Email</mat-label>
+    <input matInput formControlName="email" required />
+    <mat-error>The email is required</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Phone number</mat-label>
+    <input matInput formControlName="phoneNumber" required />
+    <mat-error>The email is required</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Nationality</mat-label>
+    <input matInput formControlName="nationality" required />
+    <mat-error>The email is required</mat-error>
+  </mat-form-field>
+
+  <mat-radio-group aria-label="Select your gender" formControlName="gender">
+    <mat-radio-button [value]="genderEnum.$0">Man</mat-radio-button>
+    <mat-radio-button [value]="genderEnum.$1">Woman</mat-radio-button>
+    <mat-radio-button [value]="genderEnum.$2">Other</mat-radio-button>
+  </mat-radio-group>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Address</mat-label>
+    <input matInput formControlName="address" required />
+    <mat-error>The email is required</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Date of birth</mat-label>
+    <input matInput [matDatepicker]="picker" formControlName="dateOfBirth" />
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Password</mat-label>
+    <input matInput formControlName="password" required type="password" />
+    <mat-error>The password is required</mat-error>
+  </mat-form-field>
+
+  <button mat-raised-button color="primary" type="submit">Register</button>
+</form>

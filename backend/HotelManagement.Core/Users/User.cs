@@ -9,12 +9,32 @@ public class User
     private User(
         string firstName,
         string lastName,
+        string email,
+        string phoneNumber,
+        string nationality,
+        Gender gender,
+        string address,
+        DateTime dateOfBirth,
+        string password,
+        bool retainSearchHistory,
+        bool sendOffersOnEmail,
+        string profilePicture,
         DateTime createdOn,
         DateTime updatedOn
     )
     {
         FirstName = firstName;
         LastName = lastName;
+        Email = email;
+        PhoneNumber = phoneNumber;
+        Nationality = nationality;
+        Gender = gender;
+        Address = address;
+        DateOfBirth = dateOfBirth;
+        Password = password;
+        RetainSearchHistory = retainSearchHistory;
+        SendOffersOnEmail = sendOffersOnEmail;
+        ProfilePicture = profilePicture;
         CreatedOn = createdOn;
         UpdatedOn = updatedOn;
     }
@@ -57,12 +77,29 @@ public class User
 
     public static User Create(
         string firstName,
-        string lastName
+        string lastName,
+        string email,
+        string phoneNumber,
+        string nationality,
+        Gender gender,
+        string address,
+        DateTime dateOfBirth,
+        string password
     )
     {
         return new User(
             firstName,
             lastName,
+            email,
+            phoneNumber,
+            nationality,
+            gender,
+            address,
+            dateOfBirth,
+            password,
+            false,
+            false,
+            "",
             DateTime.UtcNow,
             DateTime.UtcNow
         )

@@ -1,14 +1,11 @@
 ﻿using HotelManagement.Core.Abstractions;
 using HotelManagement.Core.FileStorageService;
-using HotelManagement.Core.Properties;
 using HotelManagement.Core.Users;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
-using System.Threading;
 using HotelManagement.WebApi.DTOs;
-using Google.Apis.Drive.v3.Data;
+
 
 namespace HotelManagement.WebApi.Controllers;
 

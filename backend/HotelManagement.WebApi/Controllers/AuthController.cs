@@ -31,6 +31,20 @@ public class AuthController(IConfiguration _configuration) : ControllerBase
         return TypedResults.Ok(token);
     }
 
+    [HttpPost("register")]
+    public async Task<Results<Ok<Guid>, BadRequest>> RegisterAsync(
+       [FromBody] RegisterCommand command,
+       [FromServices] ICommandHandler<RegisterCommand, Guid?> commandHandler,
+       CancellationToken cancellationToken
+    )
+    {
+        return await commandHandler.ExecuteAsync(command, cancellationToken) switch
+        {
+            { } id => TypedResults.Ok(id),
+            _ => TypedResults.BadRequest()
+        };
+    }
+
     private string GenerateJwtToken(AccountModel user)
     {
         var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT:SecretKey"]));
