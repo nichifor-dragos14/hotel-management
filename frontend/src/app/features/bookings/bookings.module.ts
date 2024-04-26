@@ -24,6 +24,7 @@ import { LeaveReviewComponent } from './leave-review.component';
 import { LeaveReviewFormFactory } from './leave-review.form';
 import { LeaveReportFormFactory } from './leave-report.form';
 import { LeaveReportComponent } from './leave-report.component';
+import { AuthGuard } from '$features/auth/auth.guard';
 
 const BOOKING_ROUTES: Routes = [
   {
@@ -49,6 +50,10 @@ const BOOKING_ROUTES: Routes = [
               return null;
             }
           },
+        },
+        canActivate: [AuthGuard],
+        data: {
+          role: 'Client',
         },
         children: [
           {
@@ -91,6 +96,10 @@ const BOOKING_ROUTES: Routes = [
                 }
               },
             },
+            canActivate: [AuthGuard],
+            data: {
+              role: 'Client',
+            },
             children: [
               {
                 path: 'actions',
@@ -102,6 +111,10 @@ const BOOKING_ROUTES: Routes = [
                     resolve: {
                       id: ({ parent }: ActivatedRouteSnapshot) =>
                         parent?.parent?.params['id'],
+                    },
+                    canActivate: [AuthGuard],
+                    data: {
+                      role: 'Client',
                     },
                   },
                   {
@@ -122,7 +135,6 @@ const BOOKING_ROUTES: Routes = [
                           return null;
                         }
                       },
-
                       reviewForm: async ({
                         params,
                       }: ActivatedRouteSnapshot) => {
@@ -155,6 +167,10 @@ const BOOKING_ROUTES: Routes = [
                           return null;
                         }
                       },
+                    },
+                    canActivate: [AuthGuard],
+                    data: {
+                      role: 'Client',
                     },
                   },
                   {
@@ -206,6 +222,10 @@ const BOOKING_ROUTES: Routes = [
                           return null;
                         }
                       },
+                    },
+                    canActivate: [AuthGuard],
+                    data: {
+                      role: 'Client',
                     },
                   },
                 ],
@@ -330,6 +350,10 @@ const BOOKING_ROUTES: Routes = [
               return null;
             }
           },
+        },
+        canActivate: [AuthGuard],
+        data: {
+          role: 'Client',
         },
       },
     ],

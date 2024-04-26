@@ -15,6 +15,7 @@ import { EditUserDetailsFormFactory } from './user-details.form';
 import { EditUserPreferencesFormFactory } from './user-preferences.form';
 import { DialogPageComponent } from '$shared/dialog-page';
 import { UploadProfilePictureComponent } from './upload-profile-picture.component';
+import { AuthGuard } from '$features/auth/auth.guard';
 
 const USER_ROUTES: Routes = [
   {
@@ -69,6 +70,10 @@ const USER_ROUTES: Routes = [
             }
           },
         },
+        canActivate: [AuthGuard],
+        data: {
+          role: 'Client',
+        },
         children: [
           {
             path: 'actions',
@@ -97,6 +102,10 @@ const USER_ROUTES: Routes = [
                       return null;
                     }
                   },
+                },
+                canActivate: [AuthGuard],
+                data: {
+                  role: 'Client',
                 },
               },
             ],
@@ -131,6 +140,10 @@ const USER_ROUTES: Routes = [
             }
           },
         },
+        canActivate: [AuthGuard],
+        data: {
+          role: 'Client',
+        },
       },
       {
         path: 'security',
@@ -153,6 +166,10 @@ const USER_ROUTES: Routes = [
               return null;
             }
           },
+        },
+        canActivate: [AuthGuard],
+        data: {
+          role: 'Client',
         },
       },
     ],

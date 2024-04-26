@@ -37,6 +37,7 @@ public class User
         ProfilePicture = profilePicture;
         CreatedOn = createdOn;
         UpdatedOn = updatedOn;
+        Role = Role.Client;
     }
 
     public Guid Id { get; }
@@ -64,6 +65,8 @@ public class User
     public bool SendOffersOnEmail { get; private set; }
 
     public string ProfilePicture { get; private set; }
+
+    public Role Role { get; private set; }
 
     public DateTime CreatedOn { get; private set; }
 

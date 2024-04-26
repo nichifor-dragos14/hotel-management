@@ -12,6 +12,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { LoginService } from '$features/auth/login.service';
 import { Subscription } from 'rxjs';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-layout',
@@ -22,6 +23,7 @@ import { Subscription } from 'rxjs';
     MatButtonModule,
     MatSidenavModule,
     MatListModule,
+    CommonModule,
   ],
   template: `
     <mat-toolbar class="mat-elevation-z4">
@@ -51,6 +53,7 @@ import { Subscription } from 'rxjs';
             mat-list-item
             routerLink="/properties/admin"
             routerLinkActive="selected"
+            *ngIf="userRole == 'Admin'"
           >
             Properties
           </a>
@@ -58,6 +61,7 @@ import { Subscription } from 'rxjs';
             mat-list-item
             routerLink="/reports/admin"
             routerLinkActive="selected"
+            *ngIf="userRole == 'Admin'"
           >
             Reports
           </a>
@@ -72,6 +76,7 @@ import { Subscription } from 'rxjs';
             mat-list-item
             routerLink="/bookings/my-reservations"
             routerLinkActive="selected"
+            *ngIf="userRole == 'Client'"
           >
             My bookings
           </a>
@@ -79,6 +84,7 @@ import { Subscription } from 'rxjs';
             mat-list-item
             routerLink="/reviews/my-reviews"
             routerLinkActive="selected"
+            *ngIf="userRole == 'Client'"
           >
             My reviews
           </a>
@@ -98,16 +104,26 @@ export class AppLayoutComponent implements OnInit {
   loginService = inject(LoginService);
 
   isLoggedIn: boolean = false;
+  userRole: string = 'Client';
   private subscription: Subscription = new Subscription();
 
   ngOnInit(): void {
     this.subscribeToLoginStatus();
+    this.subscribeToUserRole();
   }
 
   private subscribeToLoginStatus(): void {
     this.subscription.add(
       this.loginService.isLoggedIn$.subscribe((status) => {
         this.isLoggedIn = status;
+      })
+    );
+  }
+
+  private subscribeToUserRole(): void {
+    this.subscription.add(
+      this.loginService.userRole$.subscribe((status) => {
+        this.userRole = status;
       })
     );
   }

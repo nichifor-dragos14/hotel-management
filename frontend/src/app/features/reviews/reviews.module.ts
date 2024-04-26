@@ -11,6 +11,7 @@ import { LoginService } from '$features/auth/login.service';
 import { UpdateReviewPageComponent } from './update-review/update-review.component';
 import { ReviewService } from '$backend/services';
 import { UpdateReviewFormFactory } from './update-review.form';
+import { AuthGuard } from '$features/auth/auth.guard';
 
 const REVIEW_ROUTES: Routes = [
   {
@@ -36,6 +37,10 @@ const REVIEW_ROUTES: Routes = [
               return null;
             }
           },
+        },
+        canActivate: [AuthGuard],
+        data: {
+          role: 'Client',
         },
         children: [
           {
@@ -65,6 +70,10 @@ const REVIEW_ROUTES: Routes = [
                   return null;
                 }
               },
+            },
+            canActivate: [AuthGuard],
+            data: {
+              role: 'Client',
             },
           },
         ],

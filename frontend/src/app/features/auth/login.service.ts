@@ -8,19 +8,26 @@ import { UserClaims } from './user-claims.model';
 })
 export class LoginService {
   private isLoggedIn = new BehaviorSubject<boolean>(this.isTokenValid());
-
+  private userRole = new BehaviorSubject<string>(this.getLoggedUserRole());
+  
   get isLoggedIn$(): Observable<boolean> {
     return this.isLoggedIn.asObservable();
+  }
+
+  get userRole$(): Observable<string> {
+    return this.userRole.asObservable();
   }
 
   logout() {
     localStorage.removeItem('JWT');
 
     this.isLoggedIn.next(false);
+    this.userRole.next('');
   }
 
   notifyLoginSuccess() {
     this.isLoggedIn.next(true);
+    this.userRole.next(this.getLoggedUserRole());
   }
 
   private isTokenValid(): boolean {
@@ -112,5 +119,15 @@ export class LoginService {
     }
 
     return claims['nameidentifier'];
+  }
+
+  getLoggedUserRole() {
+    let claims = this.decodeToken();
+
+    if (claims == null) {
+      return '';
+    }
+
+    return claims['role'];
   }
 }

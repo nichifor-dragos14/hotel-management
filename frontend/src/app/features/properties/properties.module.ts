@@ -16,6 +16,7 @@ import { EditPropertyFormFactory } from './update-property.form-builder';
 import { PropertyReviewsPageComponent } from './property-reviews-page/property-reviews-page.component';
 import { PropertyRoomsPageComponent } from './property-rooms-page/property-rooms-page.component';
 import { PropertiesDummyComponent } from './properties.dummy.component';
+import { AuthGuard } from '$features/auth/auth.guard';
 
 const PROPERTY_ROUTES: Routes = [
   {
@@ -28,6 +29,10 @@ const PROPERTY_ROUTES: Routes = [
       {
         path: 'admin',
         component: PropertiesPageComponent,
+        canActivate: [AuthGuard],
+        data: {
+          role: 'Admin',
+        },
         children: [
           {
             path: 'new',
@@ -45,6 +50,10 @@ const PROPERTY_ROUTES: Routes = [
                   return null;
                 }
               },
+            },
+            canActivate: [AuthGuard],
+            data: {
+              role: 'Admin',
             },
           },
           {
@@ -89,6 +98,10 @@ const PROPERTY_ROUTES: Routes = [
                 }
               },
             },
+            canActivate: [AuthGuard],
+            data: {
+              role: 'Admin',
+            },
             runGuardsAndResolvers: 'always',
             children: [
               {
@@ -108,6 +121,10 @@ const PROPERTY_ROUTES: Routes = [
                           router.navigate(['/error']);
                         }
                       },
+                    },
+                    canActivate: [AuthGuard],
+                    data: {
+                      role: 'Admin',
                     },
                   },
                 ],

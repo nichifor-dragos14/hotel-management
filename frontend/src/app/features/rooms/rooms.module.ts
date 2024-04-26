@@ -13,6 +13,7 @@ import { EditRoomFormFactory } from './update-room.form-builder';
 import { NewRoomPageComponent } from './new-room/new-room.component';
 import { DialogPageComponent } from '$shared/dialog-page';
 import { DeleteRoomComponent } from './delete-room.component';
+import { AuthGuard } from '$features/auth/auth.guard';
 
 const ROOM_ROUTES: Routes = [
   {
@@ -32,6 +33,10 @@ const ROOM_ROUTES: Routes = [
             router.navigate(['/error']);
           },
         },
+        canActivate: [AuthGuard],
+        data: {
+          role: 'Admin',
+        },
       },
       {
         path: 'admin/property/:id',
@@ -46,6 +51,10 @@ const ROOM_ROUTES: Routes = [
 
             router.navigate(['/error']);
           },
+        },
+        canActivate: [AuthGuard],
+        data: {
+          role: 'Admin',
         },
         children: [
           {
@@ -64,6 +73,10 @@ const ROOM_ROUTES: Routes = [
                   return null;
                 }
               },
+            },
+            canActivate: [AuthGuard],
+            data: {
+              role: 'Admin',
             },
           },
           {
@@ -89,6 +102,10 @@ const ROOM_ROUTES: Routes = [
                 }
               },
             },
+            canActivate: [AuthGuard],
+            data: {
+              role: 'Admin',
+            },
             runGuardsAndResolvers: 'always',
             children: [
               {
@@ -108,6 +125,10 @@ const ROOM_ROUTES: Routes = [
                           router.navigate(['/error']);
                         }
                       },
+                    },
+                    canActivate: [AuthGuard],
+                    data: {
+                      role: 'Admin',
                     },
                   },
                 ],

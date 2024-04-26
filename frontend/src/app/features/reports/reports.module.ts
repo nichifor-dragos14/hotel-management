@@ -12,6 +12,7 @@ import { DialogPageComponent } from '$shared/dialog-page';
 import { CloseReportComponent } from './close-report.component';
 import { OpenReportComponent } from './open-report.component';
 import { ReportsDummyComponent } from './reports.dummy.component';
+import { AuthGuard } from '$features/auth/auth.guard';
 
 const REPORT_ROUTES: Routes = [
   {
@@ -44,6 +45,10 @@ const REPORT_ROUTES: Routes = [
                 }
               },
             },
+            canActivate: [AuthGuard],
+            data: {
+              role: 'Admin',
+            },
             children: [
               {
                 path: 'actions',
@@ -65,6 +70,10 @@ const REPORT_ROUTES: Routes = [
                         }
                       },
                     },
+                    canActivate: [AuthGuard],
+                    data: {
+                      role: 'Admin',
+                    },
                   },
                   {
                     path: 'open',
@@ -81,6 +90,10 @@ const REPORT_ROUTES: Routes = [
                           return null;
                         }
                       },
+                    },
+                    canActivate: [AuthGuard],
+                    data: {
+                      role: 'Admin',
                     },
                   },
                 ],

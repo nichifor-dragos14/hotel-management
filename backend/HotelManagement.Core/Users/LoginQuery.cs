@@ -9,7 +9,8 @@ public record LoginModel(
 
 public record AccountModel(
     Guid Id,
-    string Email
+    string Email,
+    Role Role
 );
 
 public record LoginQuery(LoginModel LoginModel) : IQuery<AccountModel?>;
@@ -24,7 +25,7 @@ internal class LoginQueryHandler(
     {
         return (from user in facade.Of<User>()
                 where user.Email == query.LoginModel.Email && user.Password == query.LoginModel.Password
-                select new AccountModel(user.Id, user.Email)
+                select new AccountModel(user.Id, user.Email, user.Role)
                 ).FirstOrDefault();
     }
 }
