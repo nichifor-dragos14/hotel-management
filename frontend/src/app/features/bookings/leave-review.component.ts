@@ -59,13 +59,13 @@ export class CustomConfigService extends StarRatingConfigService {
       <mat-form-field appearance="outline">
         <mat-label>Title</mat-label>
         <input matInput formControlName="title" />
-        <mat-error>The review title is required</mat-error>
+        <mat-error>The title is required</mat-error>
       </mat-form-field>
 
       <mat-form-field appearance="outline">
         <mat-label>Description</mat-label>
         <editor appTinyEditor formControlName="description" />
-        <mat-error>The review description is required</mat-error>
+        <mat-error>The description is required</mat-error>
       </mat-form-field>
 
       <section role="rating">

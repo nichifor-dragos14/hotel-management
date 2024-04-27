@@ -20,7 +20,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
   selector: 'app-leave-report',
   standalone: true,
   template: `
-    <app-page-header title="Your report for {{ property.name }} ❗">
+    <app-page-header title="Your report for {{ property.name }} ⚠️">
       <button
         mat-button
         color="primary"
@@ -37,39 +37,45 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     </app-page-header>
 
     <form [formGroup]="reportForm">
-      <p>
-        We are sorry to hear that you are not happy with your reservation.
-        Please, let us know what went wrong! 🤕
+      <p class="font-light">
+        We regret to learn that your reservation experience did not meet your
+        expectations. We are eager to understand and address your concerns.
+        Could you share with us the details of what happened? 🤕
       </p>
 
       <mat-form-field appearance="outline">
         <mat-label>Title</mat-label>
         <input matInput formControlName="title" />
-        <mat-error>The report title is required</mat-error>
+        <mat-error>The title is required</mat-error>
       </mat-form-field>
 
       <mat-form-field appearance="outline">
         <mat-label>Description</mat-label>
         <editor appTinyEditor formControlName="description" />
-        <mat-error>The report description is required</mat-error>
+        <mat-error>The description is required</mat-error>
       </mat-form-field>
     </form>
   `,
   styles: `
       :host {
         padding: 32px 24px;
-        width: 72vw;
+        width: 56vw;
         height: 64vh;
         display: flex;
         flex-direction: column;
         gap: 16px;
       }
-  
+
       form {
         display: flex;
         flex-direction: column;
         gap: 8px;
         padding: 0 64px;
+      }
+
+      .font-light {
+        font-weight: lighter;
+        font-size: 0.8rem;
       }
   `,
   imports: [
