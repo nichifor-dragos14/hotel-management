@@ -34,7 +34,7 @@ export class CustomConfigService extends StarRatingConfigService {
   selector: 'app-leave-review',
   standalone: true,
   template: `
-    <app-page-header title="Your review for {{ property.name }} ⭐">
+    <app-page-header title="Your review for {{ property.name }} 🌟">
       <button
         mat-button
         color="primary"
