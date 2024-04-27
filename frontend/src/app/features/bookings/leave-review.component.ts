@@ -2,6 +2,7 @@ import { PropertyDetails, ReviewService } from '$backend/services';
 import {
   ChangeDetectionStrategy,
   Component,
+  Injectable,
   Input,
   inject,
 } from '@angular/core';
@@ -16,12 +17,24 @@ import { TinyEditorModule } from '$shared/tiny-editor';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSliderModule } from '@angular/material/slider';
+import { StarRatingModule, StarRatingConfigService } from 'angular-star-rating';
+
+@Injectable()
+export class CustomConfigService extends StarRatingConfigService {
+  constructor() {
+    super();
+    this.numOfStars = 10;
+    this.staticColor = 'ok';
+    this.size = 'large';
+    this.labelPosition = 'left';
+  }
+}
 
 @Component({
   selector: 'app-leave-review',
   standalone: true,
   template: `
-    <app-page-header title="Your review for {{ property.name }}  💯">
+    <app-page-header title="Your review for {{ property.name }} ⭐">
       <button
         mat-button
         color="primary"
@@ -38,9 +51,9 @@ import { MatSliderModule } from '@angular/material/slider';
     </app-page-header>
 
     <form [formGroup]="reviewForm">
-      <p>
-        The property would like to know what went well and what not. Your review
-        helps us improve customer experience! 😄
+      <p class="font-light">
+        Let us know how your stay was! We love hearing what you liked and what
+        we can do better. Your review makes all the difference. 😄
       </p>
 
       <mat-form-field appearance="outline">
@@ -49,24 +62,24 @@ import { MatSliderModule } from '@angular/material/slider';
         <mat-error>The review title is required</mat-error>
       </mat-form-field>
 
-      <section role="rating">
-        <mat-label>Rating 🚀</mat-label>
-        <mat-slider min="1" max="10" step="0.1" discrete>
-          <input matSliderThumb formControlName="rating" />
-        </mat-slider>
-      </section>
-
       <mat-form-field appearance="outline">
         <mat-label>Description</mat-label>
         <editor appTinyEditor formControlName="description" />
         <mat-error>The review description is required</mat-error>
       </mat-form-field>
+
+      <section role="rating">
+        <span>
+          🚀 Your rating is {{ reviewForm.get(['rating'])!.value | json }}
+        </span>
+        <star-rating-control formControlName="rating"></star-rating-control>
+      </section>
     </form>
   `,
   styles: `
     :host {
       padding: 32px 24px;
-      width: 72vw;
+      width: 56vw;
       height: 64vh;
       display: flex;
       flex-direction: column;
@@ -82,7 +95,15 @@ import { MatSliderModule } from '@angular/material/slider';
 
     section[role='rating'] {
       display: flex;
-      flex-direction: column;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      gap: 32px;
+    }
+    
+    .font-light {
+      font-weight: lighter;
+      font-size: 0.8rem;
     }
 `,
   imports: [
@@ -96,8 +117,15 @@ import { MatSliderModule } from '@angular/material/slider';
     MatInputModule,
     MatFormFieldModule,
     MatSliderModule,
+    StarRatingModule,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [
+    {
+      provide: StarRatingConfigService,
+      useClass: CustomConfigService,
+    },
+  ],
 })
 export class LeaveReviewComponent {
   readonly router = inject(Router);
@@ -115,7 +143,7 @@ export class LeaveReviewComponent {
 
     try {
       await this.reviewService.reviewsPostAsync({ body: newReview });
-      this.toastService.open('Successfully posted review', 'info');
+      this.toastService.open('Your review was successfully sent', 'info');
     } catch (error) {
       if (error instanceof Error) {
         this.toastService.open(error.message, 'error');

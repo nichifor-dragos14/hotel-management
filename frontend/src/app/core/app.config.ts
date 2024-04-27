@@ -21,6 +21,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { EditorModule } from '@tinymce/tinymce-angular';
 import { httpInterceptorProviders } from '$features/auth/auth.interceptor';
 import { CustomReuseStrategy } from './router.configuration';
+import { StarRatingModule } from 'angular-star-rating';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -28,6 +29,7 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(withFetch()),
     importProvidersFrom(
       BackendApiModule.forRoot({ rootUrl: '/api' }),
+      StarRatingModule.forRoot(),
       HttpClientModule,
       BrowserAnimationsModule,
       MatSnackBarModule,
