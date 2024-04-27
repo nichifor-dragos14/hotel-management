@@ -39,7 +39,7 @@ import { MatRippleModule } from '@angular/material/core';
           </span>
 
           <span
-            matCardSubtitleI
+            matCardSubtitle
             *ngFor="let room of property.typeOfRooms.slice(0, 2)"
           >
             {{ transformTypeOfRoomToString(room) }} room
@@ -160,6 +160,11 @@ import { MatRippleModule } from '@angular/material/core';
         border-top-left-radius: 8px;
         border-top-right-radius: 8px;
         border-bottom-right-radius: 8px;
+    }
+
+    .font-light {
+      font-weight: lighter;
+      font-size: 0.8rem;
     }
 
     .green-text {
