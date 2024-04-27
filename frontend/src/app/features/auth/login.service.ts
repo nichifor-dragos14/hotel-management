@@ -1,15 +1,19 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { jwtDecode } from 'jwt-decode';
 import { UserClaims } from './user-claims.model';
+import { UserService } from '$backend/services';
 
 @Injectable({
   providedIn: 'root',
 })
 export class LoginService {
+  userService = inject(UserService);
+
   private isLoggedIn = new BehaviorSubject<boolean>(this.isTokenValid());
   private userRole = new BehaviorSubject<string>(this.getLoggedUserRole());
-  
+  private profilePicture = new BehaviorSubject<string>('');
+
   get isLoggedIn$(): Observable<boolean> {
     return this.isLoggedIn.asObservable();
   }
@@ -18,16 +22,22 @@ export class LoginService {
     return this.userRole.asObservable();
   }
 
-  logout() {
-    localStorage.removeItem('JWT');
-
-    this.isLoggedIn.next(false);
-    this.userRole.next('');
+  get profilePicture$(): Observable<string> {
+    return this.profilePicture.asObservable();
   }
 
-  notifyLoginSuccess() {
+  private async fetchProfilePicture() {
+    var user = await this.userService.usersEmailGetAsync({
+      email: this.getLoggedUserEmail(),
+    });
+
+    this.profilePicture.next(user.profilePicture);
+  }
+
+  private notifyLoginSuccess() {
     this.isLoggedIn.next(true);
     this.userRole.next(this.getLoggedUserRole());
+    this.fetchProfilePicture();
   }
 
   private isTokenValid(): boolean {
@@ -54,28 +64,6 @@ export class LoginService {
     return true;
   }
 
-  validateTokenAndUpdateState(): void {
-    const isValid = this.isTokenValid();
-    this.isLoggedIn.next(isValid);
-  }
-
-  async AddJWTToSessionStorage(JWT: string): Promise<void> {
-    return new Promise<void>((resolve, reject) => {
-      if (JWT.length != 0) {
-        try {
-          localStorage.setItem('JWT', JWT);
-
-          this.notifyLoginSuccess();
-          resolve();
-        } catch (error) {
-          reject(error);
-        }
-      } else {
-        reject(new Error('Session storage is not available and JWT is empty.'));
-      }
-    });
-  }
-
   private decodeToken() {
     const jwtToken = localStorage.getItem('JWT');
 
@@ -99,6 +87,36 @@ export class LoginService {
     }
 
     return claims;
+  }
+
+  logout() {
+    localStorage.removeItem('JWT');
+
+    this.isLoggedIn.next(false);
+    this.userRole.next('');
+    this.profilePicture.next('');
+  }
+
+  validateTokenAndUpdateState(): void {
+    const isValid = this.isTokenValid();
+    this.isLoggedIn.next(isValid);
+  }
+
+  async AddJWTToSessionStorage(JWT: string): Promise<void> {
+    return new Promise<void>((resolve, reject) => {
+      if (JWT.length != 0) {
+        try {
+          localStorage.setItem('JWT', JWT);
+
+          this.notifyLoginSuccess();
+          resolve();
+        } catch (error) {
+          reject(error);
+        }
+      } else {
+        reject(new Error('Session storage is not available and JWT is empty.'));
+      }
+    });
   }
 
   getLoggedUserEmail() {

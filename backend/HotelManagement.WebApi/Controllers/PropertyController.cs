@@ -2,6 +2,7 @@
 using HotelManagement.Core.FileStorageService;
 using HotelManagement.Core.Properties;
 using HotelManagement.Core.Properties.Filters;
+using HotelManagement.WebApi.Authorize;
 using HotelManagement.WebApi.DTOs;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
@@ -13,6 +14,7 @@ namespace HotelManagement.WebApi.Controllers;
 public class PropertyController(IFileStorageService _storageService) : ControllerBase
 {
     [HttpGet]
+    [AuthorizeRoles(Core.Users.Role.Admin)]
     public async Task<Results<Ok<IPaginatedResult<PropertySummary>>, NotFound>> GetAll(
         [FromServices] IQueryHandler<AllPropertySummariesQuery, IPaginatedResult<PropertySummary>> queryService,
         int from,
@@ -53,6 +55,7 @@ public class PropertyController(IFileStorageService _storageService) : Controlle
     }
 
     [HttpGet("types")]
+    [AuthorizeRoles(Core.Users.Role.Admin)]
     public async Task<Results<Ok<IEnumerable<PropertyTypeSummary>>, NotFound>> GetAllTypes(
         [FromServices] IQueryHandler<AllPropertyTypesQuery, IEnumerable<PropertyTypeSummary>> queryService,
         CancellationToken cancelationToken)
@@ -104,6 +107,7 @@ public class PropertyController(IFileStorageService _storageService) : Controlle
     }
 
     [HttpPost]
+    [AuthorizeRoles(Core.Users.Role.Admin)]
     public async Task<Results<Ok<Guid>, BadRequest>> Create(
         [FromBody] CreatePropertyCommand createHotelCommand,
         [FromServices] ICommandHandler<CreatePropertyCommand, Guid?> commandHandler,
@@ -118,6 +122,7 @@ public class PropertyController(IFileStorageService _storageService) : Controlle
     }
 
     [HttpPatch]
+    [AuthorizeRoles(Core.Users.Role.Admin)]
     public async Task<Results<Ok<Guid>, BadRequest>> Update(
         [FromBody] UpdatePropertyCommand updateHotelCommand,
         [FromServices] ICommandHandler<UpdatePropertyCommand, Guid?> commandHandler,
@@ -132,6 +137,7 @@ public class PropertyController(IFileStorageService _storageService) : Controlle
     }
 
     [HttpPatch("upload")]
+    [AuthorizeRoles(Core.Users.Role.Admin)]
     public async Task<Results<Ok<string>, BadRequest<string>>> UploadFile(
     [FromForm] AddPropertyPictureDTO addPropertyPicturesDTO
 )
@@ -153,6 +159,7 @@ public class PropertyController(IFileStorageService _storageService) : Controlle
     }
 
     [HttpDelete("{id}")]
+    [AuthorizeRoles(Core.Users.Role.Admin)]
     public async Task<Results<Ok, NotFound>> Delete(Guid id,
         [FromServices] ICommandHandler<DeletePropertyCommand, bool> commandHandler,
         CancellationToken cancellationToken)

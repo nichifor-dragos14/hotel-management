@@ -34,7 +34,7 @@ import { CommonModule } from '@angular/common';
             <img
               id="profile-picture"
               alt="profile picture"
-              src="assets/hotel1.jpg"
+              [src]="profilePicture"
               [routerLink]="['users/my-profile/details']"
             />
 
@@ -104,12 +104,14 @@ export class AppLayoutComponent implements OnInit {
   loginService = inject(LoginService);
 
   isLoggedIn: boolean = false;
-  userRole: string = 'Client';
+  userRole: string = '';
+  profilePicture: string = '';
   private subscription: Subscription = new Subscription();
 
   ngOnInit(): void {
     this.subscribeToLoginStatus();
     this.subscribeToUserRole();
+    this.subscribeToProfilePicture();
   }
 
   private subscribeToLoginStatus(): void {
@@ -124,6 +126,14 @@ export class AppLayoutComponent implements OnInit {
     this.subscription.add(
       this.loginService.userRole$.subscribe((status) => {
         this.userRole = status;
+      })
+    );
+  }
+
+  private subscribeToProfilePicture(): void {
+    this.subscription.add(
+      this.loginService.profilePicture$.subscribe((status) => {
+        this.profilePicture = status;
       })
     );
   }

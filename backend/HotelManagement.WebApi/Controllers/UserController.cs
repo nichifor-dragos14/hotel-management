@@ -5,12 +5,14 @@ using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using HotelManagement.WebApi.DTOs;
+using HotelManagement.WebApi.Authorize;
 
 
 namespace HotelManagement.WebApi.Controllers;
 
 [Route("users")]
 [ApiController]
+[AuthorizeRoles(Core.Users.Role.Client)]
 public class UserController(IFileStorageService _storageService) : Controller
 {
     [HttpGet("{email}")]

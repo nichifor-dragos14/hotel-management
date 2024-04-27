@@ -1,5 +1,6 @@
 ﻿using HotelManagement.Core.Abstractions;
 using HotelManagement.Core.Reports;
+using HotelManagement.WebApi.Authorize;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,6 +12,7 @@ namespace HotelManagement.WebApi.Controllers;
 public class ReportController
 {
     [HttpGet]
+    [AuthorizeRoles(Core.Users.Role.Admin)]
     public async Task<Results<Ok<IPaginatedResult<ReportSummary>>, NotFound>> GetAll(
        [FromServices] IQueryHandler<AllReportSummariesQuery, IPaginatedResult<ReportSummary>> queryService,
        int from,
@@ -21,6 +23,7 @@ public class ReportController
     }
 
     [HttpGet("{id}")]
+    [AuthorizeRoles(Core.Users.Role.Admin)]
     public async Task<Results<Ok<ReportDetails>, NotFound, BadRequest>> GetOne(Guid id,
         [FromServices] IQueryHandler<OneReportQuery, ReportDetails> queryService,
         CancellationToken cancellationToken)
@@ -51,6 +54,7 @@ public class ReportController
     }
 
     [HttpPatch("close")]
+    [AuthorizeRoles(Core.Users.Role.Admin)]
     public async Task<Results<Ok<Guid>, BadRequest>> Close(
         [FromBody] CloseReportCommand closeReportCommand,
         [FromServices] ICommandHandler<CloseReportCommand, Guid?> commandHandler,
@@ -65,6 +69,7 @@ public class ReportController
     }
 
     [HttpPatch("open")]
+    [AuthorizeRoles(Core.Users.Role.Admin)]
     public async Task<Results<Ok<Guid>, BadRequest>> Open(
         [FromBody] OpenReportCommand openReportCommand,
         [FromServices] ICommandHandler<OpenReportCommand, Guid?> commandHandler,
@@ -79,6 +84,7 @@ public class ReportController
     }
 
     [HttpPatch("read")]
+    [AuthorizeRoles(Core.Users.Role.Admin)]
     public async Task<Results<Ok<Guid>, BadRequest>> Read(
         [FromBody] ReadReportCommand readReportCommand,
         [FromServices] ICommandHandler<ReadReportCommand, Guid?> commandHandler,

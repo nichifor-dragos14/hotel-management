@@ -17,7 +17,7 @@ export class AuthInterceptor implements HttpInterceptor {
   ): Observable<HttpEvent<any>> {
     inject(LoginService).validateTokenAndUpdateState();
 
-    const jwtToken = sessionStorage.getItem('JWT');
+    const jwtToken = localStorage.getItem('JWT');
     let request = req;
 
     if (jwtToken) {

@@ -1,5 +1,6 @@
 ﻿using HotelManagement.Core.Abstractions;
 using HotelManagement.Core.Reviews;
+using HotelManagement.WebApi.Authorize;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 
@@ -7,6 +8,7 @@ namespace HotelManagement.WebApi.Controllers;
 
 [Route("reviews")]
 [ApiController]
+[AuthorizeRoles(Core.Users.Role.Client)]
 public class ReviewController : ControllerBase
 {
     [HttpGet]

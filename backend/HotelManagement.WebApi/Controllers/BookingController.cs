@@ -1,6 +1,7 @@
 ﻿using HotelManagement.Core.Abstractions;
 using HotelManagement.Core.Bookings;
 using HotelManagement.Core.EmailService;
+using HotelManagement.WebApi.Authorize;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,6 +9,7 @@ namespace HotelManagement.WebApi.Controllers;
 
 [Route("bookings")]
 [ApiController]
+[AuthorizeRoles(Core.Users.Role.Client)]
 public class BookingController(IEmailService _emailService) : ControllerBase
 {
     [HttpGet("past")]
