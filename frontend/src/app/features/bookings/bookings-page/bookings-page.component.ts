@@ -15,6 +15,7 @@ import { AppLinePlaceholderComponent } from '$shared/placeholders/line-placehold
 import { AppCirclePlaceholderComponent } from '$shared/placeholders/circle-placeholder';
 import { MatTabsModule } from '@angular/material/tabs';
 import { DateConverterModule } from '$shared/date-converter';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-bookings-page',
@@ -30,6 +31,7 @@ import { DateConverterModule } from '$shared/date-converter';
     AppCirclePlaceholderComponent,
     MatTabsModule,
     DateConverterModule,
+    MatIconModule,
   ],
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,

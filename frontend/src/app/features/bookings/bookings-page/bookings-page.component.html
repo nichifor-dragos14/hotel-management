@@ -1,5 +1,7 @@
 <app-page-header title="My bookings 🍸">
-  <button mat-button button color="primary" routerLink="/main">Book now</button>
+  <button mat-button button color="primary" routerLink="/main">
+    Explore properties
+  </button>
 </app-page-header>
 
 <mat-tab-group dynamicHeight="true">
@@ -7,21 +9,25 @@
     <mat-nav-list>
       <cdk-virtual-scroll-viewport
         scrollWindow
-        [itemSize]="64"
+        [itemSize]="72"
         [maxBufferPx]="500"
       >
         <ng-container
           *cdkVirtualFor="let booking of upcomingBookingsDataSource"
         >
           @if (!booking) {
-            <a mat-list-item disabled>
+            <a mat-list-item disabled class="placeholder">
               <app-circle-placeholder matListItemIcon [radius]="35">
               </app-circle-placeholder>
+
               <app-line-placeholder
                 matListItemTitle
                 [width]="250"
                 [height]="15"
               >
+              </app-line-placeholder>
+
+              <app-line-placeholder matListItemMeta [width]="250" [height]="15">
               </app-line-placeholder>
             </a>
           } @else {
@@ -30,10 +36,19 @@
               [routerLink]="[booking.id]"
               routerLinkActive="active"
             >
+              <span matListItemIcon>
+                <mat-icon>watch_later</mat-icon>
+              </span>
+
               <span matListItemTitle>
                 Your upcoming stay at {{ booking.propertyName }}
               </span>
-              <span matListItemMeta>{{ booking.location }}</span>
+
+              <section matListItemMeta role="location">
+                <mat-icon>location_on</mat-icon>
+                <span>{{ booking.location }}</span>
+              </section>
+
               <span matListItemLine>
                 From {{ booking.startDate | dateFormat }} to
                 {{ booking.endDate | dateFormat }}
@@ -49,21 +64,23 @@
     <mat-nav-list>
       <cdk-virtual-scroll-viewport
         scrollWindow
-        [itemSize]="64"
+        [itemSize]="72"
         [maxBufferPx]="500"
       >
         <ng-container *cdkVirtualFor="let booking of pastBookingsDataSource">
           @if (!booking) {
-            <a mat-list-item disabled>
+            <a mat-list-item disabled class="placeholder">
+              <app-circle-placeholder matListItemIcon [radius]="35">
+              </app-circle-placeholder>
+
               <app-line-placeholder
                 matListItemTitle
                 [width]="250"
                 [height]="15"
               >
               </app-line-placeholder>
-              <app-line-placeholder matListItemLine [width]="250" [height]="15">
-              </app-line-placeholder>
-              <app-line-placeholder matListItemMeta [width]="120" [height]="15">
+
+              <app-line-placeholder matListItemMeta [width]="250" [height]="15">
               </app-line-placeholder>
             </a>
           } @else {
@@ -72,14 +89,23 @@
               [routerLink]="[booking.id]"
               routerLinkActive="active"
             >
+              <span matListItemIcon>
+                <mat-icon>done</mat-icon>
+              </span>
+
               <span matListItemTitle>
                 Your stay at {{ booking.propertyName }}
               </span>
+
+              <section matListItemMeta role="location">
+                <mat-icon>location_on</mat-icon>
+                <span>{{ booking.location }}</span>
+              </section>
+
               <span matListItemLine>
                 From {{ booking.startDate | dateFormat }} to
                 {{ booking.endDate | dateFormat }}
               </span>
-              <span matListItemMeta>{{ booking.location }}</span>
             </a>
           }
         </ng-container>
