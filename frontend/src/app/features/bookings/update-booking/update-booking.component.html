@@ -45,9 +45,8 @@
     }} {{ generateStarRating(bookingDetails.propertyDetails.rating) }}"
   >
     <section button role="creation-date">
-      <h2>🕥</h2>
-      <mat-chip color="primary">
-        {{ bookingDetails.createdOn | dateFormat }}
+      <mat-chip id="custom-mat-chip">
+        🕥 {{ bookingDetails.createdOn | dateFormat }}
       </mat-chip>
     </section>
   </app-page-header>
@@ -55,14 +54,14 @@
   <section role="details">
     <section role="user-details">
       <section role="expected-guest">
-        <h2>Expected guest</h2>
+        <h2>{{ isInPast() ? 'Guest' : 'Expected guest' }}</h2>
         <section>
-          <span>
-            {{ bookingDetails.firstNameOnBooking }}
+          <span class="font-light">
+            Name: {{ bookingDetails.firstNameOnBooking }}
             {{ bookingDetails.lastNameOnBooking }}
           </span>
-          <span>
-            {{ bookingDetails.countryOnBooking }}
+          <span class="font-light">
+            Country: {{ bookingDetails.countryOnBooking }}
           </span>
         </section>
       </section>
@@ -70,29 +69,34 @@
       <section role="guest-information">
         <h2>Guest information</h2>
         <section>
-          <span> Email: {{ bookingDetails.emailOnBooking }} </span>
-          <span> Phone number: {{ bookingDetails.phoneNumberOnBooking }}</span>
+          <span class="font-light">
+            Email: {{ bookingDetails.emailOnBooking }}
+          </span>
+          <span class="font-light">
+            Phone number: {{ bookingDetails.phoneNumberOnBooking }}</span
+          >
         </section>
       </section>
 
       <section role="guest-information">
         <h2>Booked room</h2>
         <section>
-          <span>
+          <span class="font-light">
             {{ roomTypeMapper(bookingDetails.roomDetails.type) }} Room no.
             {{ bookingDetails.roomDetails.number }}
           </span>
 
           <section role="booked-room">
-            <span>
+            <span class="font-light">
               <ng-container
                 *ngFor="let _ of [].constructor(bookingDetails.roomDetails)"
               >
-                <mat-icon>person</mat-icon>
+                <mat-icon class="icon-light">person</mat-icon>
               </ng-container>
               adults
             </span>
             <span
+              class="font-light"
               [style.visibility]="
                 bookingDetails.roomDetails.childrenCapacity === 0
                   ? 'hidden'
@@ -106,7 +110,7 @@
                   )
                 "
               >
-                <mat-icon>person</mat-icon>
+                <mat-icon class="icon-light">person</mat-icon>
               </ng-container>
               children
             </span>
@@ -127,14 +131,14 @@
           <span>
             <mat-icon color="primary">location_pin</mat-icon>
           </span>
-          {{ bookingDetails.propertyDetails.location }} -
+
           <a
             href="https://www.google.com/maps/place/{{
               bookingDetails.propertyDetails.location
             }}"
             target="_blank"
           >
-            See on map
+            {{ bookingDetails.propertyDetails.location }} - See on map
           </a>
         </span>
 
@@ -151,115 +155,147 @@
 
         <section role="facilities">
           @if (bookingDetails.propertyDetails.hasFreeWiFi) {
-            <span>
-              <mat-icon color="primary">wifi</mat-icon>
-              <span>Free wifi</span>
-            </span>
+            <mat-card>
+              <mat-card-content>
+                <mat-icon color="primary">wifi</mat-icon>
+                <span>Free wifi</span>
+              </mat-card-content>
+            </mat-card>
           }
 
           @if (bookingDetails.propertyDetails.hasParking) {
-            <span>
-              <mat-icon color="primary">local_parking</mat-icon>
-              <span>Parking</span>
-            </span>
+            <mat-card>
+              <mat-card-content>
+                <mat-icon color="primary">local_parking</mat-icon>
+                <span>Parking</span>
+              </mat-card-content>
+            </mat-card>
           }
 
           @if (bookingDetails.propertyDetails.hasPool) {
-            <span>
-              <mat-icon color="primary">pool</mat-icon>
-              <span>Pool</span>
-            </span>
+            <mat-card>
+              <mat-card-content>
+                <mat-icon color="primary">pool</mat-icon>
+                <span>Pool</span>
+              </mat-card-content>
+            </mat-card>
           }
 
           @if (bookingDetails.propertyDetails.hasRestaurant) {
-            <span>
-              <mat-icon color="primary">restaurant</mat-icon>
-              <span>Restaurant</span>
-            </span>
+            <mat-card>
+              <mat-card-content>
+                <mat-icon color="primary">restaurant</mat-icon>
+                <span>Restaurant</span>
+              </mat-card-content>
+            </mat-card>
           }
 
           @if (bookingDetails.propertyDetails.hasBreakfast) {
-            <span>
-              <mat-icon color="primary">free_breakfast</mat-icon>
-              <span>Breakfast</span>
-            </span>
+            <mat-card>
+              <mat-card-content>
+                <mat-icon color="primary">free_breakfast</mat-icon>
+                <span>Breakfast</span>
+              </mat-card-content>
+            </mat-card>
           }
 
           @if (bookingDetails.propertyDetails.hasFitnessCenter) {
-            <span>
-              <mat-icon color="primary">fitness_center</mat-icon>
-              <span>Fitness center</span>
-            </span>
+            <mat-card>
+              <mat-card-content>
+                <mat-icon color="primary">fitness_center</mat-icon>
+                <span>Fitness center</span>
+              </mat-card-content>
+            </mat-card>
           }
 
           @if (bookingDetails.propertyDetails.hasRoomService) {
-            <span>
-              <mat-icon color="primary">room_service</mat-icon>
-              <span>Room service</span>
-            </span>
+            <mat-card>
+              <mat-card-content>
+                <mat-icon color="primary">room_service</mat-icon>
+                <span>Room service</span>
+              </mat-card-content>
+            </mat-card>
           }
 
           @if (bookingDetails.propertyDetails.hasPetFriendlyPolicy) {
-            <span>
-              <mat-icon color="primary">pets</mat-icon>
-              <span>Pet friendly</span>
-            </span>
+            <mat-card>
+              <mat-card-content>
+                <mat-icon color="primary">pets</mat-icon>
+                <span>Pet friendly</span>
+              </mat-card-content>
+            </mat-card>
           }
 
           @if (bookingDetails.propertyDetails.hasFreeCancellation) {
-            <span>
-              <mat-icon color="primary">cancel</mat-icon>
-              <span>Free cancellation</span>
-            </span>
+            <mat-card>
+              <mat-card-content>
+                <mat-icon color="primary">cancel</mat-icon>
+                <span>Free cancellation</span>
+              </mat-card-content>
+            </mat-card>
           }
 
           @if (bookingDetails.roomDetails.hasAirConditioning) {
-            <span matCardSubtitle>
-              <mat-icon color="primary">ac_unit</mat-icon>
-              Air conditioning
-            </span>
+            <mat-card>
+              <mat-card-content>
+                <mat-icon color="primary">ac_unit</mat-icon>
+                <span>Air conditioning</span>
+              </mat-card-content>
+            </mat-card>
           }
 
           @if (bookingDetails.roomDetails.hasBalcony) {
-            <span matCardSubtitle>
-              <mat-icon color="primary">deck</mat-icon>
-              Balcony
-            </span>
+            <mat-card>
+              <mat-card-content>
+                <mat-icon color="primary">deck</mat-icon>
+                <span>Balcony</span>
+              </mat-card-content>
+            </mat-card>
           }
 
           @if (bookingDetails.roomDetails.hasHairdryer) {
-            <span matCardSubtitle>
-              <mat-icon color="primary">waves</mat-icon>
-              Hairdryer
-            </span>
+            <mat-card>
+              <mat-card-content>
+                <mat-icon color="primary">waves</mat-icon>
+                <span>Hairdryer</span>
+              </mat-card-content>
+            </mat-card>
           }
 
           @if (bookingDetails.roomDetails.hasPrivateBathroom) {
-            <span matCardSubtitle>
-              <mat-icon color="primary">shower</mat-icon>
-              Private bathroom
-            </span>
+            <mat-card>
+              <mat-card-content>
+                <mat-icon color="primary">shower</mat-icon>
+                <span>Private bathroom</span>
+              </mat-card-content>
+            </mat-card>
           }
 
           @if (bookingDetails.roomDetails.hasRefrigerator) {
-            <span matCardSubtitle>
-              <mat-icon color="primary">kitchen</mat-icon>
-              Refrigerator
-            </span>
+            <mat-card>
+              <mat-card-content>
+                <mat-icon color="primary">kitchen</mat-icon>
+                <span>Refrigerator</span>
+              </mat-card-content>
+            </mat-card>
           }
 
           @if (bookingDetails.roomDetails.hasSeaView) {
-            <span matCardSubtitle>
-              <mat-icon color="primary">beach_access</mat-icon>
-              Sea view
-            </span>
+            <mat-card>
+              <mat-card-content>
+                <mat-icon color="primary">beach_access</mat-icon>
+                <span>Sea view</span>
+              </mat-card-content>
+            </mat-card>
           }
 
           @if (bookingDetails.roomDetails.hasTowels) {
-            <span matCardSubtitle>
-              <mat-icon color="primary">local_laundry_service</mat-icon>
-              Towels
-            </span>
+            <mat-card>
+              <mat-card-content>
+                <mat-icon color="primary">local_laundry_service</mat-icon>
+                <span>Towels</span>
+              </mat-card-content>
+            </mat-card>
           }
         </section>
       </section>
@@ -267,8 +303,10 @@
       <section role="booking-layout">
         <h2>Property's contact information</h2>
         <section role="property-contact-information">
-          <span>Email: {{ bookingDetails.propertyDetails.email }}</span>
-          <span>
+          <span class="font-light">
+            Email: {{ bookingDetails.propertyDetails.email }}
+          </span>
+          <span class="font-light">
             Phone number:
             {{ bookingDetails.propertyDetails.phoneNumber }}
           </span>
@@ -280,7 +318,7 @@
 
 @if (!isInPast()) {
   <form [formGroup]="bookingForm">
-    <h2>Edit your booking details ✏️</h2>
+    <h2>Edit your booking details 🖋️</h2>
 
     <mat-form-field appearance="outline">
       <mat-label>Select an option</mat-label>

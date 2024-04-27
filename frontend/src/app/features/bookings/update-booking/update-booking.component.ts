@@ -20,6 +20,7 @@ import { DateConverterModule } from '$shared/date-converter';
 import { MatDividerModule } from '@angular/material/divider';
 import { CommonModule } from '@angular/common';
 import { GoogleMapsPreviewComponent } from '$shared/google-maps';
+import { MatCardModule } from '@angular/material/card';
 
 @Component({
   selector: 'app-update-booking-page',
@@ -39,7 +40,8 @@ import { GoogleMapsPreviewComponent } from '$shared/google-maps';
     DateConverterModule,
     MatDividerModule,
     CommonModule,
-    GoogleMapsPreviewComponent
+    GoogleMapsPreviewComponent,
+    MatCardModule,
   ],
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,

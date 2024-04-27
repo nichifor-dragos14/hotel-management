@@ -8,8 +8,9 @@
 #location-text {
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  align-items: center;
   align-self: flex-start;
+  gap: 8px;
 }
 
 section[role='booking-actions'] {
@@ -100,9 +101,9 @@ section[role='booking-details'] section[role='booking-layout'] {
 
 section[role='facilities'] {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-row-gap: 8px;
-  grid-column-gap: 4px;
+  grid-template-columns: repeat(3, 1fr);
+  grid-row-gap: 16px;
+  grid-column-gap: 32px;
 }
 
 section[role='facilities'] span {
@@ -134,4 +135,26 @@ form {
   display: flex;
   flex-direction: column;
   gap: 8px;
+}
+
+.font-light {
+  font-weight: lighter;
+  font-size: 0.8rem;
+}
+
+.icon-light {
+  color: grey;
+}
+
+mat-card-content {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 8px 16px !important;
+}
+
+.mat-mdc-standard-chip {
+  --mdc-chip-label-text-color: white;
+  --mdc-chip-elevated-container-color: #5e35b1;
 }
