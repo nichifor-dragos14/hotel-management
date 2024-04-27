@@ -1,26 +1,28 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { ActivatedRoute, RouterModule } from '@angular/router';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  OnInit,
+  inject,
+} from '@angular/core';
+import { RouterModule } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
 import { MatListModule } from '@angular/material/list';
-import {
-  PropertyCardComponent,
-  PropertyRecommendationCardComponent,
-} from '$shared/cards';
+import { PropertyRecommendationCardComponent } from '$shared/cards';
 import {
   PropertyService,
   PropertySummaryRecommendation,
 } from '$backend/services';
 import { PaginatedDataSource } from '$core/pagination';
 import { ScrollingModule } from '@angular/cdk/scrolling';
-import {
-  PropertyCardPlaceholderComponent,
-  PropertyRecommendationCardPlaceholderComponent,
-} from '$shared/placeholders/card-placeholder';
+import { PropertyRecommendationCardPlaceholderComponent } from '$shared/placeholders/card-placeholder';
 import { SearchHistoryService } from '$core/search-history.service';
 import { AppPageHeaderComponent } from '$shared/page-header';
 import { MatButtonModule } from '@angular/material/button';
 import { PropertyQueryParams } from '../property-query-params.interface';
+import { LoginService } from '$features/auth/login.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-main-page-our-recommendations-list',
@@ -41,9 +43,27 @@ import { PropertyQueryParams } from '../property-query-params.interface';
     MatButtonModule,
   ],
 })
-export class MainPageOurRecommendationsComponent {
+export class MainPageOurRecommendationsComponent implements OnInit {
   propertyService = inject(PropertyService);
+  loginService = inject(LoginService);
   searchHistoryService = inject(SearchHistoryService);
+  cdr = inject(ChangeDetectorRef);
+
+  private subscription: Subscription = new Subscription();
+  isLoggedIn: boolean = false;
+
+  ngOnInit(): void {
+    this.subscribeToLoginStatus();
+  }
+
+  private subscribeToLoginStatus(): void {
+    this.subscription.add(
+      this.loginService.isLoggedIn$.subscribe((status) => {
+        this.isLoggedIn = status;
+        this.cdr.detectChanges();
+      })
+    );
+  }
 
   propertiesDataSource = new PaginatedDataSource({
     fetch: ({ from, to }) => {

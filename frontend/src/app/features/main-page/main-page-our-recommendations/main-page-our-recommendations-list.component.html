@@ -1,13 +1,17 @@
 <app-page-header title="Our recommendations">
-  <button
-    mat-button
-    color="primary"
-    button
-    [routerLink]="['/users/my-profile/preferences']"
-  >
-    See how we make these recommendations
-  </button>
+  @if (isLoggedIn) {
+    <button
+      mat-button
+      color="primary"
+      button
+      [routerLink]="['/users/my-profile/preferences']"
+    >
+      Discover how we make these recommendations
+    </button>
+  }
 </app-page-header>
+
+{{ isLoggedIn }}
 
 <mat-nav-list>
   <cdk-virtual-scroll-viewport
