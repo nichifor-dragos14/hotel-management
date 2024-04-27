@@ -50,10 +50,9 @@ import { SearchHistoryService } from '$core/search-history.service';
   ],
 })
 export class MainPagePropertiesComponent implements AfterViewInit {
+  readonly router = inject(Router);
   readonly searchPropertyForm = inject(SEARCH_PROPERTY_FORM);
   readonly filterPropertyForm = inject(FILTER_PROPERTY_FORM);
-  readonly router = inject(Router);
-
   readonly searchHistoryService = inject(SearchHistoryService);
 
   ngAfterViewInit() {

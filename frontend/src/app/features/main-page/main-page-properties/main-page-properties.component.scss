@@ -14,6 +14,10 @@
   top: 14.5px;
 }
 
+#filter-header {
+  z-index: 0;
+}
+
 form[role='searchForm'] {
   grid-area: searchForm;
   padding: 0 16px;
@@ -51,4 +55,18 @@ mat-panel-description {
 
 mat-icon {
   overflow: unset;
+}
+
+:host ::ng-deep mat-slide-toggle .mdc-form-field {
+  gap: 8px !important;
+}
+
+mat-icon {
+  color: grey;
+}
+
+section[role='room-search-details'] {
+  display: flex;
+  flex-direction: row;
+  gap: 24px;
 }

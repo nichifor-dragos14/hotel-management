@@ -1,4 +1,4 @@
-import { Injectable, inject } from '@angular/core';
+import { Injectable, Injector, inject } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { jwtDecode } from 'jwt-decode';
 import { UserClaims } from './user-claims.model';
@@ -8,11 +8,24 @@ import { UserService } from '$backend/services';
   providedIn: 'root',
 })
 export class LoginService {
-  userService = inject(UserService);
-
   private isLoggedIn = new BehaviorSubject<boolean>(this.isTokenValid());
   private userRole = new BehaviorSubject<string>(this.getLoggedUserRole());
   private profilePicture = new BehaviorSubject<string>('');
+
+  private userService!: UserService;
+
+  constructor(private injector: Injector) {
+    setTimeout(() => this.initServices(), 0);
+  }
+
+  private initServices() {
+    this.userService = this.injector.get(UserService);
+    this.initPicture();
+  }
+
+  async initPicture() {
+    this.profilePicture.next(await this.fetchProfilePicture());
+  }
 
   get isLoggedIn$(): Observable<boolean> {
     return this.isLoggedIn.asObservable();
@@ -27,17 +40,17 @@ export class LoginService {
   }
 
   private async fetchProfilePicture() {
-    var user = await this.userService.usersEmailGetAsync({
+    var user = this.userService.usersEmailGetAsync({
       email: this.getLoggedUserEmail(),
     });
 
-    this.profilePicture.next(user.profilePicture);
+    return await user.then((u) => u.profilePicture);
   }
 
-  private notifyLoginSuccess() {
+  private async notifyLoginSuccess() {
     this.isLoggedIn.next(true);
     this.userRole.next(this.getLoggedUserRole());
-    this.fetchProfilePicture();
+    this.profilePicture.next(await this.fetchProfilePicture());
   }
 
   private isTokenValid(): boolean {
@@ -123,7 +136,7 @@ export class LoginService {
     let claims = this.decodeToken();
 
     if (claims == null) {
-      throw Error('No user logged in');
+      return '';
     }
 
     return claims['emailaddress'];
@@ -133,7 +146,7 @@ export class LoginService {
     let claims = this.decodeToken();
 
     if (claims == null) {
-      throw Error('No user logged in');
+      return '';
     }
 
     return claims['nameidentifier'];

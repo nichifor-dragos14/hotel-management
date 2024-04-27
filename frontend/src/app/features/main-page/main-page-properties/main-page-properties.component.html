@@ -18,34 +18,35 @@
   <mat-accordion multi class="mat-elevation-z8">
     <mat-expansion-panel [expanded]="true">
       <mat-expansion-panel-header>
-        <mat-panel-title> Where are you going? </mat-panel-title>
+        <mat-panel-title>Choose your next adventure</mat-panel-title>
         <mat-panel-description>
           <mat-icon>location_on</mat-icon>
-          <span>Tell us where you wish to travel</span>
+          <span>Tell us where you want to travel.</span>
         </mat-panel-description>
       </mat-expansion-panel-header>
 
       <mat-form-field appearance="outline">
+        <mat-label>Where are you going?</mat-label>
         <input
           matInput
           formControlName="location"
           placeholder="Where are you going?"
         />
-        <mat-icon matPrefix class="my-icon">bed</mat-icon>
+        <mat-icon matPrefix>explore</mat-icon>
       </mat-form-field>
     </mat-expansion-panel>
 
     <mat-expansion-panel>
       <mat-expansion-panel-header>
-        <mat-panel-title> Trip time </mat-panel-title>
+        <mat-panel-title>When will your journey begin?</mat-panel-title>
         <mat-panel-description>
           <mat-icon>date_range</mat-icon>
-          <span>Tell us when you wish to travel</span>
+          <span>Let us know your travel dates.</span>
         </mat-panel-description>
       </mat-expansion-panel-header>
 
-      <mat-form-field>
-        <mat-label>Enter a date range</mat-label>
+      <mat-form-field appearance="outline">
+        <mat-label>Your stay dates</mat-label>
         <mat-date-range-input [rangePicker]="picker">
           <input matStartDate formControlName="startDate" />
           <input matEndDate formControlName="endDate" />
@@ -60,49 +61,62 @@
 
     <mat-expansion-panel>
       <mat-expansion-panel-header>
-        <mat-panel-title> Trip details </mat-panel-title>
+        <mat-panel-title>Room and guest arrangements</mat-panel-title>
         <mat-panel-description>
           <mat-icon>person_outline</mat-icon>
-          <span>Tell us the number of persons and rooms</span>
+          <span>
+            Specify the number of guests and the number of rooms you would like
+            to reserve.
+          </span>
         </mat-panel-description>
       </mat-expansion-panel-header>
 
-      <mat-form-field appearance="outline">
-        <mat-label>Adults</mat-label>
-        <input
-          matInput
-          formControlName="numberOfAdults"
-          type="number"
-          min="1"
-        />
-        <mat-icon matPrefix class="my-icon">person</mat-icon>
-      </mat-form-field>
+      <section role="room-search-details">
+        <mat-form-field appearance="outline">
+          <mat-label>Adults</mat-label>
+          <input
+            matInput
+            formControlName="numberOfAdults"
+            type="number"
+            min="1"
+            max="8"
+          />
+          <mat-icon matPrefix>person</mat-icon>
+        </mat-form-field>
 
-      <mat-form-field appearance="outline">
-        <mat-label>Children</mat-label>
-        <input
-          matInput
-          formControlName="numberOfChildren"
-          type="number"
-          min="0"
-        />
-        <mat-icon matPrefix class="my-icon">child_care</mat-icon>
-      </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Children</mat-label>
+          <input
+            matInput
+            formControlName="numberOfChildren"
+            type="number"
+            min="0"
+            max="8"
+          />
+          <mat-icon matPrefix>child_care</mat-icon>
+        </mat-form-field>
 
-      <mat-form-field appearance="outline">
-        <mat-label>Rooms</mat-label>
-        <input matInput formControlName="numberOfRooms" type="number" min="1" />
-        <mat-icon matPrefix class="my-icon">hotel</mat-icon>
-      </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Rooms</mat-label>
+          <input
+            matInput
+            formControlName="numberOfRooms"
+            type="number"
+            min="1"
+            max="4"
+          />
+          <mat-icon matPrefix>hotel</mat-icon>
+        </mat-form-field>
+      </section>
     </mat-expansion-panel>
   </mat-accordion>
 </form>
 
 <form [formGroup]="filterPropertyForm" role="filtersForm">
-  <app-page-header title="Filters"></app-page-header>
+  <app-page-header title="Filters" id="filter-header"></app-page-header>
 
   <mat-selection-list>
-    <h3>🏨 Property filters</h3>
+    <h2>🏡 Property filters</h2>
 
     <section role="filters">
       <mat-slide-toggle formControlName="hasFreeWiFi" (click)="submitForm()">
@@ -159,7 +173,7 @@
   <mat-divider></mat-divider>
 
   <mat-selection-list>
-    <h3>🛏️ Room filters</h3>
+    <h2>🛏️ Room filters</h2>
 
     <section role="filters">
       <mat-slide-toggle
@@ -204,7 +218,7 @@
   <mat-divider></mat-divider>
 
   <mat-selection-list>
-    <h3>⭐ Rating filters</h3>
+    <h2>🌟 Rating filters</h2>
 
     <section role="filters">
       <mat-slide-toggle formControlName="isSuperb" (click)="submitForm()">
