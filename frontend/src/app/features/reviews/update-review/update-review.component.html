@@ -15,30 +15,31 @@
   <a mat-button [routerLink]="['actions', 'close']" color="warn">Delete</a>
 </section>
 
-<p>
-  The property would like to know what went well and what not. Your review helps
-  us improve customer experience! 😄
+<p class="font-light">
+  We appreciate your feedback and would love to hear more! Please let us know
+  how we've improved or what else we can do better. Updating your review helps
+  us to continue enhancing our services! 😄
 </p>
 
 <form [formGroup]="reviewForm">
   <mat-form-field appearance="outline">
     <mat-label>Title</mat-label>
     <input matInput formControlName="title" />
-    <mat-error>The review title is required</mat-error>
+    <mat-error>The title is required</mat-error>
   </mat-form-field>
-
-  <section role="rating">
-    <mat-label>Rating 🚀</mat-label>
-    <mat-slider min="1" max="10" step="0.1" discrete>
-      <input matSliderThumb formControlName="rating" />
-    </mat-slider>
-  </section>
 
   <mat-form-field appearance="outline">
     <mat-label>Description</mat-label>
     <editor appTinyEditor formControlName="description" />
-    <mat-error>The review description is required</mat-error>
+    <mat-error>The description is required</mat-error>
   </mat-form-field>
+
+  <section role="rating">
+    <span>
+      🚀 Your rating is {{ reviewForm.get(['rating'])!.value | json }}
+    </span>
+    <star-rating-control formControlName="rating"></star-rating-control>
+  </section>
 </form>
 
 <router-outlet hidden />

@@ -16,7 +16,6 @@ import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { TinyEditorModule } from '$shared/tiny-editor';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatSliderModule } from '@angular/material/slider';
 import { StarRatingModule, StarRatingConfigService } from 'angular-star-rating';
 
 @Injectable()
@@ -116,7 +115,6 @@ export class CustomConfigService extends StarRatingConfigService {
     TinyEditorModule,
     MatInputModule,
     MatFormFieldModule,
-    MatSliderModule,
     StarRatingModule,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,

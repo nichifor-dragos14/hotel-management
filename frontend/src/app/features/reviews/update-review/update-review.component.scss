@@ -9,6 +9,7 @@ section[role='actions'] {
   display: grid;
   grid-template-columns: 1fr auto auto;
   align-items: center;
+  gap: 8px;
 }
 
 form {
@@ -19,5 +20,13 @@ form {
 
 section[role='rating'] {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+}
+
+.font-light {
+  font-weight: lighter;
+  font-size: 0.8rem;
 }

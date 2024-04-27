@@ -1,6 +1,7 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  Injectable,
   Input,
   inject,
 } from '@angular/core';
@@ -14,7 +15,18 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { TinyEditorModule } from '$shared/tiny-editor';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { AppToastService } from '$shared/toast';
-import { MatSliderModule } from '@angular/material/slider';
+import { StarRatingConfigService, StarRatingModule } from 'angular-star-rating';
+
+@Injectable()
+export class CustomConfigService extends StarRatingConfigService {
+  constructor() {
+    super();
+    this.numOfStars = 10;
+    this.staticColor = 'ok';
+    this.size = 'large';
+    this.labelPosition = 'left';
+  }
+}
 
 @Component({
   selector: 'app-update-review',
@@ -31,7 +43,13 @@ import { MatSliderModule } from '@angular/material/slider';
     MatFormFieldModule,
     TinyEditorModule,
     ReactiveFormsModule,
-    MatSliderModule,
+    StarRatingModule,
+  ],
+  providers: [
+    {
+      provide: StarRatingConfigService,
+      useClass: CustomConfigService,
+    },
   ],
 })
 export class UpdateReviewPageComponent {
@@ -48,7 +66,7 @@ export class UpdateReviewPageComponent {
 
     try {
       await this.reviewService.reviewsPatchAsync({ body: updatedReview });
-      this.toastService.open('Successfully updated review', 'info');
+      this.toastService.open('Successfully updated your review', 'info');
     } catch (error) {
       if (error instanceof Error) {
         this.toastService.open(error.message, 'error');
