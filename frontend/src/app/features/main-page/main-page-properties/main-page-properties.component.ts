@@ -69,6 +69,12 @@ export class MainPagePropertiesComponent implements AfterViewInit {
     this.router.navigate(['main/our-recommendations']);
   }
 
+  resetLocationInput() {
+    this.searchPropertyForm.patchValue({ location: '' });
+
+    this.router.navigate(['main/our-recommendations']);
+  }
+
   search(newSearch: typeof this.searchPropertyForm.value) {
     const {
       location,
