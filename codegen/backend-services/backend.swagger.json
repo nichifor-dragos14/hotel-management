@@ -1848,6 +1848,7 @@
           "lastNameOnBooking",
           "phoneNumberOnBooking",
           "propertyDetails",
+          "reviewId",
           "roomDetails",
           "specialMentions",
           "startDate",
@@ -1900,6 +1901,10 @@
           "updatedOn": {
             "type": "string",
             "format": "date-time"
+          },
+          "reviewId": {
+            "type": "string",
+            "format": "uuid"
           },
           "propertyDetails": {
             "$ref": "#/components/schemas/BookingPropertyDetails"
@@ -2305,6 +2310,7 @@
       },
       "CreateReviewCommand": {
         "required": [
+          "bookingId",
           "description",
           "propertyId",
           "rating",
@@ -2314,6 +2320,10 @@
         "type": "object",
         "properties": {
           "propertyId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "bookingId": {
             "type": "string",
             "format": "uuid"
           },

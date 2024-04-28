@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore;
 using HotelManagement.Core.Reviews;
+using System.Reflection.Metadata;
+using HotelManagement.Core.Bookings;
 
 namespace HotelManagement.Infrastructure.EntityFramework.Configuration;
 
@@ -22,5 +24,9 @@ internal class ReviewEntityConfiguration : IEntityTypeConfiguration<Review>
 
         builder.HasOne(q => q.User)
            .WithMany(q => q.Reviews);
+
+        builder.HasOne(q => q.Booking)
+            .WithOne(q => q.Review)
+            .HasForeignKey<Review>(q => q.BookingId);
     }
 }

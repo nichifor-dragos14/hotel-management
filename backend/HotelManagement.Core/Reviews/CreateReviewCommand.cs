@@ -1,4 +1,5 @@
 ﻿using HotelManagement.Core.Abstractions;
+using HotelManagement.Core.Bookings;
 using HotelManagement.Core.Properties;
 using HotelManagement.Core.Users;
 
@@ -6,6 +7,7 @@ namespace HotelManagement.Core.Reviews;
 
 public record CreateReviewCommand(
     Guid PropertyId, 
+    Guid BookingId,
     Guid UserId,
     string Title,
     double Rating,
@@ -27,6 +29,15 @@ internal class CreateReviewCommandHandler(
             return null;
         }
 
+        var bookings = unitOfWork.GetRepository<Booking>();
+
+        bookings.TryGetById([command.BookingId], out var booking);
+
+        if (booking == null)
+        {
+            return null;
+        }
+
         var users = unitOfWork.GetRepository<User>();
 
         users.TryGetById([command.UserId], out var user);
@@ -39,6 +50,7 @@ internal class CreateReviewCommandHandler(
         var reviews = unitOfWork.GetRepository<Review>();
 
         var review = Review.Create(
+            booking,
             property,
             user,
             command.Title,

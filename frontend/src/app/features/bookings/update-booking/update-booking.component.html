@@ -16,13 +16,23 @@
   }
 
   @if (isInPast()) {
-    <a
-      mat-button
-      [routerLink]="['actions', 'review', bookingDetails.propertyDetails.id]"
-      color="secondary"
-    >
-      Leave review
-    </a>
+    @if (bookingDetails.reviewId == '00000000-0000-0000-0000-000000000000') {
+      <a
+        mat-button
+        [routerLink]="['actions', 'review', bookingDetails.propertyDetails.id]"
+        color="secondary"
+      >
+        Leave review
+      </a>
+    } @else {
+      <a
+        mat-button
+        [routerLink]="['/reviews', 'my-reviews', bookingDetails.reviewId]"
+        color="secondary"
+      >
+        Update review
+      </a>
+    }
   }
 
   <a

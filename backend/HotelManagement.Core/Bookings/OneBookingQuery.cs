@@ -18,6 +18,7 @@ public record BookingDetails(
     string ExpectedArrival,
     DateTime CreatedOn,
     DateTime UpdatedOn,
+    Guid ReviewId,
     BookingPropertyDetails PropertyDetails,
     BookingRoomDetails RoomDetails
 );

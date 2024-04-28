@@ -1,4 +1,5 @@
-﻿using HotelManagement.Core.Properties;
+﻿using HotelManagement.Core.Bookings;
+using HotelManagement.Core.Properties;
 using HotelManagement.Core.Users;
 
 namespace HotelManagement.Core.Reviews;
@@ -36,6 +37,10 @@ public class Review
 
     public virtual User User { get; private set; }
 
+    public virtual Booking Booking { get; private set; }
+
+    public Guid BookingId { get; set; }
+
     public void Update(
         string title,
         string description,
@@ -49,6 +54,7 @@ public class Review
     }
 
     public static Review Create(
+        Booking booking,
         Property property,
         User user,
         string title,
@@ -64,6 +70,7 @@ public class Review
             DateTime.UtcNow
         )
         {
+            Booking = booking,
             Property = property,
             User = user,
         };

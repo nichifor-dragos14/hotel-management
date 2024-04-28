@@ -137,6 +137,7 @@ const BOOKING_ROUTES: Routes = [
                       },
                       reviewForm: async ({
                         params,
+                        parent,
                       }: ActivatedRouteSnapshot) => {
                         const router = inject(Router);
                         const loginService = inject(LoginService);
@@ -160,6 +161,7 @@ const BOOKING_ROUTES: Routes = [
                             rating: 5,
                             title: '',
                             userId: userId,
+                            bookingId: parent?.parent?.params['id'],
                           });
                         } catch (error) {
                           router.navigate(['/error']);

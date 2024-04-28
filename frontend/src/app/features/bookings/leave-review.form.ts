@@ -14,6 +14,7 @@ export class LeaveReviewFormFactory {
       rating: [review.rating, { validators: [Validators.required] }],
       title: [review.title, { validators: [Validators.required] }],
       userId: [review.userId, { validators: [Validators.required] }],
+      bookingId: [review.bookingId, { validators: [Validators.required] }],
     });
   }
 }
