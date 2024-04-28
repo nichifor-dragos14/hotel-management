@@ -77,7 +77,7 @@ import { MatButtonModule } from '@angular/material/button';
         height: 250px;
         min-width: 500px;
         min-height: 250px;
-        border: solid 5px #75c5e7;
+        border: solid 3.5px #5e35b1;
         border-style: dashed;
         display: table;
         cursor: pointer;
@@ -87,7 +87,7 @@ import { MatButtonModule } from '@angular/material/button';
         display: table-cell;
         text-align: center;
         vertical-align: middle;
-        color: #686868;
+        color: white;
       }
 
       #picture-display {
@@ -99,8 +99,8 @@ import { MatButtonModule } from '@angular/material/button';
       .image-container {
         position: relative;
         display: inline-block;
-        width: 150px;
-        height: 150px;
+        width: 120px;
+        height: 120px;
       }
 
       img {
@@ -114,6 +114,10 @@ import { MatButtonModule } from '@angular/material/button';
         position: absolute;
         top: 0;
         right: 0;
+      }
+
+      h2 {
+        font-weight: normal;
       }
     `,
   ],

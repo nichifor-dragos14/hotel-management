@@ -4,14 +4,13 @@ import {
   HostListener,
   Output,
   EventEmitter,
-  ChangeDetectorRef,
   inject,
 } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ImageFile } from './image-file.model';
 
 enum DropColor {
-  Default = '#C6E4F1',
+  Default = 'rgba(94, 53, 177, 0.7)',
   Over = '#ACADAD',
 }
 

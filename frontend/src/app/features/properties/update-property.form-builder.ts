@@ -1,8 +1,4 @@
-/* eslint-disable eslint-comments/disable-enable-pair */
-/* eslint-disable max-lines-per-function */
-/* eslint-disable no-prototype-builtins */
-
-import { PropertyDetails, UpdatePropertyCommand } from '$backend/services';
+import { UpdatePropertyCommand } from '$backend/services';
 import { AppFormBuilder } from '$core/forms';
 import { Injectable, inject } from '@angular/core';
 import { FormGroup, Validators } from '@angular/forms';
