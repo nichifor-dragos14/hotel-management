@@ -1,4 +1,4 @@
-<app-page-header title="Rooms">
+<app-page-header title="Rooms 🚪">
   <button mat-button button color="primary" routerLink="new">Add</button>
 </app-page-header>
 
@@ -16,10 +16,10 @@
         <a mat-list-item [routerLink]="[room.id]" routerLinkActive="active">
           <span matListItemIcon>
             <mat-icon
-              [matBadge]="room.adultCapacity + room.childrenCapacity"
+              [matBadge]="room.adultCapacity + '+' + room.childrenCapacity"
               matBadgeSize="small"
             >
-              person_pin
+              person
             </mat-icon>
           </span>
 

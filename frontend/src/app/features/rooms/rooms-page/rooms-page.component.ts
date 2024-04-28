@@ -4,16 +4,15 @@ import {
   Input,
   inject,
 } from '@angular/core';
-import { ActivatedRoute, RouterModule } from '@angular/router';
+import { RouterModule } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { AppPageHeaderComponent } from '$shared/page-header';
-import { PropertyService, RoomService, RoomType } from '$backend/services';
+import { RoomService, RoomType } from '$backend/services';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { MatListModule } from '@angular/material/list';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
 import { MatBadgeModule } from '@angular/material/badge';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { PaginatedDataSource } from '$core/pagination';
 import { AppLinePlaceholderComponent } from '$shared/placeholders/line-placeholder';
 import { AppCirclePlaceholderComponent } from '$shared/placeholders/circle-placeholder';
@@ -31,7 +30,6 @@ import { AppCirclePlaceholderComponent } from '$shared/placeholders/circle-place
     MatMenuModule,
     MatIconModule,
     MatBadgeModule,
-    MatProgressSpinnerModule,
     AppLinePlaceholderComponent,
     AppCirclePlaceholderComponent,
   ],
@@ -40,7 +38,6 @@ import { AppCirclePlaceholderComponent } from '$shared/placeholders/circle-place
 })
 export class RoomsPageComponent {
   roomService = inject(RoomService);
-  activatedRoute = inject(ActivatedRoute);
 
   @Input() propertyId!: string;
 
