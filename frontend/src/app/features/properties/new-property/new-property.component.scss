@@ -1,7 +1,13 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  padding: 0 32px !important;
+  gap: 16px;
+}
+
 form {
   display: flex;
   flex-direction: column;
-  margin: auto;
   gap: 8px;
 }
 
@@ -9,7 +15,7 @@ section[role='property-actions'] {
   display: grid;
   grid-template-columns: 1fr auto;
   align-items: center;
-  grid-gap: 8px;
+  gap: 8px;
 }
 
 section[role='utilities'] {
@@ -56,4 +62,19 @@ section[role='rating'] {
 section[role='rating'] h2 {
   margin: 0;
   font-weight: normal;
+}
+
+section[role='rating-uploader'] {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.font-light {
+  font-size: 0.8rem;
+  color: grey;
+}
+
+:host ::ng-deep mat-slide-toggle .mdc-form-field {
+  gap: 8px !important;
 }

@@ -18,7 +18,6 @@ import { MatInputModule } from '@angular/material/input';
 import { TinyEditorModule } from '$shared/tiny-editor';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { MatSliderModule } from '@angular/material/slider';
 import {
   ImageFile,
   MultipleImageUploadComponent,
@@ -51,7 +50,6 @@ export class CustomConfigService extends StarRatingConfigService {
     RouterModule,
     MatSelectModule,
     MatSlideToggleModule,
-    MatSliderModule,
     MultipleImageUploadComponent,
     StarRatingModule,
   ],

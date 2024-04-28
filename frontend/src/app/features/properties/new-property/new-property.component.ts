@@ -1,6 +1,7 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  Injectable,
   Input,
   OnInit,
   inject,
@@ -22,7 +23,18 @@ import {
   MultipleImageUploadComponent,
   MultipleImageUploadService,
 } from '$shared/file-uploader';
-import { MatSliderModule } from '@angular/material/slider';
+import { StarRatingConfigService, StarRatingModule } from 'angular-star-rating';
+
+@Injectable()
+export class CustomConfigService extends StarRatingConfigService {
+  constructor() {
+    super();
+    this.numOfStars = 5;
+    this.staticColor = 'ok';
+    this.size = 'large';
+    this.labelPosition = 'left';
+  }
+}
 
 @Component({
   selector: 'app-new-property-page',
@@ -40,10 +52,16 @@ import { MatSliderModule } from '@angular/material/slider';
     MatSlideToggleModule,
     GoogleMapsPreviewComponent,
     MultipleImageUploadComponent,
-    MatSliderModule,
+    StarRatingModule,
   ],
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [
+    {
+      provide: StarRatingConfigService,
+      useClass: CustomConfigService,
+    },
+  ],
 })
 export class NewPropertyPageComponent implements OnInit {
   readonly router = inject(Router);

@@ -1,22 +1,23 @@
+<section role="property-actions">
+  <a mat-icon-button routerLink="../" color="accent">
+    <mat-icon>close</mat-icon>
+  </a>
+
+  <button
+    mat-button
+    color="primary"
+    type="submit"
+    [disabled]="propertyForm.invalid || this.files.length == 0"
+    (click)="createProperty(propertyForm.value)"
+  >
+    Save
+  </button>
+</section>
+
 <form
   [formGroup]="propertyForm"
   (ngSubmit)="createProperty(propertyForm.value)"
 >
-  <section role="property-actions">
-    <a mat-icon-button routerLink="../" color="accent">
-      <mat-icon>close</mat-icon>
-    </a>
-
-    <button
-      mat-button
-      color="primary"
-      type="submit"
-      [disabled]="propertyForm.invalid || this.files.length == 0"
-    >
-      Save
-    </button>
-  </section>
-
   <section role="grid">
     <section role="grid-right">
       <app-google-maps-preview
@@ -69,41 +70,39 @@
 
   <section role="utilities-description">
     <section role="utilities">
-      <mat-slide-toggle formControlName="hasFreeWiFi">Wi-Fi</mat-slide-toggle>
-      <mat-slide-toggle formControlName="hasParking">Parking</mat-slide-toggle>
+      <mat-slide-toggle formControlName="hasFreeWiFi">
+        <span class="font-light">Wi-Fi</span>
+      </mat-slide-toggle>
+      <mat-slide-toggle formControlName="hasParking">
+        <span class="font-light">Parking</span>
+      </mat-slide-toggle>
       <mat-slide-toggle formControlName="hasRoomService">
-        Room service
+        <span class="font-light">Room service</span>
       </mat-slide-toggle>
       <mat-slide-toggle formControlName="hasFreeCancellation">
-        Free cancellation
+        <span class="font-light">Free cancellation</span>
       </mat-slide-toggle>
       <mat-slide-toggle formControlName="prepaymentNeeded">
-        Prepayment needed
+        <span class="font-light">Prepayment needed</span>
       </mat-slide-toggle>
       <mat-slide-toggle formControlName="hasRestaurant">
-        Restaurant
+        <span class="font-light">Restaurant</span>
       </mat-slide-toggle>
       <mat-slide-toggle formControlName="hasBreakfast">
-        Breakfast
+        <span class="font-light">Breakfast</span>
       </mat-slide-toggle>
-
       <mat-slide-toggle formControlName="hasKitchen">
-        Kitchen
+        <span class="font-light">Kitchen</span>
       </mat-slide-toggle>
-      <mat-slide-toggle formControlName="hasPool">Pool</mat-slide-toggle>
+      <mat-slide-toggle formControlName="hasPool">
+        <span class="font-light">Pool</span>
+      </mat-slide-toggle>
       <mat-slide-toggle formControlName="hasFitnessCenter">
-        Fitness center
+        <span class="font-light">Fitness center</span>
       </mat-slide-toggle>
       <mat-slide-toggle formControlName="hasPetFriendlyPolicy">
-        Pet friendly
+        <span class="font-light">Pet friendly</span>
       </mat-slide-toggle>
-    </section>
-
-    <section role="rating">
-      <h2>Rating 🚀</h2>
-      <mat-slider min="1" max="5" step="1" discrete>
-        <input matSliderThumb formControlName="rating" />
-      </mat-slider>
     </section>
 
     <mat-form-field appearance="outline">
@@ -113,6 +112,17 @@
     </mat-form-field>
   </section>
 
-  <app-multiple-picture-uploader [title]="'Add pictures of the property'">
-  </app-multiple-picture-uploader>
+  <section role="rating-uploader">
+    <section role="rating">
+      <span class="font-light">
+        🚀 The property rating is: {{ propertyForm.get(['rating'])!.value }}
+      </span>
+      <star-rating-control formControlName="rating"></star-rating-control>
+    </section>
+
+    <app-multiple-picture-uploader
+      [title]="'Upload pictures of the property 📸'"
+    >
+    </app-multiple-picture-uploader>
+  </section>
 </form>
