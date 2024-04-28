@@ -16,7 +16,9 @@ import { AppToastService } from '$shared/toast';
   standalone: true,
   template: `
     <h1 mat-dialog-title>Open report?</h1>
+
     <p mat-dialog-content>Are you sure you want to open this report?</p>
+
     <mat-dialog-actions align="end">
       <button mat-button color="primary" (click)="ok()">Ok</button>
       <button mat-button color="warn" routerLink="../../">Close</button>
@@ -24,10 +26,19 @@ import { AppToastService } from '$shared/toast';
   `,
   imports: [MatDialogModule, MatButtonModule, CommonModule, RouterModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  styles: `
+  :host {
+    width: 32vw;
+    height: 20vh;
+    display: flex;
+    flex-direction: column;
+    gap: 8px
+  }
+`,
 })
 export class OpenReportComponent {
-  readonly reportService = inject(ReportService);
   readonly router = inject(Router);
+  readonly reportService = inject(ReportService);
   readonly toastService = inject(AppToastService);
 
   @Input() id: string = '';
