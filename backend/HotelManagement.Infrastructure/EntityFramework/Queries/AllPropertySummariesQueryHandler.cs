@@ -23,6 +23,7 @@ internal class AllPropertySummariesQueryHandler(
                             p."Name",
                             p."Location",
                             p."CreatedOn",
+                            (SELECT COUNT(r."Id") FROM "Room" AS r WHERE r."PropertyId" = p."Id") AS "NumberOfRooms",
                             ROW_NUMBER() OVER (ORDER BY p."CreatedOn" DESC) AS "RowNumber"
                         FROM
                             "Property" AS p

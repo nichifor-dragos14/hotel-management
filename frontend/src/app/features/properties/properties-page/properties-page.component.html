@@ -1,4 +1,4 @@
-<app-page-header title="Properties">
+<app-page-header title="Properties 🏡">
   <button mat-button button color="primary" routerLink="new">Add</button>
 </app-page-header>
 
@@ -7,21 +7,16 @@
     <ng-container *cdkVirtualFor="let property of propertiesDataSource">
       @if (!property) {
         <a mat-list-item disabled>
-          <app-circle-placeholder
-            matListItemIcon
-            [radius]="35"
-          ></app-circle-placeholder>
-          <app-line-placeholder
-            matListItemTitle
-            [width]="250"
-            [height]="15"
-          ></app-line-placeholder>
+          <app-circle-placeholder matListItemIcon [radius]="35">
+          </app-circle-placeholder>
+          <app-line-placeholder matListItemTitle [width]="250" [height]="15">
+          </app-line-placeholder>
         </a>
       } @else {
         <a mat-list-item [routerLink]="[property.id]" routerLinkActive="active">
           <span matListItemIcon>
-            <mat-icon [matBadge]="3" matBadgeSize="small">
-              person_pin
+            <mat-icon [matBadge]="property.numberOfRooms" matBadgeSize="small">
+              meeting_room
             </mat-icon>
           </span>
 

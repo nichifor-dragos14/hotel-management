@@ -7,6 +7,7 @@ public record PropertySummary(
     string Name,
     string Location,
     DateTime CreatedOn,
+    int NumberOfRooms,
     int RowNumber
 );
 

@@ -2747,6 +2747,7 @@
           "id",
           "location",
           "name",
+          "numberOfRooms",
           "rowNumber"
         ],
         "type": "object",
@@ -2764,6 +2765,10 @@
           "createdOn": {
             "type": "string",
             "format": "date-time"
+          },
+          "numberOfRooms": {
+            "type": "integer",
+            "format": "int32"
           },
           "rowNumber": {
             "type": "integer",

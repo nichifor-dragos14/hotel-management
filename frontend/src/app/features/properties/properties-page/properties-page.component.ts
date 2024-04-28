@@ -8,7 +8,6 @@ import { MatListModule } from '@angular/material/list';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
 import { MatBadgeModule } from '@angular/material/badge';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { PaginatedDataSource } from '$core/pagination';
 import { AppLinePlaceholderComponent } from '$shared/placeholders/line-placeholder';
 import { AppCirclePlaceholderComponent } from '$shared/placeholders/circle-placeholder';
@@ -26,7 +25,6 @@ import { AppCirclePlaceholderComponent } from '$shared/placeholders/circle-place
     MatMenuModule,
     MatIconModule,
     MatBadgeModule,
-    MatProgressSpinnerModule,
     AppLinePlaceholderComponent,
     AppCirclePlaceholderComponent,
   ],
