@@ -2,6 +2,7 @@ import {
   ChangeDetectionStrategy,
   Component,
   Input,
+  OnInit,
   inject,
 } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -37,7 +38,7 @@ import { NEW_ROOM_FORM } from '../new-rooms.form';
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NewRoomPageComponent {
+export class NewRoomPageComponent implements OnInit {
   readonly router = inject(Router);
   readonly activatedRoute = inject(ActivatedRoute);
   readonly roomService = inject(RoomService);

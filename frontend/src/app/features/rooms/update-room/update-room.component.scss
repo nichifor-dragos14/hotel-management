@@ -1,7 +1,7 @@
 :host {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 16px;
   padding: 0 32px;
 }
 
@@ -15,6 +15,7 @@ section[role='property-actions'] {
   display: grid;
   grid-template-columns: 1fr auto auto auto auto;
   align-items: center;
+  gap: 8px;
 }
 
 section[role='utilities'] {
@@ -23,4 +24,25 @@ section[role='utilities'] {
   grid-template-rows: auto auto;
   grid-column-gap: 8px;
   grid-row-gap: 16px;
+}
+
+.font-light {
+  font-size: 0.8rem;
+  color: grey;
+}
+
+:host ::ng-deep mat-slide-toggle .mdc-form-field {
+  gap: 8px !important;
+}
+
+section[role='details'] {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-top: 24px;
+}
+
+.font-light {
+  font-size: 0.8rem;
+  color: grey;
 }

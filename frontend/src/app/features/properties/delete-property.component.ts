@@ -15,13 +15,13 @@ import { AppToastService } from '$shared/toast';
   selector: 'app-delete-property',
   standalone: true,
   styles: `
-  :host {
-    width: 32vw;
-    height: 20vh;
-    display: flex;
-    flex-direction: column;
-    gap: 8px
-  }
+    :host {
+      width: 32vw;
+      height: 20vh;
+      display: flex;
+      flex-direction: column;
+      gap: 8px
+    }
   `,
   template: `
     <h1 mat-dialog-title>Delete property?</h1>

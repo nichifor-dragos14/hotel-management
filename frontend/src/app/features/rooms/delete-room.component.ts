@@ -26,6 +26,15 @@ import { AppToastService } from '$shared/toast';
   `,
   imports: [MatDialogModule, MatButtonModule, CommonModule, RouterModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  styles: `
+    :host {
+      width: 32vw;
+      height: 20vh;
+      display: flex;
+      flex-direction: column;
+      gap: 8px
+    }
+  `,
 })
 export class DeleteRoomComponent {
   readonly router = inject(Router);

@@ -11,7 +11,10 @@ public record RoomDetails(
     bool HasAirConditioning,
     bool HasBalcony,
     bool HasRefrigerator,
-    bool HasSeaView
+    bool HasSeaView,
+    int AdultCapacity,
+    int ChildrenCapacity,
+    int Number
 );
 
 public record OneRoomQuery(Guid? Id) : IQuery<RoomDetails>;
@@ -37,7 +40,10 @@ internal class OneRoomQueryHandler(
                  room.HasAirConditioning,
                  room.HasBalcony,
                  room.HasRefrigerator,
-                 room.HasSeaView
+                 room.HasSeaView,
+                 room.AdultCapacity,
+                 room.ChildrenCapacity,
+                 room.Number
              )
             ).FirstOrDefault();
     }

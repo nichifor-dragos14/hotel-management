@@ -101,6 +101,22 @@ const ROOM_ROUTES: Routes = [
                   return null;
                 }
               },
+              roomDetails: async ({ params }: ActivatedRouteSnapshot) => {
+                const router = inject(Router);
+                const roomService = inject(RoomService);
+
+                try {
+                  const room = await roomService.roomsIdGetAsync({
+                    id: params['id'],
+                  });
+
+                  return room;
+                } catch (error) {
+                  router.navigate(['/error']);
+
+                  return null;
+                }
+              },
             },
             canActivate: [AuthGuard],
             data: {

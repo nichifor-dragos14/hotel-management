@@ -1,4 +1,4 @@
-import { RoomService } from '$backend/services';
+import { RoomDetails, RoomService } from '$backend/services';
 import { AppToastService } from '$shared/toast';
 import {
   ChangeDetectionStrategy,
@@ -39,6 +39,7 @@ export class UpdateRoomPageComponent {
   readonly activatedRoute = inject(ActivatedRoute);
 
   @Input() roomForm!: FormGroup;
+  @Input() roomDetails!: RoomDetails;
 
   async updateRoom(updatedRoom: typeof this.roomForm.value) {
     if (this.roomForm.invalid) {

@@ -13,33 +13,53 @@
     Update
   </button>
 
-  <a mat-button [routerLink]="['actions', 'delete']">Delete</a>
+  <a mat-button [routerLink]="['actions', 'delete']" color="warn">Delete</a>
 </section>
 
 <form [formGroup]="roomForm" (ngSubmit)="updateRoom(roomForm.value)">
   <mat-form-field appearance="outline">
     <mat-label>Price</mat-label>
     <input matInput formControlName="price" />
-    <mat-error>The room price is required</mat-error>
+    <mat-error>The price is required</mat-error>
   </mat-form-field>
 
   <section role="utilities">
     <mat-slide-toggle formControlName="hasPrivateBathroom">
-      Private bathroom
+      <span class="font-light">Private bathroom</span>
     </mat-slide-toggle>
-    <mat-slide-toggle formControlName="hasTowels">Towels</mat-slide-toggle>
+    <mat-slide-toggle formControlName="hasTowels">
+      <span class="font-light">Towels</span>
+    </mat-slide-toggle>
     <mat-slide-toggle formControlName="hasHairdryer">
-      Hairdryer
+      <span class="font-light">Hairdryer</span>
     </mat-slide-toggle>
     <mat-slide-toggle formControlName="hasAirConditioning">
-      Air conditioning
+      <span class="font-light">Air conditioning</span>
     </mat-slide-toggle>
-    <mat-slide-toggle formControlName="hasBalcony"> Balcony </mat-slide-toggle>
+    <mat-slide-toggle formControlName="hasBalcony">
+      <span class="font-light">Balcony</span>
+    </mat-slide-toggle>
     <mat-slide-toggle formControlName="hasRefrigerator">
-      Refrigerator
+      <span class="font-light">Refrigerator</span>
     </mat-slide-toggle>
-    <mat-slide-toggle formControlName="hasSeaView"> Sea view </mat-slide-toggle>
+    <mat-slide-toggle formControlName="hasSeaView">
+      <span class="font-light">Sea view</span>
+    </mat-slide-toggle>
   </section>
 </form>
+
+<section role="details">
+  <span class="font-light"
+    >* The room capacity is {{ roomDetails.adultCapacity }}
+    {{ roomDetails.adultCapacity == 1 ? 'adult' : 'adults' }}
+    @if (roomDetails.childrenCapacity != 0) {
+      and
+      {{ roomDetails.childrenCapacity }}
+      {{ roomDetails.childrenCapacity == 1 ? 'child' : 'children' }}
+    }
+  </span>
+
+  <span class="font-light">* The room number is {{ roomDetails.number }}</span>
+</section>
 
 <router-outlet hidden />

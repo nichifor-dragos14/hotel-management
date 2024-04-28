@@ -3342,6 +3342,8 @@
       },
       "RoomDetails": {
         "required": [
+          "adultCapacity",
+          "childrenCapacity",
           "hasAirConditioning",
           "hasBalcony",
           "hasHairdryer",
@@ -3350,6 +3352,7 @@
           "hasSeaView",
           "hasTowels",
           "id",
+          "number",
           "price"
         ],
         "type": "object",
@@ -3382,6 +3385,18 @@
           },
           "hasSeaView": {
             "type": "boolean"
+          },
+          "adultCapacity": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "childrenCapacity": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "number": {
+            "type": "integer",
+            "format": "int32"
           }
         },
         "additionalProperties": false
