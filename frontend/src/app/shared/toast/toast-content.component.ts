@@ -27,6 +27,7 @@ import { MatButtonModule } from '@angular/material/button';
         display: flex;
         align-items: center;
         justify-content: space-between;
+        gap: 8px;
       }
    `,
   template: `
@@ -42,8 +43,8 @@ import { MatButtonModule } from '@angular/material/button';
           <mat-icon>warning</mat-icon>
         }
       }
-      <span>
-        {{ content }}
+      <span id="content">
+        <span>{{ content }}</span>
         <a mat-icon-button color="accent" (click)="close()">
           <mat-icon>close</mat-icon>
         </a>
