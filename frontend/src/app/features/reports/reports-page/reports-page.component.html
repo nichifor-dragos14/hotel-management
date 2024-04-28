@@ -1,26 +1,16 @@
-<app-page-header title="Reports">
-  <button mat-button button color="primary" routerLink="new">We'll see</button>
-</app-page-header>
+<app-page-header title="Reports ⚠️"> </app-page-header>
 
 <mat-nav-list>
   <cdk-virtual-scroll-viewport scrollWindow [itemSize]="72" [maxBufferPx]="500">
     <ng-container *cdkVirtualFor="let report of reportsDataSource">
       @if (!report) {
-        <a mat-list-item disabled>
-          <app-circle-placeholder
-            matListItemIcon
-            [radius]="35"
-          ></app-circle-placeholder>
-          <app-line-placeholder
-            matListItemTitle
-            [width]="250"
-            [height]="15"
-          ></app-line-placeholder>
-          <app-line-placeholder
-            matListItemLine
-            [width]="150"
-            [height]="10"
-          ></app-line-placeholder>
+        <a mat-list-item disable d>
+          <app-circle-placeholder matListItemIcon [radius]="35">
+          </app-circle-placeholder>
+          <app-line-placeholder matListItemTitle [width]="250" [height]="15">
+          </app-line-placeholder>
+          <app-line-placeholder matListItemLine [width]="150" [height]="10">
+          </app-line-placeholder>
         </a>
       } @else {
         <a mat-list-item [routerLink]="[report.id]" routerLinkActive="active">
@@ -33,12 +23,14 @@
           <span
             matListItemTitle
             [ngStyle]="{ 'font-weight': report.isRead ? 'normal' : 'bold' }"
-            >{{ report.title }}</span
+          >
+            {{ report.title }}</span
           >
           <span
             matListItemLine
             [ngStyle]="{ 'font-weight': report.isRead ? 'normal' : 'bold' }"
-            >{{ report.propertyName }}</span
+          >
+            {{ report.propertyName }}</span
           >
         </a>
       }

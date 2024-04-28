@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   gap: 16px;
-  padding: 0 0 32px 0;
+  padding: 0 32px;
 }
 
 span {
@@ -34,5 +34,10 @@ form {
 
 #description {
   padding: 0 32px;
-  border-left: 2.5px solid purple;
+  border-left: 2.5px solid #5e35b1;
+}
+
+.mat-mdc-standard-chip {
+  --mdc-chip-label-text-color: white;
+  --mdc-chip-elevated-container-color: #5e35b1;
 }
