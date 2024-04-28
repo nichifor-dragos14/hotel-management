@@ -23,5 +23,9 @@ internal class ReportEntityConfiguration : IEntityTypeConfiguration<Report>
 
         builder.HasOne(q => q.User)
           .WithMany(q => q.Reports);
+
+        builder.HasOne(q => q.Booking)
+          .WithOne(q => q.Report)
+          .HasForeignKey<Report>(q => q.BookingId);
     }
 }

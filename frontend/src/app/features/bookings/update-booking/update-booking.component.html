@@ -34,14 +34,15 @@
       </a>
     }
   }
-
-  <a
-    mat-button
-    color="warn"
-    [routerLink]="['actions', 'report', bookingDetails.propertyDetails.id]"
-  >
-    Report
-  </a>
+  @if (bookingDetails.reportId == '00000000-0000-0000-0000-000000000000') {
+    <a
+      mat-button
+      color="warn"
+      [routerLink]="['actions', 'report', bookingDetails.propertyDetails.id]"
+    >
+      Report
+    </a>
+  }
 
   @if (!isInPast()) {
     <a mat-button color="warn" [routerLink]="['actions', 'cancel']">Cancel</a>

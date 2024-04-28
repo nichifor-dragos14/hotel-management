@@ -1,4 +1,5 @@
-﻿using HotelManagement.Core.Reviews;
+﻿using HotelManagement.Core.Reports;
+using HotelManagement.Core.Reviews;
 using HotelManagement.Core.Rooms;
 using HotelManagement.Core.Users;
 
@@ -66,6 +67,8 @@ public class Booking
     public virtual Room Room { get; private init; }
 
     public virtual Review Review { get; private set; }
+
+    public virtual Report Report { get; private set; }
 
     public static Booking Create(
         DateTime startDate,

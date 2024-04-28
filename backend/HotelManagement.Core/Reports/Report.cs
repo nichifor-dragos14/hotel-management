@@ -1,4 +1,5 @@
-﻿using HotelManagement.Core.Properties;
+﻿using HotelManagement.Core.Bookings;
+using HotelManagement.Core.Properties;
 using HotelManagement.Core.Users;
 
 namespace HotelManagement.Core.Reports;
@@ -40,9 +41,14 @@ public class Report
 
     public virtual User User { get; internal init; }
 
+    public virtual Booking Booking { get; private set; }
+
+    public Guid BookingId { get; set; }
+
     public static Report Create(
     Property property,
     User user,
+    Booking booking,
     string title,
     string description
 )
@@ -58,6 +64,7 @@ public class Report
         {
             Property = property,
             User = user,
+            Booking = booking
         };
     }
 

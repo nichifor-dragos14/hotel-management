@@ -13,6 +13,7 @@ export class LeaveReportFormFactory {
       propertyId: [review.propertyId, { validators: [Validators.required] }],
       title: [review.title, { validators: [Validators.required] }],
       userId: [review.userId, { validators: [Validators.required] }],
+      bookingId: [review.bookingId, { validators: [Validators.required] }],
     });
   }
 }

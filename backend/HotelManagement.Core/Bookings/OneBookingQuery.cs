@@ -19,6 +19,7 @@ public record BookingDetails(
     DateTime CreatedOn,
     DateTime UpdatedOn,
     Guid ReviewId,
+    Guid ReportId,
     BookingPropertyDetails PropertyDetails,
     BookingRoomDetails RoomDetails
 );

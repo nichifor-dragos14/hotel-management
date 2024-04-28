@@ -59,6 +59,7 @@ const BOOKING_ROUTES: Routes = [
           {
             path: ':id',
             component: UpdateBookingPageComponent,
+            runGuardsAndResolvers: 'always',
             resolve: {
               bookingDetails: async ({ params }: ActivatedRouteSnapshot) => {
                 const router = inject(Router);
@@ -195,6 +196,7 @@ const BOOKING_ROUTES: Routes = [
                       },
                       reportForm: async ({
                         params,
+                        parent,
                       }: ActivatedRouteSnapshot) => {
                         const router = inject(Router);
                         const loginService = inject(LoginService);
@@ -217,6 +219,7 @@ const BOOKING_ROUTES: Routes = [
                             propertyId: property.id,
                             title: '',
                             userId: userId,
+                            bookingId: parent?.parent?.params['id'],
                           });
                         } catch (error) {
                           router.navigate(['/error']);

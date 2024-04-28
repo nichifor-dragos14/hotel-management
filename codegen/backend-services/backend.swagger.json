@@ -1848,6 +1848,7 @@
           "lastNameOnBooking",
           "phoneNumberOnBooking",
           "propertyDetails",
+          "reportId",
           "reviewId",
           "roomDetails",
           "specialMentions",
@@ -1903,6 +1904,10 @@
             "format": "date-time"
           },
           "reviewId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "reportId": {
             "type": "string",
             "format": "uuid"
           },
@@ -2284,6 +2289,7 @@
       },
       "CreateReportCommand": {
         "required": [
+          "bookingId",
           "description",
           "propertyId",
           "title",
@@ -2296,6 +2302,10 @@
             "format": "uuid"
           },
           "userId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "bookingId": {
             "type": "string",
             "format": "uuid"
           },
