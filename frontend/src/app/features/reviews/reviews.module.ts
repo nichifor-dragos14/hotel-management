@@ -12,6 +12,8 @@ import { UpdateReviewPageComponent } from './update-review/update-review.compone
 import { ReviewService } from '$backend/services';
 import { UpdateReviewFormFactory } from './update-review.form';
 import { AuthGuard } from '$features/auth/auth.guard';
+import { DialogPageComponent } from '$shared/dialog-page';
+import { DeleteReviewComponent } from './delete-review.component';
 
 const REVIEW_ROUTES: Routes = [
   {
@@ -75,6 +77,33 @@ const REVIEW_ROUTES: Routes = [
             data: {
               role: ['Client'],
             },
+            children: [
+              {
+                path: 'actions',
+                component: DialogPageComponent,
+                children: [
+                  {
+                    path: 'delete',
+                    component: DeleteReviewComponent,
+                    resolve: {
+                      id: ({ parent }: ActivatedRouteSnapshot) => {
+                        const router = inject(Router);
+
+                        if (parent?.parent?.params['id']) {
+                          return parent?.parent?.params['id'];
+                        } else {
+                          router.navigate(['/error']);
+                        }
+                      },
+                    },
+                    canActivate: [AuthGuard],
+                    data: {
+                      role: ['Client'],
+                    },
+                  },
+                ],
+              },
+            ],
           },
         ],
       },

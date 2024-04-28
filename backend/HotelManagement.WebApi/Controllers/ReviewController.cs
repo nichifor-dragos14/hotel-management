@@ -1,4 +1,5 @@
 ﻿using HotelManagement.Core.Abstractions;
+using HotelManagement.Core.Bookings;
 using HotelManagement.Core.Reviews;
 using HotelManagement.WebApi.Authorize;
 using Microsoft.AspNetCore.Http.HttpResults;
@@ -64,6 +65,21 @@ public class ReviewController : ControllerBase
         {
             { } id => TypedResults.Ok(id),
             _ => TypedResults.BadRequest()
+        };
+    }
+
+    [HttpDelete("{id}")]
+    public async Task<Results<Ok, NotFound>> Delete(
+        Guid id,
+        [FromServices] ICommandHandler<DeleteReviewCommand, bool> commandHandler,
+        CancellationToken cancellationToken)
+    {
+        bool result = await commandHandler.ExecuteAsync(new DeleteReviewCommand(id), cancellationToken);
+
+        return result switch
+        {
+            true => TypedResults.Ok(),
+            false => TypedResults.NotFound()
         };
     }
 }
