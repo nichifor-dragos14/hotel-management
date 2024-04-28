@@ -1,3 +1,10 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  padding: 0 32px !important;
+  gap: 16px;
+}
+
 form {
   display: flex;
   flex-direction: column;
@@ -9,6 +16,7 @@ section[role='property-actions'] {
   display: grid;
   grid-template-columns: 1fr auto auto auto auto;
   align-items: center;
+  gap: 8px;
 }
 
 section[role='utilities'] {
@@ -22,17 +30,27 @@ section[role='utilities'] {
 section[role='rating'] {
   display: flex;
   flex-direction: row;
-  gap: 8px;
   align-items: center;
-}
-
-section[role='rating'] h2 {
-  margin: 0;
-  font-weight: normal;
+  gap: 32px;
 }
 
 section[role='utilities-description'] {
   display: flex;
   flex-direction: column;
   gap: 32px;
+}
+
+section[role='rating-uploader'] {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.font-light {
+  font-size: 0.8rem;
+  color: grey;
+}
+
+:host ::ng-deep mat-slide-toggle .mdc-form-field {
+  gap: 8px !important;
 }

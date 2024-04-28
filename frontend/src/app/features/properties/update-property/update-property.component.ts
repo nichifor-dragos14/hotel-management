@@ -3,6 +3,7 @@ import { AppToastService } from '$shared/toast';
 import {
   ChangeDetectionStrategy,
   Component,
+  Injectable,
   Input,
   OnChanges,
   inject,
@@ -23,6 +24,18 @@ import {
   MultipleImageUploadComponent,
   MultipleImageUploadService,
 } from '$shared/file-uploader';
+import { StarRatingConfigService, StarRatingModule } from 'angular-star-rating';
+
+@Injectable()
+export class CustomConfigService extends StarRatingConfigService {
+  constructor() {
+    super();
+    this.numOfStars = 5;
+    this.staticColor = 'ok';
+    this.size = 'large';
+    this.labelPosition = 'left';
+  }
+}
 
 @Component({
   selector: 'app-update-property-page',
@@ -40,6 +53,13 @@ import {
     MatSlideToggleModule,
     MatSliderModule,
     MultipleImageUploadComponent,
+    StarRatingModule,
+  ],
+  providers: [
+    {
+      provide: StarRatingConfigService,
+      useClass: CustomConfigService,
+    },
   ],
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
