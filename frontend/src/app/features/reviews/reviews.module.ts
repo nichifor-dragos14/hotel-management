@@ -40,7 +40,7 @@ const REVIEW_ROUTES: Routes = [
         },
         canActivate: [AuthGuard],
         data: {
-          role: 'Client',
+          role: ['Client'],
         },
         children: [
           {
@@ -73,7 +73,7 @@ const REVIEW_ROUTES: Routes = [
             },
             canActivate: [AuthGuard],
             data: {
-              role: 'Client',
+              role: ['Client'],
             },
           },
         ],

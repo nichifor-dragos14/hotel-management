@@ -72,7 +72,7 @@ const USER_ROUTES: Routes = [
         },
         canActivate: [AuthGuard],
         data: {
-          role: 'Client',
+          role: ['Client', 'Admin'],
         },
         children: [
           {
@@ -105,7 +105,7 @@ const USER_ROUTES: Routes = [
                 },
                 canActivate: [AuthGuard],
                 data: {
-                  role: 'Client',
+                  role: ['Client', 'Admin'],
                 },
               },
             ],
@@ -142,7 +142,7 @@ const USER_ROUTES: Routes = [
         },
         canActivate: [AuthGuard],
         data: {
-          role: 'Client',
+          role: ['Client', 'Admin'],
         },
       },
       {
@@ -169,7 +169,7 @@ const USER_ROUTES: Routes = [
         },
         canActivate: [AuthGuard],
         data: {
-          role: 'Client',
+          role: ['Client', 'Admin'],
         },
       },
     ],

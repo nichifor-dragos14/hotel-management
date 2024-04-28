@@ -47,7 +47,7 @@ const REPORT_ROUTES: Routes = [
             },
             canActivate: [AuthGuard],
             data: {
-              role: 'Admin',
+              role: ['Admin'],
             },
             children: [
               {
@@ -72,7 +72,7 @@ const REPORT_ROUTES: Routes = [
                     },
                     canActivate: [AuthGuard],
                     data: {
-                      role: 'Admin',
+                      role: ['Admin'],
                     },
                   },
                   {
@@ -93,7 +93,7 @@ const REPORT_ROUTES: Routes = [
                     },
                     canActivate: [AuthGuard],
                     data: {
-                      role: 'Admin',
+                      role: ['Admin'],
                     },
                   },
                 ],

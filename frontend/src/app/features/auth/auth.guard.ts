@@ -38,8 +38,16 @@ export class AuthGuard implements CanActivate {
       return false;
     }
 
-    if (route.data['role'] && route.data['role'] == userRole) {
-      return true;
+    const allowedRoles = route.data['role'];
+
+    if (allowedRoles.length == 0) {
+      return false;
+    }
+
+    for (let role of allowedRoles) {
+      if (role == userRole) {
+        return true;
+      }
     }
 
     return false;

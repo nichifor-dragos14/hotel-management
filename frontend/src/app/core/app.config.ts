@@ -25,6 +25,7 @@ import { StarRatingModule } from 'angular-star-rating';
 
 export const appConfig: ApplicationConfig = {
   providers: [
+    provideAnimations(),
     provideRouter(routes, withComponentInputBinding()),
     provideHttpClient(withFetch()),
     importProvidersFrom(

@@ -31,7 +31,7 @@ const PROPERTY_ROUTES: Routes = [
         component: PropertiesPageComponent,
         canActivate: [AuthGuard],
         data: {
-          role: 'Admin',
+          role: ['Admin'],
         },
         children: [
           {
@@ -53,7 +53,7 @@ const PROPERTY_ROUTES: Routes = [
             },
             canActivate: [AuthGuard],
             data: {
-              role: 'Admin',
+              role: ['Admin'],
             },
           },
           {
@@ -100,7 +100,7 @@ const PROPERTY_ROUTES: Routes = [
             },
             canActivate: [AuthGuard],
             data: {
-              role: 'Admin',
+              role: ['Admin'],
             },
             runGuardsAndResolvers: 'always',
             children: [
@@ -124,7 +124,7 @@ const PROPERTY_ROUTES: Routes = [
                     },
                     canActivate: [AuthGuard],
                     data: {
-                      role: 'Admin',
+                      role: ['Admin'],
                     },
                   },
                 ],

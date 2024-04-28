@@ -53,7 +53,7 @@ const BOOKING_ROUTES: Routes = [
         },
         canActivate: [AuthGuard],
         data: {
-          role: 'Client',
+          role: ['Client'],
         },
         children: [
           {
@@ -98,7 +98,7 @@ const BOOKING_ROUTES: Routes = [
             },
             canActivate: [AuthGuard],
             data: {
-              role: 'Client',
+              role: ['Client'],
             },
             children: [
               {
@@ -114,7 +114,7 @@ const BOOKING_ROUTES: Routes = [
                     },
                     canActivate: [AuthGuard],
                     data: {
-                      role: 'Client',
+                      role: ['Client'],
                     },
                   },
                   {
@@ -170,7 +170,7 @@ const BOOKING_ROUTES: Routes = [
                     },
                     canActivate: [AuthGuard],
                     data: {
-                      role: 'Client',
+                      role: ['Client'],
                     },
                   },
                   {
@@ -225,7 +225,7 @@ const BOOKING_ROUTES: Routes = [
                     },
                     canActivate: [AuthGuard],
                     data: {
-                      role: 'Client',
+                      role: ['Client'],
                     },
                   },
                 ],
@@ -353,7 +353,7 @@ const BOOKING_ROUTES: Routes = [
         },
         canActivate: [AuthGuard],
         data: {
-          role: 'Client',
+          role: ['Client'],
         },
       },
     ],
