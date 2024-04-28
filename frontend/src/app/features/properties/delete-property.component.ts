@@ -14,13 +14,23 @@ import { AppToastService } from '$shared/toast';
 @Component({
   selector: 'app-delete-property',
   standalone: true,
+  styles: `
+  :host {
+    width: 32vw;
+    height: 20vh;
+    display: flex;
+    flex-direction: column;
+    gap: 8px
+  }
+  `,
   template: `
     <h1 mat-dialog-title>Delete property?</h1>
+
     <p mat-dialog-content>
-      Are you sure you want to delete this property? The partner will be
-      <br />
-      announced of the deletion and all future reservations will be canceled
+      Are you sure you want to delete this property? All reservations will be
+      canceled.
     </p>
+
     <mat-dialog-actions align="end">
       <button mat-button color="primary" (click)="ok()">Ok</button>
       <button mat-button color="warn" routerLink="../../">Close</button>
@@ -30,8 +40,8 @@ import { AppToastService } from '$shared/toast';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DeletePropertyComponent {
-  readonly propertyService = inject(PropertyService);
   readonly router = inject(Router);
+  readonly propertyService = inject(PropertyService);
   readonly toastService = inject(AppToastService);
 
   @Input() id: string = '';
@@ -39,7 +49,7 @@ export class DeletePropertyComponent {
   async ok() {
     try {
       await this.propertyService.propertiesIdDeleteAsync({ id: this.id });
-      this.toastService.open('Successfully deleted property', 'info');
+      this.toastService.open('The property was deleted successfully', 'info');
     } catch (error) {
       if (error instanceof Error) {
         this.toastService.open(error.message, 'error');
