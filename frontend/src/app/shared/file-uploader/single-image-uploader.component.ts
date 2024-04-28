@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, Input, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ImageUploaderModule } from './image-uploader.module';
 import { ImageFile } from './image-file.model';
@@ -10,7 +10,7 @@ import { MatIconModule } from '@angular/material/icon';
   standalone: true,
   imports: [CommonModule, ImageUploaderModule, MatIconModule],
   template: `
-    <p>Insert a cool photo 😎</p>
+    <h2>{{ title }}</h2>
 
     <section role="content">
       <section role="upload">
@@ -21,6 +21,7 @@ import { MatIconModule } from '@angular/material/icon';
           (drop)="onDrop($event)"
           (mouseenter)="hovering = true"
           (mouseleave)="hovering = false"
+          (click)="onClickFileInput()"
         >
           <span class="message" *ngIf="!hovering">Drop your picture here</span>
           <mat-icon class="message" *ngIf="hovering">cloud_upload</mat-icon>
@@ -31,10 +32,11 @@ import { MatIconModule } from '@angular/material/icon';
           id="file-input"
           (change)="onFileSelected($event)"
           accept="image/*"
+          style="display: none"
         />
       </section>
 
-      <div id="picture-display" *ngIf="imageFile$ | async as imageFile">
+      <div class="image-container" *ngIf="imageFile$ | async as imageFile">
         <a [href]="imageFile.url" target="_blank">
           <img [src]="imageFile.url" />
         </a>
@@ -48,6 +50,7 @@ import { MatIconModule } from '@angular/material/icon';
         flex-direction: column;
         gap: 8px;
         justify-items: center;
+        align-items: center;
       }
 
       section[role='content'] {
@@ -61,28 +64,34 @@ import { MatIconModule } from '@angular/material/icon';
         height: 250px;
         min-width: 500px;
         min-height: 250px;
-        border: solid 5px #75c5e7;
+        border: solid 3.5px #5e35b1;
         border-style: dashed;
         display: table;
+        cursor: pointer;
       }
 
       .message {
         display: table-cell;
         text-align: center;
         vertical-align: middle;
-        color: #686868;
+        color: white;
+      }
+
+      .image-container {
+        position: relative;
+        display: inline-block;
+        width: 250px;
+        height: 250px;
       }
 
       img {
-        width: 200px;
-        height: 200px;
+        width: 100%;
+        height: 100%;
         object-fit: cover;
       }
 
-      section[role='upload'] {
-        display: flex;
-        flex-direction: column;
-        gap: 16px;
+      h2 {
+        font-weight: normal;
       }
     `,
   ],
@@ -90,6 +99,8 @@ import { MatIconModule } from '@angular/material/icon';
 export class SingleImageUploadComponent {
   private singleImageUploadService = inject(SingleImageUploadService);
   imageFile$ = this.singleImageUploadService.imageFile$;
+
+  @Input() title!: string;
 
   hovering: boolean = false;
 

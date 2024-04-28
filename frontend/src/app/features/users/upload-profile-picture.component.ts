@@ -49,18 +49,23 @@ import { UserDetails, UserService } from '$backend/services';
     </app-page-header>
 
     <form [formGroup]="uploadForm">
-      <app-single-picture-uploader></app-single-picture-uploader>
+      <app-single-picture-uploader
+        [title]="
+          'Update your profile picture by dropping a photo or clicking on the area below😎'
+        "
+      >
+      </app-single-picture-uploader>
     </form>
   `,
   styles: [
     `
       :host {
         padding: 32px 24px;
-        width: 72vw;
+        width: 56vw;
         height: 64vh;
         display: flex;
         flex-direction: column;
-        gap: 16px;
+        gap: 64px;
       }
 
       form {
@@ -68,6 +73,7 @@ import { UserDetails, UserService } from '$backend/services';
         flex-direction: column;
         gap: 8px;
         padding: 0 64px;
+        justify-self: center;
       }
     `,
   ],
@@ -101,8 +107,6 @@ export class UploadProfilePictureComponent implements OnInit {
       return;
     }
 
-    console.log(this.uploadForm.value);
-
     try {
       await this.userService.usersUploadPatchAsync({
         body: {
@@ -110,6 +114,8 @@ export class UploadProfilePictureComponent implements OnInit {
           File: newUploadImage.picture,
         },
       });
+
+      this.singleImageUploadService.clearImage();
 
       this.toastService.open('Successfully updated profile picture', 'info');
       this.router.navigate(['../../'], { relativeTo: this.activatedRoute });
