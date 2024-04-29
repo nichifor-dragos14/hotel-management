@@ -1,10 +1,5 @@
 import { PropertyService } from '$backend/services';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  Input,
-  inject,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
@@ -36,11 +31,10 @@ import { ReviewCardPlaceholderComponent } from '$shared/placeholders/card-placeh
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PropertyReviewsPageComponent {
-  readonly propertyService = inject(PropertyService);
-  readonly toastService = inject(AppToastService);
-
   readonly router = inject(Router);
   readonly activatedRoute = inject(ActivatedRoute);
+  readonly propertyService = inject(PropertyService);
+  readonly toastService = inject(AppToastService);
 
   reviewsDataSource = new PaginatedDataSource({
     fetch: ({ from, to }) =>
