@@ -343,12 +343,17 @@ const BOOKING_ROUTES: Routes = [
               return null;
             }
           },
-          userId: async () => {
+          user: async () => {
             const router = inject(Router);
             const loginService = inject(LoginService);
+            const userService = inject(UserService);
 
             try {
-              return loginService.getLoggedUserId();
+              const userEmail = loginService.getLoggedUserEmail();
+
+              return userService.usersEmailGetAsync({
+                email: userEmail,
+              });
             } catch (error) {
               router.navigate(['error']);
 

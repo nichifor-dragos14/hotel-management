@@ -115,7 +115,11 @@
 <section role="booking">
   <mat-card>
     <section role="user">
-      <img id="profile-picture" alt="profile picture" src="assets/hotel1.jpg" />
+      <img
+        id="profile-picture"
+        alt="profile picture"
+        [src]="user.profilePicture"
+      />
       <section>
         <h2>You are signed in</h2>
         <span>{{ loggedUserEmail }}</span>

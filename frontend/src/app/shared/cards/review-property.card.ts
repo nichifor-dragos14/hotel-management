@@ -57,7 +57,7 @@ import { DateConverterModule } from '$shared/date-converter';
         padding: 8px;
         border-radius: 0 !important;
         height: 200px;
-        width: calc(90vw / 4);
+        width: calc(70vw / 4);
     }
 
     mat-card-content {

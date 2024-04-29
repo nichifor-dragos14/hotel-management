@@ -18,6 +18,7 @@ import {
   PropertyType,
   RoomPropertyDetails,
   RoomType,
+  UserDetails,
 } from '$backend/services';
 import { MatCardModule } from '@angular/material/card';
 import { DateConverterModule } from '$shared/date-converter';
@@ -60,7 +61,7 @@ export class NewBookingPageComponent implements AfterViewInit {
   @Input() endDate!: Date;
   @Input() numberOfChildren!: string;
   @Input() numberOfAdults!: string;
-  @Input() userId!: string;
+  @Input() user!: UserDetails;
   @Input() userForm!: FormGroup;
 
   loggedUserEmail: string = '';
@@ -167,7 +168,7 @@ export class NewBookingPageComponent implements AfterViewInit {
     }
   }
 
-  createBooking(newBookingDetails: typeof this.userForm.value) {
+  async createBooking(newBookingDetails: typeof this.userForm.value) {
     if (this.userForm.invalid || !this.startDate || !this.endDate) {
       return;
     }
@@ -185,7 +186,7 @@ export class NewBookingPageComponent implements AfterViewInit {
             expectedArrival: this.expectedArrival,
             specialMentions: this.specialMentions,
             userDetails: newBookingDetails,
-            loggedUserId: this.userId,
+            loggedUserId: this.user.id,
           },
         });
       });
@@ -194,8 +195,8 @@ export class NewBookingPageComponent implements AfterViewInit {
       if (error instanceof Error) {
         this.toastService.open(error.message, 'error');
       }
+    } finally {
+      await this.router.navigateByUrl('/bookings/my-reservations');
     }
-
-    this.router.navigateByUrl('/bookings/my-reservations');
   }
 }
