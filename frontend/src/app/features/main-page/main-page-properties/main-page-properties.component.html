@@ -33,9 +33,9 @@
           placeholder="Where are you going?"
         />
         <mat-icon matPrefix>explore</mat-icon>
-        <button matSuffix mat-icon-button>
-          <mat-icon (click)="resetLocationInput()">cancel</mat-icon>
-        </button>
+        <a matSuffix mat-icon-button (click)="resetLocationInput()">
+          <mat-icon>cancel</mat-icon>
+        </a>
       </mat-form-field>
     </mat-expansion-panel>
 
