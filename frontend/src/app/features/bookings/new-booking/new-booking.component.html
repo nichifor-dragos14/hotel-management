@@ -6,7 +6,7 @@
     [disabled]="userForm.invalid"
     (click)="createBooking(userForm.value)"
   >
-    Create
+    Confirm booking
   </button>
 </app-page-header>
 
@@ -18,8 +18,8 @@
     </section>
 
     <span class="location-details">
-      <mat-icon>location_pin</mat-icon>
-      <span>{{ property.location }}</span>
+      <mat-icon class="icon-light">location_pin</mat-icon>
+      <span class="font-light">{{ property.location }}</span>
     </span>
 
     <section role="review">
