@@ -13,7 +13,12 @@
           </app-line-placeholder>
         </a>
       } @else {
-        <a mat-list-item [routerLink]="[report.id]" routerLinkActive="active">
+        <a
+          mat-list-item
+          [routerLink]="[report.id]"
+          routerLinkActive="active"
+          (click)="report.isRead = true"
+        >
           <span matListItemIcon>
             <mat-icon [color]="report.isRead ? 'secondary' : 'warn'">
               report
