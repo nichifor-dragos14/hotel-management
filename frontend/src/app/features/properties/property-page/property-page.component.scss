@@ -1,8 +1,13 @@
 :host {
   display: flex !important;
   flex-direction: column !important;
-  gap: 32px !important;
   padding: 0 64px !important;
+}
+
+section[role='content'] {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
 #property-name {
@@ -33,7 +38,7 @@ section[role='gallery-search'] {
 section[role='general-rating-map'] {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 4px;
 }
 
 section[role='map'] {
@@ -75,12 +80,19 @@ section[role='search'] {
 section[role='search'] form {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 12px;
 }
 
 section[role='search'] form section {
   display: flex;
   flex-direction: column;
+}
+
+section[role='gallery'] {
+  grid-area: gallery;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
 }
 
 .property-rating-square {
@@ -102,7 +114,6 @@ mat-grid-list {
 section[role='facilities-section'] {
   display: flex;
   flex-direction: column;
-  gap: 8px;
 }
 
 section[role='facilities'] {
@@ -113,9 +124,14 @@ section[role='facilities'] {
 
 mat-card-content {
   display: flex;
-  gap: 4px;
-  align-items: center;
-  justify-content: center;
+  gap: 8px !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+mat-card {
+  align-items: center !important;
+  justify-content: center !important;
 }
 
 section[role='about'] {
@@ -126,13 +142,12 @@ section[role='about'] {
 section[role='rooms'] {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 8px;
 }
 
 section[role='title-rooms'] {
   display: flex;
   flex-direction: column;
-  gap: 8px;
 }
 
 section[role='rooms'] table th {
@@ -154,7 +169,7 @@ section[role='rooms'] table section[role='room-facilities'] span {
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 4px;
+  gap: 8px;
 }
 
 section[role='rooms'] table section[role='room-guests'] {
@@ -167,13 +182,13 @@ section[role='rooms'] table section[role='room-guests'] span {
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 4px;
+  gap: 8px;
 }
 
 section[role='reviews'] {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 8px;
 }
 
 section[role='reviews'] h2 {
@@ -189,10 +204,6 @@ section[role='header-reviews'] {
 section[role='title-subtitle-reviews'] {
   display: flex;
   flex-direction: column;
-}
-
-section[role='title-subtitle-reviews'] span {
-  color: grey;
 }
 
 section[role='reviews'] section[role='content-reviews'] {
@@ -225,5 +236,28 @@ section[role='contact'] section[role='contact-information'] {
 section[role='contact'] section[role='contact-information'] span {
   display: flex;
   flex-direction: row;
-  gap: 4px;
+  gap: 8px;
+}
+
+.font-light {
+  font-size: 0.8rem;
+  color: grey;
+}
+
+#description-text {
+  color: grey;
+  font-size: 1rem;
+}
+
+.icon-light {
+  color: grey;
+}
+
+#room-title-text {
+  font-weight: bold;
+}
+
+#price-text {
+  margin: 0;
+  color: grey !important;
 }

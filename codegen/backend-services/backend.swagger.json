@@ -2613,10 +2613,10 @@
           "createdOn",
           "description",
           "id",
+          "profilePicture",
           "rating",
           "rowNumber",
           "title",
-          "updatedOn",
           "userFirstName",
           "userLastName",
           "userNationality"
@@ -2641,10 +2641,6 @@
             "type": "string",
             "format": "date-time"
           },
-          "updatedOn": {
-            "type": "string",
-            "format": "date-time"
-          },
           "userFirstName": {
             "type": "string"
           },
@@ -2652,6 +2648,9 @@
             "type": "string"
           },
           "userNationality": {
+            "type": "string"
+          },
+          "profilePicture": {
             "type": "string"
           },
           "rowNumber": {
@@ -3428,7 +3427,8 @@
           "firstName",
           "id",
           "lastName",
-          "nationality"
+          "nationality",
+          "profilePicture"
         ],
         "type": "object",
         "properties": {
@@ -3443,6 +3443,9 @@
             "type": "string"
           },
           "nationality": {
+            "type": "string"
+          },
+          "profilePicture": {
             "type": "string"
           }
         },

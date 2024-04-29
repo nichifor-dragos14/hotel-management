@@ -8,10 +8,10 @@ public record PropertyReview(
     string Description,
     double Rating,
     DateTime CreatedOn,
-    DateTime UpdatedOn,
     string UserFirstName,
     string UserLastName,
     string UserNationality,
+    string ProfilePicture,
     int RowNumber
 );
 

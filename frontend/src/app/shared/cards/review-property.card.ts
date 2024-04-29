@@ -12,7 +12,7 @@ import { DateConverterModule } from '$shared/date-converter';
       <section role="review">
         <mat-card-header>
           <section role="user-and-picture">
-            <img matCardAvatar src="assets/hotel1.jpg" />
+            <img matCardAvatar [src]="[review.user!.profilePicture]" />
 
             <section role="user">
               <span matCardTitle>
@@ -35,7 +35,7 @@ import { DateConverterModule } from '$shared/date-converter';
           </section>
         </mat-card-header>
 
-        <mat-card-content>
+        <mat-card-content class="font-light">
           <span matCardSubtitle>{{ review.title }}</span>
           <p [innerHTML]="transformText(review.description)"></p>
         </mat-card-content>
@@ -45,7 +45,7 @@ import { DateConverterModule } from '$shared/date-converter';
         {{ transformToTwoDecimals(review.rating) }}
       </div>
 
-      <span class="date">{{ review.createdOn | dateFormat }}</span>
+      <span class="date font-light">{{ review.createdOn | dateFormat }}</span>
     </mat-card>
   `,
   styles: `
@@ -56,7 +56,8 @@ import { DateConverterModule } from '$shared/date-converter';
         gap: 8px;
         padding: 8px;
         border-radius: 0 !important;
-        height: 200px
+        height: 200px;
+        width: calc(90vw / 4);
     }
 
     mat-card-content {
@@ -78,7 +79,7 @@ import { DateConverterModule } from '$shared/date-converter';
         flex-direction: row;
         flex-wrap: unset;
         align-items: center;
-        gap: 8px;
+        gap: 16px;
     }
 
     p {
@@ -114,6 +115,11 @@ import { DateConverterModule } from '$shared/date-converter';
       align-self: end;
       color: grey;
     }
+
+    .font-light {
+      font-size: 0.8rem;
+      color: grey;
+    }
   `,
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -123,8 +129,8 @@ export class ReviewPropertyCardComponent {
   @Input() review!: ReviewPropertyDetails;
 
   transformText(text: string) {
-    if (text.length > 50) {
-      return text.slice(0, 50) + '...';
+    if (text.length > 100) {
+      return text.slice(0, 100) + '...';
     }
 
     return text;

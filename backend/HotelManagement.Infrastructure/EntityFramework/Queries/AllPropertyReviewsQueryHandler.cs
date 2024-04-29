@@ -24,10 +24,10 @@ internal class AllPropertyReviewsQueryHandler(
                             r."Description",
                             r."Rating",
                             r."CreatedOn",
-                            r."UpdatedOn",
                             u."FirstName" as "UserFirstName",
                             u."LastName" as "UserLastName",
                             u."Nationality" as "UserNationality",
+                            u."ProfilePicture" AS "ProfilePicture",
                             ROW_NUMBER() OVER (ORDER BY r."CreatedOn" DESC) AS "RowNumber"
                         FROM
                             "Review" AS r

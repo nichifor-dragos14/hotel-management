@@ -12,7 +12,7 @@ import { DateConverterModule } from '$shared/date-converter';
       <section role="review">
         <mat-card-header>
           <section role="user-and-picture">
-            <img matCardAvatar src="assets/hotel1.jpg" />
+            <img matCardAvatar [src]="[review.profilePicture]" />
 
             <section role="user">
               <span matCardTitle>
@@ -71,7 +71,7 @@ import { DateConverterModule } from '$shared/date-converter';
         flex-direction: row;
         flex-wrap: unset;
         align-items: center;
-        gap: 8px;
+        gap: 16px;
     }
 
     section[role='user-and-picture'] img {

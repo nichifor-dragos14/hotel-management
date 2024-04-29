@@ -64,7 +64,8 @@ IQueryFacade facade
                 r.User.Id,
                 r.User.FirstName,
                 r.User.LastName,
-                r.User.Nationality
+                r.User.Nationality,
+                r.User.ProfilePicture
             )
         )).ToList();
 

@@ -46,7 +46,8 @@ public record ReviewUserPropertyDetails(
     Guid Id,
     string FirstName,
     string LastName,
-    string Nationality
+    string Nationality,
+    string ProfilePicture
 );
 
 public record RoomPropertyDetails(
