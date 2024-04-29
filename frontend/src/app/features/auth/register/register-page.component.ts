@@ -1,4 +1,9 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnInit,
+  inject,
+} from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -30,11 +35,17 @@ import { MatNativeDateModule } from '@angular/material/core';
     MatNativeDateModule,
   ],
 })
-export class RegisterPageComponent {
+export class RegisterPageComponent implements OnInit {
   registerForm = inject(REGISTER_FORM);
   authService = inject(AuthService);
   loginService = inject(LoginService);
   router = inject(Router);
+
+  ngOnInit() {
+    if (this.loginService.getLoggedUserId()) {
+      this.router.navigate(['main']);
+    }
+  }
 
   genderEnum = Gender;
 

@@ -38,7 +38,13 @@ import { CommonModule } from '@angular/common';
               [routerLink]="['users/my-profile/details']"
             />
 
-            <a mat-button (click)="loginService.logout()"> Logout </a>
+            <a
+              mat-button
+              (click)="loginService.logout()"
+              [routerLink]="['/main/our-recommendations']"
+            >
+              Logout
+            </a>
           } @else {
             <a mat-button [routerLink]="['/auth/login']"> Login </a>
           }

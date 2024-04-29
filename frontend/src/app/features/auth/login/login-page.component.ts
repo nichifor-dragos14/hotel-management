@@ -1,4 +1,9 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnInit,
+  inject,
+} from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -25,12 +30,18 @@ import { Location } from '@angular/common';
     MatButtonModule,
   ],
 })
-export class LoginPageComponent {
+export class LoginPageComponent implements OnInit {
   loginForm = inject(LOGIN_FORM);
   authService = inject(AuthService);
   loginService = inject(LoginService);
   router = inject(Router);
   private location = inject(Location);
+
+  ngOnInit() {
+    if (this.loginService.getLoggedUserId()) {
+      this.router.navigate(['main']);
+    }
+  }
 
   async login(value: typeof this.loginForm.value) {
     const { email, password } = value as Required<typeof value>;
@@ -46,9 +57,8 @@ export class LoginPageComponent {
 
       if (response.ok) {
         this.loginService.AddJWTToSessionStorage(response.body);
-        this.loginForm.reset();
-
         this.location.back();
+        this.loginForm.reset();
       }
     } catch (error) {
       throw new Error('Bad request');

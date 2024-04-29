@@ -1,15 +1,15 @@
 <section role="image">
-  <img alt="Google maps location" src="assets/hotel1.jpg" />
+  <img alt="Google maps location" src="assets/images/auth-page.jpg" />
 </section>
 
 <form [formGroup]="loginForm" (ngSubmit)="login(loginForm.value)">
-  <mat-form-field appearance="fill">
+  <mat-form-field appearance="outline">
     <mat-label>Email</mat-label>
     <input matInput formControlName="email" required />
     <mat-error>The email is required</mat-error>
   </mat-form-field>
 
-  <mat-form-field appearance="fill">
+  <mat-form-field appearance="outline">
     <mat-label>Password</mat-label>
     <input matInput formControlName="password" required type="password" />
     <mat-error>The password is required</mat-error>

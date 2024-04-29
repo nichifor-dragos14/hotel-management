@@ -1,18 +1,18 @@
 <section role="image">
-  <img alt="Google maps location" src="assets/hotel1.jpg" />
+  <img alt="Google maps location" src="assets/images/auth-page.jpg" />
 </section>
 
 <form [formGroup]="registerForm" (ngSubmit)="register(registerForm.value)">
   <mat-form-field appearance="outline">
     <mat-label>First name</mat-label>
     <input matInput formControlName="firstName" required />
-    <mat-error>The email is required</mat-error>
+    <mat-error>The first name is required</mat-error>
   </mat-form-field>
 
   <mat-form-field appearance="outline">
     <mat-label>Last name</mat-label>
     <input matInput formControlName="lastName" required />
-    <mat-error>The email is required</mat-error>
+    <mat-error>The last name is required</mat-error>
   </mat-form-field>
 
   <mat-form-field appearance="outline">
@@ -24,13 +24,13 @@
   <mat-form-field appearance="outline">
     <mat-label>Phone number</mat-label>
     <input matInput formControlName="phoneNumber" required />
-    <mat-error>The email is required</mat-error>
+    <mat-error>The phone number is required</mat-error>
   </mat-form-field>
 
   <mat-form-field appearance="outline">
     <mat-label>Nationality</mat-label>
     <input matInput formControlName="nationality" required />
-    <mat-error>The email is required</mat-error>
+    <mat-error>The nationality is required</mat-error>
   </mat-form-field>
 
   <mat-radio-group aria-label="Select your gender" formControlName="gender">
@@ -42,7 +42,7 @@
   <mat-form-field appearance="outline">
     <mat-label>Address</mat-label>
     <input matInput formControlName="address" required />
-    <mat-error>The email is required</mat-error>
+    <mat-error>The address is required</mat-error>
   </mat-form-field>
 
   <mat-form-field appearance="outline">
