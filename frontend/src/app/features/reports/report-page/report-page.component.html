@@ -9,14 +9,66 @@
   }
 </section>
 
-<section role="report-header">
-  <h1>{{ report.title }}</h1>
-
-  <mat-chip id="custom-mat-chip">
+<app-page-header
+  title="
+    Report for {{ report.propertyDetails.name }}
+    {{ generateStarRating(report.propertyDetails.rating) }}
+"
+>
+  <mat-chip id="custom-mat-chip" button>
     🕥 {{ report.createdOn | dateFormat }}
   </mat-chip>
+</app-page-header>
+
+<section role="grid">
+  <section role="left">
+    <section role="location">
+      <span>
+        <mat-icon color="primary">location_pin</mat-icon>
+      </span>
+      <a
+        href="https://www.google.com/maps/place/{{
+          report.propertyDetails.location
+        }}"
+        target="_blank"
+      >
+        Location - {{ report.propertyDetails.location }} - See on map
+      </a>
+    </section>
+
+    <section id="description">
+      <h2>{{ report.title }}</h2>
+      <p [innerHTML]="report.description"></p>
+    </section>
+  </section>
+
+  <section role="right">
+    <section id="sender">
+      <h2>
+        This report was sent by {{ report.userDetails.lastName }}
+        {{ report.userDetails.firstName }}
+      </h2>
+      <img [src]="report.userDetails.profilePicture" />
+    </section>
+  </section>
 </section>
 
-<p id="description" [innerHTML]="report.description"></p>
+<section role="grid">
+  <section class="info-section">
+    <h2>Property information</h2>
+    <span class="font-light">Email: {{ report.propertyDetails.email }}</span>
+    <span class="font-light">
+      Phone number: {{ report.propertyDetails.phoneNumber }}
+    </span>
+  </section>
+
+  <section class="info-section">
+    <h2>User information</h2>
+    <span class="font-light">Email: {{ report.userDetails.email }}</span>
+    <span class="font-light">
+      Phone number: {{ report.userDetails.phoneNumber }}
+    </span>
+  </section>
+</section>
 
 <router-outlet hidden />

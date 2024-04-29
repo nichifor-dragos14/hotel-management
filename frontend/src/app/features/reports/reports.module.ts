@@ -29,6 +29,7 @@ const REPORT_ROUTES: Routes = [
           {
             path: ':id',
             component: ReportPageComponent,
+            runGuardsAndResolvers: 'always',
             resolve: {
               report: async ({ params }: ActivatedRouteSnapshot) => {
                 const router = inject(Router);

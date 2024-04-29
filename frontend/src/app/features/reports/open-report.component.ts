@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
-import { Router, RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { AppToastService } from '$shared/toast';
 
@@ -38,6 +38,7 @@ import { AppToastService } from '$shared/toast';
 })
 export class OpenReportComponent {
   readonly router = inject(Router);
+  readonly activatedRoute = inject(ActivatedRoute);
   readonly reportService = inject(ReportService);
   readonly toastService = inject(AppToastService);
 
@@ -52,7 +53,9 @@ export class OpenReportComponent {
         this.toastService.open(error.message, 'error');
       }
     } finally {
-      await this.router.navigateByUrl('/reports/reinit');
+      await this.router.navigate(['../../'], {
+        relativeTo: this.activatedRoute,
+      });
     }
   }
 }

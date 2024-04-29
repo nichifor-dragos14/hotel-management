@@ -3143,8 +3143,9 @@
           "id",
           "isClosed",
           "isRead",
+          "propertyDetails",
           "title",
-          "updatedOn"
+          "userDetails"
         ],
         "type": "object",
         "properties": {
@@ -3168,9 +3169,44 @@
             "type": "string",
             "format": "date-time"
           },
-          "updatedOn": {
-            "type": "string",
-            "format": "date-time"
+          "propertyDetails": {
+            "$ref": "#/components/schemas/ReportPropertyDetails"
+          },
+          "userDetails": {
+            "$ref": "#/components/schemas/ReportUserDetails"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ReportPropertyDetails": {
+        "required": [
+          "email",
+          "location",
+          "name",
+          "phoneNumber",
+          "rating",
+          "type"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "type": {
+            "$ref": "#/components/schemas/PropertyType"
+          },
+          "location": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "phoneNumber": {
+            "type": "string"
+          },
+          "rating": {
+            "type": "integer",
+            "format": "int32"
           }
         },
         "additionalProperties": false
@@ -3228,6 +3264,34 @@
             "type": "integer",
             "format": "int32",
             "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ReportUserDetails": {
+        "required": [
+          "email",
+          "firstName",
+          "lastName",
+          "phoneNumber",
+          "profilePicture"
+        ],
+        "type": "object",
+        "properties": {
+          "firstName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "phoneNumber": {
+            "type": "string"
+          },
+          "profilePicture": {
+            "type": "string"
           }
         },
         "additionalProperties": false

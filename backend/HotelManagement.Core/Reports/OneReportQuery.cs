@@ -1,4 +1,5 @@
 ﻿using HotelManagement.Core.Abstractions;
+using HotelManagement.Core.Properties;
 
 namespace HotelManagement.Core.Reports;
 
@@ -9,32 +10,25 @@ public record ReportDetails(
     bool IsRead,
     bool IsClosed,
     DateTime CreatedOn,
-    DateTime UpdatedOn
+    ReportPropertyDetails PropertyDetails,
+    ReportUserDetails UserDetails
+);
+
+public record ReportPropertyDetails(
+    string Name,
+    PropertyType Type,
+    string Location,
+    string Email ,
+    string PhoneNumber,
+    int Rating 
+);
+
+public record ReportUserDetails(
+    string FirstName,
+    string LastName,
+    string Email,
+    string PhoneNumber,
+    string ProfilePicture
 );
 
 public record OneReportQuery(Guid? Id) : IQuery<ReportDetails>;
-
-internal class OneReportQueryHandler(
-    IQueryFacade facade
-) : IQueryHandler<OneReportQuery, ReportDetails>
-{
-    public async Task<ReportDetails> ExecuteAsync(
-        OneReportQuery query,
-        CancellationToken cancellationToken
-    )
-    {
-        return
-            (from report in facade.Of<Report>()
-             where report.Id == query.Id
-             select new ReportDetails(
-                 report.Id,
-                 report.Title,
-                 report.Description,
-                 report.IsRead,
-                 report.IsClosed,
-                 report.CreatedOn,
-                 report.UpdatedOn
-             )
-            ).FirstOrDefault();
-    }
-}

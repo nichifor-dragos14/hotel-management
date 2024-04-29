@@ -41,3 +41,55 @@ form {
   --mdc-chip-label-text-color: white;
   --mdc-chip-elevated-container-color: #5e35b1;
 }
+
+section[role='location'] {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  align-items: center;
+}
+
+.font-light {
+  font-size: 0.8rem;
+  color: grey;
+}
+
+.info-section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.info-section h2 {
+  margin: 0;
+}
+
+#sender {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 32px;
+}
+
+#sender img {
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+}
+
+#sender p {
+  margin: 0;
+}
+
+section[role='grid'] {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+section[role='left'],
+section[role='right'] {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}

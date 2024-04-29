@@ -12,15 +12,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
 import { MatChipsModule } from '@angular/material/chips';
 import { DateConverterModule } from '$shared/date-converter';
-import { MatInputModule } from '@angular/material/input';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { TinyEditorModule } from '$shared/tiny-editor';
-import {
-  FormBuilder,
-  FormGroup,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
+import { AppPageHeaderComponent } from '$shared/page-header';
 
 @Component({
   selector: 'app-report-page',
@@ -35,10 +27,7 @@ import {
     CommonModule,
     MatChipsModule,
     DateConverterModule,
-    MatInputModule,
-    MatFormFieldModule,
-    TinyEditorModule,
-    ReactiveFormsModule,
+    AppPageHeaderComponent,
   ],
 })
 export class ReportPageComponent implements AfterViewInit {
@@ -46,13 +35,8 @@ export class ReportPageComponent implements AfterViewInit {
 
   reportService = inject(ReportService);
 
-  replyForm = inject(FormBuilder).group({
-    reply: ['', Validators.required],
-  });
-
-  reply: boolean = false;
-
   async ngAfterViewInit() {
+    console.log(this.report);
     if (this.report.isRead) {
       return;
     }
@@ -62,9 +46,8 @@ export class ReportPageComponent implements AfterViewInit {
     });
   }
 
-  sendReply(newReply: typeof this.replyForm.value) {
-    this.reply = false;
-
-    console.log(newReply);
+  generateStarRating(rating: number): string {
+    const stars = '⭐'.repeat(rating);
+    return stars;
   }
 }
