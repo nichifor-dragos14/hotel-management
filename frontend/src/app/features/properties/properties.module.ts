@@ -136,6 +136,7 @@ const PROPERTY_ROUTES: Routes = [
       {
         path: ':id/preview',
         component: PropertyPageComponent,
+        runGuardsAndResolvers: 'always',
         resolve: {
           property: async ({ params, queryParams }: ActivatedRouteSnapshot) => {
             const router = inject(Router);
