@@ -1,7 +1,13 @@
 import { UpdatePropertyCommand } from '$backend/services';
 import { AppFormBuilder } from '$core/forms';
 import { Injectable, inject } from '@angular/core';
-import { FormGroup, Validators } from '@angular/forms';
+import {
+  AbstractControl,
+  FormGroup,
+  ValidatorFn,
+  Validators,
+} from '@angular/forms';
+import { phoneNumberValidator } from './new-property.form';
 
 @Injectable({ providedIn: 'root' })
 export class EditPropertyFormFactory {
@@ -10,15 +16,21 @@ export class EditPropertyFormFactory {
   build(property: UpdatePropertyCommand): FormGroup {
     return this.formBuilder.group<UpdatePropertyCommand>({
       id: [property.id, { validators: [Validators.required] }],
-      name: [property.name, { validators: [Validators.required] }],
+      name: [
+        property.name,
+        { validators: [Validators.required, Validators.maxLength(30)] },
+      ],
       description: [
         property.description,
-        { validators: [Validators.required] },
+        { validators: [Validators.required, Validators.maxLength(1000)] },
       ],
-      email: [property.email, { validators: [Validators.required] }],
+      email: [
+        property.email,
+        { validators: [Validators.required, Validators.email] },
+      ],
       phoneNumber: [
         property.phoneNumber,
-        { validators: [Validators.required] },
+        { validators: [Validators.required, phoneNumberValidator()] },
       ],
       hasBreakfast: [
         property.hasBreakfast,

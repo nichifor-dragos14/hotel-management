@@ -30,19 +30,34 @@
   <mat-form-field appearance="outline">
     <mat-label>Name</mat-label>
     <input matInput formControlName="name" />
-    <mat-error>The name is required</mat-error>
+    @if (propertyForm.get('name')?.errors?.['required']) {
+      <mat-error> The name is required. </mat-error>
+    }
+    @if (propertyForm.get('name')?.errors?.['maxlength']) {
+      <mat-error> The name should be under 30 characters. </mat-error>
+    }
   </mat-form-field>
 
   <mat-form-field appearance="outline">
     <mat-label>Email</mat-label>
     <input matInput formControlName="email" />
-    <mat-error>The email is required</mat-error>
+    @if (propertyForm.get('email')?.errors?.['required']) {
+      <mat-error> The email is required. </mat-error>
+    }
+    @if (propertyForm.get('email')?.errors?.['email']) {
+      <mat-error> Invalid email format. </mat-error>
+    }
   </mat-form-field>
 
   <mat-form-field appearance="outline">
     <mat-label>Phone number</mat-label>
     <input matInput formControlName="phoneNumber" />
-    <mat-error>The phone number is required</mat-error>
+    @if (propertyForm.get('phoneNumber')?.errors?.['required']) {
+      <mat-error> The phone number is required. </mat-error>
+    }
+    @if (propertyForm.get('phoneNumber')?.errors?.['invalidPhoneNumber']) {
+      <mat-error> Invalid phone number format. </mat-error>
+    }
   </mat-form-field>
 
   <section role="utilities-description">
@@ -85,7 +100,14 @@
     <mat-form-field appearance="outline">
       <mat-label>Description</mat-label>
       <editor appTinyEditor formControlName="description" />
-      <mat-error>The property description is required</mat-error>
+      @if (propertyForm.get('description')?.errors?.['required']) {
+        <mat-error> The description is required. </mat-error>
+      }
+      @if (propertyForm.get('description')?.errors?.['maxlength']) {
+        <mat-error>
+          The description should be under 1000 characters.
+        </mat-error>
+      }
     </mat-form-field>
   </section>
 

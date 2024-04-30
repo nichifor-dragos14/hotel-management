@@ -37,6 +37,7 @@ const PROPERTY_ROUTES: Routes = [
           {
             path: 'new',
             component: NewPropertyPageComponent,
+            runGuardsAndResolvers: 'always',
             resolve: {
               propertyTypes: async () => {
                 const router = inject(Router);
@@ -59,6 +60,7 @@ const PROPERTY_ROUTES: Routes = [
           {
             path: ':id',
             component: UpdatePropertyPageComponent,
+            runGuardsAndResolvers: 'always',
             resolve: {
               propertyForm: async ({ params }: ActivatedRouteSnapshot) => {
                 const router = inject(Router);
@@ -102,7 +104,6 @@ const PROPERTY_ROUTES: Routes = [
             data: {
               role: ['Admin'],
             },
-            runGuardsAndResolvers: 'always',
             children: [
               {
                 path: 'actions',
