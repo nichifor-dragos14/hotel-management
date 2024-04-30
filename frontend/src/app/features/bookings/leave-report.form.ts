@@ -9,9 +9,15 @@ export class LeaveReportFormFactory {
 
   build(review: CreateReportCommand): FormGroup {
     return this.formBuilder.group<CreateReportCommand>({
-      description: [review.description, { validators: [Validators.required] }],
+      description: [
+        review.description,
+        { validators: [Validators.required, Validators.maxLength(500)] },
+      ],
       propertyId: [review.propertyId, { validators: [Validators.required] }],
-      title: [review.title, { validators: [Validators.required] }],
+      title: [
+        review.title,
+        { validators: [Validators.required, Validators.maxLength(30)] },
+      ],
       userId: [review.userId, { validators: [Validators.required] }],
       bookingId: [review.bookingId, { validators: [Validators.required] }],
     });

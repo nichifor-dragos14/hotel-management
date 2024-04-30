@@ -355,6 +355,11 @@
     <mat-form-field appearance="outline">
       <mat-label>Special mentions</mat-label>
       <editor appTinyEditor formControlName="specialMentions" />
+      @if (bookingForm.get('specialMentions')?.errors?.['maxlength']) {
+        <mat-error>
+          The special mentions should be under 500 characters.
+        </mat-error>
+      }
     </mat-form-field>
   </form>
 }

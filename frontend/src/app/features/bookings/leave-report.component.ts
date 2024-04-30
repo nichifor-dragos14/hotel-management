@@ -46,13 +46,25 @@ import { MatFormFieldModule } from '@angular/material/form-field';
       <mat-form-field appearance="outline">
         <mat-label>Title</mat-label>
         <input matInput formControlName="title" />
-        <mat-error>The title is required</mat-error>
+        @if (reportForm.get('title')?.errors?.['required']) {
+          <mat-error>The title is required.</mat-error>
+        }
+        @if (reportForm.get('title')?.errors?.['maxlength']) {
+          <mat-error> The title cannot be more than 30 characters. </mat-error>
+        }
       </mat-form-field>
 
       <mat-form-field appearance="outline">
         <mat-label>Description</mat-label>
         <editor appTinyEditor formControlName="description" />
-        <mat-error>The description is required</mat-error>
+        @if (reportForm.get('description')?.errors?.['required']) {
+          <mat-error>The description is required.</mat-error>
+        }
+        @if (reportForm.get('description')?.errors?.['maxlength']) {
+          <mat-error>
+            The description cannot be more than 500 characters.
+          </mat-error>
+        }
       </mat-form-field>
     </form>
   `,
