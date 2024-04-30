@@ -65,13 +65,13 @@ import { MatRippleModule } from '@angular/material/core';
       <section role="rating-and-price">
         <mat-card-header>
           <span matCardTitle id="review-rating">
-            {{ transformReviewRatingToString(property.reviewRating!) }}
             @if (property.reviewRating) {
+              {{ transformReviewRatingToString(property.reviewRating!) }}
               <div class="property-rating-square">
                 {{ transformToTwoDecimals(property.reviewRating) }}
               </div>
             } @else {
-              <div class="property-rating-square">🤔</div>
+              <div>No reviews yet 🤔</div>
             }
           </span>
           <span matCardSubtitle>

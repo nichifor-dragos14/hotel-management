@@ -23,11 +23,19 @@
     </span>
 
     <section role="review">
-      <span class="property-rating-square">{{ property.reviewRating }}</span>
-      <section role="review-grade">
-        <span class="font-light">
-          {{ reviewRatingMapper(property.reviewRating) }}
+      @if (property.reviewRating) {
+        <span class="property-rating-square">
+          {{ transformToTwoDecimals(property.reviewRating) }}
         </span>
+      }
+      <section role="review-grade">
+        @if (property.reviewRating) {
+          <span class="font-light">
+            {{ reviewRatingMapper(property.reviewRating) }}
+          </span>
+        } @else {
+          <span class="font-light"> No reviews yet 🤔</span>
+        }
         <span class="font-light">·</span>
         <span class="font-light">{{ property.reviews.length }} reviews</span>
       </section>

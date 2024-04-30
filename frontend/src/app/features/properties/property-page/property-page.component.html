@@ -115,10 +115,14 @@
     <section role="search">
       <section role="general-rating-map">
         <span class="aligned-span">
-          <h2>{{ transformReviewRatingToString(property.reviewRating) }}</h2>
-          <div class="property-rating-square">
-            {{ transformToOneDecimal(property.reviewRating) }}
-          </div>
+          @if (property.reviewRating) {
+            <h2>{{ transformReviewRatingToString(property.reviewRating) }}</h2>
+            <div class="property-rating-square">
+              {{ transformToOneDecimal(property.reviewRating) }}
+            </div>
+          } @else {
+            <h2>No reviews yet 🤔</h2>
+          }
         </span>
 
         <section role="map">

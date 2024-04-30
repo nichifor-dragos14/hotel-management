@@ -128,6 +128,10 @@ export class NewBookingPageComponent implements AfterViewInit {
     return '';
   }
 
+  transformToTwoDecimals(rating: number) {
+    return rating.toPrecision(2);
+  }
+
   computeDateDifference(date1: any, date2: any): number {
     date1 = date1 instanceof Date ? date1 : new Date(date1);
     date2 = date2 instanceof Date ? date2 : new Date(date2);
