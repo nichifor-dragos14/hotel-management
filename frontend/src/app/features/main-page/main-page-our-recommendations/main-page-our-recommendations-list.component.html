@@ -25,6 +25,7 @@
           [property]="property"
           [routerLink]="['/properties', property.id, 'preview']"
           [queryParams]="generateDefaultQueryParams(property)"
+          (click)="this.setValueOfSearchForm(property.location)"
         >
         </app-property-recommendation-card>
       }

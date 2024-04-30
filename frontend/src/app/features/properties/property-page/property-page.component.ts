@@ -65,8 +65,16 @@ export class PropertyPageComponent implements OnInit {
   gridImages: GridImage[] = [];
   gridCols = 0;
 
+  minDate: Date = new Date();
+  maxDate: Date = new Date();
+
+  constructor() {
+    this.minDate.setHours(0, 0, 0, 0);
+    this.maxDate.setFullYear(this.maxDate.getFullYear() + 1);
+    this.maxDate.setHours(0, 0, 0, 0);
+  }
+
   ngOnInit(): void {
-    console.log(this.property.imageUrls);
     if (this.property.imageUrls.length === 1) {
       this.gridCols = 1;
       this.gridImages = [

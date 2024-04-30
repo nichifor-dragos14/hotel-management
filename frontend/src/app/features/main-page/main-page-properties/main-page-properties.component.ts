@@ -57,6 +57,7 @@ export class MainPagePropertiesComponent implements AfterViewInit {
 
   minDate: Date = new Date();
   maxDate: Date = new Date();
+
   constructor() {
     this.minDate.setHours(0, 0, 0, 0);
     this.maxDate.setFullYear(this.maxDate.getFullYear() + 1);

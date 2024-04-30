@@ -23,6 +23,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { PropertyQueryParams } from '../property-query-params.interface';
 import { LoginService } from '$features/auth/login.service';
 import { Subscription } from 'rxjs';
+import { SEARCH_PROPERTY_FORM } from '../search-property.form';
 
 @Component({
   selector: 'app-main-page-our-recommendations-list',
@@ -48,6 +49,7 @@ export class MainPageOurRecommendationsComponent implements OnInit {
   loginService = inject(LoginService);
   searchHistoryService = inject(SearchHistoryService);
   cdr = inject(ChangeDetectorRef);
+  searchForm = inject(SEARCH_PROPERTY_FORM);
 
   private subscription: Subscription = new Subscription();
   isLoggedIn: boolean = false;
@@ -77,13 +79,24 @@ export class MainPageOurRecommendationsComponent implements OnInit {
     },
   });
 
+  setValueOfSearchForm(location: string) {
+    this.searchForm.setValue({
+      location: location,
+      startDate: new Date(),
+      endDate: new Date(new Date().getTime() + 24 * 60 * 60 * 1000),
+      numberOfAdults: 2,
+      numberOfChildren: 0,
+      numberOfRooms: 1,
+    });
+  }
+
   generateDefaultQueryParams(property: PropertySummaryRecommendation) {
     let propertyQueryParams: PropertyQueryParams = {
       startDate: new Date().toISOString(),
       endDate: new Date(
         new Date().getTime() + 24 * 60 * 60 * 1000
       ).toISOString(),
-      numberOfChildren: 1,
+      numberOfChildren: 0,
       numberOfAdults: 2,
       numberOfRooms: 1,
       location: property.location,
