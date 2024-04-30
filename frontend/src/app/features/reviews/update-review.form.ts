@@ -9,10 +9,25 @@ export class UpdateReviewFormFactory {
 
   build(review: UpdateReviewCommand): FormGroup {
     return this.formBuilder.group<UpdateReviewCommand>({
-      description: [review.description, { validators: [Validators.required] }],
+      description: [
+        review.description,
+        { validators: [Validators.required, Validators.maxLength(500)] },
+      ],
       id: [review.id, { validators: [Validators.required] }],
-      title: [review.title, { validators: [Validators.required] }],
-      rating: [review.rating, { validators: [Validators.required] }],
+      title: [
+        review.title,
+        { validators: [Validators.required, Validators.maxLength(30)] },
+      ],
+      rating: [
+        review.rating,
+        {
+          validators: [
+            Validators.required,
+            Validators.max(10),
+            Validators.min(1),
+          ],
+        },
+      ],
     });
   }
 }
