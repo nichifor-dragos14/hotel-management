@@ -9,12 +9,12 @@ export class UpdateBookingFormFactory {
 
   build(booking: UpdateBookingCommand): FormGroup {
     return this.formBuilder.group<UpdateBookingCommand>({
-      expectedArrival: [
-        booking.expectedArrival,
-        { validators: [Validators.required] },
-      ],
+      expectedArrival: [booking.expectedArrival],
       id: [booking.id, { validators: [Validators.required] }],
-      specialMentions: [booking.specialMentions],
+      specialMentions: [
+        booking.specialMentions,
+        { validators: [Validators.maxLength(500)] },
+      ],
     });
   }
 }

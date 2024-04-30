@@ -273,6 +273,16 @@ const BOOKING_ROUTES: Routes = [
             const router = inject(Router);
 
             if (queryParams['startDate']) {
+              const today = new Date().setHours(0, 0, 0, 0);
+
+              if (
+                new Date(queryParams['startDate']).setHours(0, 0, 0, 0) < today
+              ) {
+                router.navigate(['/error']);
+
+                return null;
+              }
+
               return queryParams['startDate'];
             } else {
               router.navigate(['/error']);
@@ -285,6 +295,19 @@ const BOOKING_ROUTES: Routes = [
             const router = inject(Router);
 
             if (queryParams['endDate']) {
+              const today = new Date().setHours(0, 0, 0, 0);
+              const tomorrow = new Date(today);
+              tomorrow.setDate(tomorrow.getDate() + 1);
+
+              if (
+                new Date(queryParams['endDate']).setHours(0, 0, 0, 0) <
+                tomorrow.setHours(0, 0, 0, 0)
+              ) {
+                router.navigate(['/error']);
+
+                return null;
+              }
+
               return queryParams['endDate'];
             } else {
               router.navigate(['/error']);
@@ -292,28 +315,7 @@ const BOOKING_ROUTES: Routes = [
               return null;
             }
           },
-          numberOfAdults: async ({ queryParams }: ActivatedRouteSnapshot) => {
-            const router = inject(Router);
 
-            if (queryParams['numberOfAdults']) {
-              return queryParams['numberOfAdults'];
-            } else {
-              router.navigate(['/error']);
-
-              return null;
-            }
-          },
-          numberOfChildren: async ({ queryParams }: ActivatedRouteSnapshot) => {
-            const router = inject(Router);
-
-            if (queryParams['numberOfChildren']) {
-              return queryParams['numberOfChildren'];
-            } else {
-              router.navigate(['/error']);
-
-              return null;
-            }
-          },
           userForm: async () => {
             const router = inject(Router);
             const loginService = inject(LoginService);

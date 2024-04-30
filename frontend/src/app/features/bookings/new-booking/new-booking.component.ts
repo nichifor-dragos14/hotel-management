@@ -55,23 +55,23 @@ import { AppToastService } from '$shared/toast';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NewBookingPageComponent implements AfterViewInit {
+  readonly router = inject(Router);
+  readonly bookingService = inject(BookingService);
+  readonly toastService = inject(AppToastService);
+
   @Input() property!: PropertyDetails;
   @Input() propertyRooms!: RoomPropertyDetails[];
+
   @Input() startDate!: Date;
   @Input() endDate!: Date;
-  @Input() numberOfChildren!: string;
-  @Input() numberOfAdults!: string;
+
   @Input() user!: UserDetails;
   @Input() userForm!: FormGroup;
 
-  loggedUserEmail: string = '';
   bookingForSomeoneElse: boolean = false;
+  loggedUserEmail: string = '';
   expectedArrival: string = "I don't know";
   specialMentions: string = '';
-
-  bookingService = inject(BookingService);
-  toastService = inject(AppToastService);
-  router = inject(Router);
 
   ngAfterViewInit() {
     this.setControls();

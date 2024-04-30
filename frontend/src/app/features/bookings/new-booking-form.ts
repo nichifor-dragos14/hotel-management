@@ -1,7 +1,12 @@
 import { CreateBookingCommand, UserDetailsForBooking } from '$backend/services';
 import { AppFormBuilder } from '$core/forms';
 import { Injectable, inject } from '@angular/core';
-import { FormGroup, Validators } from '@angular/forms';
+import {
+  AbstractControl,
+  FormGroup,
+  ValidatorFn,
+  Validators,
+} from '@angular/forms';
 
 @Injectable({ providedIn: 'root' })
 export class CreateBookingFormFactory {
@@ -9,7 +14,10 @@ export class CreateBookingFormFactory {
 
   build(booking: CreateBookingCommand): FormGroup {
     return this.formBuilder.group<CreateBookingCommand>({
-      endDate: [booking.endDate, { validators: [Validators.required] }],
+      endDate: [
+        booking.endDate,
+        { validators: [Validators.required, afterTomorrow()] },
+      ],
       expectedArrival: [
         booking.expectedArrival,
         { validators: [Validators.required] },
@@ -21,9 +29,12 @@ export class CreateBookingFormFactory {
       roomId: [booking.roomId, { validators: [Validators.required] }],
       specialMentions: [
         booking.specialMentions,
-        { validators: [Validators.required] },
+        { validators: [Validators.required, Validators.maxLength(500)] },
       ],
-      startDate: [booking.startDate, { validators: [Validators.required] }],
+      startDate: [
+        booking.startDate,
+        { validators: [Validators.required, afterToday()] },
+      ],
       totalPrice: [booking.totalPrice, { validators: [Validators.required] }],
       userDetails: [booking.userDetails, { validators: [Validators.required] }],
     });
@@ -36,14 +47,64 @@ export class CreateBookingUserFormFactory {
 
   build(userDetails: UserDetailsForBooking): FormGroup {
     return this.formBuilder.group<UserDetailsForBooking>({
-      country: [userDetails.country, { validators: [Validators.required] }],
-      email: [userDetails.email, { validators: [Validators.required] }],
-      firstName: [userDetails.firstName, { validators: [Validators.required] }],
-      lastName: [userDetails.lastName, { validators: [Validators.required] }],
+      country: [
+        userDetails.country,
+        { validators: [Validators.required, Validators.maxLength(30)] },
+      ],
+      email: [
+        userDetails.email,
+        { validators: [Validators.required, Validators.maxLength(30)] },
+      ],
+      firstName: [
+        userDetails.firstName,
+        { validators: [Validators.required, Validators.maxLength(30)] },
+      ],
+      lastName: [
+        userDetails.lastName,
+        { validators: [Validators.required, Validators.maxLength(30)] },
+      ],
       phoneNumber: [
         userDetails.phoneNumber,
-        { validators: [Validators.required] },
+        { validators: [Validators.required, Validators.maxLength(30)] },
       ],
     });
   }
+}
+
+export function afterToday(): ValidatorFn {
+  return (control: AbstractControl): { [key: string]: any } | null => {
+    if (!control.value) {
+      return null;
+    }
+
+    const today = new Date();
+
+    const inputDate = new Date(control.value);
+
+    if (inputDate >= today) {
+      return null;
+    }
+
+    return { afterToday: { value: control.value } };
+  };
+}
+
+export function afterTomorrow(): ValidatorFn {
+  return (control: AbstractControl): { [key: string]: any } | null => {
+    if (!control.value) {
+      return null;
+    }
+
+    const today = new Date();
+    const tomorrow = new Date(today);
+    tomorrow.setDate(tomorrow.getDate() + 1);
+
+    const inputDate = new Date(control.value);
+
+    if (inputDate >= tomorrow) {
+      return null;
+    }
+
+    return { afterTomorrow: { value: control.value } };
+  };
 }
