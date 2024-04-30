@@ -55,6 +55,14 @@ export class MainPagePropertiesComponent implements AfterViewInit {
   readonly filterPropertyForm = inject(FILTER_PROPERTY_FORM);
   readonly searchHistoryService = inject(SearchHistoryService);
 
+  minDate: Date = new Date();
+  maxDate: Date = new Date();
+  constructor() {
+    this.minDate.setHours(0, 0, 0, 0);
+    this.maxDate.setFullYear(this.maxDate.getFullYear() + 1);
+    this.maxDate.setHours(0, 0, 0, 0);
+  }
+
   ngAfterViewInit() {
     this.submitForm();
   }

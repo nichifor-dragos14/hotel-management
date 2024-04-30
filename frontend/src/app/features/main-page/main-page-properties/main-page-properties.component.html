@@ -36,6 +36,9 @@
         <a matSuffix mat-icon-button (click)="resetLocationInput()">
           <mat-icon>cancel</mat-icon>
         </a>
+        @if (searchPropertyForm.get('location')?.errors?.['maxlength']) {
+          <mat-error> Must be under 100 characters. </mat-error>
+        }
       </mat-form-field>
     </mat-expansion-panel>
 
@@ -50,7 +53,11 @@
 
       <mat-form-field appearance="outline">
         <mat-label>Your stay dates</mat-label>
-        <mat-date-range-input [rangePicker]="picker">
+        <mat-date-range-input
+          [rangePicker]="picker"
+          [min]="minDate"
+          [max]="maxDate"
+        >
           <input matStartDate formControlName="startDate" />
           <input matEndDate formControlName="endDate" />
         </mat-date-range-input>
@@ -59,6 +66,13 @@
         </mat-datepicker-toggle>
 
         <mat-date-range-picker #picker></mat-date-range-picker>
+
+        @if (
+          searchPropertyForm.get('startDate')?.errors?.['afterToday'] ||
+          searchPropertyForm.get('endDate')?.errors?.['afterTomorrow']
+        ) {
+          <mat-error>Enter a valid time span. </mat-error>
+        }
       </mat-form-field>
     </mat-expansion-panel>
 
@@ -85,6 +99,15 @@
             max="8"
           />
           <mat-icon matPrefix>person</mat-icon>
+          @if (searchPropertyForm.get('numberOfAdults')?.errors?.['required']) {
+            <mat-error> Number of adults is required. </mat-error>
+          }
+          @if (searchPropertyForm.get('numberOfAdults')?.errors?.['max']) {
+            <mat-error> Must be under 8. </mat-error>
+          }
+          @if (searchPropertyForm.get('numberOfAdults')?.errors?.['min']) {
+            <mat-error> Must be at least 1. </mat-error>
+          }
         </mat-form-field>
 
         <mat-form-field appearance="outline">
@@ -97,6 +120,17 @@
             max="8"
           />
           <mat-icon matPrefix>child_care</mat-icon>
+          @if (
+            searchPropertyForm.get('numberOfChildren')?.errors?.['required']
+          ) {
+            <mat-error> Number of children is required. </mat-error>
+          }
+          @if (searchPropertyForm.get('numberOfChildren')?.errors?.['max']) {
+            <mat-error> Must be under 8. </mat-error>
+          }
+          @if (searchPropertyForm.get('numberOfChildren')?.errors?.['min']) {
+            <mat-error> Must be valid. </mat-error>
+          }
         </mat-form-field>
 
         <mat-form-field appearance="outline">
@@ -109,6 +143,15 @@
             max="4"
           />
           <mat-icon matPrefix>hotel</mat-icon>
+          @if (searchPropertyForm.get('numberOfRooms')?.errors?.['required']) {
+            <mat-error> Number of rooms is required. </mat-error>
+          }
+          @if (searchPropertyForm.get('numberOfRooms')?.errors?.['max']) {
+            <mat-error> Must be under 4. </mat-error>
+          }
+          @if (searchPropertyForm.get('numberOfRooms')?.errors?.['min']) {
+            <mat-error> Must be at least 1. </mat-error>
+          }
         </mat-form-field>
       </section>
     </mat-expansion-panel>
