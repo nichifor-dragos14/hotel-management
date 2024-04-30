@@ -18,13 +18,13 @@ IQueryFacade facade
                                select new
                                {
                                    Property = p,
-                                   Rooms = p.Rooms.OrderBy(r => r.CreatedOn).Take(3),
+                                   Rooms = p.Rooms.ToList(),
                                    ReviewCount = p.Reviews.Count(),
-                                   Reviews = p.Reviews.OrderBy(r => r.CreatedOn).Take(5).Select(r => new
+                                   Reviews = p.Reviews.Select(r => new
                                    {
                                        Review = r,
                                        r.User
-                                   })
+                                   }).ToList()
                                })
                                .FirstOrDefault();
 
@@ -34,7 +34,10 @@ IQueryFacade facade
         }
 
         var roomsDetails = propertyDetails.Rooms
-            .Where(r => r.Bookings.Any(b => (query.EndDate <= b.StartDate) || (query.StartDate >= b.EndDate)) || !r.Bookings.Any())
+            .Where(r => (r.Bookings.Any(b => (query.EndDate <= b.StartDate) || (query.StartDate >= b.EndDate)) || !r.Bookings.Any()) &&
+                        (r.AdultCapacity >= query.NumberOfAdults && r.AdultCapacity + r.ChildrenCapacity >= query.NumberOfAdults + query.NumberOfChildren))
+            .OrderBy(r => Math.Abs(r.AdultCapacity + r.ChildrenCapacity - query.NumberOfChildren - query.NumberOfAdults))
+            .Take(3)
             .Select(r => new RoomPropertyDetails(
             r.Id,
             r.Number,
@@ -53,7 +56,10 @@ IQueryFacade facade
             r.UpdatedOn
         )).ToList();
 
-        var reviewsDetails = propertyDetails.Reviews.Select(r => new ReviewPropertyDetails(
+        var reviewsDetails = propertyDetails.Reviews
+            .OrderBy(r => r.Review.CreatedOn)
+            .Take(4)
+            .Select(r => new ReviewPropertyDetails(
             r.Review.Id,
             r.Review.Title,
             r.Review.Description,

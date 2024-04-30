@@ -82,9 +82,11 @@ public class PropertyController(IFileStorageService _storageService) : Controlle
         int to,
         DateTime startDate,
         DateTime endDate,
+        int numberOfAdults,
+        int numberOfChildren,
         CancellationToken cancelationToken)
     {
-        return TypedResults.Ok(await queryService.ExecuteAsync(new AllPropertyRoomsQuery(from, to, id, startDate, endDate), cancelationToken));
+        return TypedResults.Ok(await queryService.ExecuteAsync(new AllPropertyRoomsQuery(from, to, id, startDate, endDate, numberOfAdults, numberOfChildren), cancelationToken));
     }
 
     [HttpGet("{id}")]
@@ -92,6 +94,8 @@ public class PropertyController(IFileStorageService _storageService) : Controlle
         Guid id,
         DateTime startDate,
         DateTime endDate,
+        int numberOfAdults,
+        int numberOfChildren,
         [FromServices] IQueryHandler<OnePropertyQuery, PropertyDetails> queryService,
         CancellationToken cancellationToken)
     {
@@ -99,7 +103,7 @@ public class PropertyController(IFileStorageService _storageService) : Controlle
             return TypedResults.BadRequest();
 
 
-        return await queryService.ExecuteAsync(new OnePropertyQuery(id, startDate, endDate), cancellationToken) switch
+        return await queryService.ExecuteAsync(new OnePropertyQuery(id, startDate, endDate, numberOfAdults, numberOfChildren), cancellationToken) switch
         {
             { } hotel => TypedResults.Ok(hotel),
             _ => TypedResults.NotFound()

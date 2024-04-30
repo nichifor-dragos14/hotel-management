@@ -129,12 +129,11 @@
           <span class="aligned-span">
             <mat-icon color="primary">location_pin</mat-icon>
             <span class="font-light">
-              {{ property.location }} -
               <a
                 href="https://www.google.com/maps/place/{{ property.location }}"
                 target="_blank"
               >
-                View on map
+                {{ property.location }} - View on map
               </a>
             </span>
           </span>
@@ -160,7 +159,12 @@
             "
             (click)="sendParams()"
           >
-            Explore more
+            {{
+              activatedRoute.snapshot.queryParams['location'] ==
+              searchPropertyForm.get('location')!.value
+                ? 'Reload with changes'
+                : 'Explore more'
+            }}
           </button>
         </span>
 
@@ -279,7 +283,7 @@
     <section role="title-rooms">
       <h2>Accommodation options</h2>
 
-      <table mat-table [dataSource]="property.rooms.slice(0, 2)">
+      <table mat-table [dataSource]="property.rooms">
         <ng-container matColumnDef="roomType">
           <th mat-header-cell *matHeaderCellDef>Room type</th>
           <td mat-cell *matCellDef="let room">
@@ -379,18 +383,17 @@
       </table>
     </section>
 
-    @if (property.rooms.length > 0) {
-      <section>
-        <button
-          mat-button
-          color="primary"
-          [routerLink]="['view', 'rooms']"
-          [queryParams]="activatedRoute.snapshot.queryParams"
-        >
-          See all the available rooms
-        </button>
-      </section>
-    }
+    <section role="final-button">
+      <button
+        class="end-section"
+        mat-button
+        color="primary"
+        [routerLink]="['view', 'rooms']"
+        [queryParams]="activatedRoute.snapshot.queryParams"
+      >
+        See all the available rooms
+      </button>
+    </section>
   </section>
 
   @if (property.reviews.length !== 0) {
@@ -410,25 +413,24 @@
         </section>
 
         <section role="content-reviews">
-          <ng-container *ngFor="let review of property.reviews.slice(0, 4)">
+          <ng-container *ngFor="let review of property.reviews">
             <app-review-property-card [review]="review">
             </app-review-property-card>
           </ng-container>
         </section>
       </section>
 
-      @if (property.reviews.length > 0) {
-        <section>
-          <button
-            mat-button
-            color="primary"
-            [routerLink]="['view', 'reviews']"
-            [queryParams]="activatedRoute.snapshot.queryParams"
-          >
-            Browse all testimonials
-          </button>
-        </section>
-      }
+      <section role="final-button">
+        <button
+          class="end-section"
+          mat-button
+          color="primary"
+          [routerLink]="['view', 'reviews']"
+          [queryParams]="activatedRoute.snapshot.queryParams"
+        >
+          Browse all testimonials
+        </button>
+      </section>
     </section>
   }
 

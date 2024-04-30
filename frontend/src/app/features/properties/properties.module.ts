@@ -148,6 +148,8 @@ const PROPERTY_ROUTES: Routes = [
                 id: params['id'],
                 startDate: queryParams['startDate'],
                 endDate: queryParams['endDate'],
+                numberOfAdults: queryParams['numberOfAdults'],
+                numberOfChildren: queryParams['numberOfChildren'],
               });
             } catch (error) {
               router.navigate(['/error']);

@@ -105,6 +105,9 @@ export class MainPagePropertiesComponent implements AfterViewInit {
       return;
     }
 
+    startDate.setHours(3, 0, 0, 0);
+    endDate.setHours(3, 0, 0, 0);
+
     const queryParams: PropertyQueryParams = {
       location: location,
       startDate: startDate.toISOString(),

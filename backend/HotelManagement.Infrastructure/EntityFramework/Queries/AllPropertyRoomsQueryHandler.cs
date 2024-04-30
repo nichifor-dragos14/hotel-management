@@ -18,7 +18,9 @@ internal class AllPropertyRoomsQueryHandler(
             $"              AND NOT EXISTS (SELECT 1 FROM \"Booking\"" +
             $"                      WHERE \"Booking\".\"RoomId\" = r.\"Id\"" +
             $"                      AND NOT (\"Booking\".\"StartDate\" >= '{query.EndDate}'" +
-            $"                      OR \"Booking\".\"EndDate\" <= '{query.StartDate}'))";
+            $"                      OR \"Booking\".\"EndDate\" <= '{query.StartDate}'))" +
+            $"              AND r.\"AdultCapacity\" >= {query.NumberOfAdults}" +
+            $"              AND r.\"AdultCapacity\" + r.\"ChildrenCapacity\" >= {query.NumberOfChildren} + {query.NumberOfAdults}";
 
         var queryBuild = $"""
                     WITH PropertyRooms AS (

@@ -80,10 +80,16 @@ export class MainPageOurRecommendationsComponent implements OnInit {
   });
 
   setValueOfSearchForm(location: string) {
+    const startDate = new Date();
+    const endDate = new Date(new Date().getTime() + 24 * 60 * 60 * 1000);
+
+    startDate.setHours(3, 0, 0, 0);
+    endDate.setHours(3, 0, 0, 0);
+
     this.searchForm.setValue({
       location: location,
-      startDate: new Date(),
-      endDate: new Date(new Date().getTime() + 24 * 60 * 60 * 1000),
+      startDate: startDate,
+      endDate: endDate,
       numberOfAdults: 2,
       numberOfChildren: 0,
       numberOfRooms: 1,
@@ -91,11 +97,15 @@ export class MainPageOurRecommendationsComponent implements OnInit {
   }
 
   generateDefaultQueryParams(property: PropertySummaryRecommendation) {
-    let propertyQueryParams: PropertyQueryParams = {
-      startDate: new Date().toISOString(),
-      endDate: new Date(
-        new Date().getTime() + 24 * 60 * 60 * 1000
-      ).toISOString(),
+    const startDate = new Date();
+    const endDate = new Date(new Date().getTime() + 24 * 60 * 60 * 1000);
+
+    startDate.setHours(3, 0, 0, 0);
+    endDate.setHours(3, 0, 0, 0);
+
+    let propertyQueryParams = {
+      startDate: startDate.toISOString(),
+      endDate: endDate.toISOString(),
       numberOfChildren: 0,
       numberOfAdults: 2,
       numberOfRooms: 1,

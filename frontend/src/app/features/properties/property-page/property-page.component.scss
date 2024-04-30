@@ -261,3 +261,11 @@ section[role='contact'] section[role='contact-information'] span {
   margin: 0;
   color: grey !important;
 }
+
+section[role='final-button'] {
+  display: grid;
+}
+
+.end-section {
+  justify-self: end;
+}
