@@ -29,7 +29,16 @@ export class EditRoomFormFactory {
       hasSeaView: [property.hasSeaView, { validators: [Validators.required] }],
       hasTowels: [property.hasTowels, { validators: [Validators.required] }],
       id: [property.id, { validators: [Validators.required] }],
-      price: [property.price, { validators: [Validators.required] }],
+      price: [
+        property.price,
+        {
+          validators: [
+            Validators.required,
+            Validators.min(1),
+            Validators.max(50000),
+          ],
+        },
+      ],
     });
   }
 }

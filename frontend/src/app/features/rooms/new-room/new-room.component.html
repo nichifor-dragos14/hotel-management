@@ -26,14 +26,30 @@
 
   <mat-form-field appearance="outline">
     <mat-label>Number</mat-label>
-    <input matInput formControlName="number" />
-    <mat-error>The number is required</mat-error>
+    <input matInput formControlName="number" min="1" max="999" />
+    @if (roomForm.get('number')?.errors?.['required']) {
+      <mat-error> The number is required. </mat-error>
+    }
+    @if (roomForm.get('number')?.errors?.['min']) {
+      <mat-error> The number must be greater or equal to 1. </mat-error>
+    }
+    @if (roomForm.get('number')?.errors?.['max']) {
+      <mat-error> The number must be less or equal to 999. </mat-error>
+    }
   </mat-form-field>
 
   <mat-form-field appearance="outline">
     <mat-label>Price</mat-label>
-    <input matInput formControlName="price" type="number" min="0" />
-    <mat-error>The price is required</mat-error>
+    <input matInput formControlName="price" type="number" min="0" max="50000" />
+    @if (roomForm.get('price')?.errors?.['required']) {
+      <mat-error> The price is required. </mat-error>
+    }
+    @if (roomForm.get('price')?.errors?.['min']) {
+      <mat-error> The price must be greater or equal to 1 leu. </mat-error>
+    }
+    @if (roomForm.get('price')?.errors?.['max']) {
+      <mat-error> The price must be less or equal to 50000 lei. </mat-error>
+    }
   </mat-form-field>
 
   <section role="capacity">
@@ -46,7 +62,17 @@
         min="1"
         max="8"
       />
-      <mat-error>The adult capacity is required</mat-error>
+      @if (roomForm.get('adultCapacity')?.errors?.['required']) {
+        <mat-error> The adult capacity is required. </mat-error>
+      }
+      @if (roomForm.get('adultCapacity')?.errors?.['min']) {
+        <mat-error>
+          The adult capacity must be greater or equal to 1.
+        </mat-error>
+      }
+      @if (roomForm.get('adultCapacity')?.errors?.['max']) {
+        <mat-error> The adult capacity must be less or equal to 8. </mat-error>
+      }
     </mat-form-field>
 
     <mat-form-field appearance="outline">
@@ -58,7 +84,19 @@
         min="0"
         max="8"
       />
-      <mat-error>The children capacity is required</mat-error>
+      @if (roomForm.get('childrenCapacity')?.errors?.['required']) {
+        <mat-error> The children capacity is required. </mat-error>
+      }
+      @if (roomForm.get('childrenCapacity')?.errors?.['min']) {
+        <mat-error>
+          The children capacity must be greater or equal to 0.
+        </mat-error>
+      }
+      @if (roomForm.get('childrenCapacity')?.errors?.['max']) {
+        <mat-error>
+          The children capacity must be less or equal to 8.
+        </mat-error>
+      }
     </mat-form-field>
   </section>
 

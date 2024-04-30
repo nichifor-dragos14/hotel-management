@@ -19,8 +19,16 @@
 <form [formGroup]="roomForm" (ngSubmit)="updateRoom(roomForm.value)">
   <mat-form-field appearance="outline">
     <mat-label>Price</mat-label>
-    <input matInput formControlName="price" />
-    <mat-error>The price is required</mat-error>
+    <input matInput formControlName="price" type="number" min="0" max="50000" />
+    @if (roomForm.get('price')?.errors?.['required']) {
+      <mat-error> The price is required. </mat-error>
+    }
+    @if (roomForm.get('price')?.errors?.['min']) {
+      <mat-error> The price must be greater or equal to 1 leu. </mat-error>
+    }
+    @if (roomForm.get('price')?.errors?.['max']) {
+      <mat-error> The price must be less or equal to 50000 lei. </mat-error>
+    }
   </mat-form-field>
 
   <section role="utilities">
