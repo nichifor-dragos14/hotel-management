@@ -64,6 +64,8 @@ public class Booking
 
     public virtual User User { get; private init; }
 
+    public virtual Guid UserId { get; private set; }
+
     public virtual Room Room { get; private init; }
 
     public virtual Review Review { get; private set; }

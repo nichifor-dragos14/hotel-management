@@ -2484,6 +2484,15 @@
         "type": "integer",
         "format": "int32"
       },
+      "GeniusLevel": {
+        "enum": [
+          0,
+          1,
+          2
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
       "LoginModel": {
         "required": [
           "email",
@@ -3981,6 +3990,8 @@
           "email",
           "firstName",
           "gender",
+          "geniusLevel",
+          "geniusXp",
           "id",
           "lastName",
           "nationality",
@@ -4028,6 +4039,13 @@
           },
           "profilePicture": {
             "type": "string"
+          },
+          "geniusXp": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "geniusLevel": {
+            "$ref": "#/components/schemas/GeniusLevel"
           }
         },
         "additionalProperties": false

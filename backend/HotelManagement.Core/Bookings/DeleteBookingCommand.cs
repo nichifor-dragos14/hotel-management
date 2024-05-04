@@ -1,4 +1,5 @@
 ﻿using HotelManagement.Core.Abstractions;
+using HotelManagement.Core.Users;
 
 namespace HotelManagement.Core.Bookings;
 
@@ -9,14 +10,48 @@ internal class DeleteBookingCommandHandler(IUnitOfWork unitOfWork) : ICommandHan
     public async Task<bool> ExecuteAsync(DeleteBookingCommand command, CancellationToken cancellationToken)
     {
         var bookings = unitOfWork.GetRepository<Booking>();
+        var users = unitOfWork.GetRepository<User>();
 
         if (bookings.TryGetById([command.Id], out var booking))
         {
-            bookings.Remove(booking);
+            if (users.TryGetById([booking.UserId], out var user))
+            {
+                var xpToRemove = booking.TotalPrice / 100;
 
-            await unitOfWork.SaveChangesAsync(cancellationToken);
+                while (xpToRemove != 0)
+                {
+                    user.GeniusXp -= xpToRemove;
 
-            return true;
+                    if (user.GeniusXp < 0)
+                    {
+                        xpToRemove = -1 * user.GeniusXp;
+                        user.GeniusXp = 100;    
+                        
+                        if (user.GeniusLevel == GeniusLevel.Level3)
+                        {
+                            user.GeniusLevel = GeniusLevel.Level2;
+                        }
+                        else
+                        {
+                            user.GeniusLevel = GeniusLevel.Level1;
+                        }
+                        if (user.GeniusLevel == GeniusLevel.Level1 && user.GeniusXp == 0)
+                        {
+                            break;
+                        }
+                    }
+                    else
+                    {
+                        xpToRemove = 0;
+                    }
+                }
+       
+                bookings.Remove(booking);
+
+                await unitOfWork.SaveChangesAsync(cancellationToken);
+
+                return true;
+            }
         }
 
         return false;

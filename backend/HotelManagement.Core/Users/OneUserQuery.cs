@@ -14,7 +14,9 @@ public record UserDetails(
     DateTime DateOfBirth,
     bool RetainSearchHistory,
     bool SendOffersOnEmail,
-    string ProfilePicture
+    string ProfilePicture,
+    int GeniusXp,
+    GeniusLevel GeniusLevel
 );
 
 public record OneUserQuery(string Email) : IQuery<UserDetails>;
@@ -41,7 +43,9 @@ internal class OneUserQueryHandler(
                     user.DateOfBirth,
                     user.RetainSearchHistory,
                     user.SendOffersOnEmail,
-                    user.ProfilePicture
+                    user.ProfilePicture,
+                    user.GeniusXp,
+                    user.GeniusLevel
                     )).FirstOrDefault();
     }
 }

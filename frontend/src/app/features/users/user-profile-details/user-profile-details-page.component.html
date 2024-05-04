@@ -4,15 +4,25 @@
     <p>Update your information and find out how it is used.</p>
   </span>
 
-  <div
-    class="profile-picture-container"
-    [routerLink]="['actions', 'upload-profile-picture']"
-  >
-    <img id="profile-picture" alt="user" [src]="user.profilePicture" />
-    <div class="hover-text">
-      <mat-icon> camera_alt </mat-icon>
+  <section role="right">
+    <div
+      class="profile-picture-container"
+      [routerLink]="['actions', 'upload-profile-picture']"
+    >
+      <img id="profile-picture" alt="user" [src]="user.profilePicture" />
+      <div class="hover-text">
+        <mat-icon> camera_alt </mat-icon>
+      </div>
     </div>
-  </div>
+
+    <section role="genius">
+      <mat-progress-bar mode="determinate" [value]="user.geniusXp"></mat-progress-bar>
+
+      <span class="font-grey">
+        Genius level {{ user.geniusLevel }} - {{ user.geniusXp }}/100 XP
+      </span>
+    </section>
+  </section>
 </section>
 
 <section role="content">

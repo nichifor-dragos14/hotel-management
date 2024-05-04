@@ -104,3 +104,26 @@ section[role='bottom'] {
   font-weight: lighter;
   font-size: 0.8rem;
 }
+
+section[role='genius'] {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+section[role='right'] {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.font-grey {
+  color: grey;
+}
+
+/* Component CSS file */
+:host ::ng-deep .mat-mdc-slider.mdc-slider--disabled {
+  color: red !important;
+  opacity: 1;
+}

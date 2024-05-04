@@ -16,6 +16,7 @@ import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { MatRadioModule } from '@angular/material/radio';
 import { AppToastService } from '$shared/toast';
 import { MatIconModule } from '@angular/material/icon';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 @Component({
   selector: 'app-user-profile-details-page',
@@ -34,6 +35,7 @@ import { MatIconModule } from '@angular/material/icon';
     MatNativeDateModule,
     MatRadioModule,
     MatIconModule,
+    MatProgressBarModule,
   ],
 })
 export class UserProfileDetailsPageComponent {
