@@ -121,9 +121,3 @@ section[role='right'] {
 .font-grey {
   color: grey;
 }
-
-/* Component CSS file */
-:host ::ng-deep .mat-mdc-slider.mdc-slider--disabled {
-  color: red !important;
-  opacity: 1;
-}
