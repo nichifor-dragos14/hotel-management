@@ -22,6 +22,8 @@ internal class UserEntityConfiguration : IEntityTypeConfiguration<User>
         builder.Property(q => q.DateOfBirth).IsRequired();
         builder.Property(q => q.ProfilePicture);
         builder.Property(q => q.Role).IsRequired();
+        builder.Property(q => q.GeniusXp).IsRequired();
+        builder.Property(q => q.GeniusLevel).IsRequired();
 
         builder.Property(q => q.RetainSearchHistory).IsRequired();
         builder.Property(q => q.SendOffersOnEmail).IsRequired();

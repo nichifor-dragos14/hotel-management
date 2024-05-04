@@ -65,6 +65,40 @@ internal class CreateBookingCommandHandler(
         );
 
         bookings.Add(newBooking);
+
+        var earnedXp = newBooking.TotalPrice / 100;
+
+        user.GeniusXp += earnedXp;
+
+        if (user.GeniusXp >= 100)
+        {
+            var levelsForward = user.GeniusXp / 100;
+
+            user.GeniusXp = user.GeniusXp % 100;
+
+            if (levelsForward == 1)
+            {
+                if (user.GeniusLevel == GeniusLevel.Level1)
+                {
+                    user.GeniusLevel = GeniusLevel.Level2;
+                }
+                else if (user.GeniusLevel == GeniusLevel.Level2)
+                {
+                    user.GeniusLevel = GeniusLevel.Level3;
+                }
+
+            }
+
+            if (levelsForward >= 2)
+            {
+                user.GeniusLevel = GeniusLevel.Level3;
+            }
+        }
+
+        if (user.GeniusLevel == GeniusLevel.Level3)
+        {
+            user.GeniusXp = 100;
+        }
      
         await unitOfWork.SaveChangesAsync(cancellationToken);
 

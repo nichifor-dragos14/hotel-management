@@ -38,6 +38,8 @@ public class User
         CreatedOn = createdOn;
         UpdatedOn = updatedOn;
         Role = Role.Client;
+        GeniusXp = 0;
+        GeniusLevel = GeniusLevel.Level1;
     }
 
     public Guid Id { get; }
@@ -67,6 +69,10 @@ public class User
     public string ProfilePicture { get; private set; }
 
     public Role Role { get; private set; }
+
+    public int GeniusXp { get; set; }
+
+    public GeniusLevel GeniusLevel { get; set; }
 
     public DateTime CreatedOn { get; private set; }
 
