@@ -34,8 +34,9 @@ IQueryFacade facade
         }
 
         var roomsDetails = propertyDetails.Rooms
-            .Where(r => (r.Bookings.Any(b => (query.EndDate <= b.StartDate) || (query.StartDate >= b.EndDate)) || !r.Bookings.Any()) &&
-                        (r.AdultCapacity >= query.NumberOfAdults && r.AdultCapacity + r.ChildrenCapacity >= query.NumberOfAdults + query.NumberOfChildren))
+            .Where(r => 
+                    r.Bookings.All(b => (b.StartDate >= query.EndDate ) || (b.EndDate <= query.StartDate)) &&
+                    r.AdultCapacity >= query.NumberOfAdults && r.AdultCapacity + r.ChildrenCapacity >= query.NumberOfAdults + query.NumberOfChildren)
             .OrderBy(r => Math.Abs(r.AdultCapacity + r.ChildrenCapacity - query.NumberOfChildren - query.NumberOfAdults))
             .Take(3)
             .Select(r => new RoomPropertyDetails(
