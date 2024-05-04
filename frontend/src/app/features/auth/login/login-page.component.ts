@@ -14,6 +14,8 @@ import { LOGIN_FORM } from '../login.form';
 import { AuthService } from '$backend/services';
 import { LoginService } from '../login.service';
 import { Location } from '@angular/common';
+import { MatIconModule } from '@angular/material/icon';
+import { AppToastService } from '$shared/toast';
 
 @Component({
   selector: 'app-login-page',
@@ -28,18 +30,20 @@ import { Location } from '@angular/common';
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
+    MatIconModule,
   ],
 })
 export class LoginPageComponent implements OnInit {
-  loginForm = inject(LOGIN_FORM);
-  authService = inject(AuthService);
-  loginService = inject(LoginService);
-  router = inject(Router);
-  private location = inject(Location);
+  readonly router = inject(Router);
+  readonly location = inject(Location);
+  readonly loginForm = inject(LOGIN_FORM);
+  readonly authService = inject(AuthService);
+  readonly loginService = inject(LoginService);
+  readonly toastrService = inject(AppToastService);
 
   ngOnInit() {
     if (this.loginService.getLoggedUserId()) {
-      this.router.navigate(['main']);
+      this.router.navigate(['main/our-recommendations']);
     }
   }
 
@@ -57,11 +61,12 @@ export class LoginPageComponent implements OnInit {
 
       if (response.ok) {
         this.loginService.AddJWTToSessionStorage(response.body);
+        this.toastrService.open('Successfully logged in', 'info');
         this.location.back();
         this.loginForm.reset();
       }
-    } catch (error) {
-      throw new Error('Bad request');
+    } catch (error: any) {
+      this.toastrService.open('Could not log in', 'error');
     }
   }
 }

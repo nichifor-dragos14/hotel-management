@@ -2,22 +2,35 @@
   <img alt="Google maps location" src="assets/images/auth-page.jpg" />
 </section>
 
-<form [formGroup]="loginForm" (ngSubmit)="login(loginForm.value)">
-  <mat-form-field appearance="outline">
-    <mat-label>Email</mat-label>
-    <input matInput formControlName="email" required />
-    <mat-error>The email is required</mat-error>
-  </mat-form-field>
+<section role="right">
+  <section role="actions">
+    <a mat-icon-button routerLink="/main/our-recommendations" color="accent">
+      <mat-icon>close</mat-icon>
+    </a>
 
-  <mat-form-field appearance="outline">
-    <mat-label>Password</mat-label>
-    <input matInput formControlName="password" required type="password" />
-    <mat-error>The password is required</mat-error>
-  </mat-form-field>
+    <a mat-button routerLink="/auth/register" color="primary"> Register Now </a>
+  </section>
 
-  <p>
-    Don't have an account? <a routerLink="/auth/register">Register here</a> now!
-  </p>
+  <section role="form-container">
+    <form [formGroup]="loginForm" (ngSubmit)="login(loginForm.value)">
+      <mat-form-field appearance="outline">
+        <mat-label>Email</mat-label>
+        <input matInput formControlName="email" required />
+        <mat-error>The email is required</mat-error>
+      </mat-form-field>
 
-  <button mat-raised-button color="primary" type="submit">Login</button>
-</form>
+      <mat-form-field appearance="outline">
+        <mat-label>Password</mat-label>
+        <input matInput formControlName="password" required type="password" />
+        <mat-error>The password is required</mat-error>
+      </mat-form-field>
+
+      <p>
+        Don't have an account?
+        <a routerLink="/auth/register">Register here</a> now!
+      </p>
+
+      <button mat-raised-button color="primary" type="submit">Login</button>
+    </form>
+  </section>
+</section>

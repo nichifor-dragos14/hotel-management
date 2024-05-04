@@ -16,6 +16,8 @@ import { LoginService } from '../login.service';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { MatIconModule } from '@angular/material/icon';
+import { AppToastService } from '$shared/toast';
 
 @Component({
   selector: 'app-register-page',
@@ -33,17 +35,19 @@ import { MatNativeDateModule } from '@angular/material/core';
     MatRadioModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatIconModule,
   ],
 })
 export class RegisterPageComponent implements OnInit {
-  registerForm = inject(REGISTER_FORM);
-  authService = inject(AuthService);
-  loginService = inject(LoginService);
-  router = inject(Router);
+  readonly router = inject(Router);
+  readonly authService = inject(AuthService);
+  readonly loginService = inject(LoginService);
+  readonly toastrService = inject(AppToastService);
+  readonly registerForm = inject(REGISTER_FORM);
 
   ngOnInit() {
     if (this.loginService.getLoggedUserId()) {
-      this.router.navigate(['main']);
+      this.router.navigate(['main/our-recommendations']);
     }
   }
 
@@ -58,9 +62,15 @@ export class RegisterPageComponent implements OnInit {
       const response = await this.authService.authRegisterPostAsync({
         body: value as RegisterCommand,
       });
-    } catch (error) {
-      console.error(error);
+
+      this.toastrService.open(
+        'Succesfully created account. The activation link was sent to your email.',
+        'info'
+      );
+    } catch (error: any) {
+      this.toastrService.open(error.receiveMessage(), 'error');
     } finally {
+      this.registerForm.reset();
       this.router.navigate(['/auth/login']);
     }
   }
