@@ -53,7 +53,13 @@ export class CreateBookingUserFormFactory {
       ],
       email: [
         userDetails.email,
-        { validators: [Validators.required, Validators.maxLength(30)] },
+        {
+          validators: [
+            Validators.required,
+            Validators.email,
+            Validators.maxLength(50),
+          ],
+        },
       ],
       firstName: [
         userDetails.firstName,
@@ -65,7 +71,7 @@ export class CreateBookingUserFormFactory {
       ],
       phoneNumber: [
         userDetails.phoneNumber,
-        { validators: [Validators.required, Validators.maxLength(30)] },
+        { validators: [Validators.required, phoneNumberValidator()] },
       ],
     });
   }
@@ -106,5 +112,16 @@ export function afterTomorrow(): ValidatorFn {
     }
 
     return { afterTomorrow: { value: control.value } };
+  };
+}
+
+export function phoneNumberValidator(): ValidatorFn {
+  return (control: AbstractControl): { [key: string]: any } | null => {
+    const validPhoneNumberRegex = /^(\+\d{1,3}[- ]?)?\d{10}$/;
+    if (control.value) {
+      const isValid = validPhoneNumberRegex.test(control.value);
+      return isValid ? null : { invalidPhoneNumber: { value: control.value } };
+    }
+    return null;
   };
 }

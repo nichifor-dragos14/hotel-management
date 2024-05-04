@@ -60,8 +60,7 @@ export class CustomConfigService extends StarRatingConfigService {
         <input matInput formControlName="title" />
         @if (reviewForm.get('title')?.errors?.['required']) {
           <mat-error>The title is required.</mat-error>
-        }
-        @if (reviewForm.get('title')?.errors?.['maxlength']) {
+        } @else if (reviewForm.get('title')?.errors?.['maxlength']) {
           <mat-error> The title cannot be more than 30 characters. </mat-error>
         }
       </mat-form-field>
@@ -71,8 +70,7 @@ export class CustomConfigService extends StarRatingConfigService {
         <editor appTinyEditor formControlName="description" />
         @if (reviewForm.get('description')?.errors?.['required']) {
           <mat-error>The description is required.</mat-error>
-        }
-        @if (reviewForm.get('description')?.errors?.['maxlength']) {
+        } @else if (reviewForm.get('description')?.errors?.['maxlength']) {
           <mat-error>
             The description cannot be more than 500 characters.
           </mat-error>

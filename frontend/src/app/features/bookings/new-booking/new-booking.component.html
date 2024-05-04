@@ -157,11 +157,8 @@
           <input matInput formControlName="firstName" />
           @if (userForm.get('firstName')?.errors?.['required']) {
             <mat-error>The first name is required.</mat-error>
-          }
-          @if (userForm.get('firstName')?.errors?.['maxlength']) {
-            <mat-error>
-              The first name cannot be more than 30 characters.
-            </mat-error>
+          } @else if (userForm.get('firstName')?.errors?.['maxlength']) {
+            <mat-error> Must be under 30 characters. </mat-error>
           }
         </mat-form-field>
 
@@ -170,11 +167,10 @@
           <input matInput formControlName="email" />
           @if (userForm.get('email')?.errors?.['required']) {
             <mat-error>The email is required.</mat-error>
-          }
-          @if (userForm.get('email')?.errors?.['maxlength']) {
-            <mat-error>
-              The email cannot be more than 30 characters.
-            </mat-error>
+          } @else if (userForm.get('email')?.errors?.['maxlength']) {
+            <mat-error> Must be under 50 characters. </mat-error>
+          } @else if (userForm.get('email')?.errors?.['email']) {
+            <mat-error> Invalid email format. </mat-error>
           }
         </mat-form-field>
 
@@ -183,11 +179,10 @@
           <input matInput formControlName="phoneNumber" />
           @if (userForm.get('phoneNumber')?.errors?.['required']) {
             <mat-error>The phone number is required.</mat-error>
-          }
-          @if (userForm.get('phoneNumber')?.errors?.['maxlength']) {
-            <mat-error>
-              The phone number cannot be more than 30 characters.
-            </mat-error>
+          } @else if (
+            userForm.get('phoneNumber')?.errors?.['invalidPhoneNumber']
+          ) {
+            <mat-error> Invalid phone number format. </mat-error>
           }
         </mat-form-field>
 
@@ -196,11 +191,8 @@
           <input matInput formControlName="country" />
           @if (userForm.get('country')?.errors?.['required']) {
             <mat-error>The country is required.</mat-error>
-          }
-          @if (userForm.get('country')?.errors?.['maxlength']) {
-            <mat-error>
-              The country cannot be more than 30 characters.
-            </mat-error>
+          } @else if (userForm.get('country')?.errors?.['maxlength']) {
+            <mat-error> Must be under 30 characters. </mat-error>
           }
         </mat-form-field>
       </section>
@@ -211,11 +203,8 @@
           <input matInput formControlName="lastName" />
           @if (userForm.get('lastName')?.errors?.['required']) {
             <mat-error>The last name is required.</mat-error>
-          }
-          @if (userForm.get('lastName')?.errors?.['maxlength']) {
-            <mat-error>
-              The last name cannot be more than 30 characters.
-            </mat-error>
+          } @else if (userForm.get('lastName')?.errors?.['maxlength']) {
+            <mat-error> Must be under 30 characters. </mat-error>
           }
         </mat-form-field>
       </section>

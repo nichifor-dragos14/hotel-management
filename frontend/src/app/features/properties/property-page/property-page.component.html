@@ -215,11 +215,13 @@
               searchPropertyForm.get('numberOfAdults')?.errors?.['required']
             ) {
               <mat-error> Number of adults is required. </mat-error>
-            }
-            @if (searchPropertyForm.get('numberOfAdults')?.errors?.['max']) {
+            } @else if (
+              searchPropertyForm.get('numberOfAdults')?.errors?.['max']
+            ) {
               <mat-error> Must be under 8. </mat-error>
-            }
-            @if (searchPropertyForm.get('numberOfAdults')?.errors?.['min']) {
+            } @else if (
+              searchPropertyForm.get('numberOfAdults')?.errors?.['min']
+            ) {
               <mat-error> Must be at least 1. </mat-error>
             }
           </mat-form-field>
@@ -238,11 +240,13 @@
               searchPropertyForm.get('numberOfChildren')?.errors?.['required']
             ) {
               <mat-error> Number of children is required. </mat-error>
-            }
-            @if (searchPropertyForm.get('numberOfChildren')?.errors?.['max']) {
+            } @else if (
+              searchPropertyForm.get('numberOfChildren')?.errors?.['max']
+            ) {
               <mat-error> Must be under 8. </mat-error>
-            }
-            @if (searchPropertyForm.get('numberOfChildren')?.errors?.['min']) {
+            } @else if (
+              searchPropertyForm.get('numberOfChildren')?.errors?.['min']
+            ) {
               <mat-error> Must be valid. </mat-error>
             }
           </mat-form-field>
@@ -261,11 +265,13 @@
               searchPropertyForm.get('numberOfRooms')?.errors?.['required']
             ) {
               <mat-error> Number of rooms is required. </mat-error>
-            }
-            @if (searchPropertyForm.get('numberOfRooms')?.errors?.['max']) {
+            } @else if (
+              searchPropertyForm.get('numberOfRooms')?.errors?.['max']
+            ) {
               <mat-error> Must be under 4. </mat-error>
-            }
-            @if (searchPropertyForm.get('numberOfRooms')?.errors?.['min']) {
+            } @else if (
+              searchPropertyForm.get('numberOfRooms')?.errors?.['min']
+            ) {
               <mat-error> Must be at least 1. </mat-error>
             }
           </mat-form-field>
