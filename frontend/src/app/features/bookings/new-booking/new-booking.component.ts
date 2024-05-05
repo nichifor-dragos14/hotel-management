@@ -68,6 +68,8 @@ export class NewBookingPageComponent implements AfterViewInit {
   @Input() user!: UserDetails;
   @Input() userForm!: FormGroup;
 
+  @Input() discount!: number;
+
   bookingForSomeoneElse: boolean = false;
   loggedUserEmail: string = '';
   expectedArrival: string = "I don't know";
@@ -75,6 +77,7 @@ export class NewBookingPageComponent implements AfterViewInit {
 
   ngAfterViewInit() {
     this.setControls();
+    console.log(this.discount);
 
     this.loggedUserEmail = this.userForm.get('email')?.value;
   }
@@ -129,7 +132,7 @@ export class NewBookingPageComponent implements AfterViewInit {
   }
 
   transformToTwoDecimals(rating: number) {
-    return rating.toPrecision(2);
+    return rating.toFixed(2);
   }
 
   computeDateDifference(date1: any, date2: any): number {
@@ -156,6 +159,14 @@ export class NewBookingPageComponent implements AfterViewInit {
     return totalPrice;
   }
 
+  computeTotalPriceDiscount() {
+    const totalPrice = this.computeTotalPrice();
+
+    return this.discount != 0
+      ? totalPrice - (this.discount * totalPrice) / 100
+      : totalPrice;
+  }
+
   setControls() {
     if (!this.bookingForSomeoneElse) {
       this.userForm.get('firstName')?.disable();
@@ -179,14 +190,19 @@ export class NewBookingPageComponent implements AfterViewInit {
 
     try {
       this.propertyRooms.forEach(async (room) => {
+        let price =
+          this.computeDateDifference(this.startDate, this.endDate) * room.price;
+
+        if (this.discount != 0) {
+          price = price - (price * this.discount) / 100;
+        }
+
         await this.bookingService.bookingsPostAsync({
           body: {
             startDate: this.startDate.toString(),
             endDate: this.endDate.toString(),
             roomId: room.id,
-            totalPrice:
-              this.computeDateDifference(this.startDate, this.endDate) *
-              room.price,
+            totalPrice: price,
             expectedArrival: this.expectedArrival,
             specialMentions: this.specialMentions,
             userDetails: newBookingDetails,

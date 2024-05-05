@@ -48,10 +48,11 @@ public class PropertyController(IFileStorageService _storageService) : Controlle
     [FromServices] IQueryHandler<AllPropertyRecommendationSummariesQuery, IPaginatedResult<PropertySummaryRecommendation>> queryService,
     int from,
     int to,
+    Guid? logggedUsedId,
     [FromQuery] List<SearchHistoryFields> searchHistoryFields,
     CancellationToken cancelationToken)
     {
-        return TypedResults.Ok(await queryService.ExecuteAsync(new AllPropertyRecommendationSummariesQuery(from, to, searchHistoryFields), cancelationToken));
+        return TypedResults.Ok(await queryService.ExecuteAsync(new AllPropertyRecommendationSummariesQuery(logggedUsedId, from, to, searchHistoryFields), cancelationToken));
     }
 
     [HttpGet("types")]
@@ -84,9 +85,10 @@ public class PropertyController(IFileStorageService _storageService) : Controlle
         DateTime endDate,
         int numberOfAdults,
         int numberOfChildren,
+        Guid? loggedUserId,
         CancellationToken cancelationToken)
     {
-        return TypedResults.Ok(await queryService.ExecuteAsync(new AllPropertyRoomsQuery(from, to, id, startDate, endDate, numberOfAdults, numberOfChildren), cancelationToken));
+        return TypedResults.Ok(await queryService.ExecuteAsync(new AllPropertyRoomsQuery(from, to, id, startDate, endDate, numberOfAdults, numberOfChildren, loggedUserId), cancelationToken));
     }
 
     [HttpGet("{id}")]
@@ -96,6 +98,7 @@ public class PropertyController(IFileStorageService _storageService) : Controlle
         DateTime endDate,
         int numberOfAdults,
         int numberOfChildren,
+        Guid? loggedUserId,
         [FromServices] IQueryHandler<OnePropertyQuery, PropertyDetails> queryService,
         CancellationToken cancellationToken)
     {
@@ -103,10 +106,23 @@ public class PropertyController(IFileStorageService _storageService) : Controlle
             return TypedResults.BadRequest();
 
 
-        return await queryService.ExecuteAsync(new OnePropertyQuery(id, startDate, endDate, numberOfAdults, numberOfChildren), cancellationToken) switch
+        return await queryService.ExecuteAsync(new OnePropertyQuery(id, startDate, endDate, numberOfAdults, numberOfChildren, loggedUserId), cancellationToken) switch
         {
             { } hotel => TypedResults.Ok(hotel),
             _ => TypedResults.NotFound()
+        };
+    }
+
+    [HttpGet("discount")]
+    public async Task<Results<Ok<int>, NotFound, BadRequest>> GetDiscount(
+        Guid propertyId,
+        Guid loggedUserId,
+        [FromServices] IQueryHandler<OnePropertyDiscountQuery, int> queryService,
+        CancellationToken cancellationToken)
+    {
+        return await queryService.ExecuteAsync(new OnePropertyDiscountQuery(propertyId, loggedUserId), cancellationToken) switch
+        {
+            { } discount => TypedResults.Ok(discount),
         };
     }
 

@@ -16,7 +16,7 @@ internal class DeleteBookingCommandHandler(IUnitOfWork unitOfWork) : ICommandHan
         {
             if (users.TryGetById([booking.UserId], out var user))
             {
-                var xpToRemove = booking.TotalPrice / 100;
+                var xpToRemove = (int) booking.TotalPrice / 100;
 
                 while (xpToRemove != 0)
                 {

@@ -10,7 +10,7 @@ public class Booking
     private Booking(
         DateTime startDate,
         DateTime endDate,
-        int totalPrice,
+        double totalPrice,
         string firstNameOnBooking,
         string lastNameOnBooking,
         string emailOnBooking,
@@ -42,7 +42,7 @@ public class Booking
 
     public DateTime EndDate { get; private set; }
 
-    public int TotalPrice { get; private set; }
+    public double TotalPrice { get; private set; }
 
     public string FirstNameOnBooking { get; private set; }
 
@@ -75,7 +75,7 @@ public class Booking
     public static Booking Create(
         DateTime startDate,
         DateTime endDate,
-        int totalPrice,
+        double totalPrice,
         string firstNameOnBooking,
         string lastNameOnBooking,
         string emailOnBooking,

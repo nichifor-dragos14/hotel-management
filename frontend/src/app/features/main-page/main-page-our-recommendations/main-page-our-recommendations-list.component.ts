@@ -72,6 +72,7 @@ export class MainPageOurRecommendationsComponent implements OnInit {
       const searchHistoryFields = this.searchHistoryService.GetSearchHistory();
 
       return this.propertyService.propertiesRecommendationsGet({
+        logggedUsedId: this.loginService.getLoggedUserId(),
         from: from,
         to: to,
         searchHistoryFields: searchHistoryFields,

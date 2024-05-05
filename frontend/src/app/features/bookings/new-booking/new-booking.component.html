@@ -92,7 +92,19 @@
     <section role="price">
       <h1>Total</h1>
       <section>
-        <h1>{{ computeTotalPrice() }} lei</h1>
+        <h1>
+          @if (discount == 0) {
+            {{ computeTotalPrice() }} lei
+          } @else {
+            <span matCardTitle>
+              <span class="cut-text">{{ computeTotalPrice() }}</span>
+              <span class="red-text">
+                {{ computeTotalPriceDiscount() }}
+                lei
+              </span>
+            </span>
+          }
+        </h1>
         <span class="font-light">Includes taxes and charges</span>
       </section>
     </section>

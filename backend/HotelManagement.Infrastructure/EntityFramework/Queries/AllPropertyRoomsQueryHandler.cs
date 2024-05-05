@@ -38,11 +38,16 @@ internal class AllPropertyRoomsQueryHandler(
                             r."HasBalcony",
                             r."HasRefrigerator",
                             r."HasSeaView",
+                            d."DiscountPercentage",
                             r."CreatedOn",
                             r."UpdatedOn",
                             ROW_NUMBER() OVER (ORDER BY r."CreatedOn" DESC) AS "RowNumber"
                         FROM
                             "Room" AS r
+                        LEFT JOIN 
+                            "Discount" AS d
+                        ON 
+                            d."PropertyId" = '{query.Id}' AND d."UserId" = '{query.LoggedUserId}' AND '{DateTime.UtcNow}' <= d."EndDate"
                         {whereClause}
                         ORDER BY
                             r."CreatedOn" DESC

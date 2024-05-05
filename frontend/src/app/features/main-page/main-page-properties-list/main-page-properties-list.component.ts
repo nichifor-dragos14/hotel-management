@@ -10,6 +10,7 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
 import { PropertyCardPlaceholderComponent } from '$shared/placeholders/card-placeholder';
 import { AppPageHeaderComponent } from '$shared/page-header';
 import { MatButtonModule } from '@angular/material/button';
+import { LoginService } from '$features/auth/login.service';
 
 @Component({
   selector: 'app-main-page-properties-list',
@@ -33,11 +34,13 @@ import { MatButtonModule } from '@angular/material/button';
 export class MainPagePropertiesListComponent {
   propertyService = inject(PropertyService);
   activatedRoute = inject(ActivatedRoute);
+  loginService = inject(LoginService);
 
   propertiesDataSource = new PaginatedDataSource({
     fetch: ({ from, to }) => {
       return this.propertyService.propertiesFilterLocationStartDateEndDateNumberOfAdultsNumberOfChildrenNumberOfRoomsGet(
         {
+          LoggedUserId: this.loginService.getLoggedUserId(),
           from,
           to,
           location: this.activatedRoute.snapshot.queryParams['location'],

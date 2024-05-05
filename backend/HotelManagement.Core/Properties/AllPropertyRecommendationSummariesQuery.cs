@@ -16,8 +16,9 @@ public record PropertySummaryRecommendation(
     double? ReviewRating,
     int? TotalReviews,
     string ImageUrl,
+    int DiscountPercentage,
     DateTime CreatedOn,
     int RowNumber
 );
 
-public record AllPropertyRecommendationSummariesQuery(int From, int To, List<SearchHistoryFields> SearchHistory) : IQuery<IPaginatedResult<PropertySummaryRecommendation>>;
+public record AllPropertyRecommendationSummariesQuery(Guid? LoggedUserId, int From, int To, List<SearchHistoryFields> SearchHistory) : IQuery<IPaginatedResult<PropertySummaryRecommendation>>;

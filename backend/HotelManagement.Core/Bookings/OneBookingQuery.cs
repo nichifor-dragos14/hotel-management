@@ -8,7 +8,7 @@ public record BookingDetails(
     Guid Id,
     DateTime StartDate,
     DateTime EndDate,
-    int TotalPrice,
+    double TotalPrice,
     string FirstNameOnBooking,
     string LastNameOnBooking,
     string EmailOnBooking,

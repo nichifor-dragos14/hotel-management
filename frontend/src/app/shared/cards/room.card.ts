@@ -1,4 +1,4 @@
-import { RoomPropertyDetails, RoomType } from '$backend/services';
+import { PropertyRoom, RoomPropertyDetails, RoomType } from '$backend/services';
 import {
   Component,
   ChangeDetectionStrategy,
@@ -18,9 +18,9 @@ import { MatButtonModule } from '@angular/material/button';
     <mat-card>
       <section role="content">
         <mat-card-header>
-          <span matCardTitle
-            >{{ roomTypeMapper(room.type) }} room no. {{ room.number }}</span
-          >
+          <span matCardTitle>
+            {{ roomTypeMapper(room.type) }} room no. {{ room.number }}
+          </span>
 
           <section role="capacity">
             <span matCardSubtitle>
@@ -101,7 +101,18 @@ import { MatButtonModule } from '@angular/material/button';
       </section>
 
       <section role="book">
-        <span matCardTitle>{{ room.price }} lei</span>
+        @if (room.discountPercentage == 0) {
+          <span matCardTitle>{{ room.price }} lei</span>
+        } @else {
+          <span matCardTitle>
+            Starting at
+            <span class="cut-text">{{ room.price }}</span>
+            <span class="red-text">
+              {{ computeReducedCost() }}
+              lei
+            </span>
+          </span>
+        }
 
         @if (!isSelected) {
           <button mat-button color="primary" (click)="toggleSelected()">
@@ -181,6 +192,14 @@ import { MatButtonModule } from '@angular/material/button';
     section[role='book'] span {
       color: black;
     }
+
+    .red-text {
+        color: red !important;
+    }
+
+    .cut-text {
+      text-decoration: line-through;
+    }
   `,
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -193,7 +212,7 @@ import { MatButtonModule } from '@angular/material/button';
   ],
 })
 export class RoomCardComponent {
-  @Input() room!: RoomPropertyDetails;
+  @Input() room!: PropertyRoom;
   @Output() messageEvent = new EventEmitter<string>();
 
   isSelected: boolean = false;
@@ -231,5 +250,12 @@ export class RoomCardComponent {
     }
 
     return '';
+  }
+
+  computeReducedCost() {
+    return (
+      this.room.price -
+      (this.room.price * this.room.discountPercentage) / 100
+    ).toFixed(1);
   }
 }

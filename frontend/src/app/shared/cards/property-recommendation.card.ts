@@ -11,6 +11,11 @@ import { MatRippleModule } from '@angular/material/core';
   template: `
     <mat-card matRipple>
       <div class="image-container">
+        @if (property.discountPercentage !== 0) {
+          <div class="corner-banner">
+            {{ property.discountPercentage }}% OFF
+          </div>
+        }
         <img matCardImage [src]="property.imageUrl" alt="Property picture" />
       </div>
 
@@ -173,6 +178,27 @@ import { MatRippleModule } from '@angular/material/core';
 
     .red-text {
         color: red;
+    }
+
+    .cut-text {
+      text-decoration: line-through;
+    }
+
+    .corner-banner {
+      overflow: visible;
+      z-index: 20;
+      position: absolute;
+      top: 75px;
+      left: 5px;
+      background-color: red;
+      color: white;
+      padding: 10px;
+      transform: rotate(-45deg);
+      transform-origin: top left;
+      text-align: center;
+      width: 80px;
+      font-size: 14px;
+      box-shadow: 2px 2px 5px rgba(0,0,0,0.3); 
     }
   `,
   standalone: true,

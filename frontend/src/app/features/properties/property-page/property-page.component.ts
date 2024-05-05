@@ -211,4 +211,8 @@ export class PropertyPageComponent implements OnInit {
       queryParams: queryParams,
     });
   }
+
+  computeReducedCost(price: number, discount: number) {
+    return (price - (price * discount) / 100).toFixed(1);
+  }
 }

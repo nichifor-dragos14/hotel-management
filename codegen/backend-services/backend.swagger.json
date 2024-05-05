@@ -522,6 +522,14 @@
             }
           },
           {
+            "name": "LoggedUserId",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
             "name": "HasFreeWiFi",
             "in": "query",
             "schema": {
@@ -709,6 +717,14 @@
             }
           },
           {
+            "name": "logggedUsedId",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
             "name": "searchHistoryFields",
             "in": "query",
             "schema": {
@@ -872,6 +888,14 @@
               "type": "integer",
               "format": "int32"
             }
+          },
+          {
+            "name": "loggedUserId",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
           }
         ],
         "responses": {
@@ -937,6 +961,14 @@
               "type": "integer",
               "format": "int32"
             }
+          },
+          {
+            "name": "loggedUserId",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
           }
         ],
         "responses": {
@@ -979,6 +1011,50 @@
           },
           "404": {
             "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/properties/discount": {
+      "get": {
+        "tags": [
+          "Property"
+        ],
+        "parameters": [
+          {
+            "name": "propertyId",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "loggedUserId",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "400": {
+            "description": "Bad Request"
           }
         }
       }
@@ -1927,8 +2003,8 @@
             "format": "date-time"
           },
           "totalPrice": {
-            "type": "integer",
-            "format": "int32"
+            "type": "number",
+            "format": "double"
           },
           "firstNameOnBooking": {
             "type": "string"
@@ -2246,8 +2322,8 @@
             "format": "date-time"
           },
           "totalPrice": {
-            "type": "integer",
-            "format": "int32"
+            "type": "number",
+            "format": "double"
           },
           "specialMentions": {
             "type": "string"
@@ -2526,6 +2602,7 @@
         "required": [
           "createdOn",
           "description",
+          "discountPercentage",
           "email",
           "hasBreakfast",
           "hasFitnessCenter",
@@ -2634,6 +2711,10 @@
               "type": "string"
             }
           },
+          "discountPercentage": {
+            "type": "integer",
+            "format": "int32"
+          },
           "rooms": {
             "type": "array",
             "items": {
@@ -2728,6 +2809,7 @@
           "adultCapacity",
           "childrenCapacity",
           "createdOn",
+          "discountPercentage",
           "hasAirConditioning",
           "hasBalcony",
           "hasHairdryer",
@@ -2787,6 +2869,10 @@
           },
           "hasSeaView": {
             "type": "boolean"
+          },
+          "discountPercentage": {
+            "type": "integer",
+            "format": "int32"
           },
           "createdOn": {
             "type": "string",
@@ -2867,6 +2953,7 @@
           "availableRooms",
           "childrenCount",
           "createdOn",
+          "discountPercentage",
           "hasFreeCancellation",
           "id",
           "imageUrl",
@@ -2945,6 +3032,10 @@
           "imageUrl": {
             "type": "string"
           },
+          "discountPercentage": {
+            "type": "integer",
+            "format": "int32"
+          },
           "createdOn": {
             "type": "string",
             "format": "date-time"
@@ -3004,6 +3095,7 @@
         "required": [
           "availableRooms",
           "createdOn",
+          "discountPercentage",
           "hasFreeCancellation",
           "id",
           "imageUrl",
@@ -3058,6 +3150,10 @@
           },
           "imageUrl": {
             "type": "string"
+          },
+          "discountPercentage": {
+            "type": "integer",
+            "format": "int32"
           },
           "createdOn": {
             "type": "string",

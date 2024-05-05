@@ -21,6 +21,7 @@ public record PropertySummaryFiltered(
     int ChildrenCount,
     int RoomCount,
     string ImageUrl,
+    int DiscountPercentage,
     DateTime CreatedOn,
     int RowNumber
 );

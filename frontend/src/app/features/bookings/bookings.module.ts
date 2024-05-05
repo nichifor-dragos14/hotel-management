@@ -362,6 +362,24 @@ const BOOKING_ROUTES: Routes = [
               return null;
             }
           },
+          discount: async ({ queryParams }: ActivatedRouteSnapshot) => {
+            const router = inject(Router);
+            const loginService = inject(LoginService);
+            const propertyService = inject(PropertyService);
+
+            try {
+              const userId = loginService.getLoggedUserId();
+
+              return propertyService.propertiesDiscountGetAsync({
+                loggedUserId: userId,
+                propertyId: queryParams['propertyId'],
+              });
+            } catch (error) {
+              router.navigate(['error']);
+
+              return null;
+            }
+          },
         },
         canActivate: [AuthGuard],
         data: {

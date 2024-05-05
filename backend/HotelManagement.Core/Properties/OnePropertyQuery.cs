@@ -28,6 +28,7 @@ public record PropertyDetails(
     bool PrepaymentNeeded,
     int ReviewCount,
     List<string> ImageUrls,
+    int DiscountPercentage,
     IEnumerable<RoomPropertyDetails> Rooms,
     IEnumerable<ReviewPropertyDetails> Reviews
 );
@@ -68,4 +69,4 @@ public record RoomPropertyDetails(
     DateTime UpdatedOn
 );
 
-public record OnePropertyQuery(Guid? Id, DateTime StartDate, DateTime EndDate, int NumberOfAdults, int NumberOfChildren) : IQuery<PropertyDetails>;
+public record OnePropertyQuery(Guid? Id, DateTime StartDate, DateTime EndDate, int NumberOfAdults, int NumberOfChildren, Guid? loggedUserId) : IQuery<PropertyDetails>;

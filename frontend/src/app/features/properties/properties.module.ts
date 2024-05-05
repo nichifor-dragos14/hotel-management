@@ -17,6 +17,7 @@ import { PropertyReviewsPageComponent } from './property-reviews-page/property-r
 import { PropertyRoomsPageComponent } from './property-rooms-page/property-rooms-page.component';
 import { PropertiesDummyComponent } from './properties.dummy.component';
 import { AuthGuard } from '$features/auth/auth.guard';
+import { LoginService } from '$features/auth/login.service';
 
 const PROPERTY_ROUTES: Routes = [
   {
@@ -142,6 +143,7 @@ const PROPERTY_ROUTES: Routes = [
           property: async ({ params, queryParams }: ActivatedRouteSnapshot) => {
             const router = inject(Router);
             const propertyService = inject(PropertyService);
+            const loginService = inject(LoginService);
 
             try {
               return await propertyService.propertiesIdGetAsync({
@@ -150,6 +152,7 @@ const PROPERTY_ROUTES: Routes = [
                 endDate: queryParams['endDate'],
                 numberOfAdults: queryParams['numberOfAdults'],
                 numberOfChildren: queryParams['numberOfChildren'],
+                loggedUserId: loginService.getLoggedUserId(),
               });
             } catch (error) {
               router.navigate(['/error']);

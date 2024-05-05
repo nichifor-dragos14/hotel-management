@@ -2,6 +2,8 @@
 
 public class PropertyFiltersOptional
 {
+    public Guid? LoggedUserId { get; set; }
+
     public bool HasFreeWiFi { get; set; }
 
     public bool HasParking { get; set; }

@@ -22,8 +22,13 @@
             <img alt="Hotel picture" [src]="image.image" />
           </mat-grid-tile>
         }
+        @if (property.discountPercentage !== 0) {
+          <div class="corner-banner">
+            {{ property.discountPercentage }}% OFF
+          </div>
+        }
       </mat-grid-list>
-
+      {{ property.discountPercentage }}
       <section role="facilities-section">
         <h2>Property facilities</h2>
 
@@ -380,7 +385,21 @@
         <ng-container matColumnDef="price">
           <th mat-header-cell *matHeaderCellDef>Price</th>
           <td mat-cell *matCellDef="let room">
-            <h2 id="price-text">{{ room.price }} lei</h2>
+            @if (property.discountPercentage == 0) {
+              <h2 id="price-text">{{ room.price }} lei</h2>
+            } @else {
+              <h2 id="price-text">
+                Starting at
+                <span class="cut-text">{{ room.price }}</span>
+                <span class="red-text">
+                  {{
+                    computeReducedCost(room.price, property.discountPercentage)
+                  }}
+                  lei <br />({{ property.discountPercentage }}% discount
+                  applied)
+                </span>
+              </h2>
+            }
           </td>
         </ng-container>
 

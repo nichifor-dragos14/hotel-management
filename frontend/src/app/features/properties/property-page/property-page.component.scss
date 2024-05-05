@@ -269,3 +269,28 @@ section[role='final-button'] {
 .end-section {
   justify-self: end;
 }
+
+.red-text {
+  color: red;
+}
+
+.cut-text {
+  text-decoration: line-through;
+}
+
+.corner-banner {
+  overflow: visible;
+  z-index: 20;
+  position: absolute;
+  top: 100px;
+  left: -20px;
+  background-color: red;
+  color: white;
+  padding: 10px;
+  transform: rotate(-45deg);
+  transform-origin: top left;
+  text-align: center;
+  width: 150px;
+  font-size: 14px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+}

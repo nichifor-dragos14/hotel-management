@@ -13,7 +13,7 @@ IQueryFacade facade
         CancellationToken cancellationToken)
     {
 
-        var propertyDetails = (from p in facade.Of<Property>().Include(p => p.Rooms).ThenInclude(r => r.Bookings)
+        var propertyDetails = (from p in facade.Of<Property>().Include(p=>p.Discounts).Include(p => p.Rooms).ThenInclude(r => r.Bookings)
                                where p.Id == query.Id
                                select new
                                {
@@ -78,6 +78,8 @@ IQueryFacade facade
 
         var property = propertyDetails.Property;
 
+        var discount = property.Discounts.Where(d => d.UserId == query.loggedUserId && DateTime.UtcNow < d.EndDate).FirstOrDefault();
+
         return new PropertyDetails(
             property.Id,
             property.Name,
@@ -103,6 +105,7 @@ IQueryFacade facade
             property.PrepaymentNeeded,
             propertyDetails.ReviewCount,
             [.. property.PictureUrls.Split(';')],
+            discount != null ? discount.DiscountPercentage : 0,
             roomsDetails,
             reviewsDetails
         );

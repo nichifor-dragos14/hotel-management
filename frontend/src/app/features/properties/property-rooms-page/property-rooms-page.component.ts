@@ -11,6 +11,7 @@ import { MatListModule } from '@angular/material/list';
 import { RoomCardComponent } from '$shared/cards';
 import { PaginatedDataSource } from '$core/pagination';
 import { RoomCardPlaceholderComponent } from '$shared/placeholders/card-placeholder';
+import { LoginService } from '$features/auth/login.service';
 
 @Component({
   selector: 'app-property-rooms-page',
@@ -33,6 +34,7 @@ import { RoomCardPlaceholderComponent } from '$shared/placeholders/card-placehol
 export class PropertyRoomsPageComponent {
   readonly propertyService = inject(PropertyService);
   readonly toastService = inject(AppToastService);
+  readonly loginService = inject(LoginService);
 
   readonly router = inject(Router);
   readonly activatedRoute = inject(ActivatedRoute);
@@ -51,6 +53,7 @@ export class PropertyRoomsPageComponent {
           this.activatedRoute.snapshot.queryParams['numberOfAdults'],
         numberOfChildren:
           this.activatedRoute.snapshot.queryParams['numberOfChildren'],
+        loggedUserId: this.loginService.getLoggedUserId(),
       }),
   });
 

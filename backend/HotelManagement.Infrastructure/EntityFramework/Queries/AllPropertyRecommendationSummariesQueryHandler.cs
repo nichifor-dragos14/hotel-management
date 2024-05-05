@@ -33,6 +33,14 @@ internal class AllPropertyRecommendationSummariesQueryHandler(
             }
         }
 
+        Guid userId = Guid.Empty;
+
+        if (query.LoggedUserId != null)
+        {
+            userId = (Guid)query.LoggedUserId;
+        }
+
+
         var queryBuild = $"""
                     WITH PropertySummaries AS (
                         SELECT
@@ -47,6 +55,7 @@ internal class AllPropertyRecommendationSummariesQueryHandler(
                             AVG(re."Rating") AS "ReviewRating",
                             COUNT(DISTINCT re."Id") AS "TotalReviews",         
                             split_part(p."PictureUrls", ';', 1) AS "ImageUrl",
+                            COALESCE(d."DiscountPercentage", 0) AS "DiscountPercentage",
                             p."CreatedOn",
                             ROW_NUMBER() OVER (ORDER BY p."CreatedOn" DESC) AS "RowNumber"
                         FROM
@@ -59,6 +68,10 @@ internal class AllPropertyRecommendationSummariesQueryHandler(
                             "Review" AS re
                         ON
                             p."Id" = re."PropertyId"
+                        LEFT JOIN 
+                            "Discount" AS d
+                        ON 
+                            d."PropertyId" = p."Id" AND d."UserId" = '{userId}' AND '{DateTime.UtcNow}' <= d."EndDate"
                         {whereClause}
                         GROUP BY
                             p."Id",
@@ -66,7 +79,8 @@ internal class AllPropertyRecommendationSummariesQueryHandler(
                             p."Location",
                             p."Rating",
                             p."HasFreeCancellation",
-                            p."CreatedOn"
+                            p."CreatedOn",
+                            d."DiscountPercentage"
                         ORDER BY
                             p."CreatedOn" DESC
                         OFFSET {query.From} ROWS FETCH NEXT {query.To - query.From} ROWS ONLY

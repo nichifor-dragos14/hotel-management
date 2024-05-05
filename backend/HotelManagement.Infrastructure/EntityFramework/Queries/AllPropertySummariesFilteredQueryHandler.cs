@@ -21,6 +21,11 @@ internal class AllPropertySummariesFilteredQueryHandler(
             $"                 WHERE \"Booking\".\"RoomId\" = r.\"Id\"" +
             $"                 AND NOT (\"Booking\".\"StartDate\" >= '{query.PropertyFiltersMandatory.EndDate}' OR \"Booking\".\"EndDate\" <= '{query.PropertyFiltersMandatory.StartDate}'))";
 
+        if (query.PropertyFiltersOptional.LoggedUserId == null)
+        {
+            query.PropertyFiltersOptional.LoggedUserId = Guid.Empty;
+        }
+
         if (query.PropertyFiltersOptional.HasFreeWiFi)
         {
             whereClause += " AND p.\"HasFreeWiFi\" = True";
@@ -130,6 +135,7 @@ internal class AllPropertySummariesFilteredQueryHandler(
                             {query.PropertyFiltersMandatory.NumberOfChildren} AS "ChildrenCount",
                             {query.PropertyFiltersMandatory.NumberOfRooms} AS "RoomCount",
                             split_part(p."PictureUrls", ';', 1) AS "ImageUrl",
+                            COALESCE(d."DiscountPercentage", 0) AS "DiscountPercentage",
                             p."CreatedOn",
                             ROW_NUMBER() OVER (ORDER BY p."CreatedOn" DESC) AS "RowNumber"
                         FROM
@@ -142,6 +148,10 @@ internal class AllPropertySummariesFilteredQueryHandler(
                             "Review" AS re
                         ON
                             p."Id" = re."PropertyId"
+                        LEFT JOIN 
+                            "Discount" AS d
+                        ON 
+                            d."PropertyId" = p."Id" AND d."UserId" = '{query.PropertyFiltersOptional.LoggedUserId}' AND '{DateTime.UtcNow}' <= d."EndDate"
                         {whereClause}
                         GROUP BY
                             p."Id",
@@ -149,7 +159,8 @@ internal class AllPropertySummariesFilteredQueryHandler(
                             p."Location",
                             p."Rating",
                             p."HasFreeCancellation",
-                            p."CreatedOn"
+                            p."CreatedOn",
+                            d."DiscountPercentage"
                         {havingClause}
                         ORDER BY
                             p."CreatedOn" DESC

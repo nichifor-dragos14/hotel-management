@@ -10,7 +10,7 @@ public record CreateBookingCommand(
     Guid RoomId,
     DateTime StartDate,
     DateTime EndDate,
-    int TotalPrice,
+    double TotalPrice,
     string SpecialMentions,
     string ExpectedArrival
 ) : ICommand<Guid?>;
@@ -66,7 +66,7 @@ internal class CreateBookingCommandHandler(
 
         bookings.Add(newBooking);
 
-        var earnedXp = newBooking.TotalPrice / 100;
+        var earnedXp = (int) newBooking.TotalPrice / 100;
 
         user.GeniusXp += earnedXp;
 
