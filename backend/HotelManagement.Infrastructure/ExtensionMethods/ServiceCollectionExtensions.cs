@@ -44,7 +44,7 @@ public static class ServiceCollectionExtensions
             q.AddTrigger(opts => opts
                 .ForJob(jobKey)
                 .WithIdentity("SendEmailJob-trigger")
-                .WithCronSchedule("0 * * ? * *")
+                .WithCronSchedule("0 15 10 ? * MON")
             );
         });
         services.AddQuartzHostedService(q => q.WaitForJobsToComplete = true);
