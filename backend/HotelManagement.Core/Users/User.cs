@@ -1,4 +1,5 @@
 ﻿using HotelManagement.Core.Bookings;
+using HotelManagement.Core.Discounts;
 using HotelManagement.Core.Reports;
 using HotelManagement.Core.Reviews;
 
@@ -83,6 +84,8 @@ public class User
     public virtual List<Review> Reviews { get; private init; }
 
     public virtual List<Report> Reports { get; private init; }
+
+    public virtual List<Discount> Discounts { get; private init; }
 
     public static User Create(
         string firstName,

@@ -1,4 +1,5 @@
-﻿using HotelManagement.Core.Reports;
+﻿using HotelManagement.Core.Discounts;
+using HotelManagement.Core.Reports;
 using HotelManagement.Core.Reviews;
 using HotelManagement.Core.Rooms;
 
@@ -96,6 +97,8 @@ public class Property
     public DateTime CreatedOn { get; private set; }
 
     public DateTime UpdatedOn { get; private set; }
+
+    public virtual List<Discount> Discounts { get; private init; }
 
     public virtual List<Room> Rooms { get; private init; }
 
