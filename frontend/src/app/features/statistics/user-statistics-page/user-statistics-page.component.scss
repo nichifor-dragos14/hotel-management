@@ -1,0 +1,12 @@
+:host {
+  display: flex !important;
+  flex-direction: column;
+  gap: 16px;
+}
+
+#graph-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-column-gap: 64px;
+  padding: 0 64px;
+}

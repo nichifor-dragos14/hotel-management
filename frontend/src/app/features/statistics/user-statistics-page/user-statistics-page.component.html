@@ -1,0 +1,11 @@
+<app-page-header title="My statistics">
+  <button mat-button button>blabla</button>
+</app-page-header>
+
+<section id="graph-container">
+  <div>
+    <canvasjs-chart [options]="bookingsByMonthChartOptions"> </canvasjs-chart>
+  </div>
+</section>
+
+<router-outlet hidden />

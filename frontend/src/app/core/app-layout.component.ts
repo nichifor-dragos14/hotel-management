@@ -75,8 +75,9 @@ import { CommonModule } from '@angular/common';
             mat-list-item
             routerLink="/main/our-recommendations"
             routerLinkActive="selected"
+            *ngIf="userRole == 'Client'"
           >
-            Main page properties
+            Search properties
           </a>
           <a
             mat-list-item
@@ -93,6 +94,14 @@ import { CommonModule } from '@angular/common';
             *ngIf="userRole == 'Client'"
           >
             My reviews
+          </a>
+          <a
+            mat-list-item
+            routerLink="/statistics/my-statistics"
+            routerLinkActive="selected"
+            *ngIf="userRole == 'Client'"
+          >
+            My statistics
           </a>
         </mat-nav-list>
       </mat-sidenav>

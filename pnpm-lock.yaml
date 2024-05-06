@@ -80,6 +80,9 @@ importers:
       '@angular/router':
         specifier: ^17.0.0
         version: 17.0.6(@angular/common@17.0.6)(@angular/core@17.0.6)(@angular/platform-browser@17.0.6)(rxjs@7.8.1)
+      '@canvasjs/angular-charts':
+        specifier: ^1.2.0
+        version: 1.2.0(@angular/common@17.0.6)(@angular/core@17.0.6)(@canvasjs/charts@3.8.5)
       '@tinymce/tinymce-angular':
         specifier: 7.0.0
         version: 7.0.0(@angular/common@17.0.6)(@angular/core@17.0.6)(@angular/forms@17.0.6)
@@ -1974,6 +1977,23 @@ packages:
       '@babel/helper-validator-identifier': 7.22.20
       to-fast-properties: 2.0.0
     dev: true
+
+  /@canvasjs/angular-charts@1.2.0(@angular/common@17.0.6)(@angular/core@17.0.6)(@canvasjs/charts@3.8.5):
+    resolution: {integrity: sha512-9wumUHLIvmfv6h9sQ1n9Rm4jQgg33OFkW2S/0P347mwf7v/N8K0MFPELpExM4Vhy9mj54/DX92QQvRIi9gZ/Lw==}
+    peerDependencies:
+      '@angular/common': '>=12.0.0'
+      '@angular/core': '>=12.0.0'
+      '@canvasjs/charts': ^3.7.5
+    dependencies:
+      '@angular/common': 17.0.6(@angular/core@17.0.6)(rxjs@7.8.1)
+      '@angular/core': 17.0.6(rxjs@7.8.1)(zone.js@0.14.2)
+      '@canvasjs/charts': 3.8.5
+      tslib: 2.6.2
+    dev: false
+
+  /@canvasjs/charts@3.8.5:
+    resolution: {integrity: sha512-i2G8v/6LlV4vGWDFu313r4ZaoCD0Z5/EDCzkTOF0tIiCzDXeij0Hn/BBtmzdoQj4IlG/TMKYcY74Tol47iIaQg==}
+    dev: false
 
   /@colors/colors@1.5.0:
     resolution: {integrity: sha512-ooWCrlZP11i8GImSjTHYHLkvFDP48nS4+204nGb1RiX/WXYHmJA2III9/e2DWVabCESdW7hBAEzHRqUn9OUVvQ==}
