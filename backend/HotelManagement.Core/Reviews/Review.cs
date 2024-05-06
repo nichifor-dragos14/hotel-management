@@ -35,7 +35,11 @@ public class Review
 
     public virtual Property Property { get; internal init; }
 
+    public virtual Guid PropertyId { get; private set; }
+
     public virtual User User { get; private set; }
+
+    public virtual Guid UserId { get; private set; }
 
     public virtual Booking Booking { get; private set; }
 
