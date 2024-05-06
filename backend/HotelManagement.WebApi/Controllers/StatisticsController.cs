@@ -10,7 +10,7 @@ namespace HotelManagement.WebApi.Controllers;
 [ApiController]
 public class StatisticsController : ControllerBase
 {
-
+    
     [AuthorizeRoles(Core.Users.Role.Admin)]
     [HttpGet("property/{id}")]
     public async Task<Results<Ok<PropertyStatistics>, NotFound, BadRequest>> GetPropertyStatistics(

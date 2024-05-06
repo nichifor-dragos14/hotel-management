@@ -1,0 +1,29 @@
+<app-page-header title="{{ statistics.propertyName }} statistics 📈">
+  <button
+    mat-button
+    button
+    color="primary"
+    [routerLink]="['/properties', 'admin', propertyId]"
+  >
+    Back
+  </button>
+</app-page-header>
+
+<section id="content">
+  <section id="graph-container">
+    <div>
+      <canvasjs-chart [options]="numberOfBookingsAndTotalRevenueMonthly">
+      </canvasjs-chart>
+    </div>
+
+    <div>
+      <canvasjs-chart [options]="totalRevenueChartOptions"> </canvasjs-chart>
+    </div>
+  </section>
+
+  <div>
+    <canvasjs-chart [options]="reviewPieOptions"> </canvasjs-chart>
+  </div>
+</section>
+
+<router-outlet hidden />

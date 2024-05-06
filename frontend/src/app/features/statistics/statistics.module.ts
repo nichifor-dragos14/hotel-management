@@ -8,6 +8,7 @@ import {
 import { LoginService } from '$features/auth/login.service';
 import { UserStatisticsPageComponent } from './user-statistics-page/user-statistics-page.component';
 import { StatisticsService } from '$backend/services';
+import { PropertyStatisticsPageComponent } from './property-statistics-page/property-statistics-page.component';
 
 const STATISTICS_ROUTES: Routes = [
   {
@@ -31,6 +32,29 @@ const STATISTICS_ROUTES: Routes = [
 
               return null;
             }
+          },
+        },
+      },
+      {
+        path: 'property/:id',
+        component: PropertyStatisticsPageComponent,
+        resolve: {
+          statistics: async ({ params }: ActivatedRouteSnapshot) => {
+            const router = inject(Router);
+            const statisticsService = inject(StatisticsService);
+
+            try {
+              return await statisticsService.statisticsPropertyIdGetAsync({
+                id: params['id'],
+              });
+            } catch (error) {
+              router.navigate(['/error']);
+
+              return null;
+            }
+          },
+          propertyId: async ({ params }: ActivatedRouteSnapshot) => {
+            return params['id'];
           },
         },
       },

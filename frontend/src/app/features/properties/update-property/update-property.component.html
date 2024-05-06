@@ -15,6 +15,13 @@
 
   <a
     mat-button
+    [routerLink]="['/statistics', 'property', propertyForm.get(['id'])!.value]"
+  >
+    Statistics
+  </a>
+
+  <a
+    mat-button
     [routerLink]="['/rooms/admin/property', propertyForm.get(['id'])!.value]"
   >
     Rooms
