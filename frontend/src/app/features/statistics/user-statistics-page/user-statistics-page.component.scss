@@ -4,9 +4,53 @@
   gap: 16px;
 }
 
-#graph-container {
+#content {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-column-gap: 64px;
   padding: 0 64px;
+}
+
+#graph-container {
+  display: grid;
+  grid-row-gap: 32px;
+  grid-template-rows: auto auto;
+}
+
+::ng-deep {
+  [id^='canvasjs-angular-chart-container'] {
+    height: 350px !important;
+    max-width: 600px !important;
+  }
+}
+
+.first {
+  color: gold;
+}
+
+.second {
+  color: silver;
+}
+
+.third {
+  color: saddlebrown;
+}
+
+.first-icon {
+  border: 2px solid gold;
+}
+
+.second-icon {
+  border: 2px solid silver;
+}
+
+.third-icon {
+  border: 2px solid saddlebrown;
+}
+
+app-page-header {
+  grid-area: header;
+  height: 'min-content';
+  position: sticky;
+  top: 14.5px;
 }

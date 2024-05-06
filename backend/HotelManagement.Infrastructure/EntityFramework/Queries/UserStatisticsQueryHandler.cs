@@ -103,7 +103,8 @@ internal class UserStatisticsQueryHandler(
             UserId: user.Id,
             TopReviewedProperties: topReviewedProperties,
             BookingsByMonth: bookingsByMonth,
-            XPByMonth: xpByMonth
+            XPByMonth: xpByMonth,
+            topUsers: userScores
         );
     }
 }

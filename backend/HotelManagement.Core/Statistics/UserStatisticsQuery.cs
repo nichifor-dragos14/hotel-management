@@ -20,7 +20,8 @@ public record UserStatistics(
     Guid UserId,
     List<PropertyReviewStatistics> TopReviewedProperties,
     List<MonthlyBookingStatistics> BookingsByMonth,
-    List<MonthlyXPStatistics> XPByMonth
+    List<MonthlyXPStatistics> XPByMonth,
+    List<UserActivityScore> topUsers
 );
 
 public record UserStatisticsQuery(Guid UserId) : IQuery<UserStatistics>;

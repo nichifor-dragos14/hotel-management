@@ -4355,6 +4355,36 @@
         },
         "additionalProperties": false
       },
+      "UserActivityScore": {
+        "required": [
+          "firstName",
+          "lastName",
+          "pictureUrl",
+          "totalPoints",
+          "userId"
+        ],
+        "type": "object",
+        "properties": {
+          "userId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "firstName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "pictureUrl": {
+            "type": "string"
+          },
+          "totalPoints": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
       "UserDetails": {
         "required": [
           "address",
@@ -4454,6 +4484,7 @@
         "required": [
           "bookingsByMonth",
           "topReviewedProperties",
+          "topUsers",
           "userId",
           "xpByMonth"
         ],
@@ -4479,6 +4510,12 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/MonthlyXPStatistics"
+            }
+          },
+          "topUsers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UserActivityScore"
             }
           }
         },

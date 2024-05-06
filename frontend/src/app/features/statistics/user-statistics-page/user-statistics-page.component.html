@@ -1,11 +1,93 @@
-<app-page-header title="My statistics">
-  <button mat-button button>blabla</button>
-</app-page-header>
+<app-page-header title="My statistics"> </app-page-header>
 
-<section id="graph-container">
-  <div>
-    <canvasjs-chart [options]="bookingsByMonthChartOptions"> </canvasjs-chart>
-  </div>
+<section id="content">
+  <section id="graph-container">
+    <div>
+      <canvasjs-chart [options]="bookingsByMonthChartOptions"> </canvasjs-chart>
+    </div>
+
+    <div>
+      <canvasjs-chart [options]="xpByMonthChartOptions"> </canvasjs-chart>
+    </div>
+  </section>
+
+  <mat-tab-group dynamicHeight="true">
+    <mat-tab label="Top users">
+      <mat-nav-list>
+        <ng-container *ngFor="let user of statistics.topUsers; let i = index">
+          <a mat-list-item>
+            <img
+              *ngIf="i == 0"
+              matListItemAvatar
+              [src]="user.pictureUrl"
+              class="first-icon"
+            />
+
+            <img
+              *ngIf="i == 1"
+              matListItemAvatar
+              [src]="user.pictureUrl"
+              class="second-icon"
+            />
+
+            <img
+              *ngIf="i == 2"
+              matListItemAvatar
+              [src]="user.pictureUrl"
+              class="third-icon"
+            />
+
+            <img
+              *ngIf="i != 0 && i != 1 && i != 2"
+              matListItemAvatar
+              [src]="user.pictureUrl"
+            />
+
+            <span matListItemTitle>
+              {{ user.lastName }} {{ user.firstName }}</span
+            >
+            <span matListItemLine> Points: {{ user.totalPoints }}</span>
+          </a>
+        </ng-container>
+      </mat-nav-list>
+    </mat-tab>
+
+    <mat-tab label="My best trips">
+      <mat-nav-list>
+        <ng-container
+          *ngFor="let review of statistics.topReviewedProperties; let i = index"
+        >
+          <a
+            mat-list-item
+            [routerLink]="['/properties', review.propertyId, 'preview']"
+            routerLinkActive="active"
+          >
+            <span matListItemIcon *ngIf="i == 0">
+              <mat-icon class="first"> emoji_events </mat-icon>
+            </span>
+
+            <span matListItemIcon *ngIf="i == 1">
+              <mat-icon class="second"> emoji_events </mat-icon>
+            </span>
+
+            <span matListItemIcon *ngIf="i == 2">
+              <mat-icon class="third"> emoji_events </mat-icon>
+            </span>
+
+            <span *ngIf="i != 0 && i != 1 && i != 2">
+              <mat-icon> star </mat-icon>
+            </span>
+
+            <span matListItemTitle> {{ review.propertyName }}</span>
+            <span matListItemLine> {{ review.propertyLocation }}</span>
+            <span matListItemMeta>
+              Reviewed with {{ review.averageRating }}</span
+            >
+          </a>
+        </ng-container>
+      </mat-nav-list>
+    </mat-tab>
+  </mat-tab-group>
 </section>
 
 <router-outlet hidden />
