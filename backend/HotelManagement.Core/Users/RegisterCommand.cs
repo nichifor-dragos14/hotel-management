@@ -11,7 +11,8 @@ public record RegisterCommand(
       Gender Gender,
       string Address,
       DateTime DateOfBirth,
-      string Password 
+      string Password,
+      string? ActivationToken
 ) : ICommand<Guid?>;
 
 internal class RegisterCommandHandler(
@@ -31,7 +32,8 @@ internal class RegisterCommandHandler(
                  command.Gender,
                  command.Address,
                  command.DateOfBirth,
-                 command.Password
+                 command.Password,
+                 command.ActivationToken
         );
 
         users.Add(user);

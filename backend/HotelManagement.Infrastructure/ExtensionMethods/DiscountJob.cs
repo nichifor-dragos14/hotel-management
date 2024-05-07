@@ -1,5 +1,6 @@
 ﻿using HotelManagement.Core.Abstractions;
 using HotelManagement.Core.Discounts;
+using HotelManagement.Core.EmailService;
 using HotelManagement.Core.Properties;
 using HotelManagement.Core.Users;
 using Microsoft.EntityFrameworkCore;
@@ -7,7 +8,7 @@ using Quartz;
 
 namespace HotelManagement.Infrastructure.ExtensionMethods;
 
-public class DiscountJob(IQueryFacade queryFacade, IUnitOfWork unitOfWork) : IJob
+public class DiscountJob(IQueryFacade queryFacade, IUnitOfWork unitOfWork, IEmailService emailService) : IJob
 {
     public async Task Execute(IJobExecutionContext context)
     {
@@ -73,6 +74,8 @@ public class DiscountJob(IQueryFacade queryFacade, IUnitOfWork unitOfWork) : IJo
 
 
             await unitOfWork.SaveChangesAsync(CancellationToken.None);
+
+            await emailService.SendDiscountsNotificationOnEmail(user.FirstName, user.LastName, user.Email, startDate, endDate);
         }
 
         Console.WriteLine("Discount job executed at: " + DateTime.Now);

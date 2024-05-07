@@ -20,6 +20,7 @@ public class User
         bool retainSearchHistory,
         bool sendOffersOnEmail,
         string profilePicture,
+        string activationToken,
         DateTime createdOn,
         DateTime updatedOn
     )
@@ -41,6 +42,8 @@ public class User
         Role = Role.Client;
         GeniusXp = 0;
         GeniusLevel = GeniusLevel.Level1;
+        IsConfirmed = false;
+        ActivationToken = activationToken;
     }
 
     public Guid Id { get; }
@@ -75,6 +78,10 @@ public class User
 
     public GeniusLevel GeniusLevel { get; set; }
 
+    public bool IsConfirmed { get; private set; }
+
+    public string ActivationToken { get; private set; }
+
     public DateTime CreatedOn { get; private set; }
 
     public DateTime UpdatedOn { get; private set; }
@@ -96,7 +103,8 @@ public class User
         Gender gender,
         string address,
         DateTime dateOfBirth,
-        string password
+        string password,
+        string activationToken
     )
     {
         return new User(
@@ -112,6 +120,7 @@ public class User
             false,
             false,
             "",
+            activationToken,
             DateTime.UtcNow,
             DateTime.UtcNow
         )
@@ -156,5 +165,10 @@ public class User
     {
         ProfilePicture = profilePicture;
         UpdatedOn = DateTime.UtcNow;
+    }
+
+    public void ConfirmAccount()
+    {
+        IsConfirmed = true;
     }
 }

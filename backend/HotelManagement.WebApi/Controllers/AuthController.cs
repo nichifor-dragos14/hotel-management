@@ -1,4 +1,5 @@
 ﻿using HotelManagement.Core.Abstractions;
+using HotelManagement.Core.EmailService;
 using HotelManagement.Core.Users;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
@@ -11,7 +12,7 @@ namespace HotelManagement.WebApi.Controllers;
 
 [Route("auth")]
 [ApiController]
-public class AuthController(IConfiguration _configuration) : ControllerBase
+public class AuthController(IConfiguration _configuration, IEmailService _emailService) : ControllerBase
 {
     [HttpPost("login")]
     public async Task<Results<Ok<string>, BadRequest>> LoginAsync(
@@ -38,7 +39,29 @@ public class AuthController(IConfiguration _configuration) : ControllerBase
        CancellationToken cancellationToken
     )
     {
-        return await commandHandler.ExecuteAsync(command, cancellationToken) switch
+        string host = HttpContext.Request.Host.Host;
+        int port = HttpContext.Request.Host.Port ?? 80;
+
+        var token = await _emailService.SendAccountValidationEmail(command.Email, command.FirstName, command.LastName, host, port);
+
+        if (token == null)
+        {
+            return TypedResults.BadRequest();
+        }
+
+        var newCommand = new RegisterCommand
+            (command.FirstName,
+            command.LastName, 
+            command.Email, 
+            command.PhoneNumber,
+            command.Nationality,
+            command.Gender, 
+            command.Address,
+            command.DateOfBirth, 
+            command.Password, token
+        );
+
+        return await commandHandler.ExecuteAsync(newCommand, cancellationToken) switch
         {
             { } id => TypedResults.Ok(id),
             _ => TypedResults.BadRequest()
@@ -71,5 +94,34 @@ public class AuthController(IConfiguration _configuration) : ControllerBase
         var tokenString = new JwtSecurityTokenHandler().WriteToken(tokenOptions);
 
         return tokenString;
+    }
+
+    [HttpGet("get-activation")]
+    public async Task<Results<Ok<Guid>, NotFound, BadRequest>> GetActivation(
+        string email,
+        string token,
+        [FromServices] IQueryHandler<ActivateAccountUserQuery, Guid> queryService,
+        CancellationToken cancellationToken)
+    {
+        return await queryService.ExecuteAsync(new ActivateAccountUserQuery(email, token), cancellationToken) switch
+        {
+            { } result => TypedResults.Ok(result),
+        };
+    }
+
+    [HttpPost("activate")]
+    public async Task<Results<Ok<Guid?>, BadRequest>> ActivateAccount(
+       [FromBody] ActivateAccountCommand command,
+       [FromServices] ICommandHandler<ActivateAccountCommand, Guid?> commandHandler,
+       CancellationToken cancellationToken)
+    {
+        var result = await commandHandler.ExecuteAsync(command, cancellationToken);
+
+        if (result == null)
+        {
+            return TypedResults.BadRequest();
+        }
+
+        return TypedResults.Ok(result);
     }
 }
