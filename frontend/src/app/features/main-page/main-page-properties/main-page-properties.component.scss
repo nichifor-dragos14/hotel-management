@@ -3,7 +3,7 @@
   grid-template-areas: 'header filtersForm' 'searchForm filtersForm' 'list filtersForm';
   grid-template-rows: min-content min-content 1fr;
   grid-template-columns: 5fr 1fr;
-  grid-gap: 8px 16px;
+  grid-gap: 16px;
   height: 100%;
   position: relative;
 }

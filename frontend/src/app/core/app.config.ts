@@ -37,7 +37,6 @@ export const appConfig: ApplicationConfig = {
       MatIconModule,
       EditorModule
     ),
-    provideAnimations(),
     httpInterceptorProviders,
     { provide: RouteReuseStrategy, useClass: CustomReuseStrategy },
   ],

@@ -12,10 +12,16 @@ const MAIN_PAGE_ROUTES: Routes = [
       {
         path: 'search-results',
         component: MainPagePropertiesListComponent,
+        data: {
+          animation: 'SearchPage',
+        },
       },
       {
         path: 'our-recommendations',
         component: MainPageOurRecommendationsComponent,
+        data: {
+          animation: 'RecommendationsPage',
+        },
       },
     ],
   },

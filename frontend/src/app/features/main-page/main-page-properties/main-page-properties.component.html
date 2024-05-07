@@ -286,4 +286,6 @@
   </mat-selection-list>
 </form>
 
-<router-outlet hidden />
+<div [@routeAnimations]="getRouteAnimationData()">
+  <router-outlet hidden />
+</div>

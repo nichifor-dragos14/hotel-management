@@ -4,7 +4,7 @@ import {
   Component,
   inject,
 } from '@angular/core';
-import { Router, RouterModule } from '@angular/router';
+import { ChildrenOutletContexts, Router, RouterModule } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
@@ -23,6 +23,7 @@ import { PropertyQueryParams } from '../property-query-params.interface';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatDividerModule } from '@angular/material/divider';
 import { SearchHistoryService } from '$core/search-history.service';
+import { slideInAnimation } from '$core/app.animations';
 
 @Component({
   selector: 'app-main-page-properties',
@@ -30,7 +31,7 @@ import { SearchHistoryService } from '$core/search-history.service';
   styleUrls: ['./main-page-properties.component.scss'],
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [],
+  animations: [slideInAnimation],
   imports: [
     RouterModule,
     MatIconModule,
@@ -58,10 +59,16 @@ export class MainPagePropertiesComponent implements AfterViewInit {
   minDate: Date = new Date();
   maxDate: Date = new Date();
 
-  constructor() {
+  constructor(private contexts: ChildrenOutletContexts) {
     this.minDate.setHours(0, 0, 0, 0);
     this.maxDate.setFullYear(this.maxDate.getFullYear() + 1);
     this.maxDate.setHours(0, 0, 0, 0);
+  }
+
+  getRouteAnimationData() {
+    return this.contexts.getContext('primary')?.route?.snapshot?.data?.[
+      'animation'
+    ];
   }
 
   ngAfterViewInit() {
