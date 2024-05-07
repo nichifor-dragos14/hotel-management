@@ -1,0 +1,23 @@
+<app-page-header title="Room statistics 📈">
+  <button
+    mat-button
+    button
+    color="primary"
+    [routerLink]="['/rooms', 'admin', 'property', propertyId, roomId]"
+  >
+    Back
+  </button>
+</app-page-header>
+
+<section id="content">
+  <div>
+    <canvasjs-chart [options]="numberOfBookingsAndTotalRevenueMonthly">
+    </canvasjs-chart>
+  </div>
+
+  <div>
+    <canvasjs-chart [options]="totalRevenueChartOptions"> </canvasjs-chart>
+  </div>
+</section>
+
+<router-outlet hidden />

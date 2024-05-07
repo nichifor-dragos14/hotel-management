@@ -117,6 +117,9 @@ const ROOM_ROUTES: Routes = [
                   return null;
                 }
               },
+              propertyId: async ({ parent }: ActivatedRouteSnapshot) => {
+                return parent?.params['id'];
+              },
             },
             canActivate: [AuthGuard],
             data: {

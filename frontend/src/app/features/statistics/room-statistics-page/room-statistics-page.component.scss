@@ -1,0 +1,27 @@
+:host {
+  display: flex !important;
+  flex-direction: column;
+  gap: 16px;
+}
+
+#content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-column-gap: 64px;
+  padding: 0 64px;
+  align-items: center;
+}
+
+::ng-deep {
+  [id^='canvasjs-angular-chart-container'] {
+    height: 350px !important;
+    max-width: 600px !important;
+  }
+}
+
+app-page-header {
+  grid-area: header;
+  height: 'min-content';
+  position: sticky;
+  top: 14.5px;
+}

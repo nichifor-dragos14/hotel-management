@@ -9,6 +9,8 @@ import { LoginService } from '$features/auth/login.service';
 import { UserStatisticsPageComponent } from './user-statistics-page/user-statistics-page.component';
 import { StatisticsService } from '$backend/services';
 import { PropertyStatisticsPageComponent } from './property-statistics-page/property-statistics-page.component';
+import { AuthGuard } from '$features/auth/auth.guard';
+import { RoomStatisticsPageComponent } from './room-statistics-page/room-statistics-page.component';
 
 const STATISTICS_ROUTES: Routes = [
   {
@@ -34,6 +36,10 @@ const STATISTICS_ROUTES: Routes = [
             }
           },
         },
+        canActivate: [AuthGuard],
+        data: {
+          role: ['Client'],
+        },
       },
       {
         path: 'property/:id',
@@ -56,6 +62,40 @@ const STATISTICS_ROUTES: Routes = [
           propertyId: async ({ params }: ActivatedRouteSnapshot) => {
             return params['id'];
           },
+        },
+        canActivate: [AuthGuard],
+        data: {
+          role: ['Admin'],
+        },
+      },
+      {
+        path: 'property/:propertyId/room/:roomId',
+        component: RoomStatisticsPageComponent,
+        resolve: {
+          statistics: async ({ params }: ActivatedRouteSnapshot) => {
+            const router = inject(Router);
+            const statisticsService = inject(StatisticsService);
+
+            try {
+              return await statisticsService.statisticsRoomIdGetAsync({
+                id: params['roomId'],
+              });
+            } catch (error) {
+              router.navigate(['/error']);
+
+              return null;
+            }
+          },
+          propertyId: async ({ params }: ActivatedRouteSnapshot) => {
+            return params['propertyId'];
+          },
+          roomId: async ({ params }: ActivatedRouteSnapshot) => {
+            return params['roomId'];
+          },
+        },
+        canActivate: [AuthGuard],
+        data: {
+          role: ['Admin'],
         },
       },
     ],

@@ -40,6 +40,7 @@ export class UpdateRoomPageComponent {
 
   @Input() roomForm!: FormGroup;
   @Input() roomDetails!: RoomDetails;
+  @Input() propertyId!: string;
 
   async updateRoom(updatedRoom: typeof this.roomForm.value) {
     if (this.roomForm.invalid) {
