@@ -172,4 +172,9 @@ public class User
     {
         IsConfirmed = true;
     }
+
+    public void UpdatePassword(string password)
+    {
+        Password = password;
+    }
 }

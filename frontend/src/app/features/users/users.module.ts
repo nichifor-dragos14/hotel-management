@@ -11,6 +11,7 @@ import { EditUserPreferencesFormFactory } from './user-preferences.form';
 import { DialogPageComponent } from '$shared/dialog-page';
 import { UploadProfilePictureComponent } from './upload-profile-picture.component';
 import { AuthGuard } from '$features/auth/auth.guard';
+import { ChangePasswordComponent } from './change-password.component';
 
 const USER_ROUTES: Routes = [
   {
@@ -166,6 +167,44 @@ const USER_ROUTES: Routes = [
         data: {
           role: ['Client', 'Admin'],
         },
+        children: [
+          {
+            path: 'actions',
+            component: DialogPageComponent,
+            children: [
+              {
+                path: 'change-password',
+                component: ChangePasswordComponent,
+                resolve: {
+                  password: async () => {
+                    const router = inject(Router);
+                    const loginService = inject(LoginService);
+                    const userService = inject(UserService);
+
+                    try {
+                      const id = loginService.getLoggedUserId();
+
+                      const password =
+                        await userService.usersPasswordIdGetAsync({
+                          id,
+                        });
+
+                      return password;
+                    } catch (error) {
+                      router.navigate(['/error']);
+
+                      return null;
+                    }
+                  },
+                },
+                canActivate: [AuthGuard],
+                data: {
+                  role: ['Client', 'Admin'],
+                },
+              },
+            ],
+          },
+        ],
       },
     ],
   },

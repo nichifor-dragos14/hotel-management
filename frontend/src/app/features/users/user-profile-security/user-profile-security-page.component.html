@@ -7,7 +7,14 @@
 
 <section role="options">
   <span>Change your password</span>
-  <button mat-button color="primary" class="edit">Change password</button>
+  <button
+    mat-button
+    color="primary"
+    class="edit"
+    [routerLink]="['actions', 'change-password']"
+  >
+    Change password
+  </button>
 </section>
 
 <section role="bottom">
@@ -16,3 +23,5 @@
     reduces potential risks.
   </p>
 </section>
+
+<router-outlet hidden />
