@@ -108,7 +108,7 @@ public class PropertyController(IFileStorageService _storageService) : Controlle
 
         return await queryService.ExecuteAsync(new OnePropertyQuery(id, startDate, endDate, numberOfAdults, numberOfChildren, loggedUserId), cancellationToken) switch
         {
-            { } hotel => TypedResults.Ok(hotel),
+            { } result => TypedResults.Ok(result),
             _ => TypedResults.NotFound()
         };
     }

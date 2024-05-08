@@ -2,7 +2,6 @@
 
 namespace HotelManagement.Core.Reviews;
 
-
 public record UpdateReviewCommand(
     Guid Id,
     string Title,
@@ -14,7 +13,9 @@ internal class UpdateReviewCommandHandler(
     IUnitOfWork unitOfWork
 ) : ICommandHandler<UpdateReviewCommand, Guid?>
 {
-    public async Task<Guid?> ExecuteAsync(UpdateReviewCommand command, CancellationToken cancellationToken)
+    public async Task<Guid?> ExecuteAsync(
+        UpdateReviewCommand command,
+        CancellationToken cancellationToken)
     {
         var reviews = unitOfWork.GetRepository<Review>();
 

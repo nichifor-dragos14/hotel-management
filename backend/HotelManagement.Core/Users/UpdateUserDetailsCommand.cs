@@ -17,7 +17,9 @@ internal class UpdateUserDetailsCommandHandler(
     IUnitOfWork unitOfWork
 ) : ICommandHandler<UpdateUserDetailsCommand, Guid?>
 {
-    public async Task<Guid?> ExecuteAsync(UpdateUserDetailsCommand command, CancellationToken cancellationToken)
+    public async Task<Guid?> ExecuteAsync(
+        UpdateUserDetailsCommand command, 
+        CancellationToken cancellationToken)
     {
         var users = unitOfWork.GetRepository<User>();
 

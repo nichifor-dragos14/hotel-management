@@ -5,9 +5,13 @@ namespace HotelManagement.Core.Bookings;
 
 public record DeleteBookingCommand(Guid Id) : ICommand<bool>;
 
-internal class DeleteBookingCommandHandler(IUnitOfWork unitOfWork) : ICommandHandler<DeleteBookingCommand, bool>
+internal class DeleteBookingCommandHandler(
+    IUnitOfWork unitOfWork
+) : ICommandHandler<DeleteBookingCommand, bool>
 {
-    public async Task<bool> ExecuteAsync(DeleteBookingCommand command, CancellationToken cancellationToken)
+    public async Task<bool> ExecuteAsync(
+        DeleteBookingCommand command,
+        CancellationToken cancellationToken)
     {
         var bookings = unitOfWork.GetRepository<Booking>();
         var users = unitOfWork.GetRepository<User>();

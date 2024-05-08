@@ -31,4 +31,6 @@ public record ReportUserDetails(
     string ProfilePicture
 );
 
-public record OneReportQuery(Guid? Id) : IQuery<ReportDetails>;
+public record OneReportQuery(
+    Guid? Id
+) : IQuery<ReportDetails>;

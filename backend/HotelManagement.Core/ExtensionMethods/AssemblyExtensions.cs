@@ -18,17 +18,17 @@ public static class AssemblyExtensions
             return type.GetInterfaces().FirstOrDefault(i => i.IsGenericType && i.GetGenericTypeDefinition() == marker);
         }
 
-        return assembly // from assembly
-            .GetTypes() // get all types
-            .Where(type => !type.IsAbstract && !type.IsInterface) // that are not abstract or interfaces
+        return assembly
+            .GetTypes()
+            .Where(type => !type.IsAbstract && !type.IsInterface)
             .SelectMany(
                 type => markers.Select(
                     marker => (
-                        Generic: FindGenericType(type, marker), // if this is null, its not inheriting from marker
+                        Generic: FindGenericType(type, marker),
                         Implementation: type
                     )
                 )
             )
-            .Where(tuple => tuple.Generic != null); // skip all types that hav no generic definition
+            .Where(tuple => tuple.Generic != null); 
     }
 }

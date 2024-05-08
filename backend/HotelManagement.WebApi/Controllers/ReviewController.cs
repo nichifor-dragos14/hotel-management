@@ -1,5 +1,4 @@
 ﻿using HotelManagement.Core.Abstractions;
-using HotelManagement.Core.Bookings;
 using HotelManagement.Core.Reviews;
 using HotelManagement.WebApi.Authorize;
 using Microsoft.AspNetCore.Http.HttpResults;

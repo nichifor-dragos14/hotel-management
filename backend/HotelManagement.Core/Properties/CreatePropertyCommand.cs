@@ -28,7 +28,9 @@ internal class CreatePropertyCommandHandler(
     IUnitOfWork unitOfWork
 ) : ICommandHandler<CreatePropertyCommand, Guid?>
 {
-    public async Task<Guid?> ExecuteAsync(CreatePropertyCommand command, CancellationToken cancellationToken)
+    public async Task<Guid?> ExecuteAsync(
+        CreatePropertyCommand command,
+        CancellationToken cancellationToken)
     {
         var properties = unitOfWork.GetRepository<Property>();
 

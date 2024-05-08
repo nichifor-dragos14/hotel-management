@@ -12,4 +12,8 @@ public record RoomSummary(
     int RowNumber
 );
 
-public record AllRoomSummariesQuery(int From, int To, Guid PropertyId) : IQuery<IPaginatedResult<RoomSummary>>;
+public record AllRoomSummariesQuery(
+    int From,
+    int To, 
+    Guid PropertyId
+) : IQuery<IPaginatedResult<RoomSummary>>;

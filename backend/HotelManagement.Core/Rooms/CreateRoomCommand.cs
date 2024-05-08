@@ -23,7 +23,9 @@ internal class CreateRoomCommandHandler(
     IUnitOfWork unitOfWork
 ) : ICommandHandler<CreateRoomCommand, Guid?>
 {
-    public async Task<Guid?> ExecuteAsync(CreateRoomCommand command, CancellationToken cancellationToken)
+    public async Task<Guid?> ExecuteAsync(
+        CreateRoomCommand command,
+        CancellationToken cancellationToken)
     {
         var properties = unitOfWork.GetRepository<Property>();
 

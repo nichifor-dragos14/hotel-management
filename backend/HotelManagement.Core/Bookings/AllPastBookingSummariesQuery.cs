@@ -11,5 +11,9 @@ public record BookingSummary(
     int RowNumber
 );
 
-public record AllPastBookingSummariesQuery(Guid UserId, int From, int To) : IQuery<IPaginatedResult<BookingSummary>>;
+public record AllPastBookingSummariesQuery(
+    Guid UserId, 
+    int From,
+    int To
+) : IQuery<IPaginatedResult<BookingSummary>>;
 

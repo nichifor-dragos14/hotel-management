@@ -3,8 +3,10 @@ using HotelManagement.Core.Discounts;
 
 namespace HotelManagement.Core.Properties;
 
-
-public record OnePropertyDiscountQuery(Guid PropertyId, Guid UserId) : IQuery<int>;
+public record OnePropertyDiscountQuery
+    (Guid PropertyId,
+    Guid UserId
+) : IQuery<int>;
 
 internal class OnePropertyDiscountQueryHandler(
     IQueryFacade facade
@@ -12,8 +14,7 @@ internal class OnePropertyDiscountQueryHandler(
 {
     public async Task<int> ExecuteAsync(
         OnePropertyDiscountQuery query,
-        CancellationToken cancellationToken
-    )
+        CancellationToken cancellationToken)
     {
         return
             (from discount in facade.Of<Discount>()

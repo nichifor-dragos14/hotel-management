@@ -13,7 +13,9 @@ public record AccountModel(
     Role Role
 );
 
-public record LoginQuery(LoginModel LoginModel) : IQuery<AccountModel?>;
+public record LoginQuery(
+    LoginModel LoginModel
+) : IQuery<AccountModel?>;
 
 internal class LoginQueryHandler(
     IQueryFacade facade

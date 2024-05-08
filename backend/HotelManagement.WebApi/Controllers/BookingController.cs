@@ -46,7 +46,7 @@ public class BookingController(IEmailService _emailService) : ControllerBase
 
         return await queryService.ExecuteAsync(new OneBookingQuery(id), cancellationToken) switch
         {
-            { } hotel => TypedResults.Ok(hotel),
+            { } result => TypedResults.Ok(result),
             _ => TypedResults.NotFound()
         };
     }

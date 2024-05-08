@@ -3,11 +3,17 @@ using HotelManagement.Core.Rooms;
 
 namespace HotelManagement.Core.Properties;
 
-public record DeleteRoomCommand(Guid Id) : ICommand<bool>;
+public record DeleteRoomCommand(
+    Guid Id
+) : ICommand<bool>;
 
-internal class DeleteRoomCommandHandler(IUnitOfWork unitOfWork) : ICommandHandler<DeleteRoomCommand, bool>
+internal class DeleteRoomCommandHandler(
+    IUnitOfWork unitOfWork
+) : ICommandHandler<DeleteRoomCommand, bool>
 {
-    public async Task<bool> ExecuteAsync(DeleteRoomCommand command, CancellationToken cancellationToken)
+    public async Task<bool> ExecuteAsync(
+        DeleteRoomCommand command, 
+        CancellationToken cancellationToken)
     {
         var rooms = unitOfWork.GetRepository<Room>();
 

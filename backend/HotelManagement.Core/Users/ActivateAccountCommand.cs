@@ -10,7 +10,9 @@ internal class ActivateAccountCommandHandler(
     IUnitOfWork unitOfWork
 ) : ICommandHandler<ActivateAccountCommand, Guid?>
 {
-    public async Task<Guid?> ExecuteAsync(ActivateAccountCommand command, CancellationToken cancellationToken)
+    public async Task<Guid?> ExecuteAsync(
+        ActivateAccountCommand command, 
+        CancellationToken cancellationToken)
     {
         var users = unitOfWork.GetRepository<User>();
 

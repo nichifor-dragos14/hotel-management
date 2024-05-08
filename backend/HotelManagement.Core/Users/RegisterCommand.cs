@@ -19,7 +19,9 @@ internal class RegisterCommandHandler(
     IUnitOfWork unitOfWork
 ) : ICommandHandler<RegisterCommand, Guid?>
 {
-    public async Task<Guid?> ExecuteAsync(RegisterCommand command, CancellationToken cancellationToken)
+    public async Task<Guid?> ExecuteAsync(
+        RegisterCommand command,
+        CancellationToken cancellationToken)
     {
         var users = unitOfWork.GetRepository<User>();
 

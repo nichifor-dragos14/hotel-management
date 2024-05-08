@@ -54,7 +54,7 @@ public class RoomController : Controller
 
         return await queryService.ExecuteAsync(new OneRoomQuery(id), cancellationToken) switch
         {
-            { } hotel => TypedResults.Ok(hotel),
+            { } result => TypedResults.Ok(result),
             _ => TypedResults.NotFound()
         };
     }

@@ -21,4 +21,9 @@ public record PropertySummaryRecommendation(
     int RowNumber
 );
 
-public record AllPropertyRecommendationSummariesQuery(Guid? LoggedUserId, int From, int To, List<SearchHistoryFields> SearchHistory) : IQuery<IPaginatedResult<PropertySummaryRecommendation>>;
+public record AllPropertyRecommendationSummariesQuery(
+    Guid? LoggedUserId, 
+    int From,
+    int To,
+    List<SearchHistoryFields> SearchHistory
+) : IQuery<IPaginatedResult<PropertySummaryRecommendation>>;

@@ -12,7 +12,9 @@ internal class UpdateUserPreferencesCommandHandler(
     IUnitOfWork unitOfWork
 ) : ICommandHandler<UpdateUserPreferencesCommand, Guid?>
 {
-    public async Task<Guid?> ExecuteAsync(UpdateUserPreferencesCommand command, CancellationToken cancellationToken)
+    public async Task<Guid?> ExecuteAsync(
+        UpdateUserPreferencesCommand command, 
+        CancellationToken cancellationToken)
     {
         var properties = unitOfWork.GetRepository<User>();
 

@@ -27,7 +27,9 @@ internal class CreateBookingCommandHandler(
     IUnitOfWork unitOfWork
 ) : ICommandHandler<CreateBookingCommand, Guid?>
 {
-    public async Task<Guid?> ExecuteAsync(CreateBookingCommand command, CancellationToken cancellationToken)
+    public async Task<Guid?> ExecuteAsync(
+        CreateBookingCommand command,
+        CancellationToken cancellationToken)
     {
         var users = unitOfWork.GetRepository<User>();
 

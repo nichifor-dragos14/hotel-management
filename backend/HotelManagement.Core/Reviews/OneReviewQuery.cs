@@ -9,7 +9,9 @@ public record ReviewDetails(
     double Rating
 );
 
-public record OneReviewQuery(Guid? Id) : IQuery<ReviewDetails>;
+public record OneReviewQuery(
+    Guid? Id
+) : IQuery<ReviewDetails>;
 
 internal class OneReviewQueryHandler(
     IQueryFacade facade

@@ -11,4 +11,7 @@ public record ReportSummary(
     int RowNumber
 );
 
-public record AllReportSummariesQuery(int From, int To) : IQuery<IPaginatedResult<ReportSummary>>;
+public record AllReportSummariesQuery(
+    int From, 
+    int To
+) : IQuery<IPaginatedResult<ReportSummary>>;

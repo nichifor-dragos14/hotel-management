@@ -11,7 +11,9 @@ internal class UpdateProfilePictureCommandHandler(
     IUnitOfWork unitOfWork
 ) : ICommandHandler<UpdateProfilePictureCommand, Guid?>
 {
-    public async Task<Guid?> ExecuteAsync(UpdateProfilePictureCommand command, CancellationToken cancellationToken)
+    public async Task<Guid?> ExecuteAsync(
+        UpdateProfilePictureCommand command,
+        CancellationToken cancellationToken)
     {
         var users = unitOfWork.GetRepository<User>();
 

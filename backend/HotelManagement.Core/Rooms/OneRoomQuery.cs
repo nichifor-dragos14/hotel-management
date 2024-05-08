@@ -17,7 +17,9 @@ public record RoomDetails(
     int Number
 );
 
-public record OneRoomQuery(Guid? Id) : IQuery<RoomDetails>;
+public record OneRoomQuery(
+    Guid? Id
+) : IQuery<RoomDetails>;
 
 internal class OneRoomQueryHandler(
     IQueryFacade facade

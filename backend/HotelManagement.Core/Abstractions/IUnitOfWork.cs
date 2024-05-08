@@ -1,6 +1,4 @@
-﻿using System.Threading;
-
-namespace HotelManagement.Core.Abstractions;
+﻿namespace HotelManagement.Core.Abstractions;
 
 public interface IUnitOfWork
 {

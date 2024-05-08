@@ -12,7 +12,9 @@ internal class UpdateBookingCommandHandler(
     IUnitOfWork unitOfWork
 ) : ICommandHandler<UpdateBookingCommand, Guid?>
 {
-    public async Task<Guid?> ExecuteAsync(UpdateBookingCommand command, CancellationToken cancellationToken)
+    public async Task<Guid?> ExecuteAsync(
+        UpdateBookingCommand command,
+        CancellationToken cancellationToken)
     {
         var bookings = unitOfWork.GetRepository<Booking>();
 

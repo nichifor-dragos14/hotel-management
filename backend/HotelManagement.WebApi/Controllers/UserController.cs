@@ -28,7 +28,7 @@ public class UserController(IFileStorageService _storageService) : Controller
 
         return await queryService.ExecuteAsync(new OneUserQuery(email), cancellationToken) switch
         {
-            { } hotel => TypedResults.Ok(hotel),
+            { } result => TypedResults.Ok(result),
             _ => TypedResults.NotFound()
         };
     }

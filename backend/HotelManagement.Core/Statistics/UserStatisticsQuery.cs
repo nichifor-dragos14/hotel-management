@@ -24,4 +24,6 @@ public record UserStatistics(
     List<UserActivityScore> topUsers
 );
 
-public record UserStatisticsQuery(Guid UserId) : IQuery<UserStatistics>;
+public record UserStatisticsQuery(
+    Guid UserId
+) : IQuery<UserStatistics>;

@@ -19,7 +19,9 @@ public record UserDetails(
     GeniusLevel GeniusLevel
 );
 
-public record OneUserQuery(string Email) : IQuery<UserDetails>;
+public record OneUserQuery(
+    string Email
+) : IQuery<UserDetails>;
 
 internal class OneUserQueryHandler(
     IQueryFacade facade

@@ -22,4 +22,6 @@ public record PropertyStatistics(
 );
 
 
-public record PropertyStatisticsQuery(Guid PropertyId) : IQuery<PropertyStatistics>;
+public record PropertyStatisticsQuery(
+    Guid PropertyId
+) : IQuery<PropertyStatistics>;

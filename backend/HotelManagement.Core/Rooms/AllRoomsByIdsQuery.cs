@@ -3,7 +3,9 @@ using HotelManagement.Core.Properties;
 
 namespace HotelManagement.Core.Rooms;
 
-public record AllRoomsByIdsQuery(List<Guid> Ids) : IQuery<IEnumerable<RoomPropertyDetails>>;
+public record AllRoomsByIdsQuery(
+    List<Guid> Ids
+) : IQuery<IEnumerable<RoomPropertyDetails>>;
 
 internal class AllRoomsByIdsQueryHandler(
     IQueryFacade facade

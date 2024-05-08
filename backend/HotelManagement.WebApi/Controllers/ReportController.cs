@@ -34,7 +34,7 @@ public class ReportController
 
         return await queryService.ExecuteAsync(new OneReportQuery(id), cancellationToken) switch
         {
-            { } report => TypedResults.Ok(report),
+            { } result => TypedResults.Ok(result),
             _ => TypedResults.NotFound()
         };
     }

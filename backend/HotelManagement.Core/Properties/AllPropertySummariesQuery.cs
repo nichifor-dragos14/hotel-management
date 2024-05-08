@@ -11,4 +11,7 @@ public record PropertySummary(
     int RowNumber
 );
 
-public record AllPropertySummariesQuery(int From, int To): IQuery<IPaginatedResult<PropertySummary>>;
+public record AllPropertySummariesQuery(
+    int From,
+    int To
+): IQuery<IPaginatedResult<PropertySummary>>;

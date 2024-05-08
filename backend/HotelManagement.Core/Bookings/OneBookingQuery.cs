@@ -65,4 +65,6 @@ public record BookingRoomDetails(
     DateTime UpdatedOn
 );
 
-public record OneBookingQuery(Guid? Id) : IQuery<BookingDetails>;
+public record OneBookingQuery(
+    Guid? Id
+) : IQuery<BookingDetails>;

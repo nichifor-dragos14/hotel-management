@@ -2,9 +2,13 @@
 
 namespace HotelManagement.Core.Reviews;
 
-public record DeleteReviewCommand(Guid Id) : ICommand<bool>;
+public record DeleteReviewCommand(
+    Guid Id
+) : ICommand<bool>;
 
-internal class DeleteReviewCommandHandler(IUnitOfWork unitOfWork) : ICommandHandler<DeleteReviewCommand, bool>
+internal class DeleteReviewCommandHandler(
+    IUnitOfWork unitOfWork
+    ) : ICommandHandler<DeleteReviewCommand, bool>
 {
     public async Task<bool> ExecuteAsync(DeleteReviewCommand command, CancellationToken cancellationToken)
     {

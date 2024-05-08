@@ -17,7 +17,9 @@ internal class CreateReportCommandHandler(
     IUnitOfWork unitOfWork
 ) : ICommandHandler<CreateReportCommand, Guid?>
 {
-    public async Task<Guid?> ExecuteAsync(CreateReportCommand command, CancellationToken cancellationToken)
+    public async Task<Guid?> ExecuteAsync(
+        CreateReportCommand command,
+        CancellationToken cancellationToken)
     {
         var properties = unitOfWork.GetRepository<Property>();
 

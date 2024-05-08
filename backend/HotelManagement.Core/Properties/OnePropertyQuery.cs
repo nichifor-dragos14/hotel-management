@@ -69,4 +69,11 @@ public record RoomPropertyDetails(
     DateTime UpdatedOn
 );
 
-public record OnePropertyQuery(Guid? Id, DateTime StartDate, DateTime EndDate, int NumberOfAdults, int NumberOfChildren, Guid? loggedUserId) : IQuery<PropertyDetails>;
+public record OnePropertyQuery(
+    Guid? Id,
+    DateTime StartDate,
+    DateTime EndDate,
+    int NumberOfAdults,
+    int NumberOfChildren,
+    Guid? LoggedUserId
+) : IQuery<PropertyDetails>;

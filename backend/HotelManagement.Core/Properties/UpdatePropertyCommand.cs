@@ -27,7 +27,9 @@ internal class UpdatePropertyCommandHandler(
     IUnitOfWork unitOfWork
 ) : ICommandHandler<UpdatePropertyCommand, Guid?>
 {
-    public async Task<Guid?> ExecuteAsync(UpdatePropertyCommand command, CancellationToken cancellationToken)
+    public async Task<Guid?> ExecuteAsync(
+        UpdatePropertyCommand command,
+        CancellationToken cancellationToken)
     {
         var properties = unitOfWork.GetRepository<Property>();
 

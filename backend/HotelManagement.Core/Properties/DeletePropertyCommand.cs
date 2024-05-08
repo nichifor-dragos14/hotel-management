@@ -2,11 +2,16 @@
 
 namespace HotelManagement.Core.Properties;
 
-public record DeletePropertyCommand(Guid Id) : ICommand<bool>;
+public record DeletePropertyCommand(
+    Guid Id
+) : ICommand<bool>;
 
-internal class DeletePropertyCommandHandler(IUnitOfWork unitOfWork) : ICommandHandler<DeletePropertyCommand, bool>
+internal class DeletePropertyCommandHandler(
+    IUnitOfWork unitOfWork) : ICommandHandler<DeletePropertyCommand, bool>
 {
-    public async Task<bool> ExecuteAsync(DeletePropertyCommand command, CancellationToken cancellationToken)
+    public async Task<bool> ExecuteAsync(
+        DeletePropertyCommand command,
+        CancellationToken cancellationToken)
     {
         var properties = unitOfWork.GetRepository<Property>();
 

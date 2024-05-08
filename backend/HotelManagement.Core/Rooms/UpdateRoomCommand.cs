@@ -18,7 +18,9 @@ internal class UpdateRoomCommandHandler(
     IUnitOfWork unitOfWork
 ) : ICommandHandler<UpdateRoomCommand, Guid?>
 {
-    public async Task<Guid?> ExecuteAsync(UpdateRoomCommand command, CancellationToken cancellationToken)
+    public async Task<Guid?> ExecuteAsync(
+        UpdateRoomCommand command, 
+        CancellationToken cancellationToken)
     {
         var rooms = unitOfWork.GetRepository<Room>();
 

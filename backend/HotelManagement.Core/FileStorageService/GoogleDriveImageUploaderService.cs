@@ -1,7 +1,6 @@
 ﻿using Google.Apis.Drive.v3;
 using Microsoft.Extensions.Options;
 
-
 namespace HotelManagement.Core.FileStorageService;
 
 public class GoogleDriveImageUploaderService(DriveService _driveService, IOptions<GoogleDriveOptions> _options) : IFileStorageService

@@ -18,7 +18,9 @@ internal class CreateReviewCommandHandler(
     IUnitOfWork unitOfWork
 ) : ICommandHandler<CreateReviewCommand, Guid?>
 {
-    public async Task<Guid?> ExecuteAsync(CreateReviewCommand command, CancellationToken cancellationToken)
+    public async Task<Guid?> ExecuteAsync(
+        CreateReviewCommand command,
+        CancellationToken cancellationToken)
     {
         var properties = unitOfWork.GetRepository<Property>();
 

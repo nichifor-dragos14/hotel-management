@@ -2,13 +2,17 @@
 
 namespace HotelManagement.Core.Reports;
 
-public record ReadReportCommand(Guid Id) : ICommand<Guid?>;
+public record ReadReportCommand(
+    Guid Id
+) : ICommand<Guid?>;
 
 internal class ReadReportCommandHandler(
     IUnitOfWork unitOfWork
 ) : ICommandHandler<ReadReportCommand, Guid?>
 {
-    public async Task<Guid?> ExecuteAsync(ReadReportCommand command, CancellationToken cancellationToken)
+    public async Task<Guid?> ExecuteAsync(
+        ReadReportCommand command,
+        CancellationToken cancellationToken)
     {
         var reports = unitOfWork.GetRepository<Report>();
 

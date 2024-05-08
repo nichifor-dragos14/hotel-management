@@ -15,4 +15,8 @@ public record PropertyReview(
     int RowNumber
 );
 
-public record AllPropertyReviewsQuery(int From, int To, Guid Id) : IQuery<IPaginatedResult<PropertyReview>>;
+public record AllPropertyReviewsQuery(
+    int From,
+    int To,
+    Guid Id
+) : IQuery<IPaginatedResult<PropertyReview>>;
