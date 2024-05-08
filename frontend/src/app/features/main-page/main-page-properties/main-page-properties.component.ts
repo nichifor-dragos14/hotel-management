@@ -24,6 +24,8 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatDividerModule } from '@angular/material/divider';
 import { SearchHistoryService } from '$core/search-history.service';
 import { slideInAnimation } from '$core/app.animations';
+import { LoginService } from '$features/auth/login.service';
+import { UserDetails, UserService } from '$backend/services';
 
 @Component({
   selector: 'app-main-page-properties',
@@ -55,14 +57,31 @@ export class MainPagePropertiesComponent implements AfterViewInit {
   readonly searchPropertyForm = inject(SEARCH_PROPERTY_FORM);
   readonly filterPropertyForm = inject(FILTER_PROPERTY_FORM);
   readonly searchHistoryService = inject(SearchHistoryService);
+  readonly loginService = inject(LoginService);
+  readonly userService = inject(UserService);
 
   minDate: Date = new Date();
   maxDate: Date = new Date();
+
+  loggedUserEmail!: string;
+  userDetails!: UserDetails;
 
   constructor(private contexts: ChildrenOutletContexts) {
     this.minDate.setHours(0, 0, 0, 0);
     this.maxDate.setFullYear(this.maxDate.getFullYear() + 1);
     this.maxDate.setHours(0, 0, 0, 0);
+
+    this.loggedUserEmail = this.loginService.getLoggedUserEmail();
+
+    if (this.loggedUserEmail) {
+      this.userService
+        .usersEmailGet({
+          email: this.loggedUserEmail,
+        })
+        .subscribe((response) => {
+          this.userDetails = response;
+        });
+    }
   }
 
   getRouteAnimationData() {
@@ -204,9 +223,11 @@ export class MainPagePropertiesComponent implements AfterViewInit {
       queryParams['isSuperb'] = true;
     }
 
-    this.searchHistoryService.AddSearchToSearchHistory(
-      JSON.stringify(this.searchPropertyForm.value)
-    );
+    if (this.loggedUserEmail && this.userDetails.retainSearchHistory) {
+      this.searchHistoryService.AddSearchToSearchHistory(
+        JSON.stringify(this.searchPropertyForm.value)
+      );
+    }
 
     this.router.navigate(['main/search-results'], { queryParams: queryParams });
   }
