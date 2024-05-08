@@ -73,7 +73,7 @@ import { CommonModule } from '@angular/common';
           </a>
           <a
             mat-list-item
-            routerLink="/main/our-recommendations"
+            routerLink="/main"
             routerLinkActive="selected"
             *ngIf="userRole == 'Client'"
           >

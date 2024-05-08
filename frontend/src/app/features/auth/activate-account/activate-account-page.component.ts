@@ -33,16 +33,21 @@ export class ActivateAccountPageComponent implements OnInit {
         (result) => {
           this.authService.authActivatePost({ body: { id: result } }).subscribe(
             (result) => {
-              this.toastrService.open('Successfully activated account!');
+              this.toastrService.open(
+                'Successfully activated account!',
+                'info'
+              );
               this.router.navigateByUrl('main/our-recommendations');
             },
             (error) => {
-              console.error(error);
+              this.toastrService.open('Can not activate account', 'error');
+              this.router.navigateByUrl('main/our-recommendations');
             }
           );
         },
         (error) => {
-          console.error(error);
+          this.toastrService.open('Invalid token or email', 'error');
+          this.router.navigateByUrl('main/our-recommendations');
         }
       );
   }

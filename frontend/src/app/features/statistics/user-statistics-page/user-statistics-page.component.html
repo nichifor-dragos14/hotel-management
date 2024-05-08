@@ -61,6 +61,7 @@
             mat-list-item
             [routerLink]="['/properties', review.propertyId, 'preview']"
             routerLinkActive="active"
+            [queryParams]="generateDefaultQueryParams()"
           >
             <span matListItemIcon *ngIf="i == 0">
               <mat-icon class="first"> emoji_events </mat-icon>

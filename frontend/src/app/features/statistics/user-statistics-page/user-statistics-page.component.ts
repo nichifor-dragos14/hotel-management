@@ -141,4 +141,23 @@ export class UserStatisticsPageComponent implements OnInit {
       ],
     };
   }
+
+  generateDefaultQueryParams() {
+    const startDate = new Date();
+    const endDate = new Date(new Date().getTime() + 24 * 60 * 60 * 1000);
+
+    startDate.setHours(3, 0, 0, 0);
+    endDate.setHours(3, 0, 0, 0);
+
+    let propertyQueryParams = {
+      startDate: startDate.toISOString(),
+      endDate: endDate.toISOString(),
+      numberOfChildren: 0,
+      numberOfAdults: 2,
+      numberOfRooms: 1,
+      location: '',
+    };
+
+    return propertyQueryParams;
+  }
 }

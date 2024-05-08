@@ -16,6 +16,11 @@ internal class ActivateAccountCommandHandler(
 
         if (users.TryGetById([command.Id], out var user))
         {
+            if (user.IsConfirmed == true)
+            {
+                return null;
+            }
+
             user.ConfirmAccount();
 
             await unitOfWork.SaveChangesAsync(cancellationToken);
