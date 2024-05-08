@@ -23,26 +23,31 @@ import { MatButtonModule } from '@angular/material/button';
           </span>
 
           <section role="capacity">
-            <span matCardSubtitle>
-              <ng-container
-                *ngFor="let _ of [].constructor(room.adultCapacity)"
-              >
-                <mat-icon>person</mat-icon>
-              </ng-container>
+            <span matCardSubtitle class="gap-icons">
+              <span>
+                <ng-container
+                  *ngFor="let _ of [].constructor(room.adultCapacity)"
+                >
+                  <mat-icon>person</mat-icon>
+                </ng-container>
+              </span>
               adults
             </span>
 
             <span
               matCardSubtitle
+              class="gap-icons"
               [style.visibility]="
                 room.childrenCapacity === 0 ? 'hidden' : 'visible'
               "
             >
-              <ng-container
-                *ngFor="let _ of [].constructor(room.childrenCapacity)"
-              >
-                <mat-icon>person</mat-icon>
-              </ng-container>
+              <span>
+                <ng-container
+                  *ngFor="let _ of [].constructor(room.childrenCapacity)"
+                >
+                  <mat-icon>person</mat-icon>
+                </ng-container>
+              </span>
               children
             </span>
           </section>
@@ -199,6 +204,12 @@ import { MatButtonModule } from '@angular/material/button';
 
     .cut-text {
       text-decoration: line-through;
+    }
+
+    .gap-icons {
+      display: flex;
+      flex-direction: row;
+      gap: 8px;
     }
   `,
   standalone: true,
