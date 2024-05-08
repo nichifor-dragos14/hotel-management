@@ -187,8 +187,12 @@ export class PropertyPageComponent implements OnInit {
   sendParams() {
     let queryParams = {
       location: this.searchPropertyForm.value.location,
-      startDate: this.searchPropertyForm.value.startDate?.toISOString(),
-      endDate: this.searchPropertyForm.value.endDate?.toISOString(),
+      startDate: new Date(
+        this.searchPropertyForm.value.startDate!.setHours(3, 0, 0, 0)
+      ).toISOString(),
+      endDate: new Date(
+        this.searchPropertyForm.value.endDate!.setHours(3, 0, 0, 0)
+      ).toISOString(),
       numberOfAdults: this.searchPropertyForm.value.numberOfAdults,
       numberOfChildren: this.searchPropertyForm.value.numberOfChildren,
       numberOfRooms: this.searchPropertyForm.value.numberOfRooms,
