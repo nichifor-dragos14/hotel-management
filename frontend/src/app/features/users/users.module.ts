@@ -175,28 +175,6 @@ const USER_ROUTES: Routes = [
               {
                 path: 'change-password',
                 component: ChangePasswordComponent,
-                resolve: {
-                  password: async () => {
-                    const router = inject(Router);
-                    const loginService = inject(LoginService);
-                    const userService = inject(UserService);
-
-                    try {
-                      const id = loginService.getLoggedUserId();
-
-                      const password =
-                        await userService.usersPasswordIdGetAsync({
-                          id,
-                        });
-
-                      return password;
-                    } catch (error) {
-                      router.navigate(['/error']);
-
-                      return null;
-                    }
-                  },
-                },
                 canActivate: [AuthGuard],
                 data: {
                   role: ['Client', 'Admin'],

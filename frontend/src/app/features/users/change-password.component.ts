@@ -49,7 +49,7 @@ import { AppToastService } from '$shared/toast';
     <form [formGroup]="changePasswordForm">
       <mat-form-field appearance="outline">
         <mat-label>Current password</mat-label>
-        <input matInput formControlName="password" />
+        <input matInput formControlName="password" type="password" />
         @if (changePasswordForm.get('password')?.errors?.['required']) {
           <mat-error> The current password is required. </mat-error>
         } @else if (
@@ -61,7 +61,7 @@ import { AppToastService } from '$shared/toast';
 
       <mat-form-field appearance="outline">
         <mat-label>New password</mat-label>
-        <input matInput formControlName="newPassword" />
+        <input matInput formControlName="newPassword" type="password" />
         @if (changePasswordForm.get('newPassword')?.errors?.['required']) {
           <mat-error> The new password is required. </mat-error>
         } @else if (
@@ -89,7 +89,7 @@ import { AppToastService } from '$shared/toast';
 
       <mat-form-field appearance="outline">
         <mat-label>Confirm new password</mat-label>
-        <input matInput formControlName="confirmPassword" />
+        <input matInput formControlName="confirmPassword" type="password" />
         @if (changePasswordForm.get('confirmPassword')?.errors?.['required']) {
           <mat-error> The confirmation password is required. </mat-error>
         } @else if (changePasswordForm.errors?.['passwordNotMatched']) {
@@ -135,17 +135,12 @@ export class ChangePasswordComponent {
   readonly loginService = inject(LoginService);
   readonly toastService = inject(AppToastService);
 
-  @Input() password!: string;
-
   changePasswordForm!: FormGroup;
 
   constructor(private formBuilder: FormBuilder) {
     this.changePasswordForm = this.formBuilder.group(
       {
-        password: [
-          '',
-          [Validators.required, this.validateCurrentPassword.bind(this)],
-        ],
+        password: ['', [Validators.required]],
         newPassword: [
           '',
           [
@@ -163,11 +158,6 @@ export class ChangePasswordComponent {
         validators: this.matchPassword('newPassword', 'confirmPassword'),
       }
     );
-  }
-
-  validateCurrentPassword(control: AbstractControl): ValidationErrors | null {
-    const isCorrectPassword = control.value === this.password;
-    return isCorrectPassword ? null : { passwordMismatch: true };
   }
 
   private matchPassword(
@@ -221,7 +211,8 @@ export class ChangePasswordComponent {
       await this.userService.usersPasswordPatchAsync({
         body: {
           id: this.loginService.getLoggedUserId(),
-          password: newPasswordForm.newPassword,
+          newPassword: newPasswordForm.newPassword,
+          oldPassword: newPasswordForm.password,
         },
       });
 

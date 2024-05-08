@@ -87,20 +87,6 @@ public class UserController(IFileStorageService _storageService) : Controller
         };
     }
 
-    [HttpGet("password/{id}")]
-    public async Task<Results<Ok<string>, NotFound, BadRequest>> GetPassword(
-       Guid id,
-       [FromServices] IQueryHandler<GetUserPasswordQuery, string> queryService,
-       CancellationToken cancellationToken)
-    {
-        return await queryService.ExecuteAsync(new GetUserPasswordQuery(id), cancellationToken) switch
-        {
-            { } result => TypedResults.Ok(result),
-            _ => TypedResults.NotFound()
-        };
-    }
-
-
     [HttpPatch("password")]
     public async Task<Results<Ok<Guid>, BadRequest>> UpdatePassword(
        [FromBody] UpdateUserPasswordCommand command,

@@ -4,7 +4,8 @@ namespace HotelManagement.Core.Users;
 
 public record UpdateUserPasswordCommand(
    Guid Id,
-   string Password
+   string OldPassword,
+   string NewPassword
 ) : ICommand<Guid?>;
 
 internal class UpdateUserPasswordCommandHandler(
@@ -19,8 +20,13 @@ internal class UpdateUserPasswordCommandHandler(
 
         if (users.TryGetById([command.Id], out var user))
         {
+            if (user.Password != command.OldPassword)
+            {
+                return null;
+            }
+
             user.UpdatePassword(
-                command.Password        
+                command.NewPassword        
             );
 
             await unitOfWork.SaveChangesAsync(cancellationToken);

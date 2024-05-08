@@ -2157,42 +2157,6 @@
         }
       }
     },
-    "/users/password/{id}": {
-      "get": {
-        "tags": [
-          "User"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "format": "uuid"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "string"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "400": {
-            "description": "Bad Request"
-          }
-        }
-      }
-    },
     "/users/password": {
       "patch": {
         "tags": [
@@ -4520,7 +4484,8 @@
       "UpdateUserPasswordCommand": {
         "required": [
           "id",
-          "password"
+          "newPassword",
+          "oldPassword"
         ],
         "type": "object",
         "properties": {
@@ -4528,7 +4493,10 @@
             "type": "string",
             "format": "uuid"
           },
-          "password": {
+          "oldPassword": {
+            "type": "string"
+          },
+          "newPassword": {
             "type": "string"
           }
         },
