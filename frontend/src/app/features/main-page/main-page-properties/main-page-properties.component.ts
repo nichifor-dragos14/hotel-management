@@ -96,6 +96,7 @@ export class MainPagePropertiesComponent implements AfterViewInit {
 
   submitForm() {
     if (this.searchPropertyForm.get(['location'])!.value != '') {
+      console.log(this, this.searchPropertyForm.value);
       this.search(this.searchPropertyForm.value);
 
       return;
@@ -223,7 +224,7 @@ export class MainPagePropertiesComponent implements AfterViewInit {
       queryParams['isSuperb'] = true;
     }
 
-    if (this.loggedUserEmail && this.userDetails.retainSearchHistory) {
+    if (this.loggedUserEmail && this.userDetails?.retainSearchHistory) {
       this.searchHistoryService.AddSearchToSearchHistory(
         JSON.stringify(this.searchPropertyForm.value)
       );
