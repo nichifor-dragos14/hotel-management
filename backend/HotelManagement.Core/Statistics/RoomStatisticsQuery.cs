@@ -8,4 +8,6 @@ public record RoomStatistics(
 );
 
 
-public record RoomStatisticsQuery(Guid RoomId) : IQuery<RoomStatistics>;
+public record RoomStatisticsQuery(
+    Guid RoomId
+) : IQuery<RoomStatistics>;

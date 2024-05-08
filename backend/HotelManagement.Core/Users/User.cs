@@ -104,6 +104,7 @@ public class User
         string address,
         DateTime dateOfBirth,
         string password,
+        string profilePicture,
         string activationToken
     )
     {
@@ -119,7 +120,7 @@ public class User
             password,
             false,
             false,
-            "",
+            profilePicture,
             activationToken,
             DateTime.UtcNow,
             DateTime.UtcNow

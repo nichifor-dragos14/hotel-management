@@ -12,6 +12,7 @@ public record RegisterCommand(
       string Address,
       DateTime DateOfBirth,
       string Password,
+      string? ProfilePicture,
       string? ActivationToken
 ) : ICommand<Guid?>;
 
@@ -35,6 +36,7 @@ internal class RegisterCommandHandler(
                  command.Address,
                  command.DateOfBirth,
                  command.Password,
+                 command.ProfilePicture,
                  command.ActivationToken
         );
 

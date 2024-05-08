@@ -28,7 +28,7 @@ internal class AllPropertyRoomsQueryHandler(
                             r."Id",
                             r."Number",
                             r."Type",
-                            r."Price",
+                            r."Price" * {(query.StartDate - query.EndDate).Days} AS "Price",
                             r."AdultCapacity",
                             r."ChildrenCapacity",
                             r."HasPrivateBathroom",

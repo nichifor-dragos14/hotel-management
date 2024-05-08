@@ -43,7 +43,7 @@ IQueryFacade facade
             r.Id,
             r.Number,
             r.Type,
-            r.Price,
+            (query.StartDate != null && query.EndDate != null) ? r.Price * (query.StartDate - query.EndDate).Days : r.Price,
             r.AdultCapacity,
             r.ChildrenCapacity,
             r.HasPrivateBathroom,
@@ -78,7 +78,7 @@ IQueryFacade facade
 
         var property = propertyDetails.Property;
 
-        var discount = property.Discounts.Where(d => d.UserId == query.loggedUserId && DateTime.UtcNow < d.EndDate).FirstOrDefault();
+        var discount = property.Discounts.Where(d => d.UserId == query.LoggedUserId && DateTime.UtcNow < d.EndDate).FirstOrDefault();
 
         return new PropertyDetails(
             property.Id,

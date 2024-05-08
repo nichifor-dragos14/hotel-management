@@ -7,8 +7,7 @@ public record DeleteReviewCommand(
 ) : ICommand<bool>;
 
 internal class DeleteReviewCommandHandler(
-    IUnitOfWork unitOfWork
-    ) : ICommandHandler<DeleteReviewCommand, bool>
+    IUnitOfWork unitOfWork) : ICommandHandler<DeleteReviewCommand, bool>
 {
     public async Task<bool> ExecuteAsync(DeleteReviewCommand command, CancellationToken cancellationToken)
     {

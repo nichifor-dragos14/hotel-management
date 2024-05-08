@@ -3605,6 +3605,10 @@
           "password": {
             "type": "string"
           },
+          "profilePicture": {
+            "type": "string",
+            "nullable": true
+          },
           "activationToken": {
             "type": "string",
             "nullable": true

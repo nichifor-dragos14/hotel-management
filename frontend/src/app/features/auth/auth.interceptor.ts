@@ -20,7 +20,7 @@ export class AuthInterceptor implements HttpInterceptor {
     const jwtToken = localStorage.getItem('JWT');
     let request = req;
 
-    if (jwtToken) {
+    if (jwtToken && !req.url.includes('maps.google.com')) {
       request = req.clone({
         setHeaders: {
           Authorization: `Bearer ${jwtToken}`,

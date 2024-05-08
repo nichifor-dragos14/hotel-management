@@ -32,13 +32,13 @@ internal class AllReviewSummariesQueryHandler(
                             "Property" AS p
                         ON
                             r."PropertyId" = p."Id"
-                        WHERE r."UserId" = {query.userId}
+                        WHERE r."UserId" = {query.UserId}
                         ORDER BY
                             r."CreatedOn" DESC
                         OFFSET {query.From} ROWS FETCH NEXT {query.To - query.From} ROWS ONLY
                     )
                     SELECT
-                        (SELECT COUNT(*) FROM "Review" r WHERE r."UserId" = {query.userId}) as "TotalCount",
+                        (SELECT COUNT(*) FROM "Review" r WHERE r."UserId" = {query.UserId}) as "TotalCount",
                             CASE
                                 WHEN (SELECT COUNT(*) FROM ReviewSummaries) > 0
                                     THEN jsonb_agg(ReviewSummaries)

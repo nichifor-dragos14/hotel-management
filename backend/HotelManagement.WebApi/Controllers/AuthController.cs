@@ -49,6 +49,8 @@ public class AuthController(IConfiguration _configuration, IEmailService _emailS
             return TypedResults.BadRequest();
         }
 
+        var profilePicture = _configuration["GoogleDriveOptions:DefaultProfilePicture"];
+
         var newCommand = new RegisterCommand
             (command.FirstName,
             command.LastName, 
@@ -58,7 +60,9 @@ public class AuthController(IConfiguration _configuration, IEmailService _emailS
             command.Gender, 
             command.Address,
             command.DateOfBirth, 
-            command.Password, token
+            command.Password,
+            profilePicture,
+            token
         );
 
         return await commandHandler.ExecuteAsync(newCommand, cancellationToken) switch
