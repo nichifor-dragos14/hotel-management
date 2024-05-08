@@ -96,7 +96,6 @@ export class MainPagePropertiesComponent implements AfterViewInit {
 
   submitForm() {
     if (this.searchPropertyForm.get(['location'])!.value != '') {
-      console.log(this, this.searchPropertyForm.value);
       this.search(this.searchPropertyForm.value);
 
       return;

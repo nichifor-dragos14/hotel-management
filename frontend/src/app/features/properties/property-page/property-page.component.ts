@@ -54,11 +54,11 @@ export interface GridImage {
   ],
 })
 export class PropertyPageComponent implements OnInit {
-  @Input() property!: PropertyDetails;
-  activatedRoute = inject(ActivatedRoute);
-  router = inject(Router);
+  readonly router = inject(Router);
+  readonly activatedRoute = inject(ActivatedRoute);
+  readonly searchPropertyForm = inject(SEARCH_PROPERTY_FORM);
 
-  searchPropertyForm = inject(SEARCH_PROPERTY_FORM);
+  @Input() property!: PropertyDetails;
 
   displayedColumns = ['roomType', 'numberOfGuests', 'price'];
 

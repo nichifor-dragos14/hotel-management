@@ -37,7 +37,7 @@ import { DateConverterModule } from '$shared/date-converter';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ReviewsPageComponent {
-  reviewService = inject(ReviewService);
+  readonly reviewService = inject(ReviewService);
 
   @Input() userId!: string;
 

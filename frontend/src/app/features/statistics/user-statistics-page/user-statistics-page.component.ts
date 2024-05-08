@@ -34,7 +34,7 @@ import { MatTabsModule } from '@angular/material/tabs';
   ],
 })
 export class UserStatisticsPageComponent implements OnInit {
-  cdr = inject(ChangeDetectorRef);
+  readonly cdr = inject(ChangeDetectorRef);
 
   @Input() statistics!: UserStatistics;
 

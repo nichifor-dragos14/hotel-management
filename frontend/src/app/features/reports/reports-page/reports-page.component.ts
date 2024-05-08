@@ -34,7 +34,7 @@ import { CommonModule } from '@angular/common';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ReportsPageComponent {
-  reportService = inject(ReportService);
+  readonly reportService = inject(ReportService);
 
   reportsDataSource = new PaginatedDataSource({
     fetch: ({ from, to }) => this.reportService.reportsGet({ from, to }),

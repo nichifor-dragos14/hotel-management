@@ -20,7 +20,6 @@ import { PropertyRecommendationCardPlaceholderComponent } from '$shared/placehol
 import { SearchHistoryService } from '$core/search-history.service';
 import { AppPageHeaderComponent } from '$shared/page-header';
 import { MatButtonModule } from '@angular/material/button';
-import { PropertyQueryParams } from '../property-query-params.interface';
 import { LoginService } from '$features/auth/login.service';
 import { Subscription } from 'rxjs';
 import { SEARCH_PROPERTY_FORM } from '../search-property.form';
@@ -45,11 +44,11 @@ import { SEARCH_PROPERTY_FORM } from '../search-property.form';
   ],
 })
 export class MainPageOurRecommendationsComponent implements OnInit {
-  propertyService = inject(PropertyService);
-  loginService = inject(LoginService);
-  searchHistoryService = inject(SearchHistoryService);
-  cdr = inject(ChangeDetectorRef);
-  searchForm = inject(SEARCH_PROPERTY_FORM);
+  readonly cdr = inject(ChangeDetectorRef);
+  readonly propertyService = inject(PropertyService);
+  readonly loginService = inject(LoginService);
+  readonly searchHistoryService = inject(SearchHistoryService);
+  readonly searchForm = inject(SEARCH_PROPERTY_FORM);
 
   private subscription: Subscription = new Subscription();
   isLoggedIn: boolean = false;

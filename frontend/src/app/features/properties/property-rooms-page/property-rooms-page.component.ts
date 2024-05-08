@@ -32,12 +32,11 @@ import { LoginService } from '$features/auth/login.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PropertyRoomsPageComponent {
+  readonly router = inject(Router);
+  readonly activatedRoute = inject(ActivatedRoute);
   readonly propertyService = inject(PropertyService);
   readonly toastService = inject(AppToastService);
   readonly loginService = inject(LoginService);
-
-  readonly router = inject(Router);
-  readonly activatedRoute = inject(ActivatedRoute);
 
   selectedRoomIds: string[] = [];
 

@@ -67,8 +67,8 @@ export class UpdatePropertyPageComponent implements OnChanges {
   readonly propertyService = inject(PropertyService);
   readonly toastService = inject(AppToastService);
   readonly router = inject(Router);
-  @Input() propertyForm!: FormGroup;
 
+  @Input() propertyForm!: FormGroup;
   @Input() propertyTypes: PropertyTypeSummary[] = [];
 
   files: ImageFile[] = [];

@@ -37,7 +37,7 @@ import { MatIconModule } from '@angular/material/icon';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BookingsPageComponent {
-  bookingService = inject(BookingService);
+  readonly bookingService = inject(BookingService);
 
   @Input() userId!: string;
 

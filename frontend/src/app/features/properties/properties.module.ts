@@ -178,9 +178,6 @@ const PROPERTY_ROUTES: Routes = [
             ],
           },
         ],
-        data: {
-          animation: 'PropertyPage',
-        },
       },
     ],
   },

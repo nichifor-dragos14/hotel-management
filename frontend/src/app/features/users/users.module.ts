@@ -1,10 +1,5 @@
 import { NgModule, inject } from '@angular/core';
-import {
-  ActivatedRouteSnapshot,
-  Router,
-  RouterModule,
-  Routes,
-} from '@angular/router';
+import { Router, RouterModule, Routes } from '@angular/router';
 import { UserProfilePageComponent } from './user-profile/user-profile-page.component';
 import { UserProfileDetailsPageComponent } from './user-profile-details/user-profile-details-page.component';
 import { UserProfilePreferencesPageComponent } from './user-profile-preferences/user-profile-preferences-page.component';

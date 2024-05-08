@@ -1,12 +1,7 @@
 import { UpdatePropertyCommand } from '$backend/services';
 import { AppFormBuilder } from '$core/forms';
 import { Injectable, inject } from '@angular/core';
-import {
-  AbstractControl,
-  FormGroup,
-  ValidatorFn,
-  Validators,
-} from '@angular/forms';
+import { FormGroup, Validators } from '@angular/forms';
 import { phoneNumberValidator } from './new-property.form';
 
 @Injectable({ providedIn: 'root' })

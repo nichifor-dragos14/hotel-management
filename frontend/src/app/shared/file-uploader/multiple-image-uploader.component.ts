@@ -123,7 +123,9 @@ import { MatButtonModule } from '@angular/material/button';
   ],
 })
 export class MultipleImageUploadComponent {
-  private multipleImageUploadService = inject(MultipleImageUploadService);
+  private readonly multipleImageUploadService = inject(
+    MultipleImageUploadService
+  );
   imageFiles$ = this.multipleImageUploadService.imageFiles$;
 
   @Input() title!: string;

@@ -40,7 +40,6 @@ export class TinyEditorDirective extends MatInput {
   @HostBinding('class.editor-placeholder')
   loading: true | undefined = true;
 
-  // eslint-disable-next-line max-lines-per-function
   constructor() {
     const matFormField = inject(MAT_FORM_FIELD);
 

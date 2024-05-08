@@ -115,13 +115,14 @@ import { CommonModule } from '@angular/common';
   styleUrl: './app-layout.component.scss',
 })
 export class AppLayoutComponent implements OnInit {
-  cdr = inject(ChangeDetectorRef);
-  loginService = inject(LoginService);
+  readonly cdr = inject(ChangeDetectorRef);
+  readonly loginService = inject(LoginService);
+
+  private subscription: Subscription = new Subscription();
 
   isLoggedIn: boolean = false;
   userRole: string = '';
   profilePicture: string = '';
-  private subscription: Subscription = new Subscription();
 
   ngOnInit(): void {
     this.subscribeToLoginStatus();

@@ -31,12 +31,11 @@ import { AppPageHeaderComponent } from '$shared/page-header';
   ],
 })
 export class ReportPageComponent implements AfterViewInit {
+  readonly reportService = inject(ReportService);
+
   @Input() report!: ReportDetails;
 
-  reportService = inject(ReportService);
-
   async ngAfterViewInit() {
-    console.log(this.report);
     if (this.report.isRead) {
       return;
     }

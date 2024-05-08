@@ -1,4 +1,4 @@
-import { PropertyRoom, RoomPropertyDetails, RoomType } from '$backend/services';
+import { PropertyRoom, RoomType } from '$backend/services';
 import {
   Component,
   ChangeDetectionStrategy,
@@ -224,6 +224,7 @@ import { MatButtonModule } from '@angular/material/button';
 })
 export class RoomCardComponent {
   @Input() room!: PropertyRoom;
+
   @Output() messageEvent = new EventEmitter<string>();
 
   isSelected: boolean = false;

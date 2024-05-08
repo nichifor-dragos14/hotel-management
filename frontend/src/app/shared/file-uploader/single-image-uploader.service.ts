@@ -6,7 +6,7 @@ import { ImageFile } from './image-file.model';
   providedIn: 'root',
 })
 export class SingleImageUploadService {
-  private imageSource = new BehaviorSubject<ImageFile | null>(null);
+  private readonly imageSource = new BehaviorSubject<ImageFile | null>(null);
   imageFile$ = this.imageSource.asObservable();
 
   setImage(file: ImageFile): void {

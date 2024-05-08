@@ -45,13 +45,13 @@ export class RegisterPageComponent implements OnInit {
   readonly toastrService = inject(AppToastService);
   readonly registerForm = inject(REGISTER_FORM);
 
+  genderEnum = Gender;
+
   ngOnInit() {
     if (this.loginService.getLoggedUserId()) {
       this.router.navigate(['main/our-recommendations']);
     }
   }
-
-  genderEnum = Gender;
 
   async register(value: typeof this.registerForm.value) {
     if (!this.registerForm.valid) {

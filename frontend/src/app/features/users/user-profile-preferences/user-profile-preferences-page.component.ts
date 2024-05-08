@@ -28,6 +28,9 @@ import { RouterModule } from '@angular/router';
   ],
 })
 export class UserProfilePreferencesPageComponent implements AfterViewInit {
+  readonly userService = inject(UserService);
+  readonly toastService = inject(AppToastService);
+
   @Input() userForm!: FormGroup;
 
   uneditedUserForm = inject(FormBuilder).group({
@@ -35,9 +38,6 @@ export class UserProfilePreferencesPageComponent implements AfterViewInit {
     sendOffersOnEmail: [false],
     retainSearchHistory: [false],
   });
-
-  userService = inject(UserService);
-  toastService = inject(AppToastService);
 
   ngAfterViewInit() {
     this.uneditedUserForm.setValue(this.userForm.value);
@@ -53,9 +53,6 @@ export class UserProfilePreferencesPageComponent implements AfterViewInit {
     if (!this.userForm.valid) {
       return;
     }
-
-    console.log({ id, sendOffersOnEmail, retainSearchHistory });
-    console.log(this.uneditedUserForm, this.userForm);
 
     try {
       await this.userService.usersPreferencesPatchAsync({

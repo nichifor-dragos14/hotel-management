@@ -6,7 +6,7 @@ import {
   OnInit,
   inject,
 } from '@angular/core';
-import { PropertyStatistics, UserStatistics } from '$backend/services';
+import { PropertyStatistics } from '$backend/services';
 import { RouterModule } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
@@ -34,7 +34,7 @@ import { MatTabsModule } from '@angular/material/tabs';
   ],
 })
 export class RoomStatisticsPageComponent implements OnInit {
-  cdr = inject(ChangeDetectorRef);
+  readonly cdr = inject(ChangeDetectorRef);
 
   @Input() statistics!: PropertyStatistics;
   @Input() propertyId!: string;

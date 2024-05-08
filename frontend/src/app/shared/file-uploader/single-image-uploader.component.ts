@@ -97,7 +97,7 @@ import { MatIconModule } from '@angular/material/icon';
   ],
 })
 export class SingleImageUploadComponent {
-  private singleImageUploadService = inject(SingleImageUploadService);
+  private readonly singleImageUploadService = inject(SingleImageUploadService);
   imageFile$ = this.singleImageUploadService.imageFile$;
 
   @Input() title!: string;

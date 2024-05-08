@@ -1,4 +1,3 @@
-// upload-profile-picture.component.ts
 import { Component, Input, OnInit, inject } from '@angular/core';
 import {
   FormControl,

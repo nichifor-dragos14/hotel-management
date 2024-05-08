@@ -77,7 +77,6 @@ export class NewBookingPageComponent implements AfterViewInit {
 
   ngAfterViewInit() {
     this.setControls();
-    console.log(this.discount);
 
     this.loggedUserEmail = this.userForm.get('email')?.value;
   }

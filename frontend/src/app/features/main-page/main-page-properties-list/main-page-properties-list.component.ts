@@ -32,9 +32,9 @@ import { LoginService } from '$features/auth/login.service';
   ],
 })
 export class MainPagePropertiesListComponent {
-  propertyService = inject(PropertyService);
-  activatedRoute = inject(ActivatedRoute);
-  loginService = inject(LoginService);
+  readonly propertyService = inject(PropertyService);
+  readonly activatedRoute = inject(ActivatedRoute);
+  readonly loginService = inject(LoginService);
 
   propertiesDataSource = new PaginatedDataSource({
     fetch: ({ from, to }) => {

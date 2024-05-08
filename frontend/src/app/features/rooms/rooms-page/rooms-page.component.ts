@@ -37,7 +37,7 @@ import { AppCirclePlaceholderComponent } from '$shared/placeholders/circle-place
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RoomsPageComponent {
-  roomService = inject(RoomService);
+  readonly roomService = inject(RoomService);
 
   @Input() propertyId!: string;
 

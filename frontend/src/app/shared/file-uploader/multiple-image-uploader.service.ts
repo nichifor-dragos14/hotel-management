@@ -7,7 +7,7 @@ import { AppToastService } from '$shared/toast';
   providedIn: 'root',
 })
 export class MultipleImageUploadService {
-  toastrService = inject(AppToastService);
+  readonly toastrService = inject(AppToastService);
 
   private filesSource = new BehaviorSubject<ImageFile[]>([]);
   imageFiles$ = this.filesSource.asObservable();

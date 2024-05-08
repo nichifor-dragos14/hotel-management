@@ -22,7 +22,7 @@ export class ImageUploaderDirective {
   @Output() dropFiles: EventEmitter<ImageFile[]> = new EventEmitter();
   @HostBinding('style.background') backgroundColor = DropColor.Default;
 
-  sanitizer = inject(DomSanitizer);
+  readonly sanitizer = inject(DomSanitizer);
 
   @HostListener('dragover', ['$event']) public dragOver(event: DragEvent) {
     event.preventDefault();

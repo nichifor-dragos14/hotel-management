@@ -32,7 +32,7 @@ import { AppCirclePlaceholderComponent } from '$shared/placeholders/circle-place
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PropertiesPageComponent {
-  propertyService = inject(PropertyService);
+  readonly propertyService = inject(PropertyService);
 
   propertiesDataSource = new PaginatedDataSource({
     fetch: ({ from, to }) => this.propertyService.propertiesGet({ from, to }),

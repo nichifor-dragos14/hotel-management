@@ -53,16 +53,16 @@ export class GoogleMapsPreviewComponent implements AfterViewInit, OnChanges {
   @Input() width: number = 450;
 
   ngAfterViewInit() {
-    //this.findAddress();
+    this.findAddress();
   }
 
   ngOnChanges() {
-    //this.findAddress();
+    this.findAddress();
   }
 
-  geocodingService = inject(GeocodingService);
-  toastrService = inject(AppToastService);
-  cdr = inject(ChangeDetectorRef);
+  readonly geocodingService = inject(GeocodingService);
+  readonly toastrService = inject(AppToastService);
+  readonly cdr = inject(ChangeDetectorRef);
 
   mapZoom = 8;
   mapCenter!: google.maps.LatLng;
