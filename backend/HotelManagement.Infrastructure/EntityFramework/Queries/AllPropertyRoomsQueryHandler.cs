@@ -28,7 +28,7 @@ internal class AllPropertyRoomsQueryHandler(
                             r."Id",
                             r."Number",
                             r."Type",
-                            r."Price" * {(query.StartDate - query.EndDate).Days} AS "Price",
+                            r."Price" * {(query.EndDate - query.StartDate).Days} AS "Price",
                             r."AdultCapacity",
                             r."ChildrenCapacity",
                             r."HasPrivateBathroom",
@@ -38,7 +38,7 @@ internal class AllPropertyRoomsQueryHandler(
                             r."HasBalcony",
                             r."HasRefrigerator",
                             r."HasSeaView",
-                            d."DiscountPercentage",
+                            COALESCE(d."DiscountPercentage", 0) AS "DiscountPercentage",
                             r."CreatedOn",
                             r."UpdatedOn",
                             ROW_NUMBER() OVER (ORDER BY r."CreatedOn" DESC) AS "RowNumber"
