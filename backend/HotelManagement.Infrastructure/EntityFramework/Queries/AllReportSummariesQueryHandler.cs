@@ -22,6 +22,7 @@ internal class AllReportSummariesQueryHandler(
                             r."Id",
                             r."Title",
                             r."IsRead",
+                            r."IsClosed",
                             p."Name" AS "PropertyName",
                             r."CreatedOn",
                             ROW_NUMBER() OVER (ORDER BY p."CreatedOn" DESC) AS "RowNumber"

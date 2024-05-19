@@ -6,6 +6,7 @@ public record ReportSummary(
     Guid Id,
     string Title,
     bool IsRead,
+    bool IsClosed,
     string PropertyName,
     DateTime CreatedOn,
     int RowNumber

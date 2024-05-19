@@ -3744,6 +3744,7 @@
         "required": [
           "createdOn",
           "id",
+          "isClosed",
           "isRead",
           "propertyName",
           "rowNumber",
@@ -3759,6 +3760,9 @@
             "type": "string"
           },
           "isRead": {
+            "type": "boolean"
+          },
+          "isClosed": {
             "type": "boolean"
           },
           "propertyName": {

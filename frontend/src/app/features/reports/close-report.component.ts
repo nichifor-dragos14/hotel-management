@@ -55,9 +55,7 @@ export class CloseReportComponent {
         this.toastService.open(error.message, 'error');
       }
     } finally {
-      await this.router.navigate(['../../'], {
-        relativeTo: this.activatedRoute,
-      });
+      await this.router.navigateByUrl('/reports/reinit');
     }
   }
 }

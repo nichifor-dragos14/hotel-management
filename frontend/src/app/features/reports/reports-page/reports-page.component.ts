@@ -12,6 +12,7 @@ import { PaginatedDataSource } from '$core/pagination';
 import { AppLinePlaceholderComponent } from '$shared/placeholders/line-placeholder';
 import { AppCirclePlaceholderComponent } from '$shared/placeholders/circle-placeholder';
 import { CommonModule } from '@angular/common';
+import { MatTabsModule } from '@angular/material/tabs';
 
 @Component({
   selector: 'app-reports-page',
@@ -29,6 +30,7 @@ import { CommonModule } from '@angular/common';
     AppLinePlaceholderComponent,
     AppCirclePlaceholderComponent,
     CommonModule,
+    MatTabsModule,
   ],
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
