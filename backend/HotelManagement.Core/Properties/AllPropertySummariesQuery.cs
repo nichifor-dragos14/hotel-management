@@ -13,5 +13,6 @@ public record PropertySummary(
 
 public record AllPropertySummariesQuery(
     int From,
-    int To
+    int To,
+    string Name
 ): IQuery<IPaginatedResult<PropertySummary>>;

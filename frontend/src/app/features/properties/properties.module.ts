@@ -31,6 +31,19 @@ const PROPERTY_ROUTES: Routes = [
         path: 'admin',
         component: PropertiesPageComponent,
         canActivate: [AuthGuard],
+        resolve: {
+          _name: async ({ queryParams }: ActivatedRouteSnapshot) => {
+            const router = inject(Router);
+
+            try {
+              return queryParams['location'];
+            } catch (error) {
+              router.navigate(['/error']);
+
+              return null;
+            }
+          },
+        },
         data: {
           role: ['Admin'],
         },

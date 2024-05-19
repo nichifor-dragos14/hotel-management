@@ -19,9 +19,10 @@ public class PropertyController(IFileStorageService _storageService) : Controlle
         [FromServices] IQueryHandler<AllPropertySummariesQuery, IPaginatedResult<PropertySummary>> queryService,
         int from,
         int to,
+        string? name,
         CancellationToken cancelationToken)
     {
-        return TypedResults.Ok(await queryService.ExecuteAsync(new AllPropertySummariesQuery(from, to), cancelationToken));
+        return TypedResults.Ok(await queryService.ExecuteAsync(new AllPropertySummariesQuery(from, to, name != null ? name : ""), cancelationToken));
     }
 
     [HttpGet("filter/{location}/{startDate}/{endDate}/{numberOfAdults}/{numberOfChildren}/{numberOfRooms}")]
