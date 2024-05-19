@@ -25,3 +25,12 @@ app-page-header {
   position: sticky;
   top: 14.5px;
 }
+
+#no-data {
+  height: 60vh;
+  width: 100%;
+  display: flex;
+  color: red;
+  justify-content: center;
+  align-items: center;
+}

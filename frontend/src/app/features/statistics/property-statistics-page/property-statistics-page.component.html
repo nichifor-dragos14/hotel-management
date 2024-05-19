@@ -11,19 +11,29 @@
 
 <section id="content">
   <section id="graph-container">
-    <div>
+    <div *ngIf="this.statistics.monthlyStatistics.length != 0">
       <canvasjs-chart [options]="numberOfBookingsAndTotalRevenueMonthly">
       </canvasjs-chart>
     </div>
 
-    <div>
+    <div *ngIf="this.statistics.monthlyStatistics.length != 0">
       <canvasjs-chart [options]="totalRevenueChartOptions"> </canvasjs-chart>
     </div>
   </section>
 
-  <div>
+  <div *ngIf="this.statistics.reviewStatistics.length != 0">
     <canvasjs-chart [options]="reviewPieOptions"> </canvasjs-chart>
   </div>
+</section>
+
+<section
+  *ngIf="
+    this.statistics.reviewStatistics.length == 0 &&
+    this.statistics.monthlyStatistics.length == 0
+  "
+  id="no-data"
+>
+  <h1>There is no available data for statistics.</h1>
 </section>
 
 <router-outlet hidden />
