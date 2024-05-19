@@ -96,6 +96,22 @@ export const FILTER_PROPERTY_FORM = new InjectionToken('SEARCH_PROPERTY_FORM', {
         queryParams['isPlesant'] ? true : false,
         { validators: [Validators.required] },
       ],
+      over1000: [
+        queryParams['over1000'] ? true : false,
+        { validators: [Validators.required] },
+      ],
+      between500and1000: [
+        queryParams['between500and1000'] ? true : false,
+        { validators: [Validators.required] },
+      ],
+      between250and500: [
+        queryParams['between250and500'] ? true : false,
+        { validators: [Validators.required] },
+      ],
+      under250: [
+        queryParams['under250'] ? true : false,
+        { validators: [Validators.required] },
+      ],
     });
   },
 });

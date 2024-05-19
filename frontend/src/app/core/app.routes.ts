@@ -1,7 +1,18 @@
 import { Routes } from '@angular/router';
 import { AppLayoutComponent } from './app-layout.component';
+import { PageNotFoundComponent } from './page-not-fount.component';
+import { PageErrorComponent } from './page-error.component';
 
 export const routes: Routes = [
+  {
+    path: '',
+    redirectTo: '/main',
+    pathMatch: 'full',
+  },
+  {
+    path: 'error',
+    component: PageErrorComponent,
+  },
   {
     path: 'auth',
     loadChildren: () =>
@@ -69,5 +80,10 @@ export const routes: Routes = [
           ),
       },
     ],
+  },
+  {
+    path: '**',
+    pathMatch: 'full',
+    component: PageNotFoundComponent,
   },
 ];

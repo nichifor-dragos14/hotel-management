@@ -95,6 +95,33 @@ internal class AllPropertySummariesFilteredQueryHandler(
         {
             whereClause += " AND r.\"HasRefrigerator\" = True";
         }
+        
+        if(query.PropertyFiltersOptional.Over1000 || query.PropertyFiltersOptional.Between500and1000 || query.PropertyFiltersOptional.Between250and500 || query.PropertyFiltersOptional.Under250)
+        {
+            whereClause += " AND (1=0";
+
+            if (query.PropertyFiltersOptional.Over1000)
+            {
+                whereClause += " OR r.\"Price\" >= 1000";
+            }
+
+            if (query.PropertyFiltersOptional.Between500and1000)
+            {
+                whereClause += " OR (r.\"Price\" >= 500 AND r.\"Price\" <= 1000)";
+            }
+
+            if (query.PropertyFiltersOptional.Between250and500)
+            {
+                whereClause += " OR (r.\"Price\" >= 250 AND r.\"Price\" <= 500)";
+            }
+
+            if (query.PropertyFiltersOptional.Under250)
+            {
+                whereClause += " OR r.\"Price\" <= 250";
+            }
+
+            whereClause += ")";
+        }
 
         var havingClause = "";
 

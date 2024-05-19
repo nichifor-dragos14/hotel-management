@@ -85,6 +85,12 @@ export class MainPagePropertiesListComponent {
           RatingOver8: this.activatedRoute.snapshot.queryParams['isVeryGood'],
           RatingOver7: this.activatedRoute.snapshot.queryParams['isGood'],
           RatingOver6: this.activatedRoute.snapshot.queryParams['isPlesant'],
+          Over1000: this.activatedRoute.snapshot.queryParams['over1000'],
+          Between500and1000:
+            this.activatedRoute.snapshot.queryParams['between500and1000'],
+          Between250and500:
+            this.activatedRoute.snapshot.queryParams['between250and500'],
+          Under250: this.activatedRoute.snapshot.queryParams['under250'],
         }
       );
     },

@@ -213,6 +213,22 @@ export class MainPagePropertiesComponent implements AfterViewInit {
       queryParams['hasRefrigerator'] = true;
     }
 
+    if (filterValue.over1000) {
+      queryParams['over1000'] = true;
+    }
+
+    if (filterValue.between500and1000) {
+      queryParams['between500and1000'] = true;
+    }
+
+    if (filterValue.between250and500) {
+      queryParams['between250and500'] = true;
+    }
+
+    if (filterValue.under250) {
+      queryParams['under250'] = true;
+    }
+
     if (filterValue.isPlesant) {
       queryParams['isPlesant'] = true;
     } else if (filterValue.isGood) {

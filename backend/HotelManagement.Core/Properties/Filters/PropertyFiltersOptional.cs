@@ -45,4 +45,12 @@ public class PropertyFiltersOptional
     public bool RatingOver7 { get; set; }
 
     public bool RatingOver6 { get; set; }
+
+    public bool Over1000 { get; set; }
+
+    public bool Between500and1000 { get; set; }
+
+    public bool Between250and500 { get; set; }
+
+    public bool Under250 { get; set; }
 }

@@ -286,6 +286,36 @@
       </mat-slide-toggle>
     </section>
   </mat-selection-list>
+
+  <mat-divider></mat-divider>
+
+  <mat-selection-list>
+    <h2>💰 Price filters</h2>
+
+    <section role="filters">
+      <mat-slide-toggle formControlName="over1000" (click)="submitForm()">
+        > 1000 lei/night
+      </mat-slide-toggle>
+
+      <mat-slide-toggle
+        formControlName="between500and1000"
+        (click)="submitForm()"
+      >
+        500 - 1000 lei/night
+      </mat-slide-toggle>
+
+      <mat-slide-toggle
+        formControlName="between250and500"
+        (click)="submitForm()"
+      >
+        250 - 500 lei/night
+      </mat-slide-toggle>
+
+      <mat-slide-toggle formControlName="under250" (click)="submitForm()">
+        < 250 lei/night
+      </mat-slide-toggle>
+    </section>
+  </mat-selection-list>
 </form>
 
 <div [@routeAnimations]="getRouteAnimationData()">
