@@ -14,7 +14,7 @@ internal class AllPropertySummariesFilteredQueryHandler(
         CancellationToken cancellationToken
         )
     {
-        var whereClause = $"WHERE p.\"Location\" ILIKE '%{query.PropertyFiltersMandatory.Location}%'" +
+        var whereClause = $"WHERE (p.\"Location\" ILIKE '%{query.PropertyFiltersMandatory.Location}%' OR p.\"Name\" ILIKE '%{query.PropertyFiltersMandatory.Location}%')" +
             $" AND r.\"AdultCapacity\" >= {query.PropertyFiltersMandatory.NumberOfAdults}" +
             $" AND r.\"ChildrenCapacity\" >= {query.PropertyFiltersMandatory.NumberOfChildren}" +
             $" AND NOT EXISTS (SELECT 1 FROM \"Booking\"" +
