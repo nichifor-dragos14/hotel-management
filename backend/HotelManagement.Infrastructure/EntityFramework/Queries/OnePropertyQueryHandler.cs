@@ -43,7 +43,7 @@ IQueryFacade facade
             r.Id,
             r.Number,
             r.Type,
-            (query.StartDate != null && query.EndDate != null) ? r.Price * (query.StartDate - query.EndDate).Days : r.Price,
+            (query.StartDate != null && query.EndDate != null) ? r.Price * (query.EndDate - query.StartDate).Days : r.Price,
             r.AdultCapacity,
             r.ChildrenCapacity,
             r.HasPrivateBathroom,
