@@ -1,4 +1,5 @@
 ﻿using HotelManagement.Core.Abstractions;
+using HotelManagement.Core.Utils;
 
 namespace HotelManagement.Core.Users;
 
@@ -20,13 +21,15 @@ internal class UpdateUserPasswordCommandHandler(
 
         if (users.TryGetById([command.Id], out var user))
         {
-            if (user.Password != command.OldPassword)
+            if (PasswordUtility.DecryptPassword(user.Password) != command.OldPassword)
             {
                 return null;
             }
 
+            var newPasswordEncrypted = PasswordUtility.EncryptPassword(command.NewPassword);
+
             user.UpdatePassword(
-                command.NewPassword        
+                newPasswordEncrypted
             );
 
             await unitOfWork.SaveChangesAsync(cancellationToken);
