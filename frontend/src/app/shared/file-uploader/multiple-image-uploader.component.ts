@@ -73,9 +73,9 @@ import { MatButtonModule } from '@angular/material/button';
       }
 
       #drop-box {
-        width: 500px;
-        height: 250px;
-        min-width: 500px;
+        width: 400px;
+        height: 150px;
+        min-width: 150px;
         min-height: 250px;
         border: solid 3.5px #5e35b1;
         border-style: dashed;
@@ -99,8 +99,8 @@ import { MatButtonModule } from '@angular/material/button';
       .image-container {
         position: relative;
         display: inline-block;
-        width: 120px;
-        height: 120px;
+        width: 100px;
+        height: 100px;
       }
 
       img {

@@ -7,7 +7,7 @@
     mat-button
     color="primary"
     type="submit"
-    [disabled]="propertyForm.invalid"
+    [disabled]="propertyForm.invalid || files.length == 0"
     (click)="updateProperty(propertyForm.value)"
   >
     Update
