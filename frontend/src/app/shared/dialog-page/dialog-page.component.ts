@@ -7,7 +7,7 @@ import {
   ViewChild,
   ChangeDetectionStrategy,
 } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
@@ -19,6 +19,8 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 })
 export class DialogPageComponent implements OnInit, OnDestroy {
   matDialog = inject(MatDialog);
+  router = inject(Router);
+  route = inject(ActivatedRoute);
 
   @ViewChild(TemplateRef, { static: true })
   template!: TemplateRef<void>;
@@ -28,7 +30,11 @@ export class DialogPageComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.dialogRef = this.matDialog.open(this.template, {
       closeOnNavigation: true,
-      hasBackdrop: false,
+      hasBackdrop: true,
+    });
+
+    this.dialogRef.backdropClick().subscribe(() => {
+      this.router.navigate(['../'], { relativeTo: this.route });
     });
   }
 
