@@ -29,3 +29,7 @@
     </ng-container>
   </cdk-virtual-scroll-viewport>
 </mat-nav-list>
+
+@if (propertiesDataSource.totalCount == 0) {
+  <h2>There are no available properties matching your search criteria 🤕</h2>
+}

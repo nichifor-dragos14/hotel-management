@@ -44,6 +44,9 @@
       }
     </ng-container>
   </cdk-virtual-scroll-viewport>
+  @if (reviewsDataSource.totalCount == 0) {
+    <h2>You did not review any stay yet 💡</h2>
+  }
 </mat-nav-list>
 
 <router-outlet hidden />

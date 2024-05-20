@@ -16,6 +16,8 @@ export class PaginatedDataSource<T> extends DataSource<T> {
   readonly fetch;
   readonly initialBuffer: number | undefined;
 
+  totalCount = 0;
+
   constructor(init: {
     initialBuffer?: number;
     fetch: (pagination: {
@@ -55,6 +57,7 @@ export class PaginatedDataSource<T> extends DataSource<T> {
     return this.fetch({ from, to }).pipe(
       map(({ results, totalCount }) => {
         let cache = this.dataStream.value;
+        this.totalCount = totalCount;
 
         if (cache.length !== totalCount) {
           cache = Array.from<T>({ length: totalCount });

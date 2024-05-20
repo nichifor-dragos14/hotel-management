@@ -63,6 +63,10 @@
         </ng-container>
       </cdk-virtual-scroll-viewport>
     </mat-nav-list>
+
+    @if (upcomingBookingsDataSource.totalCount == 0) {
+      <h2>You have no upcoming bookings 😉</h2>
+    }
   </mat-tab>
 
   <mat-tab label="Past bookings">
@@ -116,6 +120,10 @@
         </ng-container>
       </cdk-virtual-scroll-viewport>
     </mat-nav-list>
+
+    @if (pastBookingsDataSource.totalCount == 0) {
+      <h2>You have no past bookings ☀️</h2>
+    }
   </mat-tab>
 </mat-tab-group>
 
