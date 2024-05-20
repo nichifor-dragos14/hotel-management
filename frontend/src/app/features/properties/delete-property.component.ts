@@ -14,22 +14,10 @@ import { AppToastService } from '$shared/toast';
 @Component({
   selector: 'app-delete-property',
   standalone: true,
-  styles: `
-    :host {
-      width: 32vw;
-      height: 20vh;
-      display: flex;
-      flex-direction: column;
-      gap: 8px
-    }
-  `,
   template: `
     <h1 mat-dialog-title>Delete property?</h1>
 
-    <p mat-dialog-content>
-      Are you sure you want to delete this property? All reservations will be
-      canceled.
-    </p>
+    <p mat-dialog-content>Are you sure you want to delete this property?</p>
 
     <mat-dialog-actions align="end">
       <button mat-button color="primary" (click)="ok()">Ok</button>

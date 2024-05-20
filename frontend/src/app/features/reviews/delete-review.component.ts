@@ -14,15 +14,6 @@ import { AppToastService } from '$shared/toast';
 @Component({
   selector: 'app-delete-review',
   standalone: true,
-  styles: `
-    :host {
-      width: 32vw;
-      height: 20vh;
-      display: flex;
-      flex-direction: column;
-      gap: 8px
-    }
-  `,
   template: `
     <h1 mat-dialog-title>Delete review?</h1>
 
