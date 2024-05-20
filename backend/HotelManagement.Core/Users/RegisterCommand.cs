@@ -1,4 +1,5 @@
 ﻿using HotelManagement.Core.Abstractions;
+using HotelManagement.Core.Utils;
 
 namespace HotelManagement.Core.Users;
 
@@ -26,6 +27,8 @@ internal class RegisterCommandHandler(
     {
         var users = unitOfWork.GetRepository<User>();
 
+        string encryptedPassword = PasswordUtility.EncryptPassword(command.Password);
+
         var user = User.Create(
                  command.FirstName,
                  command.LastName,
@@ -35,7 +38,7 @@ internal class RegisterCommandHandler(
                  command.Gender,
                  command.Address,
                  command.DateOfBirth,
-                 command.Password,
+                 encryptedPassword,
                  command.ProfilePicture,
                  command.ActivationToken
         );

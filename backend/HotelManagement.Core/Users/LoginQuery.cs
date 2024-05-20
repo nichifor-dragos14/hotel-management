@@ -1,4 +1,5 @@
 ﻿using HotelManagement.Core.Abstractions;
+using HotelManagement.Core.Utils;
 
 namespace HotelManagement.Core.Users;
 
@@ -25,9 +26,20 @@ internal class LoginQueryHandler(
         LoginQuery query,
         CancellationToken cancellationToken)
     {
-        return (from user in facade.Of<User>()
-                where user.Email == query.LoginModel.Email && user.Password == query.LoginModel.Password
-                select new AccountModel(user.Id, user.Email, user.Role)
-                ).FirstOrDefault();
+        var user = (from u in facade.Of<User>()
+                    where u.Email == query.LoginModel.Email
+                    select new { u.Id, u.Email, u.Password, u.Role }
+                    ).FirstOrDefault();
+
+        if (user != null)
+        {     
+            var decryptedPassword = PasswordUtility.DecryptPassword(user.Password);
+            if (decryptedPassword == query.LoginModel.Password)
+            {
+                return new AccountModel(user.Id, user.Email, user.Role);
+            }       
+        }
+
+        return null;
     }
 }
