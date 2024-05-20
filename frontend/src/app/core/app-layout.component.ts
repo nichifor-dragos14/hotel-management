@@ -5,7 +5,7 @@ import {
   OnInit,
   inject,
 } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -38,13 +38,7 @@ import { CommonModule } from '@angular/common';
               [routerLink]="['users/my-profile/details']"
             />
 
-            <a
-              mat-button
-              (click)="loginService.logout()"
-              [routerLink]="['/main/our-recommendations']"
-            >
-              Logout
-            </a>
+            <a mat-button (click)="logoutAndReload()"> Logout </a>
           } @else {
             <a mat-button [routerLink]="['/auth/login']"> Login </a>
           }
@@ -115,6 +109,8 @@ import { CommonModule } from '@angular/common';
   styleUrl: './app-layout.component.scss',
 })
 export class AppLayoutComponent implements OnInit {
+  readonly router = inject(Router);
+  readonly activatedRoute = inject(ActivatedRoute);
   readonly cdr = inject(ChangeDetectorRef);
   readonly loginService = inject(LoginService);
 
@@ -156,5 +152,17 @@ export class AppLayoutComponent implements OnInit {
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
+  }
+
+  logoutAndReload() {
+    this.loginService.logout();
+    this.router
+      .navigate([''], {
+        queryParams: {},
+        skipLocationChange: false,
+      })
+      .then(() => {
+        this.router.navigate(['/main/our-recommendations']);
+      });
   }
 }
