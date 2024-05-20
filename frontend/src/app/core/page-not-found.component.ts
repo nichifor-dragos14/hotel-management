@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { LoginService } from '$features/auth/login.service';
+import { Component, inject } from '@angular/core';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-page-not-found',
@@ -9,7 +10,7 @@ import { RouterModule } from '@angular/router';
     <div class="page-not-found">
       <h1>404 - Page Not Found</h1>
       <p>The page you are looking for does not exist.</p>
-      <a routerLink="/">Go to Main page</a>
+      <a (click)="navigate()">Go to Main page</a>
     </div>
   `,
   styles: [
@@ -48,4 +49,15 @@ import { RouterModule } from '@angular/router';
     `,
   ],
 })
-export class PageNotFoundComponent {}
+export class PageNotFoundComponent {
+  readonly router = inject(Router);
+  readonly loginService = inject(LoginService);
+
+  navigate() {
+    if (this.loginService.getLoggedUserRole() == 'Admin') {
+      this.router.navigate(['properties/admin']);
+    } else {
+      this.router.navigate(['main/our-recommendations']);
+    }
+  }
+}

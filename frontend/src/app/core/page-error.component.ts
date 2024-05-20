@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { LoginService } from '$features/auth/login.service';
+import { Component, inject } from '@angular/core';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-page-error',
@@ -9,7 +10,7 @@ import { RouterModule } from '@angular/router';
     <div class="page-not-found">
       <h1>400 - Bad request</h1>
       <p>Something went wrong.</p>
-      <a routerLink="/">Go to Main page</a>
+      <a (click)="navigate()">Go to Main page</a>
     </div>
   `,
   styles: [
@@ -48,4 +49,15 @@ import { RouterModule } from '@angular/router';
     `,
   ],
 })
-export class PageErrorComponent {}
+export class PageErrorComponent {
+  readonly router = inject(Router);
+  readonly loginService = inject(LoginService);
+
+  navigate() {
+    if (this.loginService.getLoggedUserRole() == 'Admin') {
+      this.router.navigate(['properties/admin']);
+    } else {
+      this.router.navigate(['main/our-recommendations']);
+    }
+  }
+}

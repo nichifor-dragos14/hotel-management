@@ -25,6 +25,10 @@ const REPORT_ROUTES: Routes = [
       {
         path: 'admin',
         component: ReportsPageComponent,
+        canActivate: [AuthGuard],
+        data: {
+          role: ['Admin'],
+        },
         children: [
           {
             path: ':id',

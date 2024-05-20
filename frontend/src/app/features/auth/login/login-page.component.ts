@@ -62,7 +62,13 @@ export class LoginPageComponent implements OnInit {
       if (response.ok) {
         this.loginService.AddJWTToSessionStorage(response.body);
         this.toastrService.open('Successfully logged in', 'info');
-        this.location.back();
+
+        if (this.loginService.getLoggedUserRole() == 'Client') {
+          this.location.back();
+        } else {
+          this.router.navigate(['properties/admin']);
+        }
+
         this.loginForm.reset();
       }
     } catch (error: any) {

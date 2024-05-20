@@ -50,6 +50,12 @@ export class AuthGuard implements CanActivate {
       }
     }
 
+    if (userRole == 'Admin') {
+      this.router.navigate(['/properties/admin']);
+    } else {
+      this.router.navigate(['/main/our-recommendations']);
+    }
+
     return false;
   }
 }
