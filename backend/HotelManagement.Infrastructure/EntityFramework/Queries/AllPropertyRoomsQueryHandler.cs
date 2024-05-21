@@ -14,6 +14,8 @@ internal class AllPropertyRoomsQueryHandler(
         CancellationToken cancellationToken
         )
     {
+        var userId = query.LoggedUserId != null ? query.LoggedUserId.Value : Guid.Empty;  
+
         var whereClause = $"WHERE r.\"PropertyId\" = '{query.Id}'" +
             $"              AND NOT EXISTS (SELECT 1 FROM \"Booking\"" +
             $"                      WHERE \"Booking\".\"RoomId\" = r.\"Id\"" +
@@ -47,7 +49,7 @@ internal class AllPropertyRoomsQueryHandler(
                         LEFT JOIN 
                             "Discount" AS d
                         ON 
-                            d."PropertyId" = '{query.Id}' AND d."UserId" = '{query.LoggedUserId}' AND '{DateTime.UtcNow}' <= d."EndDate"
+                            d."PropertyId" = '{query.Id}' AND d."UserId" = '{userId}' AND '{DateTime.UtcNow}' <= d."EndDate"
                         {whereClause}
                         ORDER BY
                             r."CreatedOn" DESC

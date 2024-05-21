@@ -11,7 +11,7 @@ const MAIN_PAGE_ROUTES: Routes = [
     component: MainPagePropertiesComponent,
     canActivate: [AuthGuard],
     data: {
-      role: ['Client'],
+      role: ['Client', ''],
     },
     children: [
       {
@@ -20,7 +20,7 @@ const MAIN_PAGE_ROUTES: Routes = [
         canActivate: [AuthGuard],
         data: {
           animation: 'SearchPage',
-          role: ['Client'],
+          role: ['Client', ''],
         },
       },
       {
@@ -29,7 +29,7 @@ const MAIN_PAGE_ROUTES: Routes = [
         canActivate: [AuthGuard],
         data: {
           animation: 'RecommendationsPage',
-          role: ['Client'],
+          role: ['Client', ''],
         },
       },
     ],

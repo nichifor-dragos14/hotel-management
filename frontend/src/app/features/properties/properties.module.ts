@@ -152,6 +152,10 @@ const PROPERTY_ROUTES: Routes = [
         path: ':id/preview',
         component: PropertyPageComponent,
         runGuardsAndResolvers: 'always',
+        canActivate: [AuthGuard],
+        data: {
+          role: ['Client', ''],
+        },
         resolve: {
           property: async ({ params, queryParams }: ActivatedRouteSnapshot) => {
             const router = inject(Router);

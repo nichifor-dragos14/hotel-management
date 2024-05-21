@@ -43,7 +43,7 @@ export class LoginPageComponent implements OnInit {
 
   ngOnInit() {
     if (this.loginService.getLoggedUserId()) {
-      this.router.navigate(['main/our-recommendations']);
+      this.router.navigate(['/main/our-recommendations']);
     }
   }
 
