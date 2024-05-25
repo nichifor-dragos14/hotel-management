@@ -37,6 +37,9 @@
       }
     </ng-container>
   </cdk-virtual-scroll-viewport>
+  @if (roomsDataSource.totalCount == 0) {
+    <h2>Consider adding rooms, so we can list your property 😉</h2>
+  }
 </mat-nav-list>
 
 <router-outlet hidden />

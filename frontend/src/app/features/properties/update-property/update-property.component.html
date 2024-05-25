@@ -22,6 +22,20 @@
 
   <a
     mat-button
+    [routerLink]="['/reviews/admin/property', propertyForm.get(['id'])!.value]"
+  >
+    Reviews
+  </a>
+
+  <a
+    mat-button
+    [routerLink]="['/bookings/admin/property', propertyForm.get(['id'])!.value]"
+  >
+    Bookings
+  </a>
+
+  <a
+    mat-button
     [routerLink]="['/rooms/admin/property', propertyForm.get(['id'])!.value]"
   >
     Rooms

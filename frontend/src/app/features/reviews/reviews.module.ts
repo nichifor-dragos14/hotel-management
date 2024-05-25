@@ -14,6 +14,8 @@ import { UpdateReviewFormFactory } from './update-review.form';
 import { AuthGuard } from '$features/auth/auth.guard';
 import { DialogPageComponent } from '$shared/dialog-page';
 import { DeleteReviewComponent } from './delete-review.component';
+import { AdminReviewsPageComponent } from './admin-reviews-page/admin-reviews-page.component';
+import { ReviewPageComponent } from './review-page/review-page.component';
 
 const REVIEW_ROUTES: Routes = [
   {
@@ -22,6 +24,53 @@ const REVIEW_ROUTES: Routes = [
       {
         path: 'reinit',
         component: ReviewsDummyComponent,
+      },
+      {
+        path: 'admin/property/:id',
+        component: AdminReviewsPageComponent,
+        resolve: {
+          propertyId: ({ params }: ActivatedRouteSnapshot) => {
+            const router = inject(Router);
+
+            if (params['id']) {
+              return params['id'];
+            }
+
+            router.navigate(['/error']);
+          },
+        },
+        canActivate: [AuthGuard],
+        data: {
+          role: ['Owner'],
+        },
+        children: [
+          {
+            path: ':id',
+            component: ReviewPageComponent,
+            resolve: {
+              review: async ({ params }: ActivatedRouteSnapshot) => {
+                const router = inject(Router);
+                const reviewService = inject(ReviewService);
+
+                try {
+                  const review = await reviewService.reviewsIdGetAsync({
+                    id: params['id'],
+                  });
+
+                  return review;
+                } catch (error) {
+                  router.navigate(['/error']);
+
+                  return null;
+                }
+              },
+            },
+            canActivate: [AuthGuard],
+            data: {
+              role: ['Owner'],
+            },
+          },
+        ],
       },
       {
         path: 'my-reviews',

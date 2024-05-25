@@ -11,12 +11,12 @@ export class LeaveReportFormFactory {
     return this.formBuilder.group<CreateReportCommand>({
       description: [
         review.description,
-        { validators: [Validators.required, Validators.maxLength(500)] },
+        { validators: [Validators.required, Validators.maxLength(1000)] },
       ],
       propertyId: [review.propertyId, { validators: [Validators.required] }],
       title: [
         review.title,
-        { validators: [Validators.required, Validators.maxLength(30)] },
+        { validators: [Validators.required, Validators.maxLength(100)] },
       ],
       userId: [review.userId, { validators: [Validators.required] }],
       bookingId: [review.bookingId, { validators: [Validators.required] }],

@@ -73,7 +73,7 @@ import { CommonModule } from '@angular/common';
             mat-list-item
             routerLink="/main"
             routerLinkActive="selected"
-            *ngIf="userRole == 'Client'"
+            *ngIf="userRole != 'Admin' && userRole != 'Owner'"
           >
             Search properties
           </a>

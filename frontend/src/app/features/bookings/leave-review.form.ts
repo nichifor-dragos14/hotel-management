@@ -11,7 +11,7 @@ export class LeaveReviewFormFactory {
     return this.formBuilder.group<CreateReviewCommand>({
       description: [
         review.description,
-        { validators: [Validators.required, Validators.maxLength(500)] },
+        { validators: [Validators.required, Validators.maxLength(1000)] },
       ],
       propertyId: [review.propertyId, { validators: [Validators.required] }],
       rating: [
@@ -26,7 +26,7 @@ export class LeaveReviewFormFactory {
       ],
       title: [
         review.title,
-        { validators: [Validators.required, Validators.maxLength(30)] },
+        { validators: [Validators.required, Validators.maxLength(100)] },
       ],
       userId: [review.userId, { validators: [Validators.required] }],
       bookingId: [review.bookingId, { validators: [Validators.required] }],

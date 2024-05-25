@@ -67,6 +67,28 @@ public class PropertyController(IFileStorageService _storageService) : Controlle
         return TypedResults.Ok(await queryService.ExecuteAsync(new AllPropertyTypesQuery(), cancelationToken));
     }
 
+    [HttpGet("{id}/bookings-past")]
+    public async Task<Results<Ok<IPaginatedResult<PropertyBooking>>, NotFound>> GetAllPastBookings(
+       [FromServices] IQueryHandler<AllPastPropertyBookingsQuery, IPaginatedResult<PropertyBooking>> queryService,
+       Guid id,
+       int from,
+       int to,
+       CancellationToken cancelationToken)
+    {
+        return TypedResults.Ok(await queryService.ExecuteAsync(new AllPastPropertyBookingsQuery(from, to, id), cancelationToken));
+    }
+
+    [HttpGet("{id}/bookings-upcoming")]
+    public async Task<Results<Ok<IPaginatedResult<PropertyBooking>>, NotFound>> GetAllUpcomingBookings(
+       [FromServices] IQueryHandler<AllUpcomingPropertyBookingsQuery, IPaginatedResult<PropertyBooking>> queryService,
+       Guid id,
+       int from,
+       int to,
+       CancellationToken cancelationToken)
+    {
+        return TypedResults.Ok(await queryService.ExecuteAsync(new AllUpcomingPropertyBookingsQuery(from, to, id), cancelationToken));
+    }
+
     [HttpGet("{id}/reviews")]
     public async Task<Results<Ok<IPaginatedResult<PropertyReview>>, NotFound>> GetAllReviews(
         [FromServices] IQueryHandler<AllPropertyReviewsQuery, IPaginatedResult<PropertyReview>> queryService,
@@ -130,7 +152,7 @@ public class PropertyController(IFileStorageService _storageService) : Controlle
     }
 
     [HttpPost]
-    //[AuthorizeRoles(Core.Users.Role.Owner)]
+    [AuthorizeRoles(Core.Users.Role.Owner)]
     public async Task<Results<Ok<Guid>, BadRequest>> Create(
         [FromBody] CreatePropertyCommand createHotelCommand,
         [FromServices] ICommandHandler<CreatePropertyCommand, Guid?> commandHandler,

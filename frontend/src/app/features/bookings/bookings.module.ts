@@ -25,6 +25,7 @@ import { LeaveReviewFormFactory } from './leave-review.form';
 import { LeaveReportFormFactory } from './leave-report.form';
 import { LeaveReportComponent } from './leave-report.component';
 import { AuthGuard } from '$features/auth/auth.guard';
+import { AdminBookingsPageComponent } from './admin-bookings-page/admin-bookings-page.component';
 
 const BOOKING_ROUTES: Routes = [
   {
@@ -33,6 +34,25 @@ const BOOKING_ROUTES: Routes = [
       {
         path: 'reinit',
         component: BookingsDummyComponent,
+      },
+      {
+        path: 'admin/property/:id',
+        component: AdminBookingsPageComponent,
+        resolve: {
+          propertyId: ({ params }: ActivatedRouteSnapshot) => {
+            const router = inject(Router);
+
+            if (params['id']) {
+              return params['id'];
+            }
+
+            router.navigate(['/error']);
+          },
+        },
+        canActivate: [AuthGuard],
+        data: {
+          role: ['Owner'],
+        },
       },
       {
         path: 'my-reservations',

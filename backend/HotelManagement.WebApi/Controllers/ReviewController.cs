@@ -8,10 +8,10 @@ namespace HotelManagement.WebApi.Controllers;
 
 [Route("reviews")]
 [ApiController]
-[AuthorizeRoles(Core.Users.Role.Client)]
 public class ReviewController : ControllerBase
 {
     [HttpGet]
+    [AuthorizeRoles(Core.Users.Role.Client)]
     public async Task<Results<Ok<IPaginatedResult<ReviewSummary>>, NotFound>> GetAll(
        [FromServices] IQueryHandler<AllReviewSummariesQuery, IPaginatedResult<ReviewSummary>> queryService,
        int from,
@@ -24,6 +24,7 @@ public class ReviewController : ControllerBase
     }
 
     [HttpGet("{id}")]
+    [AuthorizeRoles(Core.Users.Role.Client, Core.Users.Role.Owner)]
     public async Task<Results<Ok<ReviewDetails>, NotFound, BadRequest>> GetOne(Guid id,
       [FromServices] IQueryHandler<OneReviewQuery, ReviewDetails> queryService,
       CancellationToken cancellationToken)
@@ -40,6 +41,7 @@ public class ReviewController : ControllerBase
     }
 
     [HttpPost]
+    [AuthorizeRoles(Core.Users.Role.Client)]
     public async Task<Results<Ok<Guid>, BadRequest>> Create(
        [FromBody] CreateReviewCommand command,
        [FromServices] ICommandHandler<CreateReviewCommand, Guid?> commandHandler,
@@ -54,6 +56,7 @@ public class ReviewController : ControllerBase
     }
 
     [HttpPatch]
+    [AuthorizeRoles(Core.Users.Role.Client)]
     public async Task<Results<Ok<Guid>, BadRequest>> Update(
        [FromBody] UpdateReviewCommand command,
        [FromServices] ICommandHandler<UpdateReviewCommand, Guid?> commandHandler,
@@ -68,6 +71,7 @@ public class ReviewController : ControllerBase
     }
 
     [HttpDelete("{id}")]
+    [AuthorizeRoles(Core.Users.Role.Client)]
     public async Task<Results<Ok, NotFound>> Delete(
         Guid id,
         [FromServices] ICommandHandler<DeleteReviewCommand, bool> commandHandler,

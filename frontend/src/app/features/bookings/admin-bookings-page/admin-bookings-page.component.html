@@ -1,0 +1,131 @@
+<app-page-header title="Bookings 📅">
+  <button
+    mat-button
+    button
+    [routerLink]="['/properties/admin/', activatedRoute.snapshot.params['id']]"
+  >
+    Back
+  </button>
+</app-page-header>
+
+<mat-tab-group dynamicHeight="true">
+  <mat-tab label="Upcoming bookings">
+    <mat-nav-list>
+      <cdk-virtual-scroll-viewport
+        scrollWindow
+        [itemSize]="72"
+        [maxBufferPx]="500"
+      >
+        <ng-container
+          *cdkVirtualFor="let booking of upcomingBookingsDataSource"
+        >
+          @if (!booking) {
+            <a mat-list-item disabled class="placeholder">
+              <app-circle-placeholder matListItemIcon [radius]="35">
+              </app-circle-placeholder>
+
+              <app-line-placeholder
+                matListItemTitle
+                [width]="250"
+                [height]="15"
+              >
+              </app-line-placeholder>
+
+              <app-line-placeholder matListItemMeta [width]="250" [height]="15">
+              </app-line-placeholder>
+            </a>
+          } @else {
+            <a
+              mat-list-item
+              [routerLink]="[booking.id]"
+              routerLinkActive="active"
+            >
+              <span matListItemIcon>
+                <mat-icon>watch_later</mat-icon>
+              </span>
+
+              <span matListItemTitle>
+                {{ booking.lastNameOnBooking }}
+                {{ booking.firstNameOnBooking }}'s upcoming stay
+              </span>
+
+              <section matListItemMeta role="location">
+                <mat-icon>attach_money</mat-icon>
+                <span> {{ booking.totalPrice }} lei</span>
+              </section>
+
+              <span matListItemLine>
+                From {{ booking.startDate | dateFormat }} to
+                {{ booking.endDate | dateFormat }}
+              </span>
+            </a>
+          }
+        </ng-container>
+      </cdk-virtual-scroll-viewport>
+    </mat-nav-list>
+
+    @if (upcomingBookingsDataSource.totalCount == 0) {
+      <h2>No upcoming bookings 😞</h2>
+    }
+  </mat-tab>
+
+  <mat-tab label="Past bookings">
+    <mat-nav-list>
+      <cdk-virtual-scroll-viewport
+        scrollWindow
+        [itemSize]="72"
+        [maxBufferPx]="500"
+      >
+        <ng-container *cdkVirtualFor="let booking of pastBookingsDataSource">
+          @if (!booking) {
+            <a mat-list-item disabled class="placeholder">
+              <app-circle-placeholder matListItemIcon [radius]="35">
+              </app-circle-placeholder>
+
+              <app-line-placeholder
+                matListItemTitle
+                [width]="250"
+                [height]="15"
+              >
+              </app-line-placeholder>
+
+              <app-line-placeholder matListItemMeta [width]="250" [height]="15">
+              </app-line-placeholder>
+            </a>
+          } @else {
+            <a
+              mat-list-item
+              [routerLink]="[booking.id]"
+              routerLinkActive="active"
+            >
+              <span matListItemIcon>
+                <mat-icon>done</mat-icon>
+              </span>
+
+              <span matListItemTitle>
+                {{ booking.lastNameOnBooking }}
+                {{ booking.firstNameOnBooking }}'s stay
+              </span>
+
+              <section matListItemMeta role="location">
+                <mat-icon>attach_money</mat-icon>
+                <span> {{ booking.totalPrice }} lei</span>
+              </section>
+
+              <span matListItemLine>
+                From {{ booking.startDate | dateFormat }} to
+                {{ booking.endDate | dateFormat }}
+              </span>
+            </a>
+          }
+        </ng-container>
+      </cdk-virtual-scroll-viewport>
+    </mat-nav-list>
+
+    @if (pastBookingsDataSource.totalCount == 0) {
+      <h2>No past bookings 😴</h2>
+    }
+  </mat-tab>
+</mat-tab-group>
+
+<router-outlet hidden />

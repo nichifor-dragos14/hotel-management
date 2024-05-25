@@ -1,0 +1,50 @@
+<app-page-header title="Reviews ✍🏻">
+  <button
+    mat-button
+    button
+    [routerLink]="['/properties/admin/', activatedRoute.snapshot.params['id']]"
+  >
+    Back
+  </button>
+</app-page-header>
+
+<mat-nav-list>
+  <cdk-virtual-scroll-viewport scrollWindow [itemSize]="72" [maxBufferPx]="500">
+    <ng-container *cdkVirtualFor="let review of reviewsDataSource">
+      @if (!review) {
+        <a mat-list-item disabled class="placeholder">
+          <app-circle-placeholder matListItemIcon [radius]="35">
+          </app-circle-placeholder>
+          <app-line-placeholder matListItemTitle [width]="250" [height]="15">
+          </app-line-placeholder>
+          <app-line-placeholder matListItemMeta [width]="150" [height]="10">
+          </app-line-placeholder>
+        </a>
+      } @else {
+        <a mat-list-item [routerLink]="[review.id]" routerLinkActive="active">
+          @if (review.rating >= 1 && review.rating < 5) {
+            <img matListItemIcon src="assets/svgs/face-sad.svg" />
+          } @else if (review.rating >= 5 && review.rating < 8) {
+            <img matListItemIcon src="assets/svgs/face-neutral.svg" />
+          } @else if (review.rating >= 8 && review.rating <= 10) {
+            <img matListItemIcon src="assets/svgs/face-smile.svg" />
+          }
+
+          <span matListItemTitle>
+            {{ review.title }}
+          </span>
+          <span matListItemLine> Reviewed by {{ review.propertyName }} </span>
+          <span matListItemMeta>
+            {{ review.createdOn | dateFormat }}
+          </span>
+        </a>
+      }
+    </ng-container>
+  </cdk-virtual-scroll-viewport>
+
+  @if (reviewsDataSource.totalCount == 0) {
+    <h2>No reviews yet 🙁</h2>
+  }
+</mat-nav-list>
+
+<router-outlet hidden />
