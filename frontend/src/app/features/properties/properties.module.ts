@@ -139,7 +139,7 @@ const PROPERTY_ROUTES: Routes = [
                     },
                     canActivate: [AuthGuard],
                     data: {
-                      role: ['Admina'],
+                      role: ['Admin'],
                     },
                   },
                 ],
