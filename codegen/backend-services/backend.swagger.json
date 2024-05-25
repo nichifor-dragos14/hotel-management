@@ -3959,7 +3959,8 @@
           "lastName",
           "nationality",
           "password",
-          "phoneNumber"
+          "phoneNumber",
+          "role"
         ],
         "type": "object",
         "properties": {
@@ -3998,6 +3999,9 @@
           "activationToken": {
             "type": "string",
             "nullable": true
+          },
+          "role": {
+            "$ref": "#/components/schemas/Role"
           }
         },
         "additionalProperties": false
@@ -4351,6 +4355,15 @@
           }
         },
         "additionalProperties": false
+      },
+      "Role": {
+        "enum": [
+          0,
+          1,
+          2
+        ],
+        "type": "integer",
+        "format": "int32"
       },
       "RoomDetails": {
         "required": [

@@ -54,3 +54,13 @@ section[role='form-container'] {
   display: flex;
   align-items: center;
 }
+
+section[role='names'] {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+}
+
+section[role='names'] mat-form-field {
+  width: 100%;
+}

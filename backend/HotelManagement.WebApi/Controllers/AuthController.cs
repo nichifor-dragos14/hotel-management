@@ -62,7 +62,8 @@ public class AuthController(IConfiguration _configuration, IEmailService _emailS
             command.DateOfBirth, 
             command.Password,
             profilePicture,
-            token
+            token,
+            command.Role
         );
 
         return await commandHandler.ExecuteAsync(newCommand, cancellationToken) switch

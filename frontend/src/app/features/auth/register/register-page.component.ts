@@ -11,13 +11,14 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { REGISTER_FORM } from '../register.form';
-import { AuthService, Gender, RegisterCommand } from '$backend/services';
+import { AuthService, Gender, RegisterCommand, Role } from '$backend/services';
 import { LoginService } from '../login.service';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatIconModule } from '@angular/material/icon';
 import { AppToastService } from '$shared/toast';
+import { MatSelectModule } from '@angular/material/select';
 
 @Component({
   selector: 'app-register-page',
@@ -36,6 +37,7 @@ import { AppToastService } from '$shared/toast';
     MatDatepickerModule,
     MatNativeDateModule,
     MatIconModule,
+    MatSelectModule,
   ],
 })
 export class RegisterPageComponent implements OnInit {
@@ -46,6 +48,7 @@ export class RegisterPageComponent implements OnInit {
   readonly registerForm = inject(REGISTER_FORM);
 
   genderEnum = Gender;
+  roleEnum = Role;
 
   ngOnInit() {
     if (this.loginService.getLoggedUserId()) {

@@ -14,7 +14,8 @@ public record RegisterCommand(
       DateTime DateOfBirth,
       string Password,
       string? ProfilePicture,
-      string? ActivationToken
+      string? ActivationToken,
+      Role Role
 ) : ICommand<Guid?>;
 
 internal class RegisterCommandHandler(
@@ -40,7 +41,8 @@ internal class RegisterCommandHandler(
                  command.DateOfBirth,
                  encryptedPassword,
                  command.ProfilePicture,
-                 command.ActivationToken
+                 command.ActivationToken,
+                 command.Role
         );
 
         users.Add(user);

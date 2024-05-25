@@ -14,24 +14,34 @@
   <section role="form-container">
     <form [formGroup]="registerForm" (ngSubmit)="register(registerForm.value)">
       <mat-form-field appearance="outline">
-        <mat-label>First name</mat-label>
-        <input matInput formControlName="firstName" required />
-        @if (registerForm.get('firstName')?.errors?.['required']) {
-          <mat-error> The first name is required. </mat-error>
-        } @else if (registerForm.get('firstName')?.errors?.['maxlength']) {
-          <mat-error> Must be under 100 characters. </mat-error>
-        }
+        <mat-label>Register as</mat-label>
+        <mat-select matInput formControlName="role">
+          <mat-option [value]="roleEnum.$0">Client</mat-option>
+          <mat-option [value]="roleEnum.$2">Owner</mat-option>
+        </mat-select>
       </mat-form-field>
 
-      <mat-form-field appearance="outline">
-        <mat-label>Last name</mat-label>
-        <input matInput formControlName="lastName" required />
-        @if (registerForm.get('lastName')?.errors?.['required']) {
-          <mat-error> The last name is required. </mat-error>
-        } @else if (registerForm.get('lastName')?.errors?.['maxlength']) {
-          <mat-error> Must be under 100 characters. </mat-error>
-        }
-      </mat-form-field>
+      <section role="names">
+        <mat-form-field appearance="outline">
+          <mat-label>First name</mat-label>
+          <input matInput formControlName="firstName" required />
+          @if (registerForm.get('firstName')?.errors?.['required']) {
+            <mat-error> The first name is required. </mat-error>
+          } @else if (registerForm.get('firstName')?.errors?.['maxlength']) {
+            <mat-error> Must be under 100 characters. </mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Last name</mat-label>
+          <input matInput formControlName="lastName" required />
+          @if (registerForm.get('lastName')?.errors?.['required']) {
+            <mat-error> The last name is required. </mat-error>
+          } @else if (registerForm.get('lastName')?.errors?.['maxlength']) {
+            <mat-error> Must be under 100 characters. </mat-error>
+          }
+        </mat-form-field>
+      </section>
 
       <mat-form-field appearance="outline">
         <mat-label>Email</mat-label>

@@ -1,7 +1,7 @@
 import { InjectionToken, inject } from '@angular/core';
 import { AppFormBuilder } from '$core/forms';
 import { AbstractControl, ValidatorFn, Validators } from '@angular/forms';
-import { Gender, RegisterCommand } from '$backend/services';
+import { Gender, RegisterCommand, Role } from '$backend/services';
 
 export const REGISTER_FORM = new InjectionToken('REGISTER_FORM', {
   providedIn: 'root',
@@ -48,6 +48,7 @@ export const REGISTER_FORM = new InjectionToken('REGISTER_FORM', {
         '',
         { validators: [Validators.required, phoneNumberValidator()] },
       ],
+      role: [Role.$0, { validators: [Validators.required] }],
     }),
 });
 

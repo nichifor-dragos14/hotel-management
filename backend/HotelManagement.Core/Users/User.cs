@@ -22,6 +22,7 @@ public class User
         bool sendOffersOnEmail,
         string profilePicture,
         string activationToken,
+        Role role,
         DateTime createdOn,
         DateTime updatedOn
     )
@@ -40,7 +41,7 @@ public class User
         ProfilePicture = profilePicture;
         CreatedOn = createdOn;
         UpdatedOn = updatedOn;
-        Role = Role.Client;
+        Role = role;
         GeniusXp = 0;
         GeniusLevel = GeniusLevel.Level1;
         IsConfirmed = false;
@@ -108,7 +109,8 @@ public class User
         DateTime dateOfBirth,
         string password,
         string profilePicture,
-        string activationToken
+        string activationToken,
+        Role role
     )
     {
         return new User(
@@ -125,6 +127,7 @@ public class User
             false,
             profilePicture,
             activationToken,
+            role,
             DateTime.UtcNow,
             DateTime.UtcNow
         )
