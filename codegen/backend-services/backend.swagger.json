@@ -328,6 +328,42 @@
         }
       }
     },
+    "/bookings/{id}/admin": {
+      "get": {
+        "tags": [
+          "Booking"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BookingAdminDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
     "/bookings": {
       "post": {
         "tags": [
@@ -2359,6 +2395,98 @@
           "id": {
             "type": "string",
             "format": "uuid"
+          }
+        },
+        "additionalProperties": false
+      },
+      "BookingAdminDetails": {
+        "required": [
+          "adultCapacity",
+          "childrenCapacity",
+          "countryOnBooking",
+          "createdOn",
+          "emailOnBooking",
+          "endDate",
+          "expectedArrival",
+          "firstNameOnBooking",
+          "lastNameOnBooking",
+          "number",
+          "phoneNumberOnBooking",
+          "price",
+          "specialMentions",
+          "startDate",
+          "totalPrice",
+          "type",
+          "userFirstName",
+          "userLastName",
+          "userProfilePicture"
+        ],
+        "type": "object",
+        "properties": {
+          "startDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "endDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "totalPrice": {
+            "type": "number",
+            "format": "double"
+          },
+          "firstNameOnBooking": {
+            "type": "string"
+          },
+          "lastNameOnBooking": {
+            "type": "string"
+          },
+          "emailOnBooking": {
+            "type": "string"
+          },
+          "phoneNumberOnBooking": {
+            "type": "string"
+          },
+          "countryOnBooking": {
+            "type": "string"
+          },
+          "specialMentions": {
+            "type": "string"
+          },
+          "expectedArrival": {
+            "type": "string"
+          },
+          "number": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "type": {
+            "$ref": "#/components/schemas/RoomType"
+          },
+          "price": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "adultCapacity": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "childrenCapacity": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "userProfilePicture": {
+            "type": "string"
+          },
+          "userFirstName": {
+            "type": "string"
+          },
+          "userLastName": {
+            "type": "string"
+          },
+          "createdOn": {
+            "type": "string",
+            "format": "date-time"
           }
         },
         "additionalProperties": false

@@ -1,0 +1,86 @@
+<section role="actions">
+  <a mat-icon-button routerLink="../" color="accent">
+    <mat-icon>close</mat-icon>
+  </a>
+</section>
+
+<section role="grid">
+  <section role="left">
+    <section role="user-details">
+      <section role="expected-guest">
+        <h2>{{ isInPast() ? 'Guest' : 'Expected guest' }}</h2>
+        <section>
+          <span class="font-light">
+            Name: {{ booking.firstNameOnBooking }}
+            {{ booking.lastNameOnBooking }}
+          </span>
+          <span class="font-light">
+            Country: {{ booking.countryOnBooking }}
+          </span>
+        </section>
+      </section>
+
+      <section role="guest-information">
+        <h2>Guest information</h2>
+        <section>
+          <span class="font-light"> Email: {{ booking.emailOnBooking }} </span>
+          <span class="font-light">
+            Phone number: {{ booking.phoneNumberOnBooking }}</span
+          >
+        </section>
+      </section>
+
+      <section role="guest-information">
+        <h2>Booked room</h2>
+        <section>
+          <span class="font-light">
+            {{ roomTypeMapper(booking.type) }} Room no.
+            {{ booking.number }}
+          </span>
+
+          <section role="booked-room">
+            <span class="font-light center-span">
+              <span>
+                <ng-container
+                  *ngFor="let _ of [].constructor(booking.adultCapacity)"
+                >
+                  <mat-icon class="icon-light">person</mat-icon>
+                </ng-container>
+              </span>
+              <span>adults</span>
+            </span>
+            <span
+              class="font-light center-span"
+              [style.visibility]="
+                booking.childrenCapacity === 0 ? 'hidden' : 'visible'
+              "
+            >
+              <span>
+                <ng-container
+                  *ngFor="let _ of [].constructor(booking.childrenCapacity)"
+                >
+                  <mat-icon class="icon-light">person</mat-icon>
+                </ng-container>
+              </span>
+              <span>children</span>
+            </span>
+          </section>
+        </section>
+      </section>
+
+      <section role="guest-information">
+        <mat-divider></mat-divider>
+        <h2>Total price: {{ booking.totalPrice }} lei</h2>
+      </section>
+    </section>
+  </section>
+
+  <section role="right">
+    <section id="sender">
+      <h2>Created by {{ booking.userLastName }} {{ booking.userFirstName }}</h2>
+      <img [src]="booking.userProfilePicture" />
+    </section>
+  </section>
+</section>
+
+<router-outlet hidden />
