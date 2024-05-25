@@ -59,7 +59,7 @@ public class PropertyController(IFileStorageService _storageService) : Controlle
     }
 
     [HttpGet("types")]
-    [AuthorizeRoles(Core.Users.Role.Admin, Core.Users.Role.Owner)]
+    [AuthorizeRoles(Core.Users.Role.Owner)]
     public async Task<Results<Ok<IEnumerable<PropertyTypeSummary>>, NotFound>> GetAllTypes(
         [FromServices] IQueryHandler<AllPropertyTypesQuery, IEnumerable<PropertyTypeSummary>> queryService,
         CancellationToken cancelationToken)
@@ -68,6 +68,7 @@ public class PropertyController(IFileStorageService _storageService) : Controlle
     }
 
     [HttpGet("{id}/bookings-past")]
+    [AuthorizeRoles(Core.Users.Role.Owner)]
     public async Task<Results<Ok<IPaginatedResult<PropertyBooking>>, NotFound>> GetAllPastBookings(
        [FromServices] IQueryHandler<AllPastPropertyBookingsQuery, IPaginatedResult<PropertyBooking>> queryService,
        Guid id,
@@ -79,6 +80,7 @@ public class PropertyController(IFileStorageService _storageService) : Controlle
     }
 
     [HttpGet("{id}/bookings-upcoming")]
+    [AuthorizeRoles(Core.Users.Role.Owner)]
     public async Task<Results<Ok<IPaginatedResult<PropertyBooking>>, NotFound>> GetAllUpcomingBookings(
        [FromServices] IQueryHandler<AllUpcomingPropertyBookingsQuery, IPaginatedResult<PropertyBooking>> queryService,
        Guid id,
@@ -90,6 +92,7 @@ public class PropertyController(IFileStorageService _storageService) : Controlle
     }
 
     [HttpGet("{id}/reviews")]
+    [AuthorizeRoles(Core.Users.Role.Client, Core.Users.Role.Owner)]
     public async Task<Results<Ok<IPaginatedResult<PropertyReview>>, NotFound>> GetAllReviews(
         [FromServices] IQueryHandler<AllPropertyReviewsQuery, IPaginatedResult<PropertyReview>> queryService,
         Guid id,

@@ -40,6 +40,7 @@ public class ReportController
     }
 
     [HttpPost]
+    [AuthorizeRoles(Core.Users.Role.Client)]
     public async Task<Results<Ok<Guid>, BadRequest>> Create(
       [FromBody] CreateReportCommand command,
       [FromServices] ICommandHandler<CreateReportCommand, Guid?> commandHandler,

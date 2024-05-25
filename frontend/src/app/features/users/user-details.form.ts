@@ -16,22 +16,22 @@ export class EditUserDetailsFormFactory {
     return this.formBuilder.group<UpdateUserDetailsCommand>({
       address: [
         user.address,
-        { validators: [Validators.required, Validators.maxLength(50)] },
+        { validators: [Validators.required, Validators.maxLength(200)] },
       ],
       dateOfBirth: [user.dateOfBirth, { validators: [Validators.required] }],
       firstName: [
         user.firstName,
-        { validators: [Validators.required, Validators.maxLength(30)] },
+        { validators: [Validators.required, Validators.maxLength(100)] },
       ],
       gender: [user.gender, { validators: [Validators.required] }],
       id: [user.id, { validators: [Validators.required] }],
       lastName: [
         user.lastName,
-        { validators: [Validators.required, Validators.maxLength(30)] },
+        { validators: [Validators.required, Validators.maxLength(100)] },
       ],
       nationality: [
         user.nationality,
-        { validators: [Validators.required, Validators.maxLength(30)] },
+        { validators: [Validators.required, Validators.maxLength(100)] },
       ],
       phoneNumber: [
         user.phoneNumber,

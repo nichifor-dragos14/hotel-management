@@ -11,7 +11,7 @@ namespace HotelManagement.WebApi.Controllers;
 public class StatisticsController : ControllerBase
 {
     
-    [AuthorizeRoles(Core.Users.Role.Admin, Core.Users.Role.Owner)]
+    [AuthorizeRoles(Core.Users.Role.Owner)]
     [HttpGet("property/{id}")]
     public async Task<Results<Ok<PropertyStatistics>, NotFound, BadRequest>> GetPropertyStatistics(
         Guid id,
@@ -30,7 +30,7 @@ public class StatisticsController : ControllerBase
         };
     }
 
-    [AuthorizeRoles(Core.Users.Role.Admin, Core.Users.Role.Owner)]
+    [AuthorizeRoles(Core.Users.Role.Owner)]
     [HttpGet("room/{id}")]
     public async Task<Results<Ok<RoomStatistics>, NotFound, BadRequest>> GetRoomStatistics(
         Guid id,

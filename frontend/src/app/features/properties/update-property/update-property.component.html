@@ -13,26 +13,38 @@
     Update
   </button>
 
-  <a
-    mat-button
-    [routerLink]="['/statistics', 'property', propertyForm.get(['id'])!.value]"
-  >
-    Statistics
-  </a>
+  @if (loginService.getLoggedUserRole() == 'Owner') {
+    <a
+      mat-button
+      [routerLink]="[
+        '/statistics',
+        'property',
+        propertyForm.get(['id'])!.value
+      ]"
+    >
+      Statistics
+    </a>
 
-  <a
-    mat-button
-    [routerLink]="['/reviews/admin/property', propertyForm.get(['id'])!.value]"
-  >
-    Reviews
-  </a>
+    <a
+      mat-button
+      [routerLink]="[
+        '/reviews/admin/property',
+        propertyForm.get(['id'])!.value
+      ]"
+    >
+      Reviews
+    </a>
 
-  <a
-    mat-button
-    [routerLink]="['/bookings/admin/property', propertyForm.get(['id'])!.value]"
-  >
-    Bookings
-  </a>
+    <a
+      mat-button
+      [routerLink]="[
+        '/bookings/admin/property',
+        propertyForm.get(['id'])!.value
+      ]"
+    >
+      Bookings
+    </a>
+  }
 
   <a
     mat-button

@@ -24,6 +24,7 @@ import {
   MultipleImageUploadService,
 } from '$shared/file-uploader';
 import { StarRatingConfigService, StarRatingModule } from 'angular-star-rating';
+import { LoginService } from '$features/auth/login.service';
 
 @Injectable()
 export class CustomConfigService extends StarRatingConfigService {
@@ -65,6 +66,7 @@ export class CustomConfigService extends StarRatingConfigService {
 export class UpdatePropertyPageComponent implements OnChanges {
   readonly multipleImageUploadService = inject(MultipleImageUploadService);
   readonly propertyService = inject(PropertyService);
+  readonly loginService = inject(LoginService);
   readonly toastService = inject(AppToastService);
   readonly router = inject(Router);
 

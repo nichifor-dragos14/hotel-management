@@ -1,6 +1,5 @@
 import { LoginService } from '$features/auth/login.service';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { MatButtonModule } from '@angular/material/button';
 import { MatListModule } from '@angular/material/list';
 import { RouterModule } from '@angular/router';
 
@@ -10,8 +9,8 @@ import { RouterModule } from '@angular/router';
   styleUrls: ['./user-profile-page.component.scss'],
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [MatButtonModule, MatListModule, RouterModule],
+  imports: [MatListModule, RouterModule],
 })
 export class UserProfilePageComponent {
-  readonly loginService = inject(LoginService)
+  readonly loginService = inject(LoginService);
 }

@@ -63,6 +63,7 @@ internal class UserStatisticsQueryHandler(
             .ToList();
 
         var userData = await facade.Of<User>()
+        .Where(u => u.Role == Role.Client)
         .Select(u => new
         {
             u.Id,

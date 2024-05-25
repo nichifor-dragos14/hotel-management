@@ -9,31 +9,27 @@ export const REGISTER_FORM = new InjectionToken('REGISTER_FORM', {
     inject(AppFormBuilder).group<RegisterCommand>({
       address: [
         '',
-        { validators: [Validators.required, Validators.maxLength(50)] },
+        { validators: [Validators.required, Validators.maxLength(200)] },
       ],
       dateOfBirth: ['', { validators: [Validators.required] }],
       email: [
         '',
         {
-          validators: [
-            Validators.required,
-            Validators.email,
-            Validators.maxLength(50),
-          ],
+          validators: [Validators.required, Validators.email],
         },
       ],
       firstName: [
         '',
-        { validators: [Validators.required, Validators.maxLength(30)] },
+        { validators: [Validators.required, Validators.maxLength(100)] },
       ],
       gender: [Gender.$0, { validators: [Validators.required] }],
       lastName: [
         '',
-        { validators: [Validators.required, Validators.maxLength(30)] },
+        { validators: [Validators.required, Validators.maxLength(100)] },
       ],
       nationality: [
         '',
-        { validators: [Validators.required, Validators.maxLength(30)] },
+        { validators: [Validators.required, Validators.maxLength(100)] },
       ],
       password: [
         '',

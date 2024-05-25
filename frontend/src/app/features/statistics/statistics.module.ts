@@ -65,7 +65,7 @@ const STATISTICS_ROUTES: Routes = [
         },
         canActivate: [AuthGuard],
         data: {
-          role: ['Admin', 'Owner'],
+          role: ['Owner'],
         },
       },
       {
@@ -95,7 +95,7 @@ const STATISTICS_ROUTES: Routes = [
         },
         canActivate: [AuthGuard],
         data: {
-          role: ['Admin', 'Owner'],
+          role: ['Owner'],
         },
       },
     ],

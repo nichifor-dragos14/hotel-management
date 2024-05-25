@@ -12,10 +12,10 @@ namespace HotelManagement.WebApi.Controllers;
 
 [Route("users")]
 [ApiController]
-[AuthorizeRoles(Core.Users.Role.Client, Core.Users.Role.Admin, Core.Users.Role.Owner)]
 public class UserController(IFileStorageService _storageService) : Controller
 {
     [HttpGet("{email}")]
+    [AuthorizeRoles(Core.Users.Role.Client, Core.Users.Role.Admin, Core.Users.Role.Owner)]
     public async Task<Results<Ok<UserDetails>, NotFound, BadRequest>> GetOne(
        string email,
        [FromServices] IQueryHandler<OneUserQuery, UserDetails> queryService,
@@ -34,6 +34,7 @@ public class UserController(IFileStorageService _storageService) : Controller
     }
 
     [HttpPatch("details")]
+    [AuthorizeRoles(Core.Users.Role.Client, Core.Users.Role.Admin, Core.Users.Role.Owner)]
     public async Task<Results<Ok<Guid>, BadRequest>> UpdateDetails(
        [FromBody] UpdateUserDetailsCommand command,
        [FromServices] ICommandHandler<UpdateUserDetailsCommand, Guid?> commandHandler,
@@ -47,6 +48,7 @@ public class UserController(IFileStorageService _storageService) : Controller
     }
 
     [HttpPatch("preferences")]
+    [AuthorizeRoles(Core.Users.Role.Client)]
     public async Task<Results<Ok<Guid>, BadRequest>> UpdatePreferences(
        [FromBody] UpdateUserPreferencesCommand command,
        [FromServices] ICommandHandler<UpdateUserPreferencesCommand, Guid?> commandHandler,
@@ -60,6 +62,7 @@ public class UserController(IFileStorageService _storageService) : Controller
     }
 
     [HttpPatch("upload")]
+    [AuthorizeRoles(Core.Users.Role.Client, Core.Users.Role.Admin, Core.Users.Role.Owner)]
     public async Task<Results<Ok<Guid>, BadRequest<string>>> UploadFile(
         [FromServices] ICommandHandler<UpdateProfilePictureCommand, Guid?> commandHandler,
         [FromForm] UpdateUserPictureDTO updateUserPictureDTO,
@@ -88,6 +91,7 @@ public class UserController(IFileStorageService _storageService) : Controller
     }
 
     [HttpPatch("password")]
+    [AuthorizeRoles(Core.Users.Role.Client, Core.Users.Role.Admin, Core.Users.Role.Owner)]
     public async Task<Results<Ok<Guid>, BadRequest>> UpdatePassword(
        [FromBody] UpdateUserPasswordCommand command,
        [FromServices] ICommandHandler<UpdateUserPasswordCommand, Guid?> commandHandler,
