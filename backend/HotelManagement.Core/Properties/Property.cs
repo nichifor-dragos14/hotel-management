@@ -2,6 +2,7 @@
 using HotelManagement.Core.Reports;
 using HotelManagement.Core.Reviews;
 using HotelManagement.Core.Rooms;
+using HotelManagement.Core.Users;
 
 namespace HotelManagement.Core.Properties;
 
@@ -106,6 +107,10 @@ public class Property
 
     public virtual List<Report> Reports { get; private init; }
 
+    public virtual User User { get; private set; }
+
+    public virtual Guid UserId { get; private set; }
+
     public static Property Create(
         string name,
         PropertyType type,
@@ -125,7 +130,8 @@ public class Property
         bool hasPetFriendlyPolicy,
         bool hasBreakfast,
         bool hasFreeCancellation,
-        string pictureUrls
+        string pictureUrls,
+        User user
     )
     {
         return new Property(
@@ -154,7 +160,8 @@ public class Property
         {
             Rooms = [],
             Reviews = [],
-            Reports = []
+            Reports = [],
+            User = user
         };
     }
 

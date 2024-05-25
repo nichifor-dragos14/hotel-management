@@ -45,7 +45,7 @@ const PROPERTY_ROUTES: Routes = [
           },
         },
         data: {
-          role: ['Admin'],
+          role: ['Admin', 'Owner'],
         },
         children: [
           {
@@ -68,7 +68,7 @@ const PROPERTY_ROUTES: Routes = [
             },
             canActivate: [AuthGuard],
             data: {
-              role: ['Admin'],
+              role: ['Owner'],
             },
           },
           {
@@ -116,7 +116,7 @@ const PROPERTY_ROUTES: Routes = [
             },
             canActivate: [AuthGuard],
             data: {
-              role: ['Admin'],
+              role: ['Admin', 'Owner'],
             },
             children: [
               {
@@ -139,7 +139,7 @@ const PROPERTY_ROUTES: Routes = [
                     },
                     canActivate: [AuthGuard],
                     data: {
-                      role: ['Admin'],
+                      role: ['Admin', 'Owner'],
                     },
                   },
                 ],
@@ -154,7 +154,7 @@ const PROPERTY_ROUTES: Routes = [
         runGuardsAndResolvers: 'always',
         canActivate: [AuthGuard],
         data: {
-          role: ['Client', ''],
+          role: ['Client', 'Owner', ''],
         },
         resolve: {
           property: async ({ params, queryParams }: ActivatedRouteSnapshot) => {

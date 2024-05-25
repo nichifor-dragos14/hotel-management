@@ -8,9 +8,11 @@
       <span matListItemTitle>Personal details</span>
     </a>
 
-    <a mat-list-item [routerLink]="['preferences']" routerLinkActive="active">
-      <span matListItemTitle>Preferences</span>
-    </a>
+    @if (loginService.getLoggedUserRole() == 'Client') {
+      <a mat-list-item [routerLink]="['preferences']" routerLinkActive="active">
+        <span matListItemTitle>Preferences</span>
+      </a>
+    }
 
     <a mat-list-item [routerLink]="['security']" routerLinkActive="active">
       <span matListItemTitle>Security</span>

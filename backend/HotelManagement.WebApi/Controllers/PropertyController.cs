@@ -14,15 +14,17 @@ namespace HotelManagement.WebApi.Controllers;
 public class PropertyController(IFileStorageService _storageService) : ControllerBase
 {
     [HttpGet]
-    [AuthorizeRoles(Core.Users.Role.Admin)]
+    [AuthorizeRoles(Core.Users.Role.Admin, Core.Users.Role.Owner)]
     public async Task<Results<Ok<IPaginatedResult<PropertySummary>>, NotFound>> GetAll(
         [FromServices] IQueryHandler<AllPropertySummariesQuery, IPaginatedResult<PropertySummary>> queryService,
         int from,
         int to,
+        Guid userId,
+        string userRole,
         string? name,
         CancellationToken cancelationToken)
     {
-        return TypedResults.Ok(await queryService.ExecuteAsync(new AllPropertySummariesQuery(from, to, name != null ? name : ""), cancelationToken));
+        return TypedResults.Ok(await queryService.ExecuteAsync(new AllPropertySummariesQuery(from, to, userId, userRole, name != null ? name : ""), cancelationToken));
     }
 
     [HttpGet("filter/{location}/{startDate}/{endDate}/{numberOfAdults}/{numberOfChildren}/{numberOfRooms}")]
@@ -57,7 +59,7 @@ public class PropertyController(IFileStorageService _storageService) : Controlle
     }
 
     [HttpGet("types")]
-    [AuthorizeRoles(Core.Users.Role.Admin)]
+    [AuthorizeRoles(Core.Users.Role.Admin, Core.Users.Role.Owner)]
     public async Task<Results<Ok<IEnumerable<PropertyTypeSummary>>, NotFound>> GetAllTypes(
         [FromServices] IQueryHandler<AllPropertyTypesQuery, IEnumerable<PropertyTypeSummary>> queryService,
         CancellationToken cancelationToken)
@@ -128,7 +130,7 @@ public class PropertyController(IFileStorageService _storageService) : Controlle
     }
 
     [HttpPost]
-    [AuthorizeRoles(Core.Users.Role.Admin)]
+    //[AuthorizeRoles(Core.Users.Role.Owner)]
     public async Task<Results<Ok<Guid>, BadRequest>> Create(
         [FromBody] CreatePropertyCommand createHotelCommand,
         [FromServices] ICommandHandler<CreatePropertyCommand, Guid?> commandHandler,
@@ -143,7 +145,7 @@ public class PropertyController(IFileStorageService _storageService) : Controlle
     }
 
     [HttpPatch]
-    [AuthorizeRoles(Core.Users.Role.Admin)]
+    [AuthorizeRoles(Core.Users.Role.Admin, Core.Users.Role.Owner)]
     public async Task<Results<Ok<Guid>, BadRequest>> Update(
         [FromBody] UpdatePropertyCommand updateHotelCommand,
         [FromServices] ICommandHandler<UpdatePropertyCommand, Guid?> commandHandler,
@@ -158,7 +160,7 @@ public class PropertyController(IFileStorageService _storageService) : Controlle
     }
 
     [HttpPatch("upload")]
-    [AuthorizeRoles(Core.Users.Role.Admin)]
+    [AuthorizeRoles(Core.Users.Role.Admin, Core.Users.Role.Owner)]
     public async Task<Results<Ok<string>, BadRequest<string>>> UploadFile(
     [FromForm] AddPropertyPictureDTO addPropertyPicturesDTO
 )
@@ -180,7 +182,7 @@ public class PropertyController(IFileStorageService _storageService) : Controlle
     }
 
     [HttpDelete("{id}")]
-    [AuthorizeRoles(Core.Users.Role.Admin)]
+    [AuthorizeRoles(Core.Users.Role.Admin, Core.Users.Role.Owner)]
     public async Task<Results<Ok, NotFound>> Delete(Guid id,
         [FromServices] ICommandHandler<DeletePropertyCommand, bool> commandHandler,
         CancellationToken cancellationToken)

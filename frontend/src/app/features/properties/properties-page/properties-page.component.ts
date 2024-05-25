@@ -18,6 +18,7 @@ import { AppLinePlaceholderComponent } from '$shared/placeholders/line-placehold
 import { AppCirclePlaceholderComponent } from '$shared/placeholders/circle-placeholder';
 import { FormsModule } from '@angular/forms';
 import { Subject, Subscription, debounceTime } from 'rxjs';
+import { LoginService } from '$features/auth/login.service';
 
 @Component({
   selector: 'app-properties-page',
@@ -41,6 +42,7 @@ import { Subject, Subscription, debounceTime } from 'rxjs';
 })
 export class PropertiesPageComponent {
   readonly propertyService = inject(PropertyService);
+  readonly loginService = inject(LoginService);
   readonly router = inject(Router);
 
   private nameSubject = new Subject<string>();
@@ -63,6 +65,8 @@ export class PropertiesPageComponent {
         from,
         to,
         name: this._name,
+        userId: this.loginService.getLoggedUserId(),
+        userRole: this.loginService.getLoggedUserRole(),
       }),
   });
 

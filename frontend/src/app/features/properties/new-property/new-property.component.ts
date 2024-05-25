@@ -110,6 +110,7 @@ export class NewPropertyPageComponent implements OnInit {
       hasKitchen,
       prepaymentNeeded,
       rating,
+      userId,
     } = newProperty;
 
     if (
@@ -118,6 +119,7 @@ export class NewPropertyPageComponent implements OnInit {
       !location ||
       !email ||
       !phoneNumber ||
+      !userId ||
       type == undefined ||
       rating == undefined ||
       hasBreakfast == undefined ||
@@ -178,6 +180,7 @@ export class NewPropertyPageComponent implements OnInit {
           pictureUrls,
           prepaymentNeeded,
           rating,
+          userId: userId,
         },
       });
 

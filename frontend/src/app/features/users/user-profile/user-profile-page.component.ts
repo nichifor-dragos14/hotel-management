@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { LoginService } from '$features/auth/login.service';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatListModule } from '@angular/material/list';
 import { RouterModule } from '@angular/router';
@@ -11,4 +12,6 @@ import { RouterModule } from '@angular/router';
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [MatButtonModule, MatListModule, RouterModule],
 })
-export class UserProfilePageComponent {}
+export class UserProfilePageComponent {
+  readonly loginService = inject(LoginService)
+}

@@ -433,6 +433,21 @@
             }
           },
           {
+            "name": "userId",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "userRole",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
             "name": "name",
             "in": "query",
             "schema": {
@@ -2669,7 +2684,8 @@
           "pictureUrls",
           "prepaymentNeeded",
           "rating",
-          "type"
+          "type",
+          "userId"
         ],
         "type": "object",
         "properties": {
@@ -2730,6 +2746,10 @@
           },
           "pictureUrls": {
             "type": "string"
+          },
+          "userId": {
+            "type": "string",
+            "format": "uuid"
           }
         },
         "additionalProperties": false

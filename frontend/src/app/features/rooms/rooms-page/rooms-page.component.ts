@@ -4,7 +4,7 @@ import {
   Input,
   inject,
 } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { AppPageHeaderComponent } from '$shared/page-header';
 import { RoomService, RoomType } from '$backend/services';
@@ -37,6 +37,7 @@ import { AppCirclePlaceholderComponent } from '$shared/placeholders/circle-place
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RoomsPageComponent {
+  readonly activatedRoute = inject(ActivatedRoute);
   readonly roomService = inject(RoomService);
 
   @Input() propertyId!: string;

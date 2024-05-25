@@ -2,11 +2,14 @@ import { CreatePropertyCommand, PropertyType } from '$backend/services';
 import { InjectionToken, inject } from '@angular/core';
 import { AbstractControl, ValidatorFn, Validators } from '@angular/forms';
 import { AppFormBuilder } from '$core/forms';
+import { LoginService } from '$features/auth/login.service';
 
 export const NEW_PROPERTY_FORM = new InjectionToken('NEW_PROPERTY_FORM', {
   providedIn: 'root',
-  factory: () =>
-    inject(AppFormBuilder).group<CreatePropertyCommand>({
+  factory: () => {
+    let loginService = inject(LoginService);
+
+    return inject(AppFormBuilder).group<CreatePropertyCommand>({
       name: [
         '',
         { validators: [Validators.required, Validators.maxLength(30)] },
@@ -47,7 +50,12 @@ export const NEW_PROPERTY_FORM = new InjectionToken('NEW_PROPERTY_FORM', {
         },
       ],
       pictureUrls: ['init', { validators: [Validators.required] }],
-    }),
+      userId: [
+        loginService.getLoggedUserId(),
+        { validators: [Validators.required] },
+      ],
+    });
+  },
 });
 
 export function phoneNumberValidator(): ValidatorFn {

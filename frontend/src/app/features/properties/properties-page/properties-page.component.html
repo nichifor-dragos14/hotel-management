@@ -1,7 +1,13 @@
-<app-page-header title="Properties 🏡">
-  <input button [(ngModel)]="name" placeholder="Search by name..." />
-  <button mat-button button color="primary" routerLink="new">Add</button>
-</app-page-header>
+@if (loginService.getLoggedUserRole() == 'Admin') {
+  <app-page-header title="Properties 🏡">
+    <input button [(ngModel)]="name" placeholder="Search by name..." />
+  </app-page-header>
+} @else {
+  <app-page-header title="My properties 🏘️">
+    <input button [(ngModel)]="name" placeholder="Search by name..." />
+    <button mat-button button color="primary" routerLink="new">Add</button>
+  </app-page-header>
+}
 
 <mat-nav-list>
   <cdk-virtual-scroll-viewport scrollWindow [itemSize]="56" [maxBufferPx]="500">
@@ -26,6 +32,10 @@
       }
     </ng-container>
   </cdk-virtual-scroll-viewport>
+
+  @if (propertiesDataSource.totalCount == 0) {
+    <h2>You have no matching properties 🤕</h2>
+  }
 </mat-nav-list>
 
 <router-outlet hidden />

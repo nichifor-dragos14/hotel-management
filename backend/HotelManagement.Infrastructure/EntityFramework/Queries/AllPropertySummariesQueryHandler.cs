@@ -27,13 +27,14 @@ internal class AllPropertySummariesQueryHandler(
                             ROW_NUMBER() OVER (ORDER BY p."CreatedOn" DESC) AS "RowNumber"
                         FROM
                             "Property" AS p
-                        {whereClause}
+                        LEFT JOIN "User" AS u ON u."Id" = p."UserId"
+                        {whereClause} AND ('{query.UserRole}' = 'Admin' OR p."UserId" = '{query.UserId}')
                         ORDER BY
                             p."CreatedOn" DESC
                         OFFSET {query.From} ROWS FETCH NEXT {query.To - query.From} ROWS ONLY
                     )
                     SELECT
-                        (SELECT COUNT(*) FROM "Property" AS p {whereClause}) as "TotalCount",
+                        (SELECT COUNT(*) FROM "Property" AS p LEFT JOIN "User" AS u ON u."Id" = p."UserId" {whereClause} AND ('{query.UserRole}' = 'Admin' OR p."UserId" = '{query.UserId}')) as "TotalCount",
                             CASE
                                 WHEN (SELECT COUNT(*) FROM PropertySummaries) > 0
                                     THEN jsonb_agg(PropertySummaries)

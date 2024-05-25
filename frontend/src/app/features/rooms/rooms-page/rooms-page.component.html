@@ -1,4 +1,11 @@
 <app-page-header title="Rooms 🚪">
+  <button
+    mat-button
+    button
+    [routerLink]="['/properties/admin/', activatedRoute.snapshot.params['id']]"
+  >
+    Back
+  </button>
   <button mat-button button color="primary" routerLink="new">Add</button>
 </app-page-header>
 

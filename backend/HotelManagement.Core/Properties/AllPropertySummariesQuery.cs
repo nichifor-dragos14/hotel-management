@@ -14,5 +14,7 @@ public record PropertySummary(
 public record AllPropertySummariesQuery(
     int From,
     int To,
+    Guid UserId,
+    string UserRole,
     string Name
 ): IQuery<IPaginatedResult<PropertySummary>>;

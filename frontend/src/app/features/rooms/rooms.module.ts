@@ -35,7 +35,7 @@ const ROOM_ROUTES: Routes = [
         },
         canActivate: [AuthGuard],
         data: {
-          role: ['Admin'],
+          role: ['Admin', 'Owner'],
         },
       },
       {
@@ -54,7 +54,7 @@ const ROOM_ROUTES: Routes = [
         },
         canActivate: [AuthGuard],
         data: {
-          role: ['Admin'],
+          role: ['Admin', 'Owner'],
         },
         children: [
           {
@@ -76,7 +76,7 @@ const ROOM_ROUTES: Routes = [
             },
             canActivate: [AuthGuard],
             data: {
-              role: ['Admin'],
+              role: ['Admin', 'Owner'],
             },
           },
           {
@@ -123,7 +123,7 @@ const ROOM_ROUTES: Routes = [
             },
             canActivate: [AuthGuard],
             data: {
-              role: ['Admin'],
+              role: ['Admin', 'Owner'],
             },
             runGuardsAndResolvers: 'always',
             children: [
@@ -147,7 +147,7 @@ const ROOM_ROUTES: Routes = [
                     },
                     canActivate: [AuthGuard],
                     data: {
-                      role: ['Admin'],
+                      role: ['Admin', 'Owner'],
                     },
                   },
                 ],

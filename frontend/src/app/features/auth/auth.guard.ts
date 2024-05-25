@@ -50,7 +50,7 @@ export class AuthGuard implements CanActivate {
       return false;
     }
 
-    if (userRole == 'Admin') {
+    if (userRole == 'Admin' || 'Owner') {
       this.router.navigate(['/properties/admin']);
     } else {
       this.router.navigate(['/main/our-recommendations']);

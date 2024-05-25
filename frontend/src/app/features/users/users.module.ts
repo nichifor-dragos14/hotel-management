@@ -68,7 +68,7 @@ const USER_ROUTES: Routes = [
         },
         canActivate: [AuthGuard],
         data: {
-          role: ['Client', 'Admin'],
+          role: ['Client', 'Admin', 'Owner'],
         },
         children: [
           {
@@ -101,7 +101,7 @@ const USER_ROUTES: Routes = [
                 },
                 canActivate: [AuthGuard],
                 data: {
-                  role: ['Client', 'Admin'],
+                  role: ['Client', 'Admin', 'Owner'],
                 },
               },
             ],
@@ -138,7 +138,7 @@ const USER_ROUTES: Routes = [
         },
         canActivate: [AuthGuard],
         data: {
-          role: ['Client', 'Admin'],
+          role: ['Client'],
         },
       },
       {
@@ -165,7 +165,7 @@ const USER_ROUTES: Routes = [
         },
         canActivate: [AuthGuard],
         data: {
-          role: ['Client', 'Admin'],
+          role: ['Client', 'Admin', 'Owner'],
         },
         children: [
           {
@@ -177,7 +177,7 @@ const USER_ROUTES: Routes = [
                 component: ChangePasswordComponent,
                 canActivate: [AuthGuard],
                 data: {
-                  role: ['Client', 'Admin'],
+                  role: ['Client', 'Admin', 'Owner'],
                 },
               },
             ],

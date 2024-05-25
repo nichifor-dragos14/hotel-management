@@ -15,13 +15,16 @@
       </div>
     </div>
 
-    <section role="genius">
-      <mat-progress-bar mode="determinate" [value]="user.geniusXp"></mat-progress-bar>
+    @if (loginService.getLoggedUserRole() == 'Client') {
+      <section role="genius">
+        <mat-progress-bar mode="determinate" [value]="user.geniusXp">
+        </mat-progress-bar>
 
-      <span class="font-grey">
-        Genius level {{ user.geniusLevel }} - {{ user.geniusXp }}/100 XP
-      </span>
-    </section>
+        <span class="font-grey">
+          Genius level {{ user.geniusLevel }} - {{ user.geniusXp }}/100 XP
+        </span>
+      </section>
+    }
   </section>
 </section>
 
@@ -172,14 +175,27 @@
   </section>
 </section>
 
-<section role="bottom">
-  <p class="font-light">
-    * We use your email address to send you personalized offers and to confirm
-    your bookings.
-  </p>
-  <p class="font-light">
-    * Properties can use your phone number to contact you.
-  </p>
-</section>
+@if (loginService.getLoggedUserRole() == 'Client') {
+  <section role="bottom">
+    <p class="font-light">
+      * We use your email address to send you personalized offers and to confirm
+      your bookings.
+    </p>
+    <p class="font-light">
+      * Properties can use your phone number to contact you.
+    </p>
+  </section>
+} @else if (loginService.getLoggedUserRole() == 'Owner') {
+  <section role="bottom">
+    <p class="font-light">
+      * We use your email address to notify you when someone makes a booking at
+      your property or to discuss reports.
+    </p>
+    <p class="font-light">
+      * We use your phone number to contact you in case of emergencies or
+      important updates.
+    </p>
+  </section>
+}
 
 <router-outlet hidden />

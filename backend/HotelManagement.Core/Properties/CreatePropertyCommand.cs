@@ -1,4 +1,5 @@
 ﻿using HotelManagement.Core.Abstractions;
+using HotelManagement.Core.Users;
 
 namespace HotelManagement.Core.Properties;
 
@@ -21,7 +22,8 @@ public record CreatePropertyCommand(
     bool HasPetFriendlyPolicy,
     bool HasBreakfast,
     bool HasFreeCancellation,
-    string PictureUrls
+    string PictureUrls,
+    Guid UserId
 ) : ICommand<Guid?>;
 
 internal class CreatePropertyCommandHandler(
@@ -33,6 +35,13 @@ internal class CreatePropertyCommandHandler(
         CancellationToken cancellationToken)
     {
         var properties = unitOfWork.GetRepository<Property>();
+
+        unitOfWork.GetRepository<User>().TryGetById([command.UserId], out var user);
+
+        if (user == null || user.Role != Role.Owner) 
+        {
+            return null;
+        }
 
         var newProperty = Property.Create(
             command.Name,
@@ -53,7 +62,8 @@ internal class CreatePropertyCommandHandler(
             command.HasPetFriendlyPolicy,
             command.HasBreakfast,
             command.HasFreeCancellation,
-            command.PictureUrls
+            command.PictureUrls,
+            user
         );
 
         properties.Add(newProperty);

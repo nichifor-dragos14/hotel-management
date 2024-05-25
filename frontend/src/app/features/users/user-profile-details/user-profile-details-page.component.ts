@@ -17,6 +17,7 @@ import { MatRadioModule } from '@angular/material/radio';
 import { AppToastService } from '$shared/toast';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { LoginService } from '$features/auth/login.service';
 
 @Component({
   selector: 'app-user-profile-details-page',
@@ -41,6 +42,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 export class UserProfileDetailsPageComponent {
   readonly router = inject(Router);
   readonly activatedRoute = inject(ActivatedRoute);
+  readonly loginService = inject(LoginService);
 
   @Input() userForm!: FormGroup;
   @Input() user!: UserDetails;

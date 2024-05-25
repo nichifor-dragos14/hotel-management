@@ -53,9 +53,13 @@ import { CommonModule } from '@angular/common';
             mat-list-item
             routerLink="/properties/admin"
             routerLinkActive="selected"
-            *ngIf="userRole == 'Admin'"
+            *ngIf="userRole == 'Admin' || userRole == 'Owner'"
           >
-            Properties
+            @if (userRole == 'Admin') {
+              Properties
+            } @else {
+              My properties
+            }
           </a>
           <a
             mat-list-item
@@ -69,7 +73,7 @@ import { CommonModule } from '@angular/common';
             mat-list-item
             routerLink="/main"
             routerLinkActive="selected"
-            *ngIf="userRole != 'Admin'"
+            *ngIf="userRole == 'Client'"
           >
             Search properties
           </a>

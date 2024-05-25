@@ -12,7 +12,7 @@ namespace HotelManagement.WebApi.Controllers;
 
 [Route("users")]
 [ApiController]
-[AuthorizeRoles(Core.Users.Role.Client, Core.Users.Role.Admin)]
+[AuthorizeRoles(Core.Users.Role.Client, Core.Users.Role.Admin, Core.Users.Role.Owner)]
 public class UserController(IFileStorageService _storageService) : Controller
 {
     [HttpGet("{email}")]

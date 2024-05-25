@@ -12,6 +12,7 @@ namespace HotelManagement.WebApi.Controllers;
 public class RoomController : Controller
 {
     [HttpGet]
+    [AuthorizeRoles(Core.Users.Role.Admin, Core.Users.Role.Owner)]
     public async Task<Results<Ok<IPaginatedResult<RoomSummary>>, NotFound>> GetAll(
         [FromServices] IQueryHandler<AllRoomSummariesQuery, IPaginatedResult<RoomSummary>> queryService,
         int from,
@@ -23,7 +24,7 @@ public class RoomController : Controller
     }
 
     [HttpGet("types")]
-    [AuthorizeRoles(Core.Users.Role.Admin)]
+    [AuthorizeRoles(Core.Users.Role.Admin, Core.Users.Role.Owner)]
     public async Task<Results<Ok<IEnumerable<RoomTypeSummary>>, NotFound>> GetAllTypes(
        [FromServices] IQueryHandler<AllRoomTypesQuery, IEnumerable<RoomTypeSummary>> queryService,
        CancellationToken cancelationToken)
@@ -42,7 +43,7 @@ public class RoomController : Controller
     }
 
     [HttpGet("{id}")]
-    [AuthorizeRoles(Core.Users.Role.Admin)]
+    [AuthorizeRoles(Core.Users.Role.Admin, Core.Users.Role.Owner)]
     public async Task<Results<Ok<RoomDetails>, NotFound, BadRequest>> GetOne(
         Guid id,
         [FromServices] IQueryHandler<OneRoomQuery, RoomDetails> queryService,
@@ -60,7 +61,7 @@ public class RoomController : Controller
     }
 
     [HttpPost]
-    [AuthorizeRoles(Core.Users.Role.Admin)]
+    [AuthorizeRoles(Core.Users.Role.Admin, Core.Users.Role.Owner)]
     public async Task<Results<Ok<Guid>, BadRequest>> Create(
        [FromBody] CreateRoomCommand command,
        [FromServices] ICommandHandler<CreateRoomCommand, Guid?> commandHandler,
@@ -75,7 +76,7 @@ public class RoomController : Controller
     }
 
     [HttpPatch]
-    [AuthorizeRoles(Core.Users.Role.Admin)]
+    [AuthorizeRoles(Core.Users.Role.Admin, Core.Users.Role.Owner)]
     public async Task<Results<Ok<Guid>, BadRequest>> Update(
         [FromBody] UpdateRoomCommand command,
         [FromServices] ICommandHandler<UpdateRoomCommand, Guid?> commandHandler,
@@ -90,7 +91,7 @@ public class RoomController : Controller
     }
 
     [HttpDelete("{id}")]
-    [AuthorizeRoles(Core.Users.Role.Admin)]
+    [AuthorizeRoles(Core.Users.Role.Admin, Core.Users.Role.Owner)]
     public async Task<Results<Ok, NotFound>> Delete(
         Guid id,
         [FromServices] ICommandHandler<DeleteRoomCommand, bool> commandHandler,
