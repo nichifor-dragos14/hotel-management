@@ -25,7 +25,7 @@ internal class AllReviewSummariesQueryHandler(
                             r."Rating",
                             r."CreatedOn",
                             p."Name" AS "PropertyName",
-                            ROW_NUMBER() OVER (ORDER BY p."CreatedOn" DESC) AS "RowNumber"
+                            ROW_NUMBER() OVER (ORDER BY r."CreatedOn" DESC) AS "RowNumber"
                         FROM
                             "Review" AS r
                         JOIN

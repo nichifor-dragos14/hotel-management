@@ -25,7 +25,7 @@ internal class AllReportSummariesQueryHandler(
                             r."IsClosed",
                             p."Name" AS "PropertyName",
                             r."CreatedOn",
-                            ROW_NUMBER() OVER (ORDER BY p."CreatedOn" DESC) AS "RowNumber"
+                            ROW_NUMBER() OVER (ORDER BY r."CreatedOn" DESC) AS "RowNumber"
                         FROM
                             "Report" AS r
                         LEFT JOIN
@@ -33,7 +33,7 @@ internal class AllReportSummariesQueryHandler(
                         ON
                             r."PropertyId" = p."Id"
                         ORDER BY
-                            p."CreatedOn" DESC
+                            r."CreatedOn" DESC
                         OFFSET {query.From} ROWS FETCH NEXT {query.To - query.From} ROWS ONLY
                     )
                     SELECT

@@ -27,6 +27,8 @@ internal class AllRoomSummariesQueryHandler(
                         FROM
                             "Room" AS r              
                         WHERE r."PropertyId" = '{query.PropertyId}'
+                        ORDER BY
+                            r."CreatedOn" DESC
                         OFFSET {query.From} ROWS FETCH NEXT {query.To - query.From} ROWS ONLY
                     )
                     SELECT
