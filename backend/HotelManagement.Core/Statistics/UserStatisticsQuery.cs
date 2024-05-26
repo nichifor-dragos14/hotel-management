@@ -2,9 +2,18 @@
 
 namespace HotelManagement.Core.Statistics;
 
-public record PropertyReviewStatistics(Guid PropertyId, string PropertyName, string PropertyLocation, double AverageRating);
+public record PropertyReviewStatistics(
+    Guid PropertyId, 
+    string PropertyName, 
+    string PropertyLocation, 
+    double AverageRating
+);
 
-public record MonthlyBookingStatistics(int Year, int Month, int BookingCount);
+public record MonthlyBookingStatistics(
+    int Year,
+    int Month,
+    int BookingCount
+);
 
 public record MonthlyXPStatistics(int Year, int Month, int TotalXP);
 

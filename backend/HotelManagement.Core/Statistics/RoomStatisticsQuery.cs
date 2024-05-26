@@ -7,7 +7,6 @@ public record RoomStatistics(
     List<BookingMonthlyStatistics> MonthlyStatistics
 );
 
-
 public record RoomStatisticsQuery(
     Guid RoomId
 ) : IQuery<RoomStatistics>;

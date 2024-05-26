@@ -21,7 +21,6 @@ public record PropertyStatistics(
     List<ReviewStatistics> ReviewStatistics
 );
 
-
 public record PropertyStatisticsQuery(
     Guid PropertyId
 ) : IQuery<PropertyStatistics>;
