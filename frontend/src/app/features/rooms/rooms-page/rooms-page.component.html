@@ -40,8 +40,18 @@
       }
     </ng-container>
   </cdk-virtual-scroll-viewport>
-  @if (roomsDataSource.totalCount == 0) {
+  @if (
+    roomsDataSource.totalCount == 0 &&
+    loginService.getLoggedUserRole() == 'Owner'
+  ) {
     <h2>Consider adding rooms, so we can list your property 😉</h2>
+  }
+
+  @if (
+    roomsDataSource.totalCount == 0 &&
+    loginService.getLoggedUserRole() == 'Admin'
+  ) {
+    <h2>This property has no registered rooms 🤔</h2>
   }
 </mat-nav-list>
 

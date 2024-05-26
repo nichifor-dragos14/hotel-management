@@ -1,9 +1,11 @@
-﻿using Microsoft.Extensions.Options;
+﻿using HotelManagement.Core.Abstractions;
+using HotelManagement.Core.Users;
+using Microsoft.Extensions.Options;
 using SmtpClient = MailKit.Net.Smtp.SmtpClient;
 
 namespace HotelManagement.Core.EmailService;
 
-public class EmailService(IOptions<EmailOptions> _options) : IEmailService
+public class EmailService(IOptions<EmailOptions> _options, IQueryFacade _queryFacade) : IEmailService
 {
     public async Task ComposeBookingConfirmationEmail(string firstName, string lastName, string userEmailAddress, DateTime startDate, DateTime endDate, string host, int port)
     {
@@ -68,6 +70,13 @@ public class EmailService(IOptions<EmailOptions> _options) : IEmailService
 
     public async Task<string> SendAccountValidationEmail(string userEmailAddress, string firstName, string lastName, string host, int port)
     {
+        var user = _queryFacade.Of<User>().FirstOrDefault(u => u.Email == userEmailAddress);
+
+        if (user != null)
+        {
+            return null;
+        }
+
         var gmailAddress = _options.Value.GmailAddress;
 
         var activationToken = Guid.NewGuid().ToString();

@@ -90,7 +90,7 @@ public class UserController(IFileStorageService _storageService) : Controller
 
     [HttpPatch("password")]
     [AuthorizeRoles(Core.Users.Role.Client, Core.Users.Role.Admin, Core.Users.Role.Owner)]
-    public async Task<Results<Ok<Guid>, BadRequest>> UpdatePassword(
+    public async Task<Results<Ok<Guid>, BadRequest<string>>> UpdatePassword(
         [FromServices] ICommandHandler<UpdateUserPasswordCommand, Guid?> commandHandler,
         [FromBody] UpdateUserPasswordCommand command,
         CancellationToken cancellationToken)
@@ -98,7 +98,7 @@ public class UserController(IFileStorageService _storageService) : Controller
         return await commandHandler.ExecuteAsync(command, cancellationToken) switch
         {
             { } id => TypedResults.Ok(id),
-            _ => TypedResults.BadRequest()
+            _ => TypedResults.BadRequest("The old password was incorrect")
         };
     }
 }

@@ -219,11 +219,8 @@ export class ChangePasswordComponent {
       this.toastService.open('Successfully updated password', 'info');
       this.router.navigate(['/main'], { relativeTo: this.activatedRoute });
       this.loginService.logout();
-    } catch (error) {
-      if (error instanceof Error) {
-        this.toastService.open('Failed to change password', 'error');
-        this.router.navigate(['../../'], { relativeTo: this.activatedRoute });
-      }
+    } catch (error: any) {
+      this.toastService.open(error.error, 'error');
     }
   }
 }

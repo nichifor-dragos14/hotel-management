@@ -15,16 +15,16 @@ namespace HotelManagement.WebApi.Controllers;
 public class AuthController(IConfiguration _configuration, IEmailService _emailService) : ControllerBase
 {
     [HttpPost("login")]
-    public async Task<Results<Ok<string>, BadRequest>> LoginAsync(
-        [FromBody] LoginModel loginModel,
+    public async Task<Results<Ok<string>, BadRequest<string>>> LoginAsync(
         [FromServices] IQueryHandler<LoginQuery, AccountModel> queryService,
+        [FromBody] LoginModel loginModel,
         CancellationToken cancellationToken)
     {
         AccountModel? user = await queryService.ExecuteAsync(new LoginQuery(loginModel), cancellationToken);
 
         if (user == null)
         {
-            return TypedResults.BadRequest();
+            return TypedResults.BadRequest("The email or password you entered is incorrect");
         }
 
         var token = GenerateJwtToken(user);
@@ -33,11 +33,10 @@ public class AuthController(IConfiguration _configuration, IEmailService _emailS
     }
 
     [HttpPost("register")]
-    public async Task<Results<Ok<Guid>, BadRequest>> RegisterAsync(
-       [FromBody] RegisterCommand command,
-       [FromServices] ICommandHandler<RegisterCommand, Guid?> commandHandler,
-       CancellationToken cancellationToken
-    )
+    public async Task<Results<Ok<Guid>, BadRequest<string>>> RegisterAsync(
+        [FromServices] ICommandHandler<RegisterCommand, Guid?> commandHandler,
+        [FromBody] RegisterCommand command,
+        CancellationToken cancellationToken)
     {
         string host = HttpContext.Request.Host.Host;
         int port = HttpContext.Request.Host.Port ?? 80;
@@ -46,7 +45,7 @@ public class AuthController(IConfiguration _configuration, IEmailService _emailS
 
         if (token == null)
         {
-            return TypedResults.BadRequest();
+            return TypedResults.BadRequest("The email is already in use");
         }
 
         var profilePicture = _configuration["GoogleDriveOptions:DefaultProfilePicture"];
@@ -69,7 +68,7 @@ public class AuthController(IConfiguration _configuration, IEmailService _emailS
         return await commandHandler.ExecuteAsync(newCommand, cancellationToken) switch
         {
             { } id => TypedResults.Ok(id),
-            _ => TypedResults.BadRequest()
+            _ => TypedResults.BadRequest("")
         };
     }
 
@@ -103,9 +102,9 @@ public class AuthController(IConfiguration _configuration, IEmailService _emailS
 
     [HttpGet("get-activation")]
     public async Task<Results<Ok<Guid>, NotFound, BadRequest>> GetActivation(
+        [FromServices] IQueryHandler<ActivateAccountUserQuery, Guid> queryService,
         string email,
         string token,
-        [FromServices] IQueryHandler<ActivateAccountUserQuery, Guid> queryService,
         CancellationToken cancellationToken)
     {
         return await queryService.ExecuteAsync(new ActivateAccountUserQuery(email, token), cancellationToken) switch
@@ -116,9 +115,9 @@ public class AuthController(IConfiguration _configuration, IEmailService _emailS
 
     [HttpPost("activate")]
     public async Task<Results<Ok<Guid?>, BadRequest>> ActivateAccount(
-       [FromBody] ActivateAccountCommand command,
-       [FromServices] ICommandHandler<ActivateAccountCommand, Guid?> commandHandler,
-       CancellationToken cancellationToken)
+        [FromServices] ICommandHandler<ActivateAccountCommand, Guid?> commandHandler,
+        [FromBody] ActivateAccountCommand command,
+        CancellationToken cancellationToken)
     {
         var result = await commandHandler.ExecuteAsync(command, cancellationToken);
 

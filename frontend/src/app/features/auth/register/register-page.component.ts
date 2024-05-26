@@ -71,7 +71,8 @@ export class RegisterPageComponent implements OnInit {
         'info'
       );
     } catch (error: any) {
-      this.toastrService.open(error.receiveMessage(), 'error');
+      console.log(error);
+      this.toastrService.open(error.error, 'error');
     } finally {
       this.registerForm.reset();
       this.router.navigate(['/auth/login']);

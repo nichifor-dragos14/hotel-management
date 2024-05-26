@@ -72,7 +72,7 @@ export class LoginPageComponent implements OnInit {
         this.loginForm.reset();
       }
     } catch (error: any) {
-      this.toastrService.open('Could not log in', 'error');
+      this.toastrService.open(error.error, 'error');
     }
   }
 }
