@@ -28,6 +28,7 @@ export class UpdateReviewFormFactory {
           ],
         },
       ],
+      userId: [review.userId, { validators: [Validators.required] }],
     });
   }
 }

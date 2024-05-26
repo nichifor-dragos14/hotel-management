@@ -1802,6 +1802,14 @@
               "type": "string",
               "format": "uuid"
             }
+          },
+          {
+            "name": "userId",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
           }
         ],
         "responses": {
@@ -4771,7 +4779,8 @@
           "description",
           "id",
           "rating",
-          "title"
+          "title",
+          "userId"
         ],
         "type": "object",
         "properties": {
@@ -4788,6 +4797,10 @@
           "rating": {
             "type": "number",
             "format": "double"
+          },
+          "userId": {
+            "type": "string",
+            "format": "uuid"
           }
         },
         "additionalProperties": false

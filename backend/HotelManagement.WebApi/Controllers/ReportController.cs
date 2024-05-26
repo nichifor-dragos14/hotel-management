@@ -24,8 +24,9 @@ public class ReportController
 
     [HttpGet("{id}")]
     [AuthorizeRoles(Core.Users.Role.Admin)]
-    public async Task<Results<Ok<ReportDetails>, NotFound, BadRequest>> GetOne(Guid id,
+    public async Task<Results<Ok<ReportDetails>, NotFound, BadRequest>> GetOne(
         [FromServices] IQueryHandler<OneReportQuery, ReportDetails> queryService,
+        Guid id,
         CancellationToken cancellationToken)
     {
         if (id == Guid.Empty)
@@ -42,10 +43,10 @@ public class ReportController
     [HttpPost]
     [AuthorizeRoles(Core.Users.Role.Client)]
     public async Task<Results<Ok<Guid>, BadRequest>> Create(
-      [FromBody] CreateReportCommand command,
-      [FromServices] ICommandHandler<CreateReportCommand, Guid?> commandHandler,
-      CancellationToken cancellationToken
-   )
+        [FromServices] ICommandHandler<CreateReportCommand, Guid?> commandHandler,
+        [FromBody] CreateReportCommand command,
+        CancellationToken cancellationToken
+    )
     {
         return await commandHandler.ExecuteAsync(command, cancellationToken) switch
         {
@@ -57,10 +58,9 @@ public class ReportController
     [HttpPatch("close")]
     [AuthorizeRoles(Core.Users.Role.Admin)]
     public async Task<Results<Ok<Guid>, BadRequest>> Close(
-        [FromBody] CloseReportCommand closeReportCommand,
         [FromServices] ICommandHandler<CloseReportCommand, Guid?> commandHandler,
-        CancellationToken cancellationToken
-    )
+        [FromBody] CloseReportCommand closeReportCommand,
+        CancellationToken cancellationToken)
     {
         return await commandHandler.ExecuteAsync(closeReportCommand, cancellationToken) switch
         {
@@ -72,10 +72,9 @@ public class ReportController
     [HttpPatch("open")]
     [AuthorizeRoles(Core.Users.Role.Admin)]
     public async Task<Results<Ok<Guid>, BadRequest>> Open(
-        [FromBody] OpenReportCommand openReportCommand,
         [FromServices] ICommandHandler<OpenReportCommand, Guid?> commandHandler,
-        CancellationToken cancellationToken
-    )
+        [FromBody] OpenReportCommand openReportCommand,
+        CancellationToken cancellationToken)
     {
         return await commandHandler.ExecuteAsync(openReportCommand, cancellationToken) switch
         {
@@ -87,10 +86,9 @@ public class ReportController
     [HttpPatch("read")]
     [AuthorizeRoles(Core.Users.Role.Admin)]
     public async Task<Results<Ok<Guid>, BadRequest>> Read(
-        [FromBody] ReadReportCommand readReportCommand,
         [FromServices] ICommandHandler<ReadReportCommand, Guid?> commandHandler,
-        CancellationToken cancellationToken
-    )
+        [FromBody] ReadReportCommand readReportCommand,
+        CancellationToken cancellationToken)
     {
         return await commandHandler.ExecuteAsync(readReportCommand, cancellationToken) switch
         {

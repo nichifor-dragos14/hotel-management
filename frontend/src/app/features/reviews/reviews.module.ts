@@ -101,6 +101,7 @@ const REVIEW_ROUTES: Routes = [
               reviewForm: async ({ params }: ActivatedRouteSnapshot) => {
                 const router = inject(Router);
                 const reviewService = inject(ReviewService);
+                const loginService = inject(LoginService);
 
                 const updateReviewFormFactory = new UpdateReviewFormFactory();
 
@@ -114,6 +115,7 @@ const REVIEW_ROUTES: Routes = [
                     id: review.id,
                     title: review.title,
                     rating: review.rating,
+                    userId: loginService.getLoggedUserId(),
                   });
                 } catch (error) {
                   router.navigate(['/error']);

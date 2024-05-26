@@ -10,6 +10,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { AppToastService } from '$shared/toast';
+import { LoginService } from '$features/auth/login.service';
 
 @Component({
   selector: 'app-delete-review',
@@ -31,12 +32,16 @@ export class DeleteReviewComponent {
   readonly router = inject(Router);
   readonly reviewService = inject(ReviewService);
   readonly toastService = inject(AppToastService);
+  readonly loginService = inject(LoginService);
 
   @Input() id: string = '';
 
   async ok() {
     try {
-      await this.reviewService.reviewsIdDeleteAsync({ id: this.id });
+      await this.reviewService.reviewsIdDeleteAsync({
+        id: this.id,
+        userId: this.loginService.getLoggedUserId(),
+      });
       this.toastService.open('The review was deleted successfully', 'info');
     } catch (error) {
       if (error instanceof Error) {
