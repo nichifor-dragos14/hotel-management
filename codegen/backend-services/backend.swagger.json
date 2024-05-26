@@ -1406,7 +1406,47 @@
         }
       }
     },
-    "/reports": {
+    "/reports/closed": {
+      "get": {
+        "tags": [
+          "Report"
+        ],
+        "parameters": [
+          {
+            "name": "from",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "to",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReportSummaryIPaginatedResult"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/reports/open": {
       "get": {
         "tags": [
           "Report"
@@ -1445,7 +1485,7 @@
           }
         }
       },
-      "post": {
+      "patch": {
         "tags": [
           "Report"
         ],
@@ -1453,17 +1493,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/CreateReportCommand"
+                "$ref": "#/components/schemas/OpenReportCommand"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/CreateReportCommand"
+                "$ref": "#/components/schemas/OpenReportCommand"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/CreateReportCommand"
+                "$ref": "#/components/schemas/OpenReportCommand"
               }
             }
           }
@@ -1522,8 +1562,8 @@
         }
       }
     },
-    "/reports/close": {
-      "patch": {
+    "/reports": {
+      "post": {
         "tags": [
           "Report"
         ],
@@ -1531,17 +1571,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/CloseReportCommand"
+                "$ref": "#/components/schemas/CreateReportCommand"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/CloseReportCommand"
+                "$ref": "#/components/schemas/CreateReportCommand"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/CloseReportCommand"
+                "$ref": "#/components/schemas/CreateReportCommand"
               }
             }
           }
@@ -1564,7 +1604,7 @@
         }
       }
     },
-    "/reports/open": {
+    "/reports/close": {
       "patch": {
         "tags": [
           "Report"
@@ -1573,17 +1613,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/OpenReportCommand"
+                "$ref": "#/components/schemas/CloseReportCommand"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/OpenReportCommand"
+                "$ref": "#/components/schemas/CloseReportCommand"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/OpenReportCommand"
+                "$ref": "#/components/schemas/CloseReportCommand"
               }
             }
           }

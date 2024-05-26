@@ -38,7 +38,11 @@ import { MatTabsModule } from '@angular/material/tabs';
 export class ReportsPageComponent {
   readonly reportService = inject(ReportService);
 
-  reportsDataSource = new PaginatedDataSource({
-    fetch: ({ from, to }) => this.reportService.reportsGet({ from, to }),
+  openReportsDataSource = new PaginatedDataSource({
+    fetch: ({ from, to }) => this.reportService.reportsOpenGet({ from, to }),
+  });
+
+  closedReportsDataSource = new PaginatedDataSource({
+    fetch: ({ from, to }) => this.reportService.reportsClosedGet({ from, to }),
   });
 }

@@ -8,7 +8,7 @@
         [itemSize]="72"
         [maxBufferPx]="500"
       >
-        <ng-container *cdkVirtualFor="let report of reportsDataSource">
+        <ng-container *cdkVirtualFor="let report of openReportsDataSource">
           @if (!report) {
             <a mat-list-item disable d>
               <app-circle-placeholder matListItemIcon [radius]="35">
@@ -22,7 +22,7 @@
               <app-line-placeholder matListItemLine [width]="150" [height]="10">
               </app-line-placeholder>
             </a>
-          } @else if (!report.isClosed) {
+          } @else {
             <a
               mat-list-item
               [routerLink]="[report.id]"
@@ -52,7 +52,7 @@
         </ng-container>
       </cdk-virtual-scroll-viewport>
 
-      @if (reportsDataSource.totalCount == 0) {
+      @if (openReportsDataSource.totalCount == 0) {
         <h2>No open reports 👍</h2>
       }
     </mat-nav-list>
@@ -65,7 +65,7 @@
         [itemSize]="72"
         [maxBufferPx]="500"
       >
-        <ng-container *cdkVirtualFor="let report of reportsDataSource">
+        <ng-container *cdkVirtualFor="let report of closedReportsDataSource">
           @if (!report) {
             <a mat-list-item disable d>
               <app-circle-placeholder matListItemIcon [radius]="35">
@@ -79,7 +79,7 @@
               <app-line-placeholder matListItemLine [width]="150" [height]="10">
               </app-line-placeholder>
             </a>
-          } @else if (report.isClosed) {
+          } @else {
             <a
               mat-list-item
               [routerLink]="[report.id]"
@@ -108,8 +108,8 @@
           }
         </ng-container>
       </cdk-virtual-scroll-viewport>
-      @if (reportsDataSource.totalCount == 0) {
-        <h2>No closed reports 👍</h2>
+      @if (closedReportsDataSource.totalCount == 0) {
+        <h2>No closed reports 🤔</h2>
       }
     </mat-nav-list>
   </mat-tab>

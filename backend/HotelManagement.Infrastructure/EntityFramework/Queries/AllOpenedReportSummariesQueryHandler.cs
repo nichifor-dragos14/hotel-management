@@ -4,12 +4,12 @@ using Microsoft.EntityFrameworkCore;
 
 namespace HotelManagement.Infrastructure.EntityFramework.Queries;
 
-internal class AllReportSummariesQueryHandler(
+internal class AllOpenedReportSummariesQueryHandler(
     ApplicationDbContext dbContext
-) : IQueryHandler<AllReportSummariesQuery, IPaginatedResult<ReportSummary>>
+) : IQueryHandler<AllOpenedReportSummariesQuery, IPaginatedResult<ReportSummary>>
 {
     public async Task<IPaginatedResult<ReportSummary>> ExecuteAsync(
-        AllReportSummariesQuery query,
+        AllOpenedReportSummariesQuery query,
         CancellationToken cancellationToken
         )
     {
@@ -32,12 +32,13 @@ internal class AllReportSummariesQueryHandler(
                             "Property" AS p
                         ON
                             r."PropertyId" = p."Id"
+                        WHERE r."IsClosed" = False
                         ORDER BY
                             r."CreatedOn" DESC
                         OFFSET {query.From} ROWS FETCH NEXT {query.To - query.From} ROWS ONLY
                     )
                     SELECT
-                        (SELECT COUNT(*) FROM "Report") as "TotalCount",
+                        (SELECT COUNT(*) FROM "Report" AS r WHERE r."IsClosed" = False) as "TotalCount",
                             CASE
                                 WHEN (SELECT COUNT(*) FROM ReportSummaries) > 0
                                     THEN jsonb_agg(ReportSummaries)

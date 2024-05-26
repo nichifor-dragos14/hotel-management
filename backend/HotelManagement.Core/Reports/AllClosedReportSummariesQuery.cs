@@ -12,7 +12,7 @@ public record ReportSummary(
     int RowNumber
 );
 
-public record AllReportSummariesQuery(
+public record AllClosedReportSummariesQuery(
     int From, 
     int To
 ) : IQuery<IPaginatedResult<ReportSummary>>;

@@ -10,15 +10,26 @@ namespace HotelManagement.WebApi.Controllers;
 [ApiController]
 public class ReportController
 {
-    [HttpGet]
+    [HttpGet("closed")]
     [AuthorizeRoles(Core.Users.Role.Admin)]
-    public async Task<Results<Ok<IPaginatedResult<ReportSummary>>, NotFound>> GetAll(
-        [FromServices] IQueryHandler<AllReportSummariesQuery, IPaginatedResult<ReportSummary>> queryService,
+    public async Task<Results<Ok<IPaginatedResult<ReportSummary>>, NotFound>> GetAllClosed(
+        [FromServices] IQueryHandler<AllClosedReportSummariesQuery, IPaginatedResult<ReportSummary>> queryService,
         int from,
         int to,
         CancellationToken cancelationToken)
     {
-        return TypedResults.Ok(await queryService.ExecuteAsync(new AllReportSummariesQuery(from, to), cancelationToken));
+        return TypedResults.Ok(await queryService.ExecuteAsync(new AllClosedReportSummariesQuery(from, to), cancelationToken));
+    }
+
+    [HttpGet("open")]
+    [AuthorizeRoles(Core.Users.Role.Admin)]
+    public async Task<Results<Ok<IPaginatedResult<ReportSummary>>, NotFound>> GetAllOpen(
+        [FromServices] IQueryHandler<AllOpenedReportSummariesQuery, IPaginatedResult<ReportSummary>> queryService,
+        int from,
+        int to,
+        CancellationToken cancelationToken)
+    {
+        return TypedResults.Ok(await queryService.ExecuteAsync(new AllOpenedReportSummariesQuery(from, to), cancelationToken));
     }
 
     [HttpGet("{id}")]
