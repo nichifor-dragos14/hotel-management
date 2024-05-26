@@ -57,6 +57,32 @@ public static class ServiceCollectionExtensions
             services.AddScoped(generic, implementation);
         }
 
+        var serviceProvider = services.BuildServiceProvider();
+
+        using (var scope = serviceProvider.CreateScope())
+        {
+            int numberOfOwners = 200;
+            int numberOfClients = 1000;
+            int propertiesPerUser = 5;
+            int minimumNumberOfRoomsPerProperty = 1;
+            int maximumNumberOfRoomsPerProperty = 5;
+            int minimumBookingsPerRoom = 3;
+            int maximumBookingsPerRoom = 5;
+
+            var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+            var seeder = new DatabaseSeeder(context);
+
+            //seeder.Seed(
+            //    numberOfOwners,
+            //    numberOfClients,
+            //    propertiesPerUser,
+            //    minimumNumberOfRoomsPerProperty,
+            //    maximumNumberOfRoomsPerProperty,
+            //    minimumBookingsPerRoom,
+            //    maximumBookingsPerRoom
+            //);
+        }
+
         return services;
     }
 }
