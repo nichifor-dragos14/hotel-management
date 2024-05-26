@@ -62,7 +62,6 @@ public class EmailService(IOptions<EmailOptions> _options) : IEmailService
         }
         catch (Exception ex)
         {
-            Console.WriteLine(ex);
         }
 
     }

@@ -22,6 +22,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { SEARCH_PROPERTY_FORM } from '$features/main-page/search-property.form';
 import { MatCardModule } from '@angular/material/card';
 import { GoogleMapsPreviewComponent } from '$shared/google-maps';
+import { DateConverterModule } from '$shared/date-converter';
 
 export interface GridImage {
   image: string;
@@ -51,6 +52,7 @@ export interface GridImage {
     MatNativeDateModule,
     MatCardModule,
     GoogleMapsPreviewComponent,
+    DateConverterModule,
   ],
 })
 export class PropertyPageComponent implements OnInit {

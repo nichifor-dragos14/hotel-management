@@ -80,7 +80,5 @@ public class DiscountJob(IQueryFacade queryFacade, IUnitOfWork unitOfWork, IEmai
                 await emailService.SendDiscountsNotificationOnEmail(user.FirstName, user.LastName, user.Email, startDate, endDate);
             }
         }
-
-        Console.WriteLine("Discount job executed at: " + DateTime.Now);
     }
 }
