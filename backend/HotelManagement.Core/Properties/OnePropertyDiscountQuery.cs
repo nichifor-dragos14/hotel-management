@@ -19,7 +19,7 @@ internal class OnePropertyDiscountQueryHandler(
         return
             (from discount in facade.Of<Discount>()
              where discount.PropertyId == query.PropertyId && discount.UserId == query.UserId && DateTime.UtcNow < discount.EndDate
-             select discount.DiscountPercentage
-            ).FirstOrDefault();
+             select discount.DiscountPercentage)
+            .FirstOrDefault();
     }
 }

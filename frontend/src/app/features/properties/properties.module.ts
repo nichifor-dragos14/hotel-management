@@ -156,7 +156,7 @@ const PROPERTY_ROUTES: Routes = [
         runGuardsAndResolvers: 'always',
         canActivate: [AuthGuard],
         data: {
-          role: ['Client', 'Owner', ''],
+          role: ['Client', ''],
         },
         resolve: {
           property: async ({ params, queryParams }: ActivatedRouteSnapshot) => {
@@ -189,10 +189,18 @@ const PROPERTY_ROUTES: Routes = [
               {
                 path: 'reviews',
                 component: PropertyReviewsPageComponent,
+                canActivate: [AuthGuard],
+                data: {
+                  role: ['Client', ''],
+                },
               },
               {
                 path: 'rooms',
                 component: PropertyRoomsPageComponent,
+                canActivate: [AuthGuard],
+                data: {
+                  role: ['Client', ''],
+                },
               },
             ],
           },

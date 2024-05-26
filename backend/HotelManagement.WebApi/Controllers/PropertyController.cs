@@ -30,6 +30,7 @@ public class PropertyController(IFileStorageService _storageService) : Controlle
     [HttpGet("filter/{location}/{startDate}/{endDate}/{numberOfAdults}/{numberOfChildren}/{numberOfRooms}")]
     public async Task<Results<Ok<IPaginatedResult<PropertySummaryFiltered>>, NotFound>> GetAllFiltered(
        [FromServices] IQueryHandler<AllPropertySummariesFilteredQuery, IPaginatedResult<PropertySummaryFiltered>> queryService,
+       [FromQuery] PropertyFiltersOptional propertyFiltersOptional,
        int from,
        int to,
        string location,
@@ -38,7 +39,6 @@ public class PropertyController(IFileStorageService _storageService) : Controlle
        int numberOfAdults,
        int numberOfChildren,
        int numberOfRooms,
-       [FromQuery] PropertyFiltersOptional propertyFiltersOptional,
        CancellationToken cancelationToken)
     {
         PropertyFiltersMandatory propertyFiltersMandatory = new(location, startDate, endDate, numberOfAdults, numberOfChildren, numberOfRooms);
@@ -48,12 +48,12 @@ public class PropertyController(IFileStorageService _storageService) : Controlle
 
     [HttpGet("recommendations")]
     public async Task<Results<Ok<IPaginatedResult<PropertySummaryRecommendation>>, NotFound>> GetAllFiltered(
-    [FromServices] IQueryHandler<AllPropertyRecommendationSummariesQuery, IPaginatedResult<PropertySummaryRecommendation>> queryService,
-    int from,
-    int to,
-    Guid? logggedUsedId,
-    [FromQuery] List<SearchHistoryFields> searchHistoryFields,
-    CancellationToken cancelationToken)
+        [FromServices] IQueryHandler<AllPropertyRecommendationSummariesQuery, IPaginatedResult<PropertySummaryRecommendation>> queryService,
+        [FromQuery] List<SearchHistoryFields> searchHistoryFields,
+        int from,
+        int to,
+        Guid? logggedUsedId,
+        CancellationToken cancelationToken)
     {
         return TypedResults.Ok(await queryService.ExecuteAsync(new AllPropertyRecommendationSummariesQuery(logggedUsedId, from, to, searchHistoryFields), cancelationToken));
     }
@@ -92,7 +92,6 @@ public class PropertyController(IFileStorageService _storageService) : Controlle
     }
 
     [HttpGet("{id}/reviews")]
-    [AuthorizeRoles(Core.Users.Role.Client, Core.Users.Role.Owner)]
     public async Task<Results<Ok<IPaginatedResult<PropertyReview>>, NotFound>> GetAllReviews(
         [FromServices] IQueryHandler<AllPropertyReviewsQuery, IPaginatedResult<PropertyReview>> queryService,
         Guid id,
@@ -121,13 +120,13 @@ public class PropertyController(IFileStorageService _storageService) : Controlle
 
     [HttpGet("{id}")]
     public async Task<Results<Ok<PropertyDetails>, NotFound, BadRequest>> GetOne(
+        [FromServices] IQueryHandler<OnePropertyQuery, PropertyDetails> queryService,
         Guid id,
         DateTime startDate,
         DateTime endDate,
         int numberOfAdults,
         int numberOfChildren,
         Guid? loggedUserId,
-        [FromServices] IQueryHandler<OnePropertyQuery, PropertyDetails> queryService,
         CancellationToken cancellationToken)
     {
         if (id == Guid.Empty)
@@ -142,10 +141,11 @@ public class PropertyController(IFileStorageService _storageService) : Controlle
     }
 
     [HttpGet("discount")]
+    [AuthorizeRoles(Core.Users.Role.Client)]
     public async Task<Results<Ok<int>, NotFound, BadRequest>> GetDiscount(
+        [FromServices] IQueryHandler<OnePropertyDiscountQuery, int> queryService,
         Guid propertyId,
         Guid loggedUserId,
-        [FromServices] IQueryHandler<OnePropertyDiscountQuery, int> queryService,
         CancellationToken cancellationToken)
     {
         return await queryService.ExecuteAsync(new OnePropertyDiscountQuery(propertyId, loggedUserId), cancellationToken) switch
@@ -157,10 +157,9 @@ public class PropertyController(IFileStorageService _storageService) : Controlle
     [HttpPost]
     [AuthorizeRoles(Core.Users.Role.Owner)]
     public async Task<Results<Ok<Guid>, BadRequest>> Create(
-        [FromBody] CreatePropertyCommand createHotelCommand,
         [FromServices] ICommandHandler<CreatePropertyCommand, Guid?> commandHandler,
-        CancellationToken cancellationToken
-    )
+        [FromBody] CreatePropertyCommand createHotelCommand,
+        CancellationToken cancellationToken)
     {
         return await commandHandler.ExecuteAsync(createHotelCommand, cancellationToken) switch
         {
@@ -172,10 +171,9 @@ public class PropertyController(IFileStorageService _storageService) : Controlle
     [HttpPatch]
     [AuthorizeRoles(Core.Users.Role.Admin, Core.Users.Role.Owner)]
     public async Task<Results<Ok<Guid>, BadRequest>> Update(
-        [FromBody] UpdatePropertyCommand updateHotelCommand,
         [FromServices] ICommandHandler<UpdatePropertyCommand, Guid?> commandHandler,
-        CancellationToken cancellationToken
-    )
+        [FromBody] UpdatePropertyCommand updateHotelCommand,
+        CancellationToken cancellationToken)
     {
         return await commandHandler.ExecuteAsync(updateHotelCommand, cancellationToken) switch
         {
@@ -187,14 +185,12 @@ public class PropertyController(IFileStorageService _storageService) : Controlle
     [HttpPatch("upload")]
     [AuthorizeRoles(Core.Users.Role.Admin, Core.Users.Role.Owner)]
     public async Task<Results<Ok<string>, BadRequest<string>>> UploadFile(
-    [FromForm] AddPropertyPictureDTO addPropertyPicturesDTO
-)
+        [FromForm] AddPropertyPictureDTO addPropertyPicturesDTO)
     {
         if (addPropertyPicturesDTO.File == null )
         {
             return TypedResults.BadRequest("No picture was uploaded");
         }
-
 
         var imageUrl = (await _storageService.UploadImage(addPropertyPicturesDTO.File.OpenReadStream())).Url;
 
@@ -209,9 +205,9 @@ public class PropertyController(IFileStorageService _storageService) : Controlle
     [HttpDelete("{id}")]
     [AuthorizeRoles(Core.Users.Role.Admin, Core.Users.Role.Owner)]
     public async Task<Results<Ok, NotFound>> Delete(
+        [FromServices] ICommandHandler<DeletePropertyCommand, bool> commandHandler,
         Guid id,
         Guid userId,
-        [FromServices] ICommandHandler<DeletePropertyCommand, bool> commandHandler,
         CancellationToken cancellationToken)
     {
         bool result = await commandHandler.ExecuteAsync(new DeletePropertyCommand(id, userId), cancellationToken);

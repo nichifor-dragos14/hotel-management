@@ -1,6 +1,11 @@
 ﻿namespace HotelManagement.Core.Properties.Filters;
 
-public class SearchHistoryFields(string location, int numberOfAdults, int numberOfChildren, int numberOfRooms)
+public class SearchHistoryFields(
+    string location,
+    int numberOfAdults,
+    int numberOfChildren,
+    int numberOfRooms
+)
 {
     public string Location { get; } = location;
 

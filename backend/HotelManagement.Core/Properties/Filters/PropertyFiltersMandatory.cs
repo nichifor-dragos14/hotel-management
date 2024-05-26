@@ -1,6 +1,13 @@
 ﻿namespace HotelManagement.Core.Properties.Filters;
 
-public class PropertyFiltersMandatory(string location, DateTime? startDate, DateTime? endDate, int numberOfAdults, int numberOfChildren, int numberOfRooms)
+public class PropertyFiltersMandatory(
+    string location,
+    DateTime? startDate,
+    DateTime? endDate,
+    int numberOfAdults,
+    int numberOfChildren,
+    int numberOfRooms
+)
 {
     public string Location { get; } = location;
 
