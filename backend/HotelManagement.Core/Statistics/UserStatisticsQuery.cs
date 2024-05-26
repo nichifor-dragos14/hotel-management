@@ -15,7 +15,11 @@ public record MonthlyBookingStatistics(
     int BookingCount
 );
 
-public record MonthlyXPStatistics(int Year, int Month, int TotalXP);
+public record MonthlyXPStatistics(
+    int Year,
+    int Month,
+    int TotalXP
+);
 
 public record UserActivityScore(
     Guid UserId, 

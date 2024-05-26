@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace HotelManagement.WebApi.Controllers;
 
-
 [Route("reports")]
 [ApiController]
 public class ReportController
@@ -14,10 +13,10 @@ public class ReportController
     [HttpGet]
     [AuthorizeRoles(Core.Users.Role.Admin)]
     public async Task<Results<Ok<IPaginatedResult<ReportSummary>>, NotFound>> GetAll(
-       [FromServices] IQueryHandler<AllReportSummariesQuery, IPaginatedResult<ReportSummary>> queryService,
-       int from,
-       int to,
-       CancellationToken cancelationToken)
+        [FromServices] IQueryHandler<AllReportSummariesQuery, IPaginatedResult<ReportSummary>> queryService,
+        int from,
+        int to,
+        CancellationToken cancelationToken)
     {
         return TypedResults.Ok(await queryService.ExecuteAsync(new AllReportSummariesQuery(from, to), cancelationToken));
     }

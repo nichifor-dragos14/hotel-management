@@ -15,6 +15,7 @@ export class UpdateBookingFormFactory {
         booking.specialMentions,
         { validators: [Validators.maxLength(500)] },
       ],
+      userId: [booking.userId, { validators: [Validators.required] }],
     });
   }
 }

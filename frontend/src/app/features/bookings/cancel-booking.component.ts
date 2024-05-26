@@ -10,6 +10,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { AppToastService } from '$shared/toast';
+import { LoginService } from '$features/auth/login.service';
 
 @Component({
   selector: 'app-cancel-booking',
@@ -18,7 +19,7 @@ import { AppToastService } from '$shared/toast';
     <h1 mat-dialog-title>Cancel booking?</h1>
 
     <p mat-dialog-content>Are you sure you want to cancel this booking?</p>
-    
+
     <mat-dialog-actions align="end">
       <button mat-button color="primary" (click)="ok()">Ok</button>
       <button mat-button color="warn" routerLink="../../">Close</button>
@@ -31,6 +32,7 @@ export class CancelBookingComponent {
   readonly router = inject(Router);
   readonly bookingService = inject(BookingService);
   readonly toastService = inject(AppToastService);
+  readonly loginService = inject(LoginService);
 
   @Input() id: string = '';
 
@@ -38,6 +40,7 @@ export class CancelBookingComponent {
     try {
       await this.bookingService.bookingsIdDeleteAsync({
         id: this.id,
+        userId: this.loginService.getLoggedUserId(),
       });
       this.toastService.open('You successfully cancelled your booking', 'info');
     } catch (error) {

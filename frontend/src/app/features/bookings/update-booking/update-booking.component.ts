@@ -94,6 +94,7 @@ export class UpdateBookingPageComponent {
           id: newBooking.id,
           expectedArrival: newBooking.expectedArrival,
           specialMentions: newBooking.specialMentions,
+          userId: newBooking.userId,
         },
       });
       this.toastService.open('Successfully updated booking details', 'info');

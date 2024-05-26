@@ -14,11 +14,11 @@ public class BookingController(IEmailService _emailService) : ControllerBase
     [HttpGet("past")]
     [AuthorizeRoles(Core.Users.Role.Client)]
     public async Task<Results<Ok<IPaginatedResult<BookingSummary>>, NotFound>> GetAllPastBookings(
-    [FromServices] IQueryHandler<AllPastBookingSummariesQuery, IPaginatedResult<BookingSummary>> queryService,
-    Guid userId,
-    int from,
-    int to,
-    CancellationToken cancelationToken)
+        [FromServices] IQueryHandler<AllPastBookingSummariesQuery, IPaginatedResult<BookingSummary>> queryService,
+        Guid userId,
+        int from,
+        int to,
+        CancellationToken cancelationToken)
     {
         return TypedResults.Ok(await queryService.ExecuteAsync(new AllPastBookingSummariesQuery(userId, from, to), cancelationToken));
     }
@@ -26,11 +26,11 @@ public class BookingController(IEmailService _emailService) : ControllerBase
     [HttpGet("upcoming")]
     [AuthorizeRoles(Core.Users.Role.Client)]
     public async Task<Results<Ok<IPaginatedResult<BookingSummary>>, NotFound>> GetAllUpcomingBookings(
-    [FromServices] IQueryHandler<AllUpcomingBookingSummariesQuery, IPaginatedResult<BookingSummary>> queryService,
-    Guid userId,
-    int from,
-    int to,
-    CancellationToken cancelationToken)
+        [FromServices] IQueryHandler<AllUpcomingBookingSummariesQuery, IPaginatedResult<BookingSummary>> queryService,
+        Guid userId,
+        int from,
+        int to,
+        CancellationToken cancelationToken)
     {
         return TypedResults.Ok(await queryService.ExecuteAsync(new AllUpcomingBookingSummariesQuery(userId, from, to), cancelationToken));
     }
@@ -38,13 +38,14 @@ public class BookingController(IEmailService _emailService) : ControllerBase
     [HttpGet("{id}")]
     [AuthorizeRoles(Core.Users.Role.Client)]
     public async Task<Results<Ok<BookingDetails>, NotFound, BadRequest>> GetOne(
-        Guid id,
         [FromServices] IQueryHandler<OneBookingQuery, BookingDetails> queryService,
+        Guid id,
         CancellationToken cancellationToken)
     {
         if (id == Guid.Empty)
+        {
             return TypedResults.BadRequest();
-
+        }
 
         return await queryService.ExecuteAsync(new OneBookingQuery(id), cancellationToken) switch
         {
@@ -56,13 +57,14 @@ public class BookingController(IEmailService _emailService) : ControllerBase
     [HttpGet("{id}/admin")]
     [AuthorizeRoles(Core.Users.Role.Owner)]
     public async Task<Results<Ok<BookingAdminDetails>, NotFound, BadRequest>> GetOneOwner(
-        Guid id,
         [FromServices] IQueryHandler<OneBookingAdminQuery, BookingAdminDetails> queryService,
+        Guid id,
         CancellationToken cancellationToken)
     {
         if (id == Guid.Empty)
+        {
             return TypedResults.BadRequest();
-
+        }
 
         return await queryService.ExecuteAsync(new OneBookingAdminQuery(id), cancellationToken) switch
         {
@@ -74,10 +76,9 @@ public class BookingController(IEmailService _emailService) : ControllerBase
     [HttpPost]
     [AuthorizeRoles(Core.Users.Role.Client)]
     public async Task<Results<Ok<Guid>, BadRequest>> Create(
-       [FromBody] CreateBookingCommand command,
-       [FromServices] ICommandHandler<CreateBookingCommand, Guid?> commandHandler,
-       CancellationToken cancellationToken
-    )
+        [FromServices] ICommandHandler<CreateBookingCommand, Guid?> commandHandler,
+        [FromBody] CreateBookingCommand command,
+        CancellationToken cancellationToken)
     {
         string host = HttpContext.Request.Host.Host;
         int port = HttpContext.Request.Host.Port ?? 80;
@@ -106,10 +107,9 @@ public class BookingController(IEmailService _emailService) : ControllerBase
     [HttpPatch]
     [AuthorizeRoles(Core.Users.Role.Client)]
     public async Task<Results<Ok<Guid>, BadRequest>> Update(
-        [FromBody] UpdateBookingCommand command,
         [FromServices] ICommandHandler<UpdateBookingCommand, Guid?> commandHandler,
-        CancellationToken cancellationToken
-    )
+        [FromBody] UpdateBookingCommand command,
+        CancellationToken cancellationToken)
     {
         return await commandHandler.ExecuteAsync(command, cancellationToken) switch
         {
@@ -121,11 +121,12 @@ public class BookingController(IEmailService _emailService) : ControllerBase
     [HttpDelete("{id}")]
     [AuthorizeRoles(Core.Users.Role.Client)]
     public async Task<Results<Ok, NotFound>> Delete(
-        Guid id,
         [FromServices] ICommandHandler<DeleteBookingCommand, bool> commandHandler,
+        Guid id,
+        Guid userId,
         CancellationToken cancellationToken)
     {
-        bool result = await commandHandler.ExecuteAsync(new DeleteBookingCommand(id), cancellationToken);
+        bool result = await commandHandler.ExecuteAsync(new DeleteBookingCommand(id, userId), cancellationToken);
 
         return result switch
         {

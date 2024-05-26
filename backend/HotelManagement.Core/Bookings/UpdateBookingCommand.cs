@@ -1,35 +1,56 @@
 ﻿using HotelManagement.Core.Abstractions;
+using HotelManagement.Core.Users;
 
 namespace HotelManagement.Core.Bookings;
 
 public record UpdateBookingCommand(
     Guid Id,
     string SpecialMentions,
-    string ExpectedArrival 
+    string ExpectedArrival,
+    Guid UserId
 ) : ICommand<Guid?>;
 
 internal class UpdateBookingCommandHandler(
-    IUnitOfWork unitOfWork
+    IUnitOfWork unitOfWork,
+    IQueryFacade facade
 ) : ICommandHandler<UpdateBookingCommand, Guid?>
 {
     public async Task<Guid?> ExecuteAsync(
         UpdateBookingCommand command,
         CancellationToken cancellationToken)
     {
-        var bookings = unitOfWork.GetRepository<Booking>();
+        var bookingDetails =
+          (from booking in facade.Of<Booking>()
+           where booking.Id == command.Id
+           join user in facade.Of<User>() on booking.UserId equals user.Id
+           select new
+           {
+               Booking = booking,
+               User = user
+           }).FirstOrDefault();
 
-        if (bookings.TryGetById([command.Id], out var booking))
+        if (bookingDetails == null)
         {
-            booking.Update(
-                command.SpecialMentions,
-                command.ExpectedArrival
-            );
-
-            await unitOfWork.SaveChangesAsync(cancellationToken);
-
-            return booking.Id;
+            return null;
         }
 
-        return null;
+        var bookingPart = bookingDetails.Booking;
+        var userPart = bookingDetails.User;
+
+        unitOfWork.GetRepository<User>().TryGetById([command.UserId], out var loggedUser);
+
+        if (userPart.Id != loggedUser.Id)
+        {
+            return null;
+        }
+
+        bookingPart.Update(
+            command.SpecialMentions,
+            command.ExpectedArrival
+        );
+
+        await unitOfWork.SaveChangesAsync(cancellationToken);
+
+        return bookingPart.Id;
     }
 }

@@ -316,6 +316,14 @@
               "type": "string",
               "format": "uuid"
             }
+          },
+          {
+            "name": "userId",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
           }
         ],
         "responses": {
@@ -4670,7 +4678,8 @@
         "required": [
           "expectedArrival",
           "id",
-          "specialMentions"
+          "specialMentions",
+          "userId"
         ],
         "type": "object",
         "properties": {
@@ -4683,6 +4692,10 @@
           },
           "expectedArrival": {
             "type": "string"
+          },
+          "userId": {
+            "type": "string",
+            "format": "uuid"
           }
         },
         "additionalProperties": false

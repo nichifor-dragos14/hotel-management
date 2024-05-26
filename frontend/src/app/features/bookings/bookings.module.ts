@@ -128,6 +128,7 @@ const BOOKING_ROUTES: Routes = [
                 const router = inject(Router);
                 const editBookingForm = inject(UpdateBookingFormFactory);
                 const bookingService = inject(BookingService);
+                const loginService = inject(LoginService);
 
                 try {
                   const booking = await bookingService.bookingsIdGetAsync({
@@ -138,6 +139,7 @@ const BOOKING_ROUTES: Routes = [
                     expectedArrival: booking.expectedArrival,
                     id: booking.id,
                     specialMentions: booking.specialMentions,
+                    userId: loginService.getLoggedUserId(),
                   });
                 } catch (error) {
                   router.navigate(['/error']);
