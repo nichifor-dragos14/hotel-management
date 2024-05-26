@@ -3,10 +3,12 @@ import { AppFormBuilder } from '$core/forms';
 import { Injectable, inject } from '@angular/core';
 import { FormGroup, Validators } from '@angular/forms';
 import { phoneNumberValidator } from './new-property.form';
+import { LoginService } from '$features/auth/login.service';
 
 @Injectable({ providedIn: 'root' })
 export class EditPropertyFormFactory {
   readonly formBuilder = inject(AppFormBuilder);
+  readonly loginService = inject(LoginService);
 
   build(property: UpdatePropertyCommand): FormGroup {
     return this.formBuilder.group<UpdatePropertyCommand>({
@@ -70,6 +72,7 @@ export class EditPropertyFormFactory {
         { validators: [Validators.required] },
       ],
       rating: [property.rating, { validators: [Validators.required] }],
+      userId: [property.userId, { validators: [Validators.required] }],
     });
   }
 }

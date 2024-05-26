@@ -208,11 +208,13 @@ public class PropertyController(IFileStorageService _storageService) : Controlle
 
     [HttpDelete("{id}")]
     [AuthorizeRoles(Core.Users.Role.Admin, Core.Users.Role.Owner)]
-    public async Task<Results<Ok, NotFound>> Delete(Guid id,
+    public async Task<Results<Ok, NotFound>> Delete(
+        Guid id,
+        Guid userId,
         [FromServices] ICommandHandler<DeletePropertyCommand, bool> commandHandler,
         CancellationToken cancellationToken)
     {
-        bool result = await commandHandler.ExecuteAsync(new DeletePropertyCommand(id), cancellationToken);
+        bool result = await commandHandler.ExecuteAsync(new DeletePropertyCommand(id, userId), cancellationToken);
 
         return result switch
         {

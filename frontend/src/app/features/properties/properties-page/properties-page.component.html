@@ -33,8 +33,18 @@
     </ng-container>
   </cdk-virtual-scroll-viewport>
 
-  @if (propertiesDataSource.totalCount == 0) {
+  @if (
+    propertiesDataSource.totalCount == 0 &&
+    loginService.getLoggedUserRole() == 'Owner'
+  ) {
     <h2>You have no matching properties 🤕</h2>
+  }
+
+  @if (
+    propertiesDataSource.totalCount == 0 &&
+    loginService.getLoggedUserRole() == 'Admin'
+  ) {
+    <h2>No properties 🤕</h2>
   }
 </mat-nav-list>
 

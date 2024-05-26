@@ -107,6 +107,7 @@ export class UpdatePropertyPageComponent implements OnChanges {
       hasKitchen,
       prepaymentNeeded,
       rating,
+      userId,
     } = newProperty;
 
     if (
@@ -126,7 +127,8 @@ export class UpdatePropertyPageComponent implements OnChanges {
       hasRoomService == undefined ||
       hasKitchen == undefined ||
       prepaymentNeeded == undefined ||
-      rating == undefined
+      rating == undefined ||
+      !userId
     ) {
       return;
     }
@@ -182,6 +184,7 @@ export class UpdatePropertyPageComponent implements OnChanges {
           prepaymentNeeded,
           rating,
           imageUrls,
+          userId,
         },
       });
 

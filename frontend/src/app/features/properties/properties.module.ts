@@ -78,6 +78,7 @@ const PROPERTY_ROUTES: Routes = [
             resolve: {
               propertyForm: async ({ params }: ActivatedRouteSnapshot) => {
                 const router = inject(Router);
+                const loginService = inject(LoginService);
                 const propertyService = inject(PropertyService);
 
                 const editPropertyFormFactory = inject(EditPropertyFormFactory);
@@ -106,6 +107,7 @@ const PROPERTY_ROUTES: Routes = [
                     phoneNumber: property.phoneNumber,
                     prepaymentNeeded: property.prepaymentNeeded,
                     rating: property.rating,
+                    userId: loginService.getLoggedUserId(),
                   });
                 } catch (error) {
                   router.navigate(['/error']);

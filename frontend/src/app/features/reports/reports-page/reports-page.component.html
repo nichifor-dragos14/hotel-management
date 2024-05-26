@@ -51,6 +51,10 @@
           }
         </ng-container>
       </cdk-virtual-scroll-viewport>
+
+      @if (reportsDataSource.totalCount == 0) {
+        <h2>No open reports 👍</h2>
+      }
     </mat-nav-list>
   </mat-tab>
 
@@ -104,6 +108,9 @@
           }
         </ng-container>
       </cdk-virtual-scroll-viewport>
+      @if (reportsDataSource.totalCount == 0) {
+        <h2>No closed reports 👍</h2>
+      }
     </mat-nav-list>
   </mat-tab>
 </mat-tab-group>

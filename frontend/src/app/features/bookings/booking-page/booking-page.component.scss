@@ -110,3 +110,12 @@ section[role='booking-details'] section[role='booking-layout'] {
   align-content: center;
   gap: 8px;
 }
+
+h2 {
+  margin: 0;
+}
+
+#description {
+  padding: 0 32px;
+  border-left: 2.5px solid #5e35b1;
+}

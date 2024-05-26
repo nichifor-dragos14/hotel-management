@@ -1271,6 +1271,14 @@
               "type": "string",
               "format": "uuid"
             }
+          },
+          {
+            "name": "userId",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
           }
         ],
         "responses": {
@@ -4677,7 +4685,8 @@
           "name",
           "phoneNumber",
           "prepaymentNeeded",
-          "rating"
+          "rating",
+          "userId"
         ],
         "type": "object",
         "properties": {
@@ -4736,6 +4745,10 @@
           },
           "imageUrls": {
             "type": "string"
+          },
+          "userId": {
+            "type": "string",
+            "format": "uuid"
           }
         },
         "additionalProperties": false

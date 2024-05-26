@@ -31,6 +31,19 @@
       </section>
 
       <section role="guest-information">
+        <h2>Special mentions & expected time of arrival</h2>
+        <section>
+          <span>
+            Expected time of arrival:
+            <span>{{ booking.expectedArrival }}</span>
+          </span>
+
+          <span> Special mentions: </span>
+          <span [innerHTML]="booking.specialMentions" id="description"></span>
+        </section>
+      </section>
+
+      <section role="guest-information">
         <h2>Booked room</h2>
         <section>
           <span class="font-light">

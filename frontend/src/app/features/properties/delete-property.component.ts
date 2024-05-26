@@ -10,6 +10,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { AppToastService } from '$shared/toast';
+import { LoginService } from '$features/auth/login.service';
 
 @Component({
   selector: 'app-delete-property',
@@ -30,13 +31,17 @@ import { AppToastService } from '$shared/toast';
 export class DeletePropertyComponent {
   readonly router = inject(Router);
   readonly propertyService = inject(PropertyService);
+  readonly loginService = inject(LoginService);
   readonly toastService = inject(AppToastService);
 
   @Input() id: string = '';
 
   async ok() {
     try {
-      await this.propertyService.propertiesIdDeleteAsync({ id: this.id });
+      await this.propertyService.propertiesIdDeleteAsync({
+        id: this.id,
+        userId: this.loginService.getLoggedUserId(),
+      });
       this.toastService.open('The property was deleted successfully', 'info');
     } catch (error) {
       if (error instanceof Error) {
