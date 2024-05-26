@@ -16,6 +16,7 @@ import { MatBadgeModule } from '@angular/material/badge';
 import { PaginatedDataSource } from '$core/pagination';
 import { AppLinePlaceholderComponent } from '$shared/placeholders/line-placeholder';
 import { AppCirclePlaceholderComponent } from '$shared/placeholders/circle-placeholder';
+import { LoginService } from '$features/auth/login.service';
 
 @Component({
   selector: 'app-rooms-page',
@@ -38,6 +39,7 @@ import { AppCirclePlaceholderComponent } from '$shared/placeholders/circle-place
 })
 export class RoomsPageComponent {
   readonly activatedRoute = inject(ActivatedRoute);
+  readonly loginService = inject(LoginService);
   readonly roomService = inject(RoomService);
 
   @Input() propertyId!: string;

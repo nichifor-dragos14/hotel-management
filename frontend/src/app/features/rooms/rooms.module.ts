@@ -14,6 +14,7 @@ import { NewRoomPageComponent } from './new-room/new-room.component';
 import { DialogPageComponent } from '$shared/dialog-page';
 import { DeleteRoomComponent } from './delete-room.component';
 import { AuthGuard } from '$features/auth/auth.guard';
+import { LoginService } from '$features/auth/login.service';
 
 const ROOM_ROUTES: Routes = [
   {
@@ -76,7 +77,7 @@ const ROOM_ROUTES: Routes = [
             },
             canActivate: [AuthGuard],
             data: {
-              role: ['Admin', 'Owner'],
+              role: ['Owner'],
             },
           },
           {
@@ -86,6 +87,7 @@ const ROOM_ROUTES: Routes = [
               roomForm: async ({ params }: ActivatedRouteSnapshot) => {
                 const router = inject(Router);
                 const roomService = inject(RoomService);
+                const loginService = inject(LoginService);
 
                 const editPropertyFormFactory = inject(EditRoomFormFactory);
 
@@ -94,7 +96,18 @@ const ROOM_ROUTES: Routes = [
                     id: params['id'],
                   });
 
-                  return editPropertyFormFactory.build(room);
+                  return editPropertyFormFactory.build({
+                    hasAirConditioning: room.hasAirConditioning,
+                    hasBalcony: room.hasBalcony,
+                    hasHairdryer: room.hasHairdryer,
+                    hasPrivateBathroom: room.hasPrivateBathroom,
+                    hasRefrigerator: room.hasRefrigerator,
+                    hasSeaView: room.hasSeaView,
+                    hasTowels: room.hasTowels,
+                    id: room.id,
+                    price: room.price,
+                    userId: loginService.getLoggedUserId(),
+                  });
                 } catch (error) {
                   router.navigate(['/error']);
 

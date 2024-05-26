@@ -10,6 +10,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { AppToastService } from '$shared/toast';
+import { LoginService } from '$features/auth/login.service';
 
 @Component({
   selector: 'app-delete-room',
@@ -32,12 +33,16 @@ export class DeleteRoomComponent {
   readonly activatedRoute = inject(ActivatedRoute);
   readonly roomService = inject(RoomService);
   readonly toastService = inject(AppToastService);
+  readonly loginService = inject(LoginService);
 
   @Input() id: string = '';
 
   async ok() {
     try {
-      await this.roomService.roomsIdDeleteAsync({ id: this.id });
+      await this.roomService.roomsIdDeleteAsync({
+        id: this.id,
+        userId: this.loginService.getLoggedUserId(),
+      });
 
       this.toastService.open('Successfully deleted room', 'info');
     } catch (error) {

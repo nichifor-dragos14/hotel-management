@@ -14,6 +14,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { LoginService } from '$features/auth/login.service';
 
 @Component({
   selector: 'app-update-room-page',
@@ -33,10 +34,11 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UpdateRoomPageComponent {
-  readonly roomService = inject(RoomService);
-  readonly toastService = inject(AppToastService);
   readonly router = inject(Router);
   readonly activatedRoute = inject(ActivatedRoute);
+  readonly roomService = inject(RoomService);
+  readonly loginService = inject(LoginService);
+  readonly toastService = inject(AppToastService);
 
   @Input() roomForm!: FormGroup;
   @Input() roomDetails!: RoomDetails;

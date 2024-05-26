@@ -3,23 +3,21 @@ import { AppFormBuilder } from '$core/forms';
 import { Injectable, inject } from '@angular/core';
 import { FormGroup, Validators } from '@angular/forms';
 import { phoneNumberValidator } from './new-property.form';
-import { LoginService } from '$features/auth/login.service';
 
 @Injectable({ providedIn: 'root' })
 export class EditPropertyFormFactory {
   readonly formBuilder = inject(AppFormBuilder);
-  readonly loginService = inject(LoginService);
 
   build(property: UpdatePropertyCommand): FormGroup {
     return this.formBuilder.group<UpdatePropertyCommand>({
       id: [property.id, { validators: [Validators.required] }],
       name: [
         property.name,
-        { validators: [Validators.required, Validators.maxLength(30)] },
+        { validators: [Validators.required, Validators.maxLength(100)] },
       ],
       description: [
         property.description,
-        { validators: [Validators.required, Validators.maxLength(1000)] },
+        { validators: [Validators.required, Validators.maxLength(2000)] },
       ],
       email: [
         property.email,

@@ -70,6 +70,8 @@ public class Room
 
     public virtual Property Property { get; internal init; }
 
+    public virtual Guid PropertyId { get; internal set; }
+
     public virtual List<Booking> Bookings { get; internal init; }
 
     public static Room Create(

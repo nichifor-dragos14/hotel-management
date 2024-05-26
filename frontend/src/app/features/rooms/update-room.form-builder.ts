@@ -39,6 +39,7 @@ export class EditRoomFormFactory {
           ],
         },
       ],
+      userId: [property.userId, { validators: [Validators.required] }],
     });
   }
 }

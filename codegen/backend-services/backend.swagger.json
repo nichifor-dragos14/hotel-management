@@ -2053,6 +2053,14 @@
               "type": "string",
               "format": "uuid"
             }
+          },
+          {
+            "name": "userId",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
           }
         ],
         "responses": {
@@ -3069,7 +3077,8 @@
           "number",
           "price",
           "propertyId",
-          "type"
+          "type",
+          "userId"
         ],
         "type": "object",
         "properties": {
@@ -3116,6 +3125,10 @@
           },
           "hasSeaView": {
             "type": "boolean"
+          },
+          "userId": {
+            "type": "string",
+            "format": "uuid"
           }
         },
         "additionalProperties": false
@@ -4789,7 +4802,8 @@
           "hasSeaView",
           "hasTowels",
           "id",
-          "price"
+          "price",
+          "userId"
         ],
         "type": "object",
         "properties": {
@@ -4821,6 +4835,10 @@
           },
           "hasSeaView": {
             "type": "boolean"
+          },
+          "userId": {
+            "type": "string",
+            "format": "uuid"
           }
         },
         "additionalProperties": false

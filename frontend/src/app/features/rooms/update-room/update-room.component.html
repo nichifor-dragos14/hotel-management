@@ -13,18 +13,20 @@
     Update
   </button>
 
-  <a
-    mat-button
-    [routerLink]="[
-      '/statistics',
-      'property',
-      propertyId,
-      'room',
-      roomForm.get(['id'])!.value
-    ]"
-  >
-    Statistics
-  </a>
+  @if (loginService.getLoggedUserRole() == 'Owner') {
+    <a
+      mat-button
+      [routerLink]="[
+        '/statistics',
+        'property',
+        propertyId,
+        'room',
+        roomForm.get(['id'])!.value
+      ]"
+    >
+      Statistics
+    </a>
+  }
 
   <a mat-button [routerLink]="['actions', 'delete']" color="warn">Delete</a>
 </section>

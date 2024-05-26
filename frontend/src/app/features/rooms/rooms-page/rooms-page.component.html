@@ -6,7 +6,10 @@
   >
     Back
   </button>
-  <button mat-button button color="primary" routerLink="new">Add</button>
+
+  @if (loginService.getLoggedUserRole() == 'Owner') {
+    <button mat-button button color="primary" routerLink="new">Add</button>
+  }
 </app-page-header>
 
 <mat-nav-list>

@@ -12,15 +12,15 @@ export const NEW_PROPERTY_FORM = new InjectionToken('NEW_PROPERTY_FORM', {
     return inject(AppFormBuilder).group<CreatePropertyCommand>({
       name: [
         '',
-        { validators: [Validators.required, Validators.maxLength(30)] },
+        { validators: [Validators.required, Validators.maxLength(100)] },
       ],
       description: [
         '',
-        { validators: [Validators.required, Validators.maxLength(1000)] },
+        { validators: [Validators.required, Validators.maxLength(2000)] },
       ],
       location: [
         '',
-        { validators: [Validators.required, Validators.maxLength(50)] },
+        { validators: [Validators.required, Validators.maxLength(100)] },
       ],
       email: ['', { validators: [Validators.required, Validators.email] }],
       phoneNumber: [

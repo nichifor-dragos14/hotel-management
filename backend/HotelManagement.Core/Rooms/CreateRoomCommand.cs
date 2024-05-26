@@ -1,5 +1,6 @@
 ﻿using HotelManagement.Core.Abstractions;
 using HotelManagement.Core.Properties;
+using HotelManagement.Core.Users;
 
 namespace HotelManagement.Core.Rooms;
 
@@ -16,7 +17,8 @@ public record CreateRoomCommand(
     bool HasAirConditioning,
     bool HasBalcony,
     bool HasRefrigerator,
-    bool HasSeaView
+    bool HasSeaView,
+    Guid UserId
 ) : ICommand<Guid?>;
 
 internal class CreateRoomCommandHandler(
@@ -27,6 +29,13 @@ internal class CreateRoomCommandHandler(
         CreateRoomCommand command,
         CancellationToken cancellationToken)
     {
+        unitOfWork.GetRepository<User>().TryGetById([command.UserId], out var user);
+
+        if (user == null || user.Role != Role.Owner)
+        {
+            return null;
+        }
+
         var properties = unitOfWork.GetRepository<Property>();
 
         if (properties.TryGetById([command.PropertyId], out var property)) {

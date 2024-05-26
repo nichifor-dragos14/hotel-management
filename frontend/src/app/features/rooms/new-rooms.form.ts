@@ -2,11 +2,14 @@ import { CreateRoomCommand, RoomType } from '$backend/services';
 import { InjectionToken, inject } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { AppFormBuilder } from '$core/forms';
+import { LoginService } from '$features/auth/login.service';
 
 export const NEW_ROOM_FORM = new InjectionToken('NEW_ROOM_FORM', {
   providedIn: 'root',
-  factory: () =>
-    inject(AppFormBuilder).group<CreateRoomCommand>({
+  factory: () => {
+    let loginService = inject(LoginService);
+
+    return inject(AppFormBuilder).group<CreateRoomCommand>({
       adultCapacity: [
         1,
         {
@@ -56,5 +59,10 @@ export const NEW_ROOM_FORM = new InjectionToken('NEW_ROOM_FORM', {
       ],
       propertyId: ['', { validators: [Validators.required] }],
       type: [RoomType.$0, { validators: [Validators.required] }],
-    }),
+      userId: [
+        loginService.getLoggedUserId(),
+        { validators: [Validators.required] },
+      ],
+    });
+  },
 });
