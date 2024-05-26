@@ -34,6 +34,7 @@ internal class LoginQueryHandler(
         if (user != null)
         {     
             var decryptedPassword = PasswordUtility.DecryptPassword(user.Password);
+
             if (decryptedPassword == query.LoginModel.Password)
             {
                 return new AccountModel(user.Id, user.Email, user.Role);

@@ -7,7 +7,6 @@ using Microsoft.IdentityModel.Tokens;
 using HotelManagement.WebApi.DTOs;
 using HotelManagement.WebApi.Authorize;
 
-
 namespace HotelManagement.WebApi.Controllers;
 
 [Route("users")]
@@ -17,9 +16,9 @@ public class UserController(IFileStorageService _storageService) : Controller
     [HttpGet("{email}")]
     [AuthorizeRoles(Core.Users.Role.Client, Core.Users.Role.Admin, Core.Users.Role.Owner)]
     public async Task<Results<Ok<UserDetails>, NotFound, BadRequest>> GetOne(
-       string email,
-       [FromServices] IQueryHandler<OneUserQuery, UserDetails> queryService,
-       CancellationToken cancellationToken)
+        [FromServices] IQueryHandler<OneUserQuery, UserDetails> queryService,
+        string email,
+        CancellationToken cancellationToken)
     {
         if (email.IsNullOrEmpty())
         {
@@ -36,9 +35,9 @@ public class UserController(IFileStorageService _storageService) : Controller
     [HttpPatch("details")]
     [AuthorizeRoles(Core.Users.Role.Client, Core.Users.Role.Admin, Core.Users.Role.Owner)]
     public async Task<Results<Ok<Guid>, BadRequest>> UpdateDetails(
-       [FromBody] UpdateUserDetailsCommand command,
-       [FromServices] ICommandHandler<UpdateUserDetailsCommand, Guid?> commandHandler,
-       CancellationToken cancellationToken)
+        [FromServices] ICommandHandler<UpdateUserDetailsCommand, Guid?> commandHandler,
+        [FromBody] UpdateUserDetailsCommand command,
+        CancellationToken cancellationToken)
     {
         return await commandHandler.ExecuteAsync(command, cancellationToken) switch
         {
@@ -50,9 +49,9 @@ public class UserController(IFileStorageService _storageService) : Controller
     [HttpPatch("preferences")]
     [AuthorizeRoles(Core.Users.Role.Client)]
     public async Task<Results<Ok<Guid>, BadRequest>> UpdatePreferences(
-       [FromBody] UpdateUserPreferencesCommand command,
-       [FromServices] ICommandHandler<UpdateUserPreferencesCommand, Guid?> commandHandler,
-       CancellationToken cancellationToken)
+        [FromServices] ICommandHandler<UpdateUserPreferencesCommand, Guid?> commandHandler,
+        [FromBody] UpdateUserPreferencesCommand command,
+        CancellationToken cancellationToken)
     {
         return await commandHandler.ExecuteAsync(command, cancellationToken) switch
         {
@@ -66,8 +65,7 @@ public class UserController(IFileStorageService _storageService) : Controller
     public async Task<Results<Ok<Guid>, BadRequest<string>>> UploadFile(
         [FromServices] ICommandHandler<UpdateProfilePictureCommand, Guid?> commandHandler,
         [FromForm] UpdateUserPictureDTO updateUserPictureDTO,
-        CancellationToken cancellationToken
-    )
+        CancellationToken cancellationToken)
     {
         if (updateUserPictureDTO.File == null || updateUserPictureDTO.File.Length == 0)
         {
@@ -93,9 +91,9 @@ public class UserController(IFileStorageService _storageService) : Controller
     [HttpPatch("password")]
     [AuthorizeRoles(Core.Users.Role.Client, Core.Users.Role.Admin, Core.Users.Role.Owner)]
     public async Task<Results<Ok<Guid>, BadRequest>> UpdatePassword(
-       [FromBody] UpdateUserPasswordCommand command,
-       [FromServices] ICommandHandler<UpdateUserPasswordCommand, Guid?> commandHandler,
-       CancellationToken cancellationToken)
+        [FromServices] ICommandHandler<UpdateUserPasswordCommand, Guid?> commandHandler,
+        [FromBody] UpdateUserPasswordCommand command,
+        CancellationToken cancellationToken)
     {
         return await commandHandler.ExecuteAsync(command, cancellationToken) switch
         {

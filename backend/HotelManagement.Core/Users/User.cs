@@ -168,7 +168,7 @@ public class User
 
     public void UpdateProfilePicture(
       string profilePicture
-   )
+    )
     {
         ProfilePicture = profilePicture;
         UpdatedOn = DateTime.UtcNow;

@@ -48,6 +48,6 @@ internal class OneUserQueryHandler(
                     user.ProfilePicture,
                     user.GeniusXp,
                     user.GeniusLevel
-                    )).FirstOrDefault();
+                )).FirstOrDefault();
     }
 }

@@ -13,7 +13,7 @@ internal class ActivateAccountUserQueryHandler(
         CancellationToken cancellationToken)
     {
         return (from user in facade.Of<User>()
-                where user.ActivationToken == query.Token && user.Email == query.Email
+                where user.ActivationToken == query.Token && user.Email == query.Email && user.IsConfirmed == false
                 select user.Id
                 ).FirstOrDefault();
     }
