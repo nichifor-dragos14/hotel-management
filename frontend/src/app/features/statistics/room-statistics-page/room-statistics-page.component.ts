@@ -79,7 +79,7 @@ export class RoomStatisticsPageComponent implements OnInit {
         {
           type: 'column',
           lineThickness: 2,
-          color: '#0000FF',
+          color: '#87CEEB',
           markerType: 'circle',
           markerColor: '#4F81BC',
           markerSize: 8,

@@ -73,9 +73,9 @@ export class UserStatisticsPageComponent implements OnInit {
       },
       data: [
         {
-          type: 'line',
+          type: 'column',
           lineThickness: 2,
-          color: '#F08080',
+          color: '#87CEEB',
           markerType: 'circle',
           markerColor: '#4F81BC',
           markerSize: 8,

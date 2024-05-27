@@ -8,103 +8,110 @@ using Microsoft.EntityFrameworkCore;
 namespace HotelManagement.Infrastructure.EntityFramework.Queries;
 
 internal class UserStatisticsQueryHandler(
-    IQueryFacade facade
+    ApplicationDbContext dbContext
 ) : IQueryHandler<UserStatisticsQuery, UserStatistics>
 {
     public async Task<UserStatistics> ExecuteAsync(
         UserStatisticsQuery query,
         CancellationToken cancellationToken
-        )
+    )
     {
-        var user = await facade.Of<User>()
-               .Include(u => u.Reviews)
-               .ThenInclude(r => r.Property)
-               .Include(u => u.Bookings)
-               .ThenInclude(b => b.Review)
-               .FirstOrDefaultAsync(u => u.Id == query.UserId, cancellationToken);
+        var userId = query.UserId;
+        var oneYearAgo = DateTime.UtcNow.AddYears(-1);
+
+        var user = await dbContext.Set<User>()
+            .Include(u => u.Reviews)
+                .ThenInclude(r => r.Property)
+            .Include(u => u.Bookings)
+            .FirstOrDefaultAsync(u => u.Id == userId, cancellationToken);
 
         if (user == null)
         {
             return null;
         }
-      
-        var topReviewedProperties = user.Reviews
-            .GroupBy(r => r.PropertyId)
-            .Select(g => new PropertyReviewStatistics(
-                PropertyId: g.Key,
-                PropertyName: g.First().Property.Name,
-                PropertyLocation: g.First().Property.Location,
-                AverageRating: g.Average(r => r.Rating)
-            ))
+
+        var topReviewedProperties = await dbContext.Set<Review>()
+            .Where(r => r.UserId == userId)
+            .GroupBy(r => new { r.PropertyId, r.Property.Name, r.Property.Location })
+            .Select(g => new
+            {
+                PropertyId = g.Key.PropertyId,
+                PropertyName = g.Key.Name,
+                PropertyLocation = g.Key.Location,
+                AverageRating = g.Average(r => r.Rating)
+            })
             .OrderByDescending(prs => prs.AverageRating)
             .Take(10)
-            .ToList();
+            .ToListAsync(cancellationToken);
 
-        var oneYearAgo = DateTime.Today.AddYears(-1);
+        var topReviewedPropertyStats = topReviewedProperties.Select(g => new PropertyReviewStatistics(
+            g.PropertyId,
+            g.PropertyName,
+            g.PropertyLocation,
+            g.AverageRating
+        )).ToList();
 
-        var bookingsByMonth = user.Bookings
-            .Where(b => b.StartDate >= oneYearAgo)
+        var bookingsByMonth = await dbContext.Set<Booking>()
+            .Where(b => b.UserId == userId && b.StartDate >= oneYearAgo)
             .GroupBy(b => new { b.StartDate.Year, b.StartDate.Month })
-            .Select(g => new MonthlyBookingStatistics(
-                Year: g.Key.Year,
-                Month: g.Key.Month,
-                BookingCount: g.Count()
-            ))
-            .ToList();
+            .Select(g => new
+            {
+                Year = g.Key.Year,
+                Month = g.Key.Month,
+                BookingCount = g.Count()
+            })
+            .ToListAsync(cancellationToken);
 
-        var xpByMonth = user.Bookings
-            .Where(b => b.StartDate >= oneYearAgo)
+        var monthlyBookingStats = bookingsByMonth.Select(g => new MonthlyBookingStatistics(
+            g.Year,
+            g.Month,
+            g.BookingCount
+        )).ToList();
+
+        var xpByMonth = await dbContext.Set<Booking>()
+            .Where(b => b.UserId == userId && b.StartDate >= oneYearAgo)
             .GroupBy(b => new { b.StartDate.Year, b.StartDate.Month })
-            .Select(g => new MonthlyXPStatistics(
-                Year: g.Key.Year,
-                Month: g.Key.Month,
-                TotalXP: g.Sum(b => (int)(b.TotalPrice / 100))
-            ))
-            .ToList();
+            .Select(g => new
+            {
+                Year = g.Key.Year,
+                Month = g.Key.Month,
+                TotalXP = g.Sum(b => (int)(b.TotalPrice / 100))
+            })
+            .ToListAsync(cancellationToken);
 
-        var userData = await facade.Of<User>()
-        .Where(u => u.Role == Role.Client)
-        .Select(u => new
-        {
+        var monthlyXPStats = xpByMonth.Select(g => new MonthlyXPStatistics(
+            g.Year,
+            g.Month,
+            g.TotalXP
+        )).ToList();
+
+        var topUsers = await dbContext.Set<User>()
+            .Where(u => u.Role == Role.Client)
+            .Select(u => new
+            {
+                u.Id,
+                u.FirstName,
+                u.LastName,
+                u.ProfilePicture,
+                TotalPoints = (u.Bookings.Sum(b => (int)b.TotalPrice) / 100) + (u.Reviews.Count * 2)
+            })
+            .OrderByDescending(u => u.TotalPoints)
+            .Take(10)
+            .ToListAsync(cancellationToken);
+
+        var userScores = topUsers.Select(u => new UserActivityScore(
             u.Id,
             u.FirstName,
             u.LastName,
             u.ProfilePicture,
-            BookingIds = u.Bookings.Select(b => b.Id),
-            ReviewIds = u.Reviews.Select(r => r.Id)
-        })
-        .ToListAsync(cancellationToken);
-
-        var bookingSums = await facade.Of<Booking>()
-            .Where(b => userData.Select(u => u.Id).Contains(b.UserId))
-            .GroupBy(b => b.UserId)
-            .Select(g => new { UserId = g.Key, TotalPrice = g.Sum(b =>(int) b.TotalPrice) })
-            .ToListAsync(cancellationToken);
-
-        var reviewCounts = await facade.Of<Review>()
-            .Where(r => userData.Select(u => u.Id).Contains(r.UserId))
-            .GroupBy(r => r.UserId)
-            .Select(g => new { UserId = g.Key, Count = g.Count() })
-            .ToListAsync(cancellationToken);
-
-        var userScores = userData.Select(u => new UserActivityScore(
-             u.Id,
-             u.FirstName,
-             u.LastName,
-             u.ProfilePicture,
-             (bookingSums.FirstOrDefault(b => b.UserId == u.Id)?.TotalPrice ?? 0) / 100
-                + reviewCounts.FirstOrDefault(r => r.UserId == u.Id)?.Count * 2 ?? 0
-            )
-        )
-        .OrderByDescending(us => us.TotalPoints)
-        .Take(10)
-        .ToList();
+            u.TotalPoints
+        )).ToList();
 
         return new UserStatistics(
             UserId: user.Id,
-            TopReviewedProperties: topReviewedProperties,
-            BookingsByMonth: bookingsByMonth,
-            XPByMonth: xpByMonth,
+            TopReviewedProperties: topReviewedPropertyStats,
+            BookingsByMonth: monthlyBookingStats,
+            XPByMonth: monthlyXPStats,
             topUsers: userScores
         );
     }
