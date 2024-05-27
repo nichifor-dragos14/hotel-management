@@ -1,0 +1,26 @@
+<mat-dialog-actions align="end">
+  <button mat-button color="warn" routerLink="../../../">Close</button>
+</mat-dialog-actions>
+
+<section role="grid">
+  <section role="left">
+    <section id="description">
+      <h2>{{ review.title }}</h2>
+      <p [innerHTML]="review.description"></p>
+    </section>
+  </section>
+
+  <section role="right">
+    <section id="sender">
+      <h2>
+        Reviewed by {{ review.userLastName }}
+        {{ review.userFirstName }}
+        {{ generateStarRating(review.rating) }} ({{ review.rating }}/10)
+      </h2>
+
+      <img [src]="review.userProfilePicture" />
+    </section>
+  </section>
+</section>
+
+<router-outlet hidden />

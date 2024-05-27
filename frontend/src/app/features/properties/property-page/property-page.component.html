@@ -462,7 +462,10 @@
 
         <section role="content-reviews">
           <ng-container *ngFor="let review of property.reviews">
-            <app-review-property-card [review]="review">
+            <app-review-property-card
+              [review]="review"
+              [routerLink]="['view', 'review', review.id]"
+            >
             </app-review-property-card>
           </ng-container>
         </section>

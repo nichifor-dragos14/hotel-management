@@ -4,11 +4,12 @@ import { MatCardModule } from '@angular/material/card';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { DateConverterModule } from '$shared/date-converter';
+import { MatRippleModule } from '@angular/material/core';
 
 @Component({
   selector: 'app-review-property-card',
   template: `
-    <mat-card>
+    <mat-card matRipple>
       <section role="review">
         <mat-card-header>
           <section role="user-and-picture">
@@ -123,7 +124,13 @@ import { DateConverterModule } from '$shared/date-converter';
   `,
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [MatCardModule, CommonModule, RouterModule, DateConverterModule],
+  imports: [
+    MatCardModule,
+    CommonModule,
+    RouterModule,
+    DateConverterModule,
+    MatRippleModule,
+  ],
 })
 export class ReviewPropertyCardComponent {
   @Input() review!: ReviewPropertyDetails;

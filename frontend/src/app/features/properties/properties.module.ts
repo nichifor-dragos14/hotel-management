@@ -1,5 +1,5 @@
 import { NgModule, inject } from '@angular/core';
-import { PropertyService } from '$backend/services';
+import { PropertyService, ReviewService } from '$backend/services';
 import { DeletePropertyComponent } from './delete-property.component';
 import {
   ActivatedRouteSnapshot,
@@ -18,6 +18,7 @@ import { PropertyRoomsPageComponent } from './property-rooms-page/property-rooms
 import { PropertiesDummyComponent } from './properties.dummy.component';
 import { AuthGuard } from '$features/auth/auth.guard';
 import { LoginService } from '$features/auth/login.service';
+import { PropertyReviewComponent } from './property-review/property-review-details.component';
 
 const PROPERTY_ROUTES: Routes = [
   {
@@ -187,12 +188,76 @@ const PROPERTY_ROUTES: Routes = [
             runGuardsAndResolvers: 'always',
             children: [
               {
+                path: 'review/:id',
+                component: PropertyReviewComponent,
+                canActivate: [AuthGuard],
+                data: {
+                  role: ['Client', ''],
+                },
+                resolve: {
+                  review: async ({ params }: ActivatedRouteSnapshot) => {
+                    const router = inject(Router);
+                    const reviewService = inject(ReviewService);
+
+                    try {
+                      const review = await reviewService.reviewsIdGetAsync({
+                        id: params['id'],
+                      });
+
+                      return review;
+                    } catch (error) {
+                      router.navigate(['/error']);
+
+                      return null;
+                    }
+                  },
+                },
+              },
+              {
                 path: 'reviews',
                 component: PropertyReviewsPageComponent,
                 canActivate: [AuthGuard],
                 data: {
                   role: ['Client', ''],
                 },
+                children: [
+                  {
+                    path: 'view',
+                    component: DialogPageComponent,
+                    runGuardsAndResolvers: 'always',
+                    children: [
+                      {
+                        path: ':id',
+                        component: PropertyReviewComponent,
+                        canActivate: [AuthGuard],
+                        data: {
+                          role: ['Client', ''],
+                        },
+                        resolve: {
+                          review: async ({
+                            params,
+                          }: ActivatedRouteSnapshot) => {
+                            const router = inject(Router);
+                            const reviewService = inject(ReviewService);
+
+                            try {
+                              const review =
+                                await reviewService.reviewsIdGetAsync({
+                                  id: params['id'],
+                                });
+
+                              return review;
+                            } catch (error) {
+                              router.navigate(['/error']);
+
+                              return null;
+                            }
+                          },
+                        },
+                      },
+                    ],
+                  },
+                ],
               },
               {
                 path: 'rooms',
