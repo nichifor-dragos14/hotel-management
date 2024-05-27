@@ -8,7 +8,10 @@
     color="primary"
     type="submit"
     (click)="submitForm()"
-    [disabled]="searchPropertyForm.invalid"
+    [disabled]="
+      searchPropertyForm.invalid ||
+      searchPropertyForm.get('location')?.value == ''
+    "
   >
     Explore now
   </button>

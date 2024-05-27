@@ -16,7 +16,7 @@ export class PaginatedDataSource<T> extends DataSource<T> {
   readonly fetch;
   readonly initialBuffer: number | undefined;
 
-  totalCount = 0;
+  totalCount = 15;
 
   constructor(init: {
     initialBuffer?: number;
@@ -68,7 +68,7 @@ export class PaginatedDataSource<T> extends DataSource<T> {
           this.fetchedEntities.add(i);
         }
 
-        cache.splice(from, to, ...results);
+        cache.splice(from, to - from, ...results);
 
         return cache;
       })

@@ -36,8 +36,8 @@ import { DateConverterModule } from '$shared/date-converter';
         </mat-card-header>
 
         <mat-card-content class="font-light">
-          <span matCardSubtitle>{{ review.title }}</span>
-          <p [innerHTML]="transformText(review.description)"></p>
+          <span matCardSubtitle>{{ transformTitle(review.title) }}</span>
+          <p [innerHTML]="transformDescription(review.description)"></p>
         </mat-card-content>
       </section>
 
@@ -56,7 +56,7 @@ import { DateConverterModule } from '$shared/date-converter';
         gap: 8px;
         padding: 8px;
         border-radius: 0 !important;
-        height: 200px;
+        height: 250px;
         width: calc(70vw / 4);
     }
 
@@ -128,9 +128,17 @@ import { DateConverterModule } from '$shared/date-converter';
 export class ReviewPropertyCardComponent {
   @Input() review!: ReviewPropertyDetails;
 
-  transformText(text: string) {
-    if (text.length > 100) {
-      return text.slice(0, 100) + '...';
+  transformTitle(text: string) {
+    if (text.length > 33) {
+      return text.slice(0, 30) + '...';
+    }
+
+    return text;
+  }
+
+  transformDescription(text: string) {
+    if (text.length > 83) {
+      return text.slice(0, 80) + '...';
     }
 
     return text;

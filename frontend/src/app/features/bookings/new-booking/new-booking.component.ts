@@ -131,7 +131,7 @@ export class NewBookingPageComponent implements AfterViewInit {
   }
 
   transformToTwoDecimals(rating: number) {
-    return rating.toFixed(2);
+    return rating.toFixed(1);
   }
 
   computeDateDifference(date1: any, date2: any): number {

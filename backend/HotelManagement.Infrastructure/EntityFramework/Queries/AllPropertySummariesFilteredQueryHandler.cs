@@ -200,28 +200,44 @@ internal class AllPropertySummariesFilteredQueryHandler(
             SELECT
                 CASE
                     WHEN (
-                        SELECT COUNT(DISTINCT p.""Id"") 
-                        FROM ""Property"" AS p 
-                        JOIN ""Room"" AS r ON r.""PropertyId"" = p.""Id""
-                        LEFT JOIN ""Review"" AS re ON re.""PropertyId"" = p.""Id""
-                        LEFT JOIN 
-                            ""Discount"" AS d
-                        ON 
-                            d.""PropertyId"" = p.""Id"" AND d.""UserId"" = '{query.PropertyFiltersOptional.LoggedUserId}' AND '{DateTime.UtcNow}' <= d.""EndDate""
-                        {whereClause}
-                        {havingClause}
+                        SELECT COUNT(*)
+                        FROM (
+                            SELECT p.""Id""
+                            FROM ""Property"" AS p
+                            JOIN ""Room"" AS r ON r.""PropertyId"" = p.""Id""
+                            LEFT JOIN ""Review"" AS re ON re.""PropertyId"" = p.""Id""
+                            LEFT JOIN ""Discount"" AS d ON d.""PropertyId"" = p.""Id"" AND d.""UserId"" = '{query.PropertyFiltersOptional.LoggedUserId}' AND '{DateTime.UtcNow}' <= d.""EndDate""
+                            {whereClause}
+                            GROUP BY
+                                p.""Id"",
+                                p.""Name"",
+                                p.""Location"",
+                                p.""Rating"",
+                                p.""HasFreeCancellation"",
+                                p.""CreatedOn"",
+                                d.""DiscountPercentage""
+                            {havingClause}
+                        ) AS subquery
                     ) IS NULL THEN 0
                     ELSE (
-                        SELECT COUNT(DISTINCT p.""Id"") 
-                        FROM ""Property"" AS p 
-                        JOIN ""Room"" AS r ON r.""PropertyId"" = p.""Id""
-                        LEFT JOIN ""Review"" AS re ON re.""PropertyId"" = p.""Id""
-                        LEFT JOIN 
-                            ""Discount"" AS d
-                        ON 
-                            d.""PropertyId"" = p.""Id"" AND d.""UserId"" = '{query.PropertyFiltersOptional.LoggedUserId}' AND '{DateTime.UtcNow}' <= d.""EndDate""
-                        {whereClause}
-                        {havingClause}
+                        SELECT COUNT(*)
+                        FROM (
+                            SELECT p.""Id""
+                            FROM ""Property"" AS p
+                            JOIN ""Room"" AS r ON r.""PropertyId"" = p.""Id""
+                            LEFT JOIN ""Review"" AS re ON re.""PropertyId"" = p.""Id""
+                            LEFT JOIN ""Discount"" AS d ON d.""PropertyId"" = p.""Id"" AND d.""UserId"" = '{query.PropertyFiltersOptional.LoggedUserId}' AND '{DateTime.UtcNow}' <= d.""EndDate""
+                            {whereClause}
+                            GROUP BY
+                                p.""Id"",
+                                p.""Name"",
+                                p.""Location"",
+                                p.""Rating"",
+                                p.""HasFreeCancellation"",
+                                p.""CreatedOn"",
+                                d.""DiscountPercentage""
+                            {havingClause}
+                        ) AS subquery
                     )
                 END AS ""TotalCount"",
                     CASE

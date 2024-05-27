@@ -8,6 +8,7 @@
     color="primary"
     [routerLink]="['view', 'rooms']"
     [queryParams]="activatedRoute.snapshot.queryParams"
+    [disabled]="property.rooms.length == 0"
   >
     Book your stay
   </button>
@@ -413,7 +414,7 @@
           <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
         </table>
       } @else {
-        <h3>
+        <div id="description-text">
           No rooms available for
           {{
             searchPropertyForm.get('startDate')?.value!.toISOString()
@@ -423,8 +424,8 @@
           {{
             searchPropertyForm.get('endDate')?.value!.toISOString()
               | dateFormat
-          }}. Consider searching other dates. 🙃
-        </h3>
+          }}. Consider searching for other dates. 🙃
+        </div>
       }
     </section>
 

@@ -71,7 +71,6 @@ export class RegisterPageComponent implements OnInit {
         'info'
       );
     } catch (error: any) {
-      console.log(error);
       this.toastrService.open(error.error, 'error');
     } finally {
       this.registerForm.reset();

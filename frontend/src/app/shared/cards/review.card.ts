@@ -25,8 +25,11 @@ import { DateConverterModule } from '$shared/date-converter';
         </mat-card-header>
 
         <mat-card-content>
-          <span>{{ review.title }}</span>
-          <span [innerHTML]="review.description" matCardSubtitle></span>
+          <span>{{ transformText(review.title) }}</span>
+          <span
+            [innerHTML]="transformText(review.description)"
+            matCardSubtitle
+          ></span>
         </mat-card-content>
       </section>
 
@@ -110,6 +113,14 @@ import { DateConverterModule } from '$shared/date-converter';
 })
 export class ReviewCardComponent {
   @Input() review!: PropertyReview;
+
+  transformText(text: string) {
+    if (text.length > 183) {
+      return text.slice(0, 180) + '...';
+    }
+
+    return text;
+  }
 
   transformToTwoDecimals(rating: number) {
     return rating.toPrecision(2);

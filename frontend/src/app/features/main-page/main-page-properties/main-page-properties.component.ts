@@ -26,6 +26,7 @@ import { SearchHistoryService } from '$core/search-history.service';
 import { slideInAnimation } from '$core/app.animations';
 import { LoginService } from '$features/auth/login.service';
 import { UserDetails, UserService } from '$backend/services';
+import { FormStateService } from '../form-state.service';
 
 @Component({
   selector: 'app-main-page-properties',
@@ -59,6 +60,7 @@ export class MainPagePropertiesComponent implements AfterViewInit {
   readonly searchHistoryService = inject(SearchHistoryService);
   readonly loginService = inject(LoginService);
   readonly userService = inject(UserService);
+  private formStateService = inject(FormStateService);
 
   minDate: Date = new Date();
   maxDate: Date = new Date();

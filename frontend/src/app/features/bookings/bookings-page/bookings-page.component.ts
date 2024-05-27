@@ -54,4 +54,12 @@ export class BookingsPageComponent {
         to,
       }),
   });
+
+  cropLocation(location: string) {
+    if (location.length > 23) {
+      return location.slice(0, 20) + '...';
+    }
+
+    return location;
+  }
 }

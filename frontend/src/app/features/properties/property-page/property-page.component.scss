@@ -29,7 +29,7 @@ mat-grid-tile img {
 
 section[role='gallery-search'] {
   display: grid;
-  grid-template-columns: 1fr auto;
+  grid-template-columns: 3fr 1fr;
   grid-template-areas: 'gallery search';
   gap: 64px;
   padding: 16px 0;
@@ -127,6 +127,10 @@ mat-card-content {
   gap: 8px !important;
   align-items: center !important;
   justify-content: center !important;
+}
+
+mat-card-content mat-icon {
+  overflow: visible !important;
 }
 
 mat-card {
