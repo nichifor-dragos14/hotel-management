@@ -61,13 +61,13 @@ public static class ServiceCollectionExtensions
 
         using (var scope = serviceProvider.CreateScope())
         {
-            int numberOfOwners = 1000;
-            int numberOfClients = 1000;
+            int numberOfOwners = 100;
+            int numberOfClients = 3000;
             int propertiesPerOwner = 100;
             int minimumNumberOfRoomsPerProperty = 1;
             int maximumNumberOfRoomsPerProperty = 5;
-            int minimumBookingsPerRoom = 0;
-            int maximumBookingsPerRoom = 2;
+            int minimumBookingsPerRoom = 1;
+            int maximumBookingsPerRoom = 5;
 
             var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
             var seeder = new DatabaseSeeder(context);

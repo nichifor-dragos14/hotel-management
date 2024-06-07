@@ -23,7 +23,6 @@ public class ReviewController : ControllerBase
     }
 
     [HttpGet("{id}")]
-    [AuthorizeRoles(Core.Users.Role.Client, Core.Users.Role.Owner)]
     public async Task<Results<Ok<ReviewDetails>, NotFound, BadRequest>> GetOne(
         [FromServices] IQueryHandler<OneReviewQuery, ReviewDetails> queryService,
         Guid id,

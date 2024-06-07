@@ -240,7 +240,7 @@ public static class DataGenerator
 
         foreach (var booking in bookings)
         {
-            var hasReviewed = random.Next(0, 2) > 0.4;
+            var hasReviewed = random.Next(0, 2) > 0.8;
 
             if (hasReviewed)
             {
@@ -268,7 +268,7 @@ public static class DataGenerator
 
         foreach (var booking in bookings)
         {
-            var hasReported = random.Next(0, 2) > 0.95;
+            var hasReported = random.Next(0, 2) > 0.2;
 
             if (hasReported)
             {
