@@ -54,7 +54,7 @@ internal class OnePropertyQueryHandler(
                 r.Room.Id,
                 r.Room.Number,
                 r.Room.Type,
-                (query.StartDate != null && query.EndDate != null) ? r.Room.Price * (query.EndDate - query.StartDate).Days : r.Room.Price,
+                (query.StartDate != null && query.EndDate != null && r.Room.Price * (query.EndDate - query.StartDate).Days != 0) ? r.Room.Price * (query.EndDate - query.StartDate).Days : r.Room.Price,
                 r.Room.AdultCapacity,
                 r.Room.ChildrenCapacity,
                 r.Room.HasPrivateBathroom,

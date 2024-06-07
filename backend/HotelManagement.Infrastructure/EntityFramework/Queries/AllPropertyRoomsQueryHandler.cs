@@ -30,7 +30,10 @@ internal class AllPropertyRoomsQueryHandler(
                             r."Id",
                             r."Number",
                             r."Type",
-                            r."Price" * {(query.EndDate - query.StartDate).Days} AS "Price",
+                            CASE
+                                WHEN {(query.EndDate - query.StartDate).Days} > 0 THEN r."Price" * {(query.EndDate - query.StartDate).Days}
+                                ELSE r."Price"
+                            END AS "Price",
                             r."AdultCapacity",
                             r."ChildrenCapacity",
                             r."HasPrivateBathroom",
