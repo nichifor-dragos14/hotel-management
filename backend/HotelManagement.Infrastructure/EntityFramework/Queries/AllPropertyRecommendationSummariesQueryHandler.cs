@@ -82,7 +82,7 @@ internal class AllPropertyRecommendationSummariesQueryHandler(
                         p."CreatedOn",
                         d."DiscountPercentage"
                     ORDER BY
-                        p."CreatedOn" DESC
+                        d."DiscountPercentage", p."CreatedOn" DESC
                     LIMIT 100
                 ),
                 LimitedPropertySummaries AS (

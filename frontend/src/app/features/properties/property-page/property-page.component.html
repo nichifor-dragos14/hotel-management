@@ -465,6 +465,7 @@
             <app-review-property-card
               [review]="review"
               [routerLink]="['view', 'review', review.id]"
+              [queryParams]="activatedRoute.snapshot.queryParams"
             >
             </app-review-property-card>
           </ng-container>

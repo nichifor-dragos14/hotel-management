@@ -194,7 +194,7 @@ internal class AllPropertySummariesFilteredQueryHandler(
                     d.""DiscountPercentage""
                 {havingClause}
                 ORDER BY
-                    p.""CreatedOn"" DESC
+                   d.""DiscountPercentage"", p.""CreatedOn"" DESC
                 OFFSET {query.From} ROWS FETCH NEXT {query.To - query.From} ROWS ONLY
             )
             SELECT

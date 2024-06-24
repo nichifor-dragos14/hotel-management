@@ -75,7 +75,7 @@ public class RoomController : Controller
     }
 
     [HttpPatch]
-    //[AuthorizeRoles(Core.Users.Role.Admin, Core.Users.Role.Owner)]
+    [AuthorizeRoles(Core.Users.Role.Admin, Core.Users.Role.Owner)]
     public async Task<Results<Ok<Guid>, BadRequest>> Update(
         [FromServices] ICommandHandler<UpdateRoomCommand, Guid?> commandHandler,
         [FromBody] UpdateRoomCommand command,
@@ -90,7 +90,7 @@ public class RoomController : Controller
     }
 
     [HttpDelete("{id}")]
-    //[AuthorizeRoles(Core.Users.Role.Admin, Core.Users.Role.Owner)]
+    [AuthorizeRoles(Core.Users.Role.Admin, Core.Users.Role.Owner)]
     public async Task<Results<Ok, NotFound>> Delete(
         [FromServices] ICommandHandler<DeleteRoomCommand, bool> commandHandler,
         Guid id,

@@ -6,7 +6,7 @@ import {
   inject,
 } from '@angular/core';
 import { ReviewDetails } from '$backend/services';
-import { Router, RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
@@ -28,6 +28,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 })
 export class PropertyReviewComponent {
   readonly router = inject(Router);
+  readonly activatedRoute = inject(ActivatedRoute)
 
   @Input() review!: ReviewDetails;
 

@@ -33,7 +33,7 @@ import { AppToastService } from '$shared/toast';
     AppPageHeaderComponent,
   ],
   template: `
-    <app-page-header title="Update your password">
+    <app-page-header title="Update your password 🤐">
       <button
         button
         mat-button

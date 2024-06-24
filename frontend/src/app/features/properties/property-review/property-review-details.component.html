@@ -1,5 +1,5 @@
 <mat-dialog-actions align="end">
-  <button mat-button color="warn" routerLink="../../../">Close</button>
+  <button mat-button color="warn" routerLink="../../../" [queryParams]="activatedRoute.snapshot.queryParams">Close</button>
 </mat-dialog-actions>
 
 <section role="grid">

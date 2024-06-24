@@ -30,19 +30,19 @@ public class DiscountJob(IQueryFacade queryFacade, IUnitOfWork unitOfWork, IEmai
         {
             if (user.GeniusLevel == GeniusLevel.Level1)
             {
-                numberOfDiscounts = 3;
+                numberOfDiscounts = 7;
                 discountRangeLow = 5;
                 discountRangeHigh = 10;
             }
             else if (user.GeniusLevel == GeniusLevel.Level2)
             {
-                numberOfDiscounts = 5;
+                numberOfDiscounts = 13;
                 discountRangeLow = 10;
                 discountRangeHigh = 15;
             }
             else if (user.GeniusLevel == GeniusLevel.Level3)
             {
-                numberOfDiscounts = 7;
+                numberOfDiscounts = 25;
                 discountRangeLow = 10;
                 discountRangeHigh = 20;
             }
