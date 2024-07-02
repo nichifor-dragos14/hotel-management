@@ -34,7 +34,7 @@ export class DialogPageComponent implements OnInit, OnDestroy {
     });
 
     this.dialogRef.backdropClick().subscribe(() => {
-      this.router.navigate(['../'], { relativeTo: this.route });
+      this.router.navigate(['../'], { relativeTo: this.route, queryParams: this.route.snapshot.queryParams});
     });
   }
 
